@@ -161,31 +161,31 @@ export function LayoutContextProvider({ history, children, menuConfig }) {
       [history, menuConfig]
   );
 
-  const { refs: splashScreenRefs } = state.splashScreen;
-  const splashScreenVisible = useMemo(
-      () => Object.keys(splashScreenRefs).length > 0,
-      [splashScreenRefs]
-  );
+  // const { refs: splashScreenRefs } = state.splashScreen;
+  // const splashScreenVisible = useMemo(
+  //     () => Object.keys(splashScreenRefs).length > 0,
+  //     [splashScreenRefs]
+  // );
 
-  useEffect(() => {
-    const splashScreen = document.getElementById("splash-screen");
+  // useEffect(() => {
+  //   const splashScreen = document.getElementById("splash-screen");
 
-    if (splashScreenVisible) {
-      splashScreen.classList.remove("hidden");
+  //   if (splashScreenVisible) {
+  //     splashScreen.classList.remove("hidden");
 
-      return () => {
-        splashScreen.classList.add("hidden");
-      };
-    }
+  //     return () => {
+  //       splashScreen.classList.add("hidden");
+  //     };
+  //   }
 
-    const timeout = setTimeout(() => {
-      splashScreen.classList.add("hidden");
-    }, 1000);
+  //   const timeout = setTimeout(() => {
+  //     splashScreen.classList.add("hidden");
+  //   }, 1000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [splashScreenVisible]);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [splashScreenVisible]);
 
   // Pass state and dispatch to it's contexts.
   return (

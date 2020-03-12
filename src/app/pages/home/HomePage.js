@@ -19,7 +19,7 @@ export default function HomePage() {
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 
   return (
-    <Suspense fallback={<LayoutSplashScreen />}>
+    // <Suspense /* fallback={<LayoutSplashScreen />} */>
       <Switch>
         {
           /* Redirect from root URL to /dashboard. */
@@ -32,6 +32,6 @@ export default function HomePage() {
         <Route path="/docs" component={DocsPage} />
         <Redirect to="/error/error-v1" />
       </Switch>
-    </Suspense>
+    // </Suspense>
   );
 }

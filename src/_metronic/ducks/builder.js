@@ -26,8 +26,9 @@ export const selectors = {
       const { htmlClassServiceObjects } = store.builder;
 
       return htmlClassServiceObjects
-          ? htmlClassServiceObjects.getAttributes(params.path)
-          : [];    }
+        ? htmlClassServiceObjects.getAttributes(params.path)
+        : [];
+    }
 
     return [];
   },
@@ -43,9 +44,10 @@ export const selectors = {
   },
 
   getLogo: ({ builder: { layoutConfig } }) => {
-    const menuAsideLeftSkin = objectPath.get(layoutConfig, "brand.self.skin");
+    const menuAsideLeftSkin = objectPath.get(layoutConfig, "brand.self.logo");
     // set brand logo
     const logoObject = objectPath.get(layoutConfig, "self.logo");
+    console.log(logoObject)
     let logo;
     if (typeof logoObject === "string") {
       logo = logoObject;
@@ -59,7 +61,7 @@ export const selectors = {
       try {
         const logos = objectPath.get(this.layoutConfig, "self.logo");
         logo = logos[Object.keys(logos)[0]];
-      } catch (e) {}
+      } catch (e) { }
     }
     return logo;
   },
@@ -95,7 +97,7 @@ export const reducer = persistReducer(
         return { ...state, layoutConfig: payload };
 
       case actionTypes.SetLayoutConfigsWithPageRefresh: {
-        return {...state, layoutConfig: payload};
+        return { ...state, layoutConfig: payload };
       }
       case actionTypes.SetHtmlClassService:
         return { ...state, htmlClassServiceObjects: payload };

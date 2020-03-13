@@ -9,7 +9,7 @@ export const initLayoutConfig = {
     logo: {
       dark: toAbsoluteUrl("/media/logos/logo-light.png"),
       light: toAbsoluteUrl("/media/logos/logo-dark.png"),
-      brand: toAbsoluteUrl("/media/logos/logo-light.png"),
+      brand: toAbsoluteUrl("/media/logos/laundrez-logo.svg"),
       green: toAbsoluteUrl("/media/logos/logo-light.png")
     }
   },
@@ -94,7 +94,8 @@ export const initLayoutConfig = {
   },
   brand: {
     self: {
-      skin:"light"
+      skin:"light",
+      logo:"brand"
     }
   },
   aside: {

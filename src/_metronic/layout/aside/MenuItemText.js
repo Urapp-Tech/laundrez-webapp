@@ -7,7 +7,9 @@ export default class MenuItemText extends React.Component {
 
     return (
       <>
-        {item.icon && <i className={`kt-menu__link-icon ${item.icon}`} />}
+        {/* {item.icon && <i className={`kt-menu__link-icon ${item.icon}`} />} */}
+        {item.icon && <img className="  img-fluid mr-3" src={require(`../assets/layout-svg-icons/${item.icon}`)} alt="icon" />}
+
 
         {parentItem && parentItem.bullet === "dot" && (
           <i className="kt-menu__link-bullet kt-menu__link-bullet--dot">

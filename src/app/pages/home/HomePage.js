@@ -4,6 +4,7 @@ import Builder from "./Builder";
 import Dashboard from "./Dashboard";
 import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
+import Services from "./Services";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -19,7 +20,7 @@ export default function HomePage() {
   // https://reactjs.org/docs/hooks-reference.html#useeffect
 
   return (
-    // <Suspense /* fallback={<LayoutSplashScreen />} */>
+    <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
         {
           /* Redirect from root URL to /dashboard. */
@@ -30,8 +31,10 @@ export default function HomePage() {
         <Route path="/google-material" component={GoogleMaterialPage} />
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/docs" component={DocsPage} />
+        <Route path="/services" component={Services} />
+
         <Redirect to="/error/error-v1" />
       </Switch>
-    // </Suspense>
+    </Suspense>
   );
 }

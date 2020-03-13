@@ -43,6 +43,21 @@ class AsideLeft extends React.Component {
                 <Menu htmlClassService={this.props.htmlClassService} />
               </PerfectScrollbar>
             )}
+            <div className="d-flex flex-column sidemenu-footer "  >
+              <span>Share</span>
+              <div className="d-flex justify-content-between  w-75 mt-3">
+                <img alt={"fb"} src={require("../assets/layout-svg-icons/facebook.svg")} />
+                <img alt={"fb"} src={require("../assets/layout-svg-icons/whatsapp.svg")} />
+                <img alt={"fb"} src={require("../assets/layout-svg-icons/twitter-sign.svg")} />
+                <img alt={"fb"} src={require("../assets/layout-svg-icons/black-envelope.svg")} />
+
+              </div>
+              <div className="break-line mt-5" ></div>
+              <div className="logout-box mt-5 d-flex" >
+                <img alt={"fb"} src={require("../assets/layout-svg-icons/power.svg")} />
+                <span className="ml-3 logout-text " >Logout</span>
+              </div>
+            </div>
           </div>
         </div>
       </>

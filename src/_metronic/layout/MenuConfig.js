@@ -512,7 +512,7 @@ export default {
       {
         title: "Services",
         root: true,
-        icon: "home-solid.svg",
+        icon: "server-solid.svg",
         page: "services",
         bullet: "dot",
         submenu: [
@@ -562,14 +562,14 @@ export default {
       {
         title: "Contact Us",
         root: true,
-        icon: "home-solid.svg",
+        icon: "email.svg",
         page: "",
         bullet: "dot"
       },
       {
         title: "FAQ's",
         root: true,
-        icon: "home-solid.svg",
+        icon: "question.svg",
         page: "",
         bullet: "dot"
       },

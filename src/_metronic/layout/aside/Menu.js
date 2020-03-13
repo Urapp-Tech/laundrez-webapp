@@ -151,7 +151,7 @@ class AsideLeft extends React.Component {
         <div
           id="kt_aside_menu"
           ref={this.asideMenuRef}
-          style={{ maxHeight: "90vh", position: "relative" }}
+          style={{ maxHeight: "50vh", position: "relative" }}
           onMouseEnter={this.mouseEnter}
           onMouseLeave={this.mouseLeave}
           data-ktmenu-vertical="1"
@@ -172,6 +172,7 @@ class AsideLeft extends React.Component {
               layoutConfig={layoutConfig}
             />
           </ul>
+          
         </div>
       </>
     );

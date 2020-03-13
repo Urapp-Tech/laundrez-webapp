@@ -4,8 +4,34 @@
 // Most of the changes can be achieved via global or layout level sass variable changes.
 //
 
-
-.kt-menu__subnav{
-    background-color: #243553;
-    color:#fff;
+.kt-menu__subnav {
+  background-color: #243553;
+  color: #fff;
+}
+.sidemenu-footer {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  padding: 9px 25px;
+  color: #fff;
+  bottom:12vh;//   background-color: red;
+  .break-line {
+    width: 100%;
+    // background-color: #f6f7f8;
+    border: 1px solid #dddfe0;
+  }
+  .logout-box {
+    width: 55px;
+    height: 19px;
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0);
+    font-family: Raleway;
+    font-size: 16px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: 0.16px;
+    text-align: left;
+    color: #ed8f31;
+  }
 }

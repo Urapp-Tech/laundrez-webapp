@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 import objectPath from "object-path";
 import KTToggle from "../../_assets/js/toggle";
 import * as builder from "../../ducks/builder";
-import { ReactComponent as AngleDoubleLeftIcon } from "../assets/layout-svg-icons/Angle-double-left.svg";
-import { ReactComponent as AngleDoubleRightIcon } from "../assets/layout-svg-icons/Angle-double-right.svg";
+
 
 
 class Brand extends React.Component {
@@ -20,7 +19,7 @@ class Brand extends React.Component {
   render() {
     return (
       <div
-        className={`kt-aside__brand kt-grid__item ${this.props.brandClasses}`}
+        className={`kt-aside__brand kt-grid__item  ${this.props.brandClasses}`}
         id="kt_aside_brand"
       >
         <div className="kt-aside__brand-logo">
@@ -36,12 +35,6 @@ class Brand extends React.Component {
               className="kt-aside__brand-aside-toggler"
               id="kt_aside_toggler"
             >
-              <span>
-                <AngleDoubleLeftIcon />
-              </span>
-              <span>
-                <AngleDoubleRightIcon />
-              </span>
             </button>
           </div>
         )}

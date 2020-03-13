@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__shopping-cart" width="33.07" height="28" viewBox="0 0 33.07 28">
+    <defs>
+        <linearGradient id="prefix__linear-gradient" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ed8f31"/>
+            <stop offset="1" stop-color="#ffa304"/>
+        </linearGradient>
+        <style>
+            .prefix__cls-1{fill:url(#prefix__linear-gradient)}
+        </style>
+    </defs>
+    <path id="prefix__Path_88" d="M32.579 49.679a2.281 2.281 0 0 0-1.8-.866h-6.366l-3.454-7.946a.97.97 0 1 0-1.776.779l3.117 7.167H10.772l3.115-7.167a.97.97 0 1 0-1.776-.779l-3.454 7.946H2.288a2.281 2.281 0 0 0-1.8.866 2.25 2.25 0 0 0-.434 1.906l3.4 14.927a2.272 2.272 0 0 0 2.232 1.77h21.695a2.272 2.272 0 0 0 2.232-1.77l3.4-14.927a2.25 2.25 0 0 0-.434-1.906zm-5.2 16.657H5.69a.347.347 0 0 1-.343-.258l-3.4-14.927a.3.3 0 0 1 .06-.259.351.351 0 0 1 .282-.133h5.522l-.254.584a.975.975 0 0 0 .5 1.282.966.966 0 0 0 1.276-.5l.592-1.363h13.22l.592 1.363a.97.97 0 1 0 1.776-.779l-.254-.584h5.523a.351.351 0 0 1 .282.133.3.3 0 0 1 .06.258l-3.4 14.927a.347.347 0 0 1-.343.258z" class="prefix__cls-1" data-name="Path 88" transform="translate(0 -40.283)"/>
+    <path id="prefix__Path_89" d="M151.969 266.717a.971.971 0 0 0-.969.973v7.139a.969.969 0 1 0 1.938 0v-7.139a.971.971 0 0 0-.969-.973z" class="prefix__cls-1" data-name="Path 89" transform="translate(-141.247 -252.022)"/>
+    <path id="prefix__Path_90" d="M241.969 266.717a.971.971 0 0 0-.969.973v7.139a.969.969 0 1 0 1.938 0v-7.139a.971.971 0 0 0-.969-.973z" class="prefix__cls-1" data-name="Path 90" transform="translate(-225.434 -252.022)"/>
+    <path id="prefix__Path_91" d="M331.969 266.717a.971.971 0 0 0-.969.973v7.139a.969.969 0 1 0 1.938 0v-7.139a.971.971 0 0 0-.969-.973z" class="prefix__cls-1" data-name="Path 91" transform="translate(-309.621 -252.022)"/>
+</svg>

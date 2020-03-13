@@ -11,6 +11,7 @@
 	flex-direction: row;
 	padding: 0 kt-get($kt-page-padding, desktop);
 	height: kt-get($kt-header-config, base, desktop, default, height);
+	border-right: 3px solid #f5f5f5 ;
 
 	.kt-aside__brand-logo {
 		display: flex;

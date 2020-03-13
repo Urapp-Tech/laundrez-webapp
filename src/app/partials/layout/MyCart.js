@@ -5,7 +5,7 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { Dropdown } from "react-bootstrap";
 import { toAbsoluteUrl } from "../../../_metronic";
 import HeaderDropdownToggle from "../content/CustomDropdowns/HeaderDropdownToggle";
-import { ReactComponent as CartNum3Icon } from "../../../_metronic/layout/assets/layout-svg-icons/CartNum3.svg";
+import { ReactComponent as CartNum3Icon } from "../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg";
 
 const perfectScrollbarOptions = {
   wheelSpeed: 2,

@@ -29,7 +29,7 @@ class UserProfile extends React.Component {
               </span>
             )}
 
-            {showAvatar && <img alt="Pic" src={user.pic} />}
+            {showAvatar && <img alt="Pic" className="rounded-circle" src={user.pic} />}
 
             {showBadge && (
               <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">

@@ -29,7 +29,7 @@ function Layout({
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes
   // window.scrollTo(0, 0);
-
+  console.log(subheaderDisplay)
   const contentCssClasses = htmlClassService.classes.content.join(" ");
 
   return selfLayout !== "blank" ? (
@@ -90,13 +90,13 @@ function Layout({
       <StickyToolbar />
     </LayoutInitializer>
   ) : (
-    // BLANK LAYOUT
-    <div className="kt-grid kt-grid--ver kt-grid--root">
-      <KtContent>
-        {children}
-      </KtContent>
-    </div>
-  );
+      // BLANK LAYOUT
+      <div className="kt-grid kt-grid--ver kt-grid--root">
+        <KtContent>
+          {children}
+        </KtContent>
+      </div>
+    );
 }
 
 const mapStateToProps = ({ builder: { layoutConfig } }) => ({

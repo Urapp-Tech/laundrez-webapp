@@ -105,79 +105,79 @@ function Login(props) {
               handleSubmit,
               isSubmitting
             }) => (
-              <form
-                noValidate={true}
-                autoComplete="off"
-                className="kt-form"
-                onSubmit={handleSubmit}
-              >
-                {status ? (
-                  <div role="alert" className="alert alert-danger">
-                    <div className="alert-text">{status}</div>
-                  </div>
-                ) : (
-                  <div role="alert" className="alert alert-info">
-                    <div className="alert-text">
-                      Use account <strong>admin@demo.com</strong> and password{" "}
-                      <strong>demo</strong> to continue.
+                <form
+                  noValidate={true}
+                  autoComplete="off"
+                  className="kt-form"
+                  onSubmit={handleSubmit}
+                >
+                  {status ? (
+                    <div role="alert" className="alert alert-danger">
+                      <div className="alert-text">{status}</div>
                     </div>
+                  ) : (
+                      <div role="alert" className="alert alert-info">
+                        <div className="alert-text">
+                          Use account <strong>admin@demo.com</strong> and password{" "}
+                          <strong>demo</strong> to continue.
+                    </div>
+                      </div>
+                    )}
+
+                  <div className="form-group">
+                    <TextField
+                      type="email"
+                      label="Email"
+                      margin="normal"
+                      className="kt-width-full"
+                      name="email"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.email}
+                      helperText={touched.email && errors.email}
+                      error={Boolean(touched.email && errors.email)}
+                    />
                   </div>
-                )}
 
-                <div className="form-group">
-                  <TextField
-                    type="email"
-                    label="Email"
-                    margin="normal"
-                    className="kt-width-full"
-                    name="email"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.email}
-                    helperText={touched.email && errors.email}
-                    error={Boolean(touched.email && errors.email)}
-                  />
-                </div>
+                  <div className="form-group">
+                    <TextField
+                      type="password"
+                      margin="normal"
+                      label="Password"
+                      className="kt-width-full"
+                      name="password"
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      value={values.password}
+                      helperText={touched.password && errors.password}
+                      error={Boolean(touched.password && errors.password)}
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <TextField
-                    type="password"
-                    margin="normal"
-                    label="Password"
-                    className="kt-width-full"
-                    name="password"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    value={values.password}
-                    helperText={touched.password && errors.password}
-                    error={Boolean(touched.password && errors.password)}
-                  />
-                </div>
+                  <div className="kt-login__actions">
+                    <Link
+                      to="/auth/forgot-password"
+                      className="kt-link kt-login__link-forgot"
+                    >
+                      <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
+                    </Link>
 
-                <div className="kt-login__actions">
-                  <Link
-                    to="/auth/forgot-password"
-                    className="kt-link kt-login__link-forgot"
-                  >
-                    <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
-                  </Link>
-
-                  <button
-                    id="kt_login_signin_submit"
-                    type="submit"
-                    disabled={isSubmitting}
-                    className={`btn btn-primary btn-elevate kt-login__btn-primary ${clsx(
-                      {
-                        "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading
-                      }
-                    )}`}
-                    style={loadingButtonStyle}
-                  >
-                    Sign In
+                    <button
+                      id="kt_login_signin_submit"
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`btn btn-primary btn-elevate kt-login__btn-primary ${clsx(
+                        {
+                          "kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light": loading
+                        }
+                      )}`}
+                      style={loadingButtonStyle}
+                    >
+                      Sign In
                   </button>
-                </div>
-              </form>
-            )}
+                  </div>
+                </form>
+              )}
           </Formik>
 
           <div className="kt-login__divider">

@@ -8,7 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { mockAxios, setupAxios } from "./_metronic";
-import store, { persistor } from "./app/store/store";
+import store from "./app/store/store";
 import App from "./App";
 import "./index.scss"; // Standard version
 // import "./sass/style.react.rtl.css"; // RTL version
@@ -42,7 +42,7 @@ setupAxios(axios, store);
 ReactDOM.render(
   <App
     store={store}
-    persistor={persistor}
+    // persistor={persistor}
     basename={PUBLIC_URL}
   />,
   document.getElementById("root")

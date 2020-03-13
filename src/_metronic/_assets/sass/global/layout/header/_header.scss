@@ -8,7 +8,7 @@
 @include kt-desktop {
 	.kt-header {
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 		height: kt-get($kt-header-config, base, desktop, default, height);
 		transition: kt-get($kt-aside-config, base, minimize, transition);
 		position: relative;

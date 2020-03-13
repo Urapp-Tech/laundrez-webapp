@@ -39,7 +39,7 @@ class Header extends React.Component {
       >
         <AnimateLoading />
         {/* <!-- begin: Header Menu --> */}
-        {menuHeaderDisplay && <HMenu />}
+        {/* {menuHeaderDisplay && <HMenu />} */}
         {/* <!-- end: Header Menu --> */}
         {/* <!-- begin:: Header Topbar --> */}
         {/* <!-- empty div to fix topbar to stay on the right when menu-horizontal is hidden --> */}

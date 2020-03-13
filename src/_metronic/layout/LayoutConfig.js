@@ -45,7 +45,7 @@ export const initLayoutConfig = {
   },
   // page toolbar
   toolbar: {
-    display: true
+    display: false
   },
   header: {
     self: {
@@ -80,7 +80,7 @@ export const initLayoutConfig = {
     }
   },
   subheader: {
-    display: true,
+    display: false,
     displayDesc: false,
     displayDaterangepicker: true,
     layout: "subheader-v1",

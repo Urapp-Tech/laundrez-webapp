@@ -37,9 +37,9 @@ export const Routes = withRouter(({ history }) => {
           /* Render auth page when user at `/auth` and not authorized. */
           <AuthPage />
         ) : (
-          /* Otherwise redirect to root page (`/`) */
-          <Redirect from="/auth" to={userLastLocation} />
-        )}
+            /* Otherwise redirect to root page (`/`) */
+            <Redirect from="/auth" to={userLastLocation} />
+          )}
 
         <Route path="/error" component={ErrorsPage} />
         <Route path="/logout" component={LogoutPage} />
@@ -48,10 +48,10 @@ export const Routes = withRouter(({ history }) => {
           /* Redirect to `/auth` when user is not authorized */
           <Redirect to="/auth/login" />
         ) : (
-          <Layout>
-            <HomePage userLastLocation={userLastLocation} />
-          </Layout>
-        )}
+            <Layout>
+              <HomePage userLastLocation={userLastLocation} />
+            </Layout>
+          )}
       </Switch>
     </LayoutContextProvider>
   );

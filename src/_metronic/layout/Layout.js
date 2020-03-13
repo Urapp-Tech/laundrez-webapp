@@ -24,12 +24,12 @@ function Layout({
   subheaderDisplay,
   selfLayout,
   layoutConfig,
-  contentContainerClasses
+  toolbarDisplay,
+  contentContainerClasses,
 }) {
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes
   // window.scrollTo(0, 0);
-  console.log(subheaderDisplay)
   const contentCssClasses = htmlClassService.classes.content.join(" ");
 
   return selfLayout !== "blank" ? (
@@ -87,7 +87,7 @@ function Layout({
       </div>
       <QuickPanel />
       <ScrollTop />
-      <StickyToolbar />
+      {toolbarDisplay&&<StickyToolbar />}
     </LayoutInitializer>
   ) : (
       // BLANK LAYOUT
@@ -104,6 +104,7 @@ const mapStateToProps = ({ builder: { layoutConfig } }) => ({
   selfLayout: objectPath.get(layoutConfig, "self.layout"),
   asideDisplay: objectPath.get(layoutConfig, "aside.self.display"),
   subheaderDisplay: objectPath.get(layoutConfig, "subheader.display"),
+  toolbarDisplay: objectPath.get(layoutConfig, "toolbar.dispaly"),
   desktopHeaderDisplay: objectPath.get(
     layoutConfig,
     "header.self.fixed.desktop"

@@ -77,13 +77,13 @@ export default function Dashboard() {
             <div className="col-sm-12 col-md-12 col-lg-6">
               <Portlet className="kt-portlet--height-fluid-half kt-portlet--border-bottom-brand">
                 <PortletBody fluid={true}>
-                  <QuickStatsChart
+                  {/* <QuickStatsChart
                     value={570}
                     desc="Total Sales"
                     data={chartOptions.chart1.data}
                     color={chartOptions.chart1.color}
                     border={chartOptions.chart1.border}
-                  />
+                  /> */}
                 </PortletBody>
               </Portlet>
 

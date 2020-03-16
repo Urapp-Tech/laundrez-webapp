@@ -10,6 +10,7 @@ import axios from "axios";
 import { mockAxios, setupAxios } from "./_metronic";
 import store from "./app/store/store";
 import App from "./App";
+import 'react-circular-progressbar/dist/styles.css';
 import "./index.scss"; // Standard version
 // import "./sass/style.react.rtl.css"; // RTL version
 import "socicon/css/socicon.css";

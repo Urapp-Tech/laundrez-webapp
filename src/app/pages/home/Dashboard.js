@@ -10,6 +10,7 @@ import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
+import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 
 export default function Dashboard() {
   const categories = [
@@ -161,9 +162,18 @@ export default function Dashboard() {
 
                     return (< tr >
                       <td>
-                        <div className="progress-order progress-order-placed" >
-                          <img alt={"img"} src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")} />
-                        </div>
+                        <CircularProgressbarWithChildren
+                          value={60}
+                          background={"#357BF3"}
+                          styles={{
+                            root: { width: "36px", height: "36px" },
+                            background: {
+                              fill: '#fff',
+                            },
+                          }}
+                        >
+                          <img alt={"img"} className="order-progress-image" src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")} />
+                        </CircularProgressbarWithChildren>
                       </td>
                       <td>{data.orderNumber}</td>
                       <td>{data.orderDateTime}</td>

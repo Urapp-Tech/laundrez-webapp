@@ -5,6 +5,11 @@ import Brand from "../brand/Brand";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import Menu from "./Menu";
 import KTOffcanvas from "../../_assets/js/offcanvas";
+import FbImage from "../assets/layout-svg-icons/facebook.svg";
+import WhatsappImage from "../assets/layout-svg-icons/whatsapp.svg";
+import TwitterImage from "../assets/layout-svg-icons/twitter-sign.svg";
+import EmailImage from "../assets/layout-svg-icons/black-envelope.svg";
+import PowerImage from "../assets/layout-svg-icons/power.svg";
 
 class AsideLeft extends React.Component {
   asideOffCanvasRef = React.createRef();
@@ -46,15 +51,15 @@ class AsideLeft extends React.Component {
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
               <div className="d-flex justify-content-between  w-75 mt-3">
-                <img alt={"fb"} src={require("../assets/layout-svg-icons/facebook.svg")} />
-                <img alt={"fb"} src={require("../assets/layout-svg-icons/whatsapp.svg")} />
-                <img alt={"fb"} src={require("../assets/layout-svg-icons/twitter-sign.svg")} />
-                <img alt={"fb"} src={require("../assets/layout-svg-icons/black-envelope.svg")} />
+                <img alt={"fb"} src={FbImage} />
+                <img alt={"whatsapp"} src={WhatsappImage} />
+                <img alt={"twitter"} src={TwitterImage} />
+                <img alt={"email"} src={EmailImage} />
 
               </div>
               <div className="break-line mt-5" ></div>
               <div className="logout-box mt-5 d-flex" >
-                <img alt={"fb"} src={require("../assets/layout-svg-icons/power.svg")} />
+                <img alt={"power"} src={PowerImage} />
                 <span className="ml-3 logout-text " >Logout</span>
               </div>
             </div>

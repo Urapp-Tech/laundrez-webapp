@@ -541,21 +541,21 @@ export default {
       {
         title: "Order History",
         root: true,
-        icon: "home-solid.svg",
+        icon: "order.svg",
         page: "",
         bullet: "dot"
       },
       {
         title: "Payment Setting",
         root: true,
-        icon: "home-solid.svg",
+        icon: "receipt.svg",
         page: "",
         bullet: "dot"
       },
       {
         title: "Delivery Address",
         root: true,
-        icon: "home-solid.svg",
+        icon: "tracking.svg",
         page: "",
         bullet: "dot"
       },

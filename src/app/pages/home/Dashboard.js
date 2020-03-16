@@ -106,7 +106,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="row">
-        <div className="col-xl-6">
+        <div className="col-xl-5">
           <div className="row row-full-height ">
             {categories.map((data, i) => {
               return (
@@ -128,7 +128,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="col-xl-6">
+        <div className="col-xl-7">
           <Portlet fluidHeight={true}>
             <PortletHeader
               icon={
@@ -146,7 +146,7 @@ export default function Dashboard() {
             />
 
             <PortletBody>
-              <Table striped  >
+              <Table striped responsive  >
                 <thead  >
                   <tr>
                     <th></th>
@@ -165,14 +165,21 @@ export default function Dashboard() {
                         <CircularProgressbarWithChildren
                           value={60}
                           background={"#357BF3"}
+                          
                           styles={{
                             root: { width: "36px", height: "36px" },
                             background: {
                               fill: '#fff',
                             },
                           }}
+
                         >
-                          <img alt={"img"} className="order-progress-image" src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")} />
+                          {/* <div className="d-flex justify-content-center align-content-center" > */}
+                          <img alt={"img"}
+                            // src="https://i.imgur.com/b9NyUGm.png"
+                            src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")}
+                          />
+                          {/* </div> */}
                         </CircularProgressbarWithChildren>
                       </td>
                       <td>{data.orderNumber}</td>
@@ -192,11 +199,13 @@ export default function Dashboard() {
 
                       }</td>
                       <td>{data.itemCount}</td>
-                      <td>{
-                        data.orderStatus === "delivered" ?
-                          <Badge variant="primary">Repeat Order</Badge>
-                          : null
-                      }</td>
+                      <td>
+                        {
+                          data.orderStatus === "delivered" ?
+                            <Badge variant="primary">Repeat Order</Badge>
+                            : null
+                        }
+                      </td>
                     </tr>)
                   })
                   }

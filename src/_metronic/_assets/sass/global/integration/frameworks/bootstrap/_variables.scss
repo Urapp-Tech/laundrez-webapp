@@ -21,7 +21,10 @@ $warning:       									kt-get($kt-state-colors, warning, base) !default;
 $danger:        									kt-get($kt-state-colors, danger, base) !default;
 $light:         									#f8f9fa !default;
 $dark:          									#343a40 !default;
-
+$order-placed:										#357BF3;
+$order-pickedup:									#C367F1;
+$order-out-delivery:								#2CD285;
+$order-delivered:									#949EAE;			
 $theme-colors: (
 												  	"primary":    $primary,
 												   	"secondary":  $secondary,
@@ -30,7 +33,11 @@ $theme-colors: (
 												    "warning":    $warning,
 												    "danger":     $danger,
 												    "light":      $light,
-												    "dark":       $dark
+													"dark":       $dark,
+													"order-placed": $order-placed,
+													"order-pickedup": $order-pickedup,
+													"order-out-delivery": $order-out-delivery,
+													"order-delivered": $order-delivered
 );
 
 

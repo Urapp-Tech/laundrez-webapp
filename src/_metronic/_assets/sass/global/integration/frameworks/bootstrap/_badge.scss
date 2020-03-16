@@ -2,8 +2,27 @@
 // Badge Customization
 //
 
-
-
 .badge {
-	font-weight: 400;
+  font-weight: 400;
+}
+.badge-order-placed {
+  background-color: kt-get($theme-colors, order-placed);
+  color: #fff;
+  padding: 0.5em 1.3em;
+}
+.badge-order-pickedup {
+  background-color: kt-get($theme-colors, order-pickedup);
+  color: #fff;
+}
+.badge-order-out-delivery {
+  background-color: kt-get($theme-colors, order-out-delivery);
+  color: #fff;
+}
+.badge-order-delivered {
+  background-color: kt-get($theme-colors, order-delivered);
+  color: #fff;
+  padding: 0.5em 2.3em;
+}
+.badge-primary {
+  color: #fff;
 }

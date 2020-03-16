@@ -5,7 +5,7 @@
 
 
 .table {
-
+	color: kt-get($kt-font-color, text);
 	th, td{
 		&.table-center{
 			text-align: center;
@@ -19,6 +19,7 @@
 			padding-top: 1rem;
 			padding-bottom: 1rem;
 		}
+		background-color: #f4f5f8;
 	}
 
 	tr.table-active {

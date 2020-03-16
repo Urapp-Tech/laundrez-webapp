@@ -8,6 +8,8 @@ import {
 } from "../../partials/content/Portlet";
 import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
 import { Link } from "react-router-dom";
+import { Table } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 
 export default function Dashboard() {
   const categories = [
@@ -44,9 +46,61 @@ export default function Dashboard() {
     //   categoryImage: 'https://flatvectors.com/wp-content/uploads/travel-man.svg',
     // },
   ];
- 
+  const orders = [
+    {
+      orderNumber: 'EZ-45867',
+      orderDateTime: '17:20 , 12-01-2020',
+      orderStatus: "placed",
+      itemCount: '3',
+      progressColor: '#357bf3',
+      progressCount: '20',
+      progressImage: "",
+      serviceCharges: '$15.00',
+    },
+    {
+      orderNumber: 'EZ-45864',
+      orderDateTime: '22:16 , 09-01-2020',
+      orderStatus: "pickedup",
+      itemCount: '13',
+      progressColor: '#c367f1',
+      progressCount: '25',
+      progressImage: "",
+      serviceCharges: '$15.00',
+    },
+    {
+      orderNumber: 'EZ-45867',
+      orderDateTime: '17:20 , 12-01-2020',
+      orderStatus: "out",
+      itemCount: '3',
+      progressColor: '#949eae',
+      progressCount: '100',
+      progressImage: "",
+      serviceCharges: '$15.00',
+    },
+    {
+      orderNumber: 'EZ-45866',
+      orderDateTime: '22:16 , 09-01-2020',
+      orderStatus: "placed",
+      itemCount: '1',
+      progressColor: '#2cd285',
+      progressCount: '80',
+      progressImage: "",
+      serviceCharges: '$15.00',
+    },
+    {
+      orderNumber: 'EZ-45864',
+      orderDateTime: '22:16 , 09-01-2020',
+      orderStatus: "delivered",
+      itemCount: '13',
+      progressColor: '#949eae',
+      progressCount: '25',
+      progressImage: "",
+      serviceCharges: '$15.00',
+    },
+  ];
 
-  
+
+
 
   return (
     <>
@@ -79,19 +133,61 @@ export default function Dashboard() {
               icon={
                 <img className="mr-2" alt={"icon"} src={OrderImage} />
               }
-              title="Order Statistics"
+              title="Order History"
               toolbar={
                 <PortletHeaderToolbar>
                   {/* <PortletHeaderDropdown /> */}
                   <Link to="">
-                   View all
+                    View all
                   </Link>
                 </PortletHeaderToolbar>
               }
             />
 
             <PortletBody>
+              <Table striped  >
+                <thead  >
+                  <tr>
+                    <th></th>
+                    <th>Order ID</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Items</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((data, i) => {
 
+                    return (< tr >
+                      <td></td>
+                      <td>{data.orderNumber}</td>
+                      <td>{data.orderDateTime}</td>
+                      <td>{
+                        data.orderStatus === "delivered" ?
+                          <Badge variant="order-delivered">Delivered</Badge>
+                          : data.orderStatus === "placed" ?
+                            <Badge variant="order-placed">Order Placed</Badge>
+                            : data.orderStatus === "pickedup" ?
+                              <Badge variant="order-pickedup">Order Pickedup</Badge>
+                              : data.orderStatus === "out" ?
+                                <Badge variant="order-out-delivery">Out for Delivery</Badge>
+                                : null
+
+
+
+                      }</td>
+                      <td>{data.itemCount}</td>
+                      <td>{
+                        data.orderStatus === "delivered" ?
+                          <Badge variant="primary">Repeat Order</Badge>
+                          : null
+                      }</td>
+                    </tr>)
+                  })
+                  }
+                </tbody>
+              </Table>
             </PortletBody>
           </Portlet>
         </div>

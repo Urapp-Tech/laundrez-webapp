@@ -162,25 +162,27 @@ export default function Dashboard() {
 
                     return (< tr >
                       <td>
-                        <CircularProgressbarWithChildren
-                          value={60}
-                          background={"#357BF3"}
-                          
-                          styles={{
-                            root: { width: "36px", height: "36px" },
-                            background: {
-                              fill: '#fff',
-                            },
-                          }}
+                        <div  style={{ width: "2.2rem" }} >
+                          <CircularProgressbarWithChildren
+                            value={60}
+                            background={"#357BF3"}
 
-                        >
-                          {/* <div className="d-flex justify-content-center align-content-center" > */}
-                          <img alt={"img"}
-                            // src="https://i.imgur.com/b9NyUGm.png"
-                            src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")}
-                          />
-                          {/* </div> */}
-                        </CircularProgressbarWithChildren>
+                            styles={{
+                              // root: { width: "36px", height: "36px" },
+                              background: {
+                                fill: '#fff',
+                              },
+                            }}
+
+                          >
+                            {/* <div style={{ width: "30%" }} > */}
+                            <img alt={"img"}
+                              // src="https://i.imgur.com/b9NyUGm.png"
+                              src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")}
+                            />
+                            {/* </div> */}
+                          </CircularProgressbarWithChildren>
+                        </div>
                       </td>
                       <td>{data.orderNumber}</td>
                       <td>{data.orderDateTime}</td>

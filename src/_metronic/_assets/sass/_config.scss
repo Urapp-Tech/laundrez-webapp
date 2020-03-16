@@ -89,7 +89,7 @@ $kt-state-colors: (
 
     // Bootstrap states
     primary: (
-        base: #5867dd,
+        base: #ed8f31,
         inverse: #ffffff
     ),
     success: (
@@ -117,7 +117,7 @@ $kt-base-colors: (
         1: #a2a5b9,
         2: #74788d,
         3: #595d6e,
-        4: #48465b
+        4: #2c436a
     ),
     shape: (
         1: #f0f3ff,
@@ -183,7 +183,7 @@ $kt-font-size: (
 
 // General Link Settings
 $kt-font-color: (
-    text: #646c9a,
+    text: #2c436a,
     link: (
         default: kt-state-color(brand),
         hover: darken(kt-state-color(brand), 6%)

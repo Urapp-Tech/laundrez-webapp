@@ -33,3 +33,17 @@
     color: #ed8f31;
   }
 }
+.category-card {
+  width: 250px;
+  height: 250px;
+  box-shadow: 0 6px 20px 0 #2435532b;
+  margin-left: auto;
+  margin-right:auto ;
+  background-color: #ffffff;
+
+  .category-image {
+    width: 113.4px;
+    height: 123.9px;
+    object-fit: contain;
+  }
+}

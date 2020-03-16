@@ -652,11 +652,11 @@
                 border-bottom: 1px solid transparent;
 
                 .kt-portlet__head-title {
-                    color: kt-get($color, inverse);
+                    // color: kt-get($color, inverse);
 
-                    small {
-                        color: darken(kt-get($color, inverse), 6%);
-                    }
+                    // small {
+                    //     color: darken(kt-get($color, inverse), 6%);
+                    // }
                 }
 
                 .kt-portlet__head-icon {

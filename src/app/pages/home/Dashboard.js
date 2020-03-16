@@ -160,7 +160,11 @@ export default function Dashboard() {
                   {orders.map((data, i) => {
 
                     return (< tr >
-                      <td></td>
+                      <td>
+                        <div className="progress-order progress-order-placed" >
+                          <img alt={"img"} src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")} />
+                        </div>
+                      </td>
                       <td>{data.orderNumber}</td>
                       <td>{data.orderDateTime}</td>
                       <td>{

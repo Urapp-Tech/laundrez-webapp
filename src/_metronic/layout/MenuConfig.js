@@ -519,6 +519,7 @@ export default {
           {
             title: "Dry Cleaning",
             bullet: "dot",
+            page:"services/drycleaning"
           },
           {
             title: "Wash & fold",

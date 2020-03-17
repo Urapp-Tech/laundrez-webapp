@@ -46,8 +46,25 @@
     height: 123.9px;
     object-fit: contain;
   }
-  h2{
-    color:kt-state-color(primary, base);
+  h2 {
+    color: kt-state-color(primary, base);
+  }
+  .card-description {
+    width: 164px;
+    height: 28px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
   }
 }
-
+.margin-card {
+  margin-left: 15px;
+}

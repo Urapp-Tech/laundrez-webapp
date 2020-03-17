@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Portlet, PortletBody } from "../../../partials/content/Portlet";
+import ServiceModal from "../../../partials/layout/ServiceModal";
 
 export default function DryCleaning() {
     const orders = [
@@ -80,27 +81,28 @@ export default function DryCleaning() {
             serviceCharges: '$10.00',
         },
     ];
+    const [showModal, toggleModal] = useState(false);
     return (
         <div>
             <h2 className="mb-5" >Dry Cleaning</h2>
             <div className="d-flex flex-wrap  ">
                 {orders.map((data, i) => {
                     return (
-                        <div className="margin-card ">
+                        <div className="margin-card " onClick={() => toggleModal(!showModal)} >
                             <Portlet className="justify-content-center category-card kt-portlet--border-bottom-brand">
                                 <PortletBody className="justify-content-center align-items-center" >
                                     <h5>{data.serviceTitle}</h5>
                                     <img className="category-image" alt="img" src={data.serviceImage} />
                                     <div className="text-truncate card-description" >{data.serviceDesc}</div>
-                                    <h2 className="font-weight-bold" >{data.serviceCharges}</h2>
+                                    <h2 className="font-weight-bold price" >{data.serviceCharges}</h2>
                                 </PortletBody>
                             </Portlet>
                         </div>
                     )
                 })
                 }
-
             </div>
+            <ServiceModal data={orders[0]} showModal={showModal} toggleModal={() => toggleModal(!showModal)} />
         </div>
     )
 }

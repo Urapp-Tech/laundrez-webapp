@@ -10,7 +10,7 @@ import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
-import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
+import CircularProgress from "../../partials/layout/CircularProgress";
 
 export default function Dashboard() {
   const categories = [
@@ -73,7 +73,7 @@ export default function Dashboard() {
       orderDateTime: '17:20 , 12-01-2020',
       orderStatus: "out",
       itemCount: '3',
-      progressColor: '#949eae',
+      progressColor: '#2CD285',
       progressCount: '100',
       progressImage: "",
       serviceCharges: '$15.00',
@@ -83,7 +83,7 @@ export default function Dashboard() {
       orderDateTime: '22:16 , 09-01-2020',
       orderStatus: "placed",
       itemCount: '1',
-      progressColor: '#2cd285',
+      progressColor: '#357bf3',
       progressCount: '80',
       progressImage: "",
       serviceCharges: '$15.00',
@@ -94,7 +94,7 @@ export default function Dashboard() {
       orderStatus: "delivered",
       itemCount: '13',
       progressColor: '#949eae',
-      progressCount: '25',
+      progressCount: '100',
       progressImage: "",
       serviceCharges: '$15.00',
     },
@@ -137,7 +137,6 @@ export default function Dashboard() {
               title="Order History"
               toolbar={
                 <PortletHeaderToolbar>
-                  {/* <PortletHeaderDropdown /> */}
                   <Link to="">
                     View all
                   </Link>
@@ -162,27 +161,18 @@ export default function Dashboard() {
 
                     return (< tr >
                       <td>
-                        <div  style={{ width: "2.2rem" }} >
-                          <CircularProgressbarWithChildren
-                            value={60}
-                            background={"#357BF3"}
 
-                            styles={{
-                              // root: { width: "36px", height: "36px" },
-                              background: {
-                                fill: '#fff',
-                              },
-                            }}
+                        {data.orderStatus === "delivered" ?
+                          <CircularProgress value={data.progressCount} color={data.progressColor} img={"box.svg"} />
+                          : data.orderStatus === "placed" ?
+                            <CircularProgress value={data.progressCount} color={data.progressColor} img={"checklist.svg"} />
+                            : data.orderStatus === "pickedup" ?
+                              <CircularProgress value={data.progressCount} color={data.progressColor} img={"trolley.svg"} />
+                              : data.orderStatus === "out" ?
+                                <CircularProgress value={data.progressCount} color={data.progressColor} img={"tracking-green.svg"} />
+                                : null
 
-                          >
-                            {/* <div style={{ width: "30%" }} > */}
-                            <img alt={"img"}
-                              // src="https://i.imgur.com/b9NyUGm.png"
-                              src={require("../../../_metronic/layout/assets/layout-svg-icons/checklist.svg")}
-                            />
-                            {/* </div> */}
-                          </CircularProgressbarWithChildren>
-                        </div>
+                        }
                       </td>
                       <td>{data.orderNumber}</td>
                       <td>{data.orderDateTime}</td>
@@ -218,55 +208,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* <Portlet>
-        <PortletBody fit={true}>
-          <div className="row row-no-padding row-col-separator-xl">
-            <div className="col-xl-4">
-              <OrdersWidget />
-            </div>
-            <div className="col-xl-4">
-              <SalesBarChart
-                title="Daily Sales"
-                desc="Check out each column for more details"
-              />
-            </div>
-            <div className="col-xl-4">
-              <SalesBarChart
-                title="Revenue Change"
-                desc="Revenue change breakdown by cities"
-              />
-            </div>
-          </div>
-        </PortletBody>
-      </Portlet> */}
-
-      {/* <div className="row">
-        <div className="col-xl-4">
-          <DownloadFiles />
-        </div>
-        <div className="col-xl-4">
-          <NewUsers />
-        </div>
-        <div className="col-xl-4">
-          <LatestUpdates />
-        </div>
-      </div> */}
-
-      {/* <div className="row">
-        <div className="col-xl-8"></div>
-        <div className="col-xl-4">
-          <AuthorsProfit />
-        </div>
-      </div> */}
-
-      {/* <div className="row">
-        <div className="col-xl-8">
-          <BestSellers />
-        </div>
-        <div className="col-xl-4">
-          <RecentActivities />
-        </div>
-      </div> */}
+     
     </>
   );
 }

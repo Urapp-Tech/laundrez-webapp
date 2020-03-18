@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import Services from "./Services";
+import OrderHistory from "./OrderHistory";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -32,6 +33,8 @@ export default function HomePage() {
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/docs" component={DocsPage} />
         <Route path="/services" component={Services} />
+        <Route path="/orderhistory" component={OrderHistory} />
+
 
         <Redirect to="/error/error-v1" />
       </Switch>

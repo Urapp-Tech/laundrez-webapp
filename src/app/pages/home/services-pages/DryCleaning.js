@@ -88,7 +88,7 @@ export default function DryCleaning() {
             <div className="d-flex flex-wrap  ">
                 {orders.map((data, i) => {
                     return (
-                        <div className="margin-card " onClick={() => toggleModal(!showModal)} >
+                        <div key={i} className="margin-card " onClick={() => toggleModal(!showModal)} >
                             <Portlet className="justify-content-center category-card kt-portlet--border-bottom-brand">
                                 <PortletBody className="justify-content-center align-items-center" >
                                     <h5>{data.serviceTitle}</h5>

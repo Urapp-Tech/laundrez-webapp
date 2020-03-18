@@ -503,7 +503,7 @@ export default {
     self: {},
     items: [
       {
-        title: "Dashboard",
+        title: "Home",
         root: true,
         icon: "home-solid.svg",
         page: "dashboard",
@@ -543,7 +543,7 @@ export default {
         title: "Order History",
         root: true,
         icon: "order.svg",
-        page: "",
+        page: "orderhistory",
         bullet: "dot"
       },
       {

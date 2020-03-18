@@ -47,7 +47,6 @@ export const selectors = {
     const menuAsideLeftSkin = objectPath.get(layoutConfig, "brand.self.logo");
     // set brand logo
     const logoObject = objectPath.get(layoutConfig, "self.logo");
-    console.log(logoObject)
     let logo;
     if (typeof logoObject === "string") {
       logo = logoObject;

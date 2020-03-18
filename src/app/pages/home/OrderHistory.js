@@ -3,9 +3,9 @@ import OrderHistoryTable from "../../partials/layout/OrderHistoryTable";
 
 export default function OrderHistory() {
 
-    return (
-        <div className="col-xl-12">
-          <OrderHistoryTable showToolbar={false} />
-        </div>
-    );
+  return (
+    <div className="col-xl-12">
+      <OrderHistoryTable showToolbar={false} showPagination={true} />
+    </div>
+  );
 }

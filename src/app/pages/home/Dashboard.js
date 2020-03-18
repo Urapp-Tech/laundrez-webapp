@@ -79,7 +79,7 @@ export default function Dashboard() {
         </div>
 
         <div className="col-xl-7">
-          <OrderHistoryTable showToolbar={true} />
+          <OrderHistoryTable showToolbar={true} showPagination={false} />
         </div>
       </div>
 

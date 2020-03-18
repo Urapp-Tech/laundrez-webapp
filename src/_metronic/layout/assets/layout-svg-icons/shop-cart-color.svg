@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="114" height="28" viewBox="0 0 114 28">
+    <defs>
+        <style>
+            .prefix__cls-3{fill:#fff}
+        </style>
+    </defs>
+    <g id="prefix__Group_143" data-name="Group 143" transform="translate(-1469 -92)">
+        <text id="prefix__My_Basket" data-name="My Basket" transform="translate(1502 111)" style="font-size:16px;font-family:Poppins-Regular,Poppins;fill:#fff">
+            <tspan x="0" y="0">My Basket</tspan>
+        </text>
+        <g id="prefix__Rectangle_69" data-name="Rectangle 69" style="fill:#ed8f31;stroke:#fff">
+            <path d="M0 0H28V28H0z" style="stroke:none" transform="translate(1469 92)"/>
+            <path d="M0.5 0.5H27.5V27.5H0.5z" style="fill:none" transform="translate(1469 92)"/>
+        </g>
+        <g id="prefix__cart" transform="translate(1474 99)">
+            <g id="prefix__shopping-cart">
+                <path id="prefix__Path_88" d="M17.839 45.316a1.26 1.26 0 0 0-.984-.464h-3.487L11.477 40.6a.534.534 0 0 0-.7-.269.518.518 0 0 0-.274.687l1.706 3.839H5.9l1.7-3.844a.518.518 0 0 0-.274-.687.534.534 0 0 0-.7.269L4.74 44.852H1.253a1.259 1.259 0 0 0-.984.464 1.185 1.185 0 0 0-.238 1.021l1.862 8a1.239 1.239 0 0 0 1.222.948h11.878a1.239 1.239 0 0 0 1.222-.948l1.862-8a1.185 1.185 0 0 0-.238-1.021zm-2.846 8.924H3.115a.189.189 0 0 1-.188-.138l-1.862-8a.157.157 0 0 1 .033-.139.194.194 0 0 1 .155-.071h3.024l-.139.313a.518.518 0 0 0 .274.687.535.535 0 0 0 .7-.269l.324-.73h7.238l.324.73a.535.535 0 0 0 .7.269.518.518 0 0 0 .274-.687l-.139-.313h3.024a.194.194 0 0 1 .155.071.157.157 0 0 1 .033.138l-1.862 8a.189.189 0 0 1-.188.138z" class="prefix__cls-3" data-name="Path 88" transform="translate(0 -40.283)"/>
+                <path id="prefix__Path_89" d="M151.531 266.717a.526.526 0 0 0-.531.521v3.824a.531.531 0 0 0 1.061 0v-3.824a.526.526 0 0 0-.53-.521z" class="prefix__cls-3" data-name="Path 89" transform="translate(-145.659 -258.844)"/>
+                <path id="prefix__Path_90" d="M241.531 266.717a.526.526 0 0 0-.531.521v3.824a.531.531 0 0 0 1.061 0v-3.824a.526.526 0 0 0-.53-.521z" class="prefix__cls-3" data-name="Path 90" transform="translate(-232.476 -258.844)"/>
+                <path id="prefix__Path_91" d="M331.531 266.717a.526.526 0 0 0-.531.521v3.824a.531.531 0 0 0 1.061 0v-3.824a.526.526 0 0 0-.53-.521z" class="prefix__cls-3" data-name="Path 91" transform="translate(-319.293 -258.844)"/>
+            </g>
+        </g>
+    </g>
+</svg>

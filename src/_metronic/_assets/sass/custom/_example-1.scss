@@ -277,3 +277,10 @@
   bottom: 25px;
   width: 100%;
 }
+.address-label {
+  color: kt-get($kt-font-color, text) !important ;
+  img {
+    width: 1.13125rem;
+    height: 1.54375rem;
+  }
+}

@@ -8,6 +8,7 @@ import Services from "./Services";
 import OrderHistory from "./OrderHistory";
 import MyBasket from "./MyBasket";
 import AddDeliveryAddress from "./AddDeliveryAddress";
+import PickAndDrop from "./PickAndDrop";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -38,6 +39,7 @@ export default function HomePage() {
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/mybasket" component={MyBasket} />
         <Route path="/deliveryaddress" component={AddDeliveryAddress} />
+        <Route path="/pickanddrop" component={PickAndDrop} />
 
 
         <Redirect to="/error/error-v1" />

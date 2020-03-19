@@ -37,7 +37,7 @@ export default function HomePage() {
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/mybasket" component={MyBasket} />
-        <Route path="/adddeliveryaddress" component={AddDeliveryAddress} />
+        <Route path="/deliveryaddress" component={AddDeliveryAddress} />
 
 
         <Redirect to="/error/error-v1" />

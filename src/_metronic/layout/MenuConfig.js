@@ -557,7 +557,7 @@ export default {
         title: "Delivery Address",
         root: true,
         icon: "tracking.svg",
-        page: "",
+        page: "deliveryaddress",
         bullet: "dot"
       },
       {

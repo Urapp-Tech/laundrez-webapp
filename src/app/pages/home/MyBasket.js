@@ -58,7 +58,7 @@ export default function MyBasket({ history }) {
                                         <h4>Grand Total</h4>
                                         <h4 className=" font-weight-bold kt-font-primary" >$431.20</h4>
                                     </div>
-                                    <button onClick={()=>history.push("/adddeliveryaddress")} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
+                                    <button onClick={()=>history.push("/deliveryaddress")} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
                                 </PortletBody>
                             </Portlet>
                         </div>

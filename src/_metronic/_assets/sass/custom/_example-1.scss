@@ -146,7 +146,7 @@
     letter-spacing: 0.24px;
   }
   .accordion-container {
-    border-bottom: 1px solid kt-get($kt-font-color,text);
+    border-bottom: 1px solid kt-get($kt-font-color, text);
   }
   .faq-ans {
     margin-top: 1rem;
@@ -159,14 +159,118 @@
     text-align: left;
     padding-bottom: 1rem;
   }
-  .arrow-icon{
+  .arrow-icon {
     width: 10px;
   }
-  .close{
+  .close {
     font-weight: 500;
-    color:kt-get($kt-font-color,text);
-    opacity:1;
-    font-size:1.8rem;
+    color: kt-get($kt-font-color, text);
+    opacity: 1;
+    font-size: 1.8rem;
   }
 }
+.mybasket-billing {
+  .amounts-container {
+    border-bottom: 1px solid rgba(69, 65, 78, 0.08);
+    padding: 1rem 0;
+    .amount-num {
+      font-size: 21px;
+      font-weight: 500;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.48;
+      letter-spacing: normal;
+    }
+    .amount-text {
+      font-size: 16px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 2.5;
+      letter-spacing: normal;
+    }
+  }
+}
+.mybasket-item {
+  border-bottom: 1px solid rgba(69, 65, 78, 0.08);
+  padding: 1.3rem 0;
+  .close {
+    font-weight: 500;
+    color: kt-get($kt-font-color, text);
+    opacity: 1;
+    font-size: 1.8rem;
+  }
+  .product {
+    width: 50%;
+    margin-left: 1.1rem;
+    .product-image {
+      width: 4rem;
+      height: 100%;
+      border-radius: 100%;
+      border: 3px solid kt-base-color(label, 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50px;
+        // border:2px solid kt-base-color(label, 2);
+      }
+    }
+  }
+  .quantity {
+    width: 50%;
+    // margin-left: 8rem;
+  }
+  .price {
+    width: 50%;
+    color: kt-base-color(label, 2);
+    font-size: 0.9em;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: 0.24px;
+
+    // margin-left: 3rem;
+  }
+  .sub-total {
+    width: 50%;
+    font-size: 1em;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.56;
+    letter-spacing: 0.32px;
+  }
+}
+.mybasket-footer {
+  .add-more-container {
+    width: 17rem;
+    .image-basket {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    .text {
+      margin-left: 10px;
+      font-size: 1em;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.56;
+      letter-spacing: 0.32px;
+    }
+  }
+  .promo-container {
+    .promo-input {
+      width: 15rem;
+    }
+
+  }
+  
+}

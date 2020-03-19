@@ -141,7 +141,7 @@ export default function OrderHistoryTable({ showToolbar, showPagination }) {
                 />
 
                 <PortletBody>
-                    <Table striped responsive  >
+                    <Table className="table-head-solid table-light"  responsive  >
                         <thead  >
                             <tr>
                                 <th></th>

@@ -6,6 +6,7 @@ import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import Services from "./Services";
 import OrderHistory from "./OrderHistory";
+import MyBasket from "./MyBasket";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -34,6 +35,7 @@ export default function HomePage() {
         <Route path="/docs" component={DocsPage} />
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />
+        <Route path="/mybasket" component={MyBasket} />
 
 
         <Redirect to="/error/error-v1" />

@@ -15,7 +15,9 @@ const perfectScrollbarOptions = {
 };
 
 export default class MyCart extends React.Component {
+
   render() {
+    console.log(this.props)
     const { bgImage, useSVG, icon, iconType } = this.props;
 
     return (
@@ -43,16 +45,16 @@ export default class MyCart extends React.Component {
           <form className="flex-column p-0">
             <div className="kt-mycart">
               <div
-                className="kt-mycart__head kt-head"
+                className="kt-mycart__head kt-head  "
                 style={{ backgroundImage: `url(${bgImage})` }}
               >
                 <div className="">
                   <CartNum4Icon className=" kt-svg-icon--primary" />
                 </div>
                 <div className="kt-mycart__button">
-                  <button type="button" className="btn btn-outline-light btn-sm">
+                  <Link to="/mybasket"  className="btn btn-outline-light btn-sm">
                     2 Items
-                  </button>
+                  </Link>
                 </div>
               </div>
 

@@ -564,7 +564,7 @@ export default {
         title: "Contact Us",
         root: true,
         icon: "email.svg",
-        page: "",
+        page: "contactus",
         bullet: "dot"
       },
       {

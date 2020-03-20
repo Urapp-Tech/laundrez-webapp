@@ -20,7 +20,7 @@ export default function OrderReviewItems() {
                 <span> 3 Items </span>
 
             </Col>
-            <Col className="d-flex justify-content-center align-items-center" >
+            <Col className="d-flex justify-content-end align-items-center" >
                 <span className="kt-font-primary font-weight-bold"> $150.00 </span>
             </Col>
 

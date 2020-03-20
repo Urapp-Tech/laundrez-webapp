@@ -4,6 +4,9 @@
 // Most of the changes can be achieved via global or layout level sass variable changes.
 //
 
+.text-out-for-delivery {
+  color: $order-out-delivery;
+}
 .kt-menu__subnav {
   background-color: #243553;
   color: #fff;
@@ -300,11 +303,11 @@
     width: 0.9rem;
   }
 }
-.driver-inst{
-  label{
+.driver-inst {
+  label {
     color: kt-base-color(label, 2);
   }
-  span{
+  span {
     font-weight: 500;
   }
 }

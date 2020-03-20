@@ -1,17 +1,17 @@
 import React from "react";
-import { CircularProgressbarWithChildren,buildStyles } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 
 
-export default function CircularProgress({ color, img, value }) {
+export default function CircularProgress({ color, img, value, width = "2.2rem" }) {
 
-    return (<div style={{ width: "2.2rem" }} >
+    return (<div style={{ width: width }} >
         <CircularProgressbarWithChildren
             value={value}
             background={true}
             styles={buildStyles({
                 pathColor: color,
-                backgroundColor:"#fff"
-              })}
+                backgroundColor: "#fff"
+            })}
 
         >
             <img alt={"img"}

@@ -60,7 +60,7 @@ export default function PickAndDrop() {
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button className="btn btn-lg btn-primary-gradient btn-primary pr-5 pl-5">Place Order</button>
+                                        <button id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>
@@ -70,7 +70,10 @@ export default function PickAndDrop() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Portlet className=""></Portlet>
+                            <Portlet className="">
+                                <PortletBody className="" >
+                                </PortletBody>
+                            </Portlet>
                         </div>
                     </div>
                 </div>

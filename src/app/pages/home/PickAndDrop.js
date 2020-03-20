@@ -2,7 +2,7 @@ import React from "react";
 import { Portlet, PortletBody } from "../../partials/content/Portlet";
 import { Form, Row, Col } from "react-bootstrap";
 
-export default function PickAndDrop() {
+export default function PickAndDrop({ history }) {
     return (
         <>
             <h4 className="mb-3" >Pick And Drop</h4>
@@ -60,7 +60,7 @@ export default function PickAndDrop() {
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
+                                        <button onClick={()=>history.push("/orderreview")} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>

@@ -288,3 +288,23 @@
   padding-left: 8rem;
   padding-right: 8rem;
 }
+
+.border-image-theme {
+  border: 3px solid kt-base-color(label, 1);
+}
+.street-container {
+  .street-text {
+    font-size: 0.9em;
+  }
+  .pin-image {
+    width: 0.9rem;
+  }
+}
+.driver-inst{
+  label{
+    color: kt-base-color(label, 2);
+  }
+  span{
+    font-weight: 500;
+  }
+}

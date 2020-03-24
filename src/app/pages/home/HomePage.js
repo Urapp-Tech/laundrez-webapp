@@ -14,6 +14,7 @@ import OrderDetails from "./OrderDetails";
 import ContactUs from "./ContactUs";
 import PaymentSettings from "./PaymentSettings";
 import PaymentDetails from "./PaymentDetails";
+import YourProfile from "./YourProfile";
 
 const GoogleMaterialPage = lazy(() =>
   import("./google-material/GoogleMaterialPage")
@@ -50,6 +51,8 @@ export default function HomePage() {
         <Route path="/contactus" component={ContactUs} />
         <Route path="/paymentsettings" component={PaymentSettings} />
         <Route path="/paymentdetails" component={PaymentDetails} />
+        <Route path="/profile" component={YourProfile} />
+
 
 
         <Redirect to="/error/error-v1" />

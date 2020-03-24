@@ -301,9 +301,6 @@
   .street-text {
     font-size: 0.9em;
   }
-  .pin-image {
-    width: 0.9rem;
-  }
 }
 .driver-inst {
   label {
@@ -312,4 +309,8 @@
   span {
     font-weight: 500;
   }
+}
+
+.pin-image {
+  width: 0.9rem;
 }

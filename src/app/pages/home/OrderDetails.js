@@ -4,6 +4,7 @@ import OrderReviewItems from "../../partials/content/OrderReviewItems";
 import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
 import CircularProgress from "../../partials/layout/CircularProgress";
 import { Row, Col } from "react-bootstrap";
+import Map from "../../widgets/Map";
 export default function OrderDetails() {
     return (
         <>
@@ -33,6 +34,7 @@ export default function OrderDetails() {
                                         <PickAndDropInfo />
                                     </div>
                                     <div className="mt-3" >
+                                        <OrderReviewItems />
                                         <OrderReviewItems />
                                     </div>
                                     <Row className="mt-3 border-bottom pb-3">
@@ -66,7 +68,7 @@ export default function OrderDetails() {
                                         </Row>
                                     </div>
 
-                                    
+
 
                                 </PortletBody>
                             </Portlet>
@@ -76,10 +78,7 @@ export default function OrderDetails() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Portlet className="">
-                                <PortletBody className="" >
-                                </PortletBody>
-                            </Portlet>
+                            <Map height={"600px"} />
                         </div>
                     </div>
                 </div>

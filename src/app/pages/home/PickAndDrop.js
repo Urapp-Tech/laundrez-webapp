@@ -1,6 +1,7 @@
 import React from "react";
 import { Portlet, PortletBody } from "../../partials/content/Portlet";
 import { Form, Row, Col } from "react-bootstrap";
+import Map from "../../widgets/Map";
 
 export default function PickAndDrop({ history }) {
     return (
@@ -60,7 +61,7 @@ export default function PickAndDrop({ history }) {
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button onClick={()=>history.push("/orderreview")} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
+                                        <button onClick={() => history.push("/orderreview")} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>
@@ -68,12 +69,11 @@ export default function PickAndDrop({ history }) {
                     </div>
                 </div>
                 <div className="col-xl-6 col-md-6">
-                    <div className="row row-full-height ">
+                    <div className="row row-full-height">
                         <div className="col-md-12 ">
-                            <Portlet className="">
-                                <PortletBody className="" >
-                                </PortletBody>
-                            </Portlet>
+
+                            <Map height={"600px"} />
+
                         </div>
                     </div>
                 </div>

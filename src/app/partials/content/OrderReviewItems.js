@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 
 export default function OrderReviewItems() {
     return (
-        <Row className="border-bottom" >
+        <Row className="border-bottom mb-3" >
             <Col>
                 <div className=" d-flex justify-content-center align-items-center">
                     <div style={{width:"8rem"}} className="rounded-circle  border-image-theme mb-3" >

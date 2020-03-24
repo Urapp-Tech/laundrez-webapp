@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import OrderReviewItems from "../../partials/content/OrderReviewItems";
 import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
 import { ReactComponent as Basket } from "../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg";
+import Map from "../../widgets/Map";
 
 export default function OrderReview() {
     return (
@@ -16,6 +17,7 @@ export default function OrderReview() {
                             <Portlet className="">
                                 <PortletBody>
                                     <div>
+                                        <OrderReviewItems />
                                         <OrderReviewItems />
                                     </div>
                                     <div>
@@ -45,7 +47,7 @@ export default function OrderReview() {
                                                 <span className="ml-1 kt-font-primary" >Add More to Basket</span>
                                             </Col>
                                             <Col className=" d-flex justify-content-between align-items-center" >
-                                                <button  className="btn btn-block btn-primary-gradient btn-primary">Continue</button>
+                                                <button className="btn btn-block btn-primary-gradient btn-primary">Continue</button>
 
                                             </Col>
                                         </Row>
@@ -59,10 +61,7 @@ export default function OrderReview() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Portlet className="">
-                                <PortletBody className="" >
-                                </PortletBody>
-                            </Portlet>
+                            <Map height={"600px"} />
                         </div>
                     </div>
                 </div>

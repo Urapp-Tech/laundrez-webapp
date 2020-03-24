@@ -164,9 +164,7 @@
     text-align: left;
     padding-bottom: 1rem;
   }
-  .arrow-icon {
-    width: 10px;
-  }
+  
   .close {
     font-weight: 500;
     color: kt-get($kt-font-color, text);
@@ -313,4 +311,7 @@
 
 .pin-image {
   width: 0.9rem;
+}
+.arrow-icon {
+  width: 10px;
 }

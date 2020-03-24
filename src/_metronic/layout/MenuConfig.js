@@ -571,7 +571,7 @@ export default {
         title: "FAQ's",
         root: true,
         icon: "question.svg",
-        page: "",
+        page: "faqs",
         bullet: "dot"
       },
       

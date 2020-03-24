@@ -7,7 +7,7 @@ import { LayoutSplashScreen } from "../../../_metronic";
 import Services from "./Services";
 import OrderHistory from "./OrderHistory";
 import MyBasket from "./MyBasket";
-import AddDeliveryAddress from "./AddDeliveryAddress";
+import DeliveryAddress from "./DeliveryAddress";
 import PickAndDrop from "./PickAndDrop";
 import OrderReview from "./OrderReview";
 import OrderDetails from "./OrderDetails";
@@ -41,7 +41,7 @@ export default function HomePage() {
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/mybasket" component={MyBasket} />
-        <Route path="/deliveryaddress" component={AddDeliveryAddress} />
+        <Route path="/deliveryaddress" component={DeliveryAddress} />
         <Route path="/pickanddrop" component={PickAndDrop} />
         <Route path="/orderreview" component={OrderReview} />
         <Route path="/orderdetails" component={OrderDetails} />

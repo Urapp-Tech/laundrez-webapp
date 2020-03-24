@@ -124,6 +124,25 @@
         padding-top: 0;
         padding-bottom: 0;
     }
+    .close {
+        outline:none !important;
+        color: kt-get($kt-font-color, text);
+
+        @include kt-close-icon();
+        @include kt-hover-transition();
+
+        &:before {
+            font-size: 1.3rem;
+        }
+
+        span {
+            display: none;
+        }
+
+        // &:hover {
+        //     color: kt-brand-color();
+        // }
+    }
 }
 
 @include kt-media-above(xl) {

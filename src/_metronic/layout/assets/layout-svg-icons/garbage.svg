@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="17.99" viewBox="0 0 16 17.99">
+    <defs>
+        <linearGradient id="prefix__linear-gradient" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ed8f31"/>
+            <stop offset="1" stop-color="#ffa304"/>
+        </linearGradient>
+        <style>
+            .prefix__cls-1{fill:url(#prefix__linear-gradient)}
+        </style>
+    </defs>
+    <g id="prefix__garbage" transform="translate(-26.9)">
+        <g id="prefix__Group_145" data-name="Group 145" transform="translate(26.9)">
+            <path id="prefix__Path_294" d="M42.4 2.589h-3.742v-.61A1.981 1.981 0 0 0 36.679 0h-3.558a1.981 1.981 0 0 0-1.979 1.979v.61H27.4a.5.5 0 0 0 0 1h.9v11.73a2.674 2.674 0 0 0 2.67 2.67h7.856a2.674 2.674 0 0 0 2.67-2.67V3.588h.9a.5.5 0 0 0 0-1zm-10.26-.61a.982.982 0 0 1 .98-.98h3.558a.982.982 0 0 1 .98.98v.61h-5.517zm8.36 13.34a1.675 1.675 0 0 1-1.672 1.672h-7.856a1.675 1.675 0 0 1-1.672-1.672V3.588h11.2v11.731z" class="prefix__cls-1" data-name="Path 294" transform="translate(-26.9)"/>
+            <path id="prefix__Path_295" d="M230.2 155.223a.5.5 0 0 0 .5-.5V145.9a.5.5 0 1 0-1 0v8.821a.5.5 0 0 0 .5.502z" class="prefix__cls-1" data-name="Path 295" transform="translate(-222.199 -140.022)"/>
+            <path id="prefix__Path_296" d="M142.1 168.925a.5.5 0 0 0 .5-.5V160.7a.5.5 0 0 0-1 0v7.726a.5.5 0 0 0 .5.499z" class="prefix__cls-1" data-name="Path 296" transform="translate(-137.358 -154.275)"/>
+            <path id="prefix__Path_297" d="M318.3 168.925a.5.5 0 0 0 .5-.5V160.7a.5.5 0 0 0-1 0v7.726a.5.5 0 0 0 .5.499z" class="prefix__cls-1" data-name="Path 297" transform="translate(-307.041 -154.275)"/>
+        </g>
+    </g>
+</svg>

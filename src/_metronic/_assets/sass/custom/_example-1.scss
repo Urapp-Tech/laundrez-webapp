@@ -3,7 +3,9 @@
 // Here you can put your custom sass code, use global SASS mixings and variables to override the theme or add new styles according to your requirements.
 // Most of the changes can be achieved via global or layout level sass variable changes.
 //
-
+.cursor-pointer {
+  cursor: pointer;
+}
 .text-out-for-delivery {
   color: $order-out-delivery;
 }

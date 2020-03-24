@@ -80,7 +80,7 @@ function Layout({
               {/*<!-- end:: Content Body -->*/}
             </div>
             {/* <!-- end:: Content --> */}
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </div>
         {/* <!-- end:: Body --> */}

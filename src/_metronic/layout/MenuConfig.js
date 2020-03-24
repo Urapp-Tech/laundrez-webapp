@@ -550,7 +550,7 @@ export default {
         title: "Payment Setting",
         root: true,
         icon: "receipt.svg",
-        page: "",
+        page: "paymentsettings",
         bullet: "dot"
       },
       {

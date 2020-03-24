@@ -14,7 +14,7 @@ $font-family-base:									kt-get($kt-font-families, regular);
 
 // Color System
 $primary:       									kt-get($kt-state-colors, primary, base) !default;
-$secondary:     									#e1e1ef !default;
+$secondary:     									#949eae !default;
 $success:       									kt-get($kt-state-colors, success, base) !default;
 $info:          									kt-get($kt-state-colors, info, base) !default;
 $warning:       									kt-get($kt-state-colors, warning, base) !default;

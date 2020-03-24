@@ -1,8 +1,6 @@
 import React from "react";
 import { Portlet, PortletBody } from "../../partials/content/Portlet";
 import { Col, Row, Form } from "react-bootstrap";
-import Pin from "../../../_metronic/layout/assets/layout-svg-icons/pin.svg";
-import Garbage from "../../../_metronic/layout/assets/layout-svg-icons/garbage.svg";
 import SavedAddress from "../../partials/content/SavedAddress";
 
 export default function DeliveryAddress() {

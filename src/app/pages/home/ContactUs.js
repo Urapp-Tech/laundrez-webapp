@@ -25,19 +25,19 @@ export default function ContactUs() {
                                             <Form.Label>Your Message</Form.Label>
                                             <Form.Control as="textarea" rows="15" />
                                         </Form.Group>
-                                        
+
                                         <Row className="justify-content-end" >
                                             <Col md={3} >
-                                            <button className="btn btn-primary  btn-primary-gradient btn-block" > Send </button>
-                                        </Col>
+                                                <button className="btn btn-primary  btn-primary-gradient btn-block" > Send </button>
+                                            </Col>
                                         </Row>
                                     </Form>
-                            </div>
+                                </div>
                             </div>
                         </PortletBody>
                     </Portlet>
+                </div>
             </div>
-        </div>
         </>
     )
 }

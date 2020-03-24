@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link, } from "react-router-dom";
+import { Link, withRouter, } from "react-router-dom";
 import { Table, Badge } from "react-bootstrap";
 import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
 import CircularProgress from "./CircularProgress";
 import { Portlet, PortletHeader, PortletBody, PortletHeaderToolbar } from "../content/Portlet";
 import Pagination from "react-js-pagination";
 
-export default function OrderHistoryTable({ showToolbar, showPagination }) {
+function OrderHistoryTable({ history, showToolbar, showPagination }) {
     const orders = [
         {
             orderNumber: 'EZ-45867',
@@ -118,7 +118,7 @@ export default function OrderHistoryTable({ showToolbar, showPagination }) {
             progressImage: "",
             serviceCharges: '$15.00',
         },
-        
+
     ];
     const [activePage, setActivePage] = useState(1);
     return (
@@ -141,7 +141,7 @@ export default function OrderHistoryTable({ showToolbar, showPagination }) {
                 />
 
                 <PortletBody>
-                    <Table className="table-head-solid table-light"  responsive  >
+                    <Table className="table-head-solid table-light" responsive  >
                         <thead  >
                             <tr>
                                 <th></th>
@@ -170,7 +170,7 @@ export default function OrderHistoryTable({ showToolbar, showPagination }) {
 
                                         }
                                     </td>
-                                    <td>{data.orderNumber}</td>
+                                    <td className="cursor-pointer" onClick={()=>history.push("/orderdetails")} >{data.orderNumber}</td>
                                     <td>{data.orderDateTime}</td>
                                     <td>{
                                         data.orderStatus === "delivered" ?
@@ -224,3 +224,4 @@ export default function OrderHistoryTable({ showToolbar, showPagination }) {
         </>
     );
 }
+export default withRouter(OrderHistoryTable);

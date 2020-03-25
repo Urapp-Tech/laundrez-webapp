@@ -6,6 +6,8 @@ import { Link, Redirect } from "react-router-dom";
 import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../../store/ducks/auth.duck";
 import { requestPassword } from "../../crud/auth.crud";
+import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
+import { Row, Col, Form } from "react-bootstrap";
 
 class ForgotPassword extends Component {
   state = { isRequested: false };
@@ -23,12 +25,21 @@ class ForgotPassword extends Component {
         <div className="kt-login__body">
           <div className="kt-login__form">
             <div className="kt-login__title">
-              <h3>
-                <FormattedMessage id="AUTH.FORGOT.TITLE" />
+              <img src={Logo} />
+              <h3 className="text-primary" >
+                Forgot Password
               </h3>
+              <h6>Enter registered email to receive password reset link</h6>
             </div>
+            <Form className="kt-form " >
+              <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Control type="email" placeholder="Email" />
+              </Form.Group>
+            <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Submit </button>
 
-            <Formik
+            </Form>
+
+            {/* <Formik
               initialValues={{ email: "" }}
               validate={values => {
                 const errors = {};
@@ -115,7 +126,7 @@ class ForgotPassword extends Component {
                   </div>
                 </form>
               )}
-            </Formik>
+            </Formik> */}
           </div>
         </div>
       </div>

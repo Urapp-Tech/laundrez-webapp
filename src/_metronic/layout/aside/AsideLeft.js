@@ -10,6 +10,7 @@ import WhatsappImage from "../assets/layout-svg-icons/whatsapp.svg";
 import TwitterImage from "../assets/layout-svg-icons/twitter-sign.svg";
 import EmailImage from "../assets/layout-svg-icons/black-envelope.svg";
 import PowerImage from "../assets/layout-svg-icons/power.svg";
+import { Link } from "react-router-dom";
 
 class AsideLeft extends React.Component {
   asideOffCanvasRef = React.createRef();
@@ -50,17 +51,21 @@ class AsideLeft extends React.Component {
             )}
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
-              <div className="d-flex justify-content-between  w-75 mt-3">
+              <div className="d-flex justify-content-between   w-75 mt-3">
                 <img alt={"fb"} src={FbImage} />
                 <img alt={"whatsapp"} src={WhatsappImage} />
                 <img alt={"twitter"} src={TwitterImage} />
                 <img alt={"email"} src={EmailImage} />
 
               </div>
-              <div className="break-line mt-5" ></div>
-              <div className="logout-box mt-5 d-flex" >
+              <div className="break-line mt-3" ></div>
+              <div className="border-bottom mt-3 " >
+                <Link> <h6 className="text-white" >Terms & Conditions</h6></Link>
+                <Link> <h6 className="text-white" >Privacy Policy</h6></Link>
+              </div>
+              <div className="logout-box cursor-pointer d-flex mt-3 " >
                 <img alt={"power"} src={PowerImage} />
-                <span className="ml-3 logout-text " >Logout</span>
+                <span className="ml-3 logout-text  " >Logout</span>
               </div>
             </div>
           </div>

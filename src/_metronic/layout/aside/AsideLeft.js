@@ -24,6 +24,7 @@ class AsideLeft extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <>
         <button className="kt-aside-close" id="kt_aside_close_btn">
@@ -60,13 +61,13 @@ class AsideLeft extends React.Component {
               </div>
               <div className="break-line mt-3" ></div>
               <div className="border-bottom mt-3 " >
-                <Link> <h6 className="text-white" >Terms & Conditions</h6></Link>
-                <Link> <h6 className="text-white" >Privacy Policy</h6></Link>
+                <Link to="/termsandcondition" > <h6 className="text-white" >Terms & Conditions</h6></Link>
+                <Link to="/privacypolicy" > <h6 className="text-white" >Privacy Policy</h6></Link>
               </div>
-              <div className="logout-box cursor-pointer d-flex mt-3 " >
+              <Link to="/logout" className="logout-box cursor-pointer d-flex mt-3 " >
                 <img alt={"power"} src={PowerImage} />
                 <span className="ml-3 logout-text  " >Logout</span>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

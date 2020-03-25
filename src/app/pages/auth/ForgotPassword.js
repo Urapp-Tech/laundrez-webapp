@@ -7,7 +7,7 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../../store/ducks/auth.duck";
 import { requestPassword } from "../../crud/auth.crud";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
-import { Row, Col, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 class ForgotPassword extends Component {
   state = { isRequested: false };
@@ -35,7 +35,7 @@ class ForgotPassword extends Component {
               <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Control type="email" placeholder="Email" />
               </Form.Group>
-            <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Submit </button>
+              <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Submit </button>
 
             </Form>
 

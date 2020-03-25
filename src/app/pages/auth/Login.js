@@ -7,6 +7,9 @@ import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
 import { login } from "../../crud/auth.crud";
+import { Row, Col, Form } from "react-bootstrap";
+import FbLogo from "../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg";
+import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
 
 function Login(props) {
   const { intl } = props;
@@ -27,7 +30,7 @@ function Login(props) {
 
   return (
     <>
-      <div className="kt-login__head">
+      {/* <div className="kt-login__head">
         <span className="kt-login__signup-label">
           Don't have an account yet?
         </span>
@@ -35,18 +38,43 @@ function Login(props) {
         <Link to="/auth/registration" className="kt-link kt-login__signup-link">
           Sign Up!
         </Link>
-      </div>
+      </div> */}
 
       <div className="kt-login__body">
         <div className="kt-login__form">
           <div className="kt-login__title">
-            <h3>
+            <img src={Logo} />
+            <h3 className="text-primary" >
               {/* https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage */}
-              <FormattedMessage id="AUTH.LOGIN.TITLE" />
+              {/* <FormattedMessage id="AUTH.LOGIN.TITLE" /> */}
+              Sign In To Customer
             </h3>
           </div>
-
-          <Formik
+          <Form className="kt-form " >
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Control type="email" placeholder="Email" />
+            </Form.Group>
+            <Form.Group className="" controlId="exampleForm.ControlInput1">
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Row className="justify-content-between pr-3 pl-3 mt-3 " >
+              <Form.Group className="m-0 remember-me" controlId="remember-me">
+                <Form.Check type="checkbox" inline label="Remember me" />
+              </Form.Group>
+              <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
+            </Row>
+            <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Login </button>
+            <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} className="mr-2" /> Login with Facebook </button>
+          </Form>
+          <div className="kt-login__options mt-5">
+            <Row className="justify-content-center " >
+              <Col>
+                <span>Don't have an account yet ? </span>
+                <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+              </Col>
+            </Row>
+          </div>
+          {/* <Formik
             initialValues={{
               email: "admin@demo.com",
               password: "demo"
@@ -120,7 +148,7 @@ function Login(props) {
                         <div className="alert-text">
                           Use account <strong>admin@demo.com</strong> and password{" "}
                           <strong>demo</strong> to continue.
-                    </div>
+                        </div>
                       </div>
                     )}
 
@@ -178,17 +206,17 @@ function Login(props) {
                   </div>
                 </form>
               )}
-          </Formik>
+          </Formik> */}
 
-          <div className="kt-login__divider">
+          {/* <div className="kt-login__divider">
             <div className="kt-divider">
               <span />
               <span>OR</span>
               <span />
             </div>
-          </div>
+          </div> */}
 
-          <div className="kt-login__options">
+          {/* <div className="kt-login__options">
             <Link to="http://facebook.com" className="btn btn-primary kt-btn">
               <i className="fab fa-facebook-f" />
               Facebook
@@ -201,7 +229,7 @@ function Login(props) {
               <i className="fab fa-google" />
               Google
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

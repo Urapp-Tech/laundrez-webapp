@@ -13,7 +13,7 @@ export const actionTypes = {
 };
 
 const initialAuthState = {
-  user: {
+  user:null, /* {
     "id": 1,
     "username": "admin",
     "email": "admin@demo.com",
@@ -37,7 +37,7 @@ const initialAuthState = {
       "twitter": "https://twitter.com/admin",
       "instagram": "https://instagram.com/admin"
     }
-  },
+  }, */
   authToken: undefined
 };
 

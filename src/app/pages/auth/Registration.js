@@ -2,10 +2,12 @@ import React from "react";
 import { Formik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { FormattedMessage, injectIntl } from "react-intl";
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import * as auth from "../../store/ducks/auth.duck";
 import { register } from "../../crud/auth.crud";
+import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
+import { Row, Col, Form } from "react-bootstrap";
+
 
 function Registration(props) {
   const { intl } = props;
@@ -14,12 +16,43 @@ function Registration(props) {
     <div className="kt-login__body">
       <div className="kt-login__form">
         <div className="kt-login__title">
-          <h3>
-            <FormattedMessage id="AUTH.REGISTER.TITLE" />
-          </h3>
+          <img src={Logo} />
+          <h3 className="text-primary" >
+            Get Registered
+            </h3>
         </div>
 
-        <Formik
+        <Form className="kt-form " >
+          <Form.Group >
+            <Form.Control type="text" placeholder="First Name" />
+          </Form.Group>
+          <Form.Group >
+            <Form.Control type="text" placeholder="Last Name" />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="number" placeholder="Phone Number" />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="email" placeholder="Email" />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="password" placeholder="Password" />
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="postalcode" placeholder="Postal Code" />
+          </Form.Group>
+          <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Sign Up </button>
+        </Form>
+        <div className="kt-login__options mt-5">
+          <Row className="justify-content-center " >
+            <Col>
+              <span>Already Have an Account </span>
+              <Link to="/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Signin </h6> </Link>
+            </Col>
+          </Row>
+        </div>
+
+        {/* <Formik
           initialValues={{
             email: "",
             fullname: "",
@@ -236,15 +269,14 @@ function Registration(props) {
               </div>
             </form>
           )}
-        </Formik>
+        </Formik> */}
       </div>
     </div>
   );
 }
 
-export default injectIntl(
+export default
   connect(
     null,
     auth.actions
   )(Registration)
-);

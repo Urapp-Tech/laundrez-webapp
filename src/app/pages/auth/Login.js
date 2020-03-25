@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import { connect } from "react-redux";
-import { FormattedMessage, injectIntl } from "react-intl";
 import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
@@ -45,8 +44,6 @@ function Login(props) {
           <div className="kt-login__title">
             <img src={Logo} />
             <h3 className="text-primary" >
-              {/* https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage */}
-              {/* <FormattedMessage id="AUTH.LOGIN.TITLE" /> */}
               Sign In To Customer
             </h3>
           </div>
@@ -236,9 +233,8 @@ function Login(props) {
   );
 }
 
-export default injectIntl(
+export default
   connect(
     null,
     auth.actions
-  )(Login)
-);
+  )(Login);

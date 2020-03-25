@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import { connect } from "react-redux";
@@ -6,26 +6,54 @@ import { TextField } from "@material-ui/core";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
 import { login } from "../../crud/auth.crud";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form, Alert } from "react-bootstrap";
 import FbLogo from "../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
 
 function Login(props) {
-  const { intl } = props;
   const [loading, setLoading] = useState(false);
-  const [loadingButtonStyle, setLoadingButtonStyle] = useState({
-    paddingRight: "2.5rem"
-  });
+  const [error, setError] = useState({ show: false, message: "" });
+  const [formValues, setFormValues] = useState({ email: "", password: "" })
 
   const enableLoading = () => {
     setLoading(true);
-    setLoadingButtonStyle({ paddingRight: "3.5rem" });
   };
 
   const disableLoading = () => {
     setLoading(false);
-    setLoadingButtonStyle({ paddingRight: "2.5rem" });
   };
+  // useEffect(() => {
+  //   enableLoading();
+  // })
+  const onLoginClick = () => {
+    setError({ show: false, message: "" });
+    console.log(formValues)
+    if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)
+    ) {
+      setError({ show: true, message: "Email is not valid" });
+      return;
+    }
+
+    else if (!formValues.password) {
+      setError({ show: true, message: "Password is not valid" });
+      return;
+    }
+    enableLoading();
+    setTimeout(() => {
+
+      login(formValues.email, formValues.password)
+        .then(({ data: { accessToken } }) => {
+          disableLoading();
+          props.login(accessToken);
+        })
+        .catch(() => {
+          disableLoading();
+          setError({ show: true, message: "login detail is incorrect" })
+        });;
+    }, 1000)
+  }
+
 
   return (
     <>
@@ -47,12 +75,17 @@ function Login(props) {
               Sign In To Customer
             </h3>
           </div>
-          <Form className="kt-form " >
+          {error.show &&
+            <Alert variant={"danger"}>
+              {error.message}
+            </Alert>
+          }
+          <div className="kt-form " >
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Email" />
+              <Form.Control type="email" placeholder="Email" value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
             </Form.Group>
-            <Form.Group className="" controlId="exampleForm.ControlInput1">
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="" controlId="exampleForm.ControlInput2">
+              <Form.Control type="password" placeholder="Password" value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
             </Form.Group>
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >
               <Form.Group className="m-0 remember-me" controlId="remember-me">
@@ -60,9 +93,9 @@ function Login(props) {
               </Form.Group>
               <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
-            <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Login </button>
+            <button onClick={onLoginClick} disabled={loading} className={loading ? "text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light" : "btn btn-primary  btn-primary-gradient btn-block mt-4"} > Login </button>
             <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} className="mr-2" /> Login with Facebook </button>
-          </Form>
+          </div>
           <div className="kt-login__options mt-5">
             <Row className="justify-content-center " >
               <Col>

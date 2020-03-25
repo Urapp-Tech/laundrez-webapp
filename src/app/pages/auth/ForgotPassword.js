@@ -7,7 +7,7 @@ import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../../store/ducks/auth.duck";
 import { requestPassword } from "../../crud/auth.crud";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
-import { Form } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 
 class ForgotPassword extends Component {
   state = { isRequested: false };
@@ -38,6 +38,14 @@ class ForgotPassword extends Component {
               <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Submit </button>
 
             </Form>
+            <div className="kt-login__options mt-5">
+              <Row className="justify-content-center " >
+                <Col>
+                  <span>Don't have an account yet ? </span>
+                  <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+                </Col>
+              </Row>
+            </div>
 
             {/* <Formik
               initialValues={{ email: "" }}

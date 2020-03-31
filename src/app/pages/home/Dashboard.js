@@ -3,10 +3,10 @@ import React, { useMemo } from "react";
 import {
   Portlet,
   PortletBody,
-  PortletHeader,
-  PortletHeaderToolbar
 } from "../../partials/content/Portlet";
 import OrderHistoryTable from "../../partials/layout/OrderHistoryTable";
+import Info from "../../../_metronic/layout/assets/layout-svg-icons/info.svg"
+import { Link } from "react-router-dom";
 // import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
 // import { Link } from "react-router-dom";
 // import { Table } from "react-bootstrap";
@@ -57,10 +57,11 @@ export default function Dashboard() {
     <>
       <div className="row">
         <div className="col-md-12">
+          <h4 className="mb-3 pl-3" >Place Orders <img alt={'info'} src={Info} /> </h4>
           <div className="d-flex flex-wrap w-100 ">
             {categories.map((data, i) => {
               return (
-                <div key={i}  className=" margin-card  ">
+                <div key={i} className=" margin-card  ">
                   <Portlet className="justify-content-center  category-card kt-portlet--border-bottom-brand">
                     <PortletBody className="justify-content-center align-items-center" >
                       <h5>{data.categoryTitle}</h5>
@@ -79,7 +80,14 @@ export default function Dashboard() {
         </div>
 
         <div className="col-md-12">
-          <OrderHistoryTable showToolbar={true} showPagination={false} />
+          <div className="d-flex justify-content-between align-items-center" >
+            <h4 className="mb-3 pl-3 " >
+              <span> Active Orders <img alt={'info'} src={Info} /></span>
+
+            </h4>
+            <Link to="/orderhistory" >View All</Link>
+          </div>
+          <OrderHistoryTable showPagination={false} repeatOrder={false} />
         </div>
       </div>
 

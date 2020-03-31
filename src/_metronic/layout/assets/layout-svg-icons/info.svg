@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__info" width="13.667" height="13.667" viewBox="0 0 13.667 13.667">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#ed8f31}
+        </style>
+    </defs>
+    <g id="prefix__Group_168" data-name="Group 168">
+        <g id="prefix__Group_167" data-name="Group 167">
+            <path id="prefix__Path_320" d="M6.833 0a6.833 6.833 0 1 0 6.833 6.833A6.83 6.83 0 0 0 6.833 0zm0 12.756a5.922 5.922 0 1 1 5.922-5.922 5.929 5.929 0 0 1-5.922 5.922z" class="prefix__cls-1" data-name="Path 320"/>
+        </g>
+    </g>
+    <g id="prefix__Group_170" data-name="Group 170" transform="translate(6.378 5.6)">
+        <g id="prefix__Group_169" data-name="Group 169">
+            <path id="prefix__Path_321" d="M239.386 209.777a.456.456 0 0 0-.456.456v3.843a.456.456 0 0 0 .911 0v-3.843a.456.456 0 0 0-.455-.456z" class="prefix__cls-1" data-name="Path 321" transform="translate(-238.93 -209.777)"/>
+        </g>
+    </g>
+    <g id="prefix__Group_172" data-name="Group 172" transform="translate(5.922 3.313)">
+        <g id="prefix__Group_171" data-name="Group 171">
+            <path id="prefix__Path_322" d="M222.778 124.122a.911.911 0 1 0 .911.911.912.912 0 0 0-.911-.911z" class="prefix__cls-1" data-name="Path 322" transform="translate(-221.867 -124.122)"/>
+        </g>
+    </g>
+</svg>

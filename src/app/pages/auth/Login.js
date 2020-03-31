@@ -13,7 +13,7 @@ import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
 function Login(props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ show: false, message: "" });
-  const [formValues, setFormValues] = useState({ email: "", password: "" })
+  const [formValues, setFormValues] = useState({ email: "admin@demo.com", password: "demo" })
 
   const enableLoading = () => {
     setLoading(true);
@@ -22,9 +22,6 @@ function Login(props) {
   const disableLoading = () => {
     setLoading(false);
   };
-  // useEffect(() => {
-  //   enableLoading();
-  // })
   const onLoginClick = () => {
     setError({ show: false, message: "" });
     console.log(formValues)
@@ -82,10 +79,10 @@ function Login(props) {
           }
           <div className="kt-form " >
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Email" value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
+              <Form.Control type="email" placeholder="Email" defaultValue={formValues.email} value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
             </Form.Group>
             <Form.Group className="" controlId="exampleForm.ControlInput2">
-              <Form.Control type="password" placeholder="Password" value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
+              <Form.Control type="password" placeholder="Password" defaultValue={formValues.password} value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
             </Form.Group>
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >
               <Form.Group className="m-0 remember-me" controlId="remember-me">

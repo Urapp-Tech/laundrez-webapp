@@ -80,7 +80,7 @@ export default function Dashboard() {
         </div>
 
         <div className="col-md-12">
-          <div className="d-flex justify-content-between align-items-center" >
+          <div className="d-flex justify-content-between align-items-center mt-5" >
             <h4 className="mb-3 pl-3 " >
               <span> Active Orders <img alt={'info'} src={Info} /></span>
 

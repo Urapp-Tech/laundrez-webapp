@@ -41,7 +41,7 @@
 
 // category cards
 .category-card {
-  width: 240px;
+  width: 15.3rem;
   height: 250px;
   box-shadow: 0 6px 20px 0 #2435532b;
   margin-left: auto;
@@ -71,6 +71,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: pre-wrap;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .category-card {
+    width: 17.3rem;
+    height: 260px;
   }
 }
 
@@ -164,7 +170,7 @@
     text-align: left;
     padding-bottom: 1rem;
   }
-  
+
   .close {
     font-weight: 500;
     color: kt-get($kt-font-color, text);

@@ -56,12 +56,12 @@ export default function Dashboard() {
   return (
     <>
       <div className="row">
-        <div className="col-xl-5">
-          <div className="row row-full-height ">
+        <div className="col-md-12">
+          <div className="d-flex flex-wrap w-100 ">
             {categories.map((data, i) => {
               return (
-                <div key={i} className="col-md-6 ">
-                  <Portlet className="justify-content-center category-card kt-portlet--border-bottom-brand">
+                <div key={i}  className=" margin-card  ">
+                  <Portlet className="justify-content-center  category-card kt-portlet--border-bottom-brand">
                     <PortletBody className="justify-content-center align-items-center" >
                       <h5>{data.categoryTitle}</h5>
                       <img className="category-image" alt="img" src={data.categoryImage} />
@@ -78,7 +78,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="col-xl-7">
+        <div className="col-md-12">
           <OrderHistoryTable showToolbar={true} showPagination={false} />
         </div>
       </div>

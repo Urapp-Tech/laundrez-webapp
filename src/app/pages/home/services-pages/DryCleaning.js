@@ -85,7 +85,7 @@ export default function DryCleaning() {
     return (
         <div>
             <h2 className="mb-5" >Dry Cleaning</h2>
-            <div className="d-flex flex-wrap  ">
+            <div className="d-flex flex-wrap  w-100">
                 {orders.map((data, i) => {
                     return (
                         <div key={i} className="margin-card " onClick={() => toggleModal(!showModal)} >

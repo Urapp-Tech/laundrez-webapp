@@ -41,13 +41,6 @@ export default function AuthPage() {
                 backgroundImage: `url(${BgAuth})`
               }}
             >
-              {/* <div className="kt-grid__item"> */}
-                {/* <Link to="/" className="kt-login__logo">
-                  <img
-                    alt="Logo"
-                    src={toAbsoluteUrl("/media/logos/logo-4.png")}
-                  />
-                </Link> */}
               {/* </div> */}
               <div className="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
                 <div className="kt-grid__item kt-grid__item--middle">

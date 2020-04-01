@@ -1,5 +1,4 @@
 import React from "react";
-import { Formik } from "formik";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Checkbox, FormControlLabel, TextField } from "@material-ui/core";

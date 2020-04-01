@@ -56,7 +56,7 @@ class HeaderMobile extends React.Component {
             className="kt-header-mobile__topbar-toggler"
             id="kt_header_mobile_topbar_toggler"
           >
-            <i className="flaticon-more" />
+            <i class="fas fa-ellipsis-v"></i>
           </button>
         </div>
       </div>

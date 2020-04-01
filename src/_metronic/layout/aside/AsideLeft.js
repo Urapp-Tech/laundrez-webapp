@@ -28,7 +28,7 @@ class AsideLeft extends React.Component {
     return (
       <>
         <button className="kt-aside-close" id="kt_aside_close_btn">
-          <i className="la la-close" />
+          <i class="fas fa-times"></i>
         </button>
         <div
           id="kt_aside"

@@ -26,7 +26,7 @@ function Layout({
 }) {
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes
-  // window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
   const contentCssClasses = htmlClassService.classes.content.join(" ");
 
   return selfLayout !== "blank" ? (

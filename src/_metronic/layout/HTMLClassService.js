@@ -43,7 +43,7 @@ export default class HtmlClassService {
 
     // init header and subheader menu
     this.initHeader();
-    this.initSubheader();
+    // this.initSubheader();
 
     this.initContent();
     // init aside and aside menu
@@ -108,7 +108,7 @@ export default class HtmlClassService {
   /**
    * Init Loader
    */
-  initLoader() {}
+  initLoader() { }
 
   /**
    * Init Header
@@ -147,37 +147,37 @@ export default class HtmlClassService {
   /**
    * Init Subheader
    */
-  initSubheader() {
-    if (objectPath.get(this.config, "subheader.display")) {
-      document.body.classList.add("kt-subheader--enabled");
-    }
+  // initSubheader() {
+  //   if (objectPath.get(this.config, "subheader.display")) {
+  //     document.body.classList.add("kt-subheader--enabled");
+  //   }
 
-    // Fixed content head
-    if (
-      objectPath.get(this.config, "subheader.fixed") &&
-      objectPath.get(this.config, "header.self.fixed.desktop")
-    ) {
-      document.body.classList.add("kt-subheader--fixed");
-    }
+  //   // Fixed content head
+  //   if (
+  //     objectPath.get(this.config, "subheader.fixed") &&
+  //     objectPath.get(this.config, "header.self.fixed.desktop")
+  //   ) {
+  //     document.body.classList.add("kt-subheader--fixed");
+  //   }
 
-    if (objectPath.has(this.config, "subheader.style")) {
-      document.body.classList.add(
-        "kt-subheader--" + objectPath.get(this.config, "subheader.style")
-      );
-    }
+  //   if (objectPath.has(this.config, "subheader.style")) {
+  //     document.body.classList.add(
+  //       "kt-subheader--" + objectPath.get(this.config, "subheader.style")
+  //     );
+  //   }
 
-    if (objectPath.get(this.config, "subheader.width") === "fluid") {
-      objectPath.push(
-        this.classes,
-        "subheader_container",
-        "kt-container--fluid"
-      );
-    }
+  //   if (objectPath.get(this.config, "subheader.width") === "fluid") {
+  //     objectPath.push(
+  //       this.classes,
+  //       "subheader_container",
+  //       "kt-container--fluid"
+  //     );
+  //   }
 
-    if (objectPath.get(this.config, "subheader.clear")) {
-      objectPath.push(this.classes, "subheader", "kt-subheader--clear");
-    }
-  }
+  //   if (objectPath.get(this.config, "subheader.clear")) {
+  //     objectPath.push(this.classes, "subheader", "kt-subheader--clear");
+  //   }
+  // }
 
   /**
    * Init Content
@@ -268,7 +268,7 @@ export default class HtmlClassService {
     if (objectPath.get(this.config, "header.menu.desktop.submenu.skin")) {
       document.body.classList.add(
         "kt-header-menu-" +
-          objectPath.get(this.config, "header.menu.desktop.submenu.skin")
+        objectPath.get(this.config, "header.menu.desktop.submenu.skin")
       );
     }
 

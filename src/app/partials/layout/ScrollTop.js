@@ -20,7 +20,7 @@ export default class ScrollTop extends React.Component {
         className="kt-scrolltop"
         ref={this.scrollTopCommonRef}
       >
-        <i className="la la-arrow-up" />
+        <i className="fas fa-arrow-up" />
       </div>
     );
   }

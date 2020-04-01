@@ -37,8 +37,7 @@ export default class MenuItemText extends React.Component {
             </span>
           </span>
         )}
-
-        {item.submenu && <i className="kt-menu__ver-arrow la la-angle-right" />}
+        {item.submenu && <i className="kt-menu__ver-arrow fas fa-angle-right" />}
       </>
     );
   }

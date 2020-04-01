@@ -25,10 +25,10 @@ export default function App({ store, persistor, basename }) {
               {/* Provide Metronic theme overrides. */}
               {/* <ThemeProvider> */}
                 {/* Provide `react-intl` context synchronized with Redux state.  */}
-                <I18nProvider>
+                {/* <I18nProvider> */}
                   {/* Render routes with provided `Layout`. */}
                   <Routes />
-                </I18nProvider>
+                {/* </I18nProvider> */}
               {/* </ThemeProvider> */}
             </LastLocationProvider>
           </BrowserRouter>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Portlet, PortletBody } from "../../partials/content/Portlet";
 import { Form, Row, Col } from "react-bootstrap";
-import Map from "../../widgets/Map";
+import Map from "../../partials/layout/Map";
 
 export default function PickAndDrop({ history }) {
     return (

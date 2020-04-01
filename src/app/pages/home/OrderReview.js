@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import OrderReviewItems from "../../partials/content/OrderReviewItems";
 import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
 import { ReactComponent as Basket } from "../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg";
-import Map from "../../widgets/Map";
+import Map from "../../partials/layout/Map";
 
 export default function OrderReview() {
     return (

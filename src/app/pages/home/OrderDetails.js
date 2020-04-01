@@ -4,7 +4,7 @@ import OrderReviewItems from "../../partials/content/OrderReviewItems";
 import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
 import CircularProgress from "../../partials/layout/CircularProgress";
 import { Row, Col } from "react-bootstrap";
-import Map from "../../widgets/Map";
+import Map from "../../partials/layout/Map";
 export default function OrderDetails() {
     return (
         <>

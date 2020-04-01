@@ -9,7 +9,7 @@ export const initLayoutConfig = {
     logo: {
       dark: toAbsoluteUrl("/media/logos/logo-light.png"),
       light: toAbsoluteUrl("/media/logos/logo-dark.png"),
-      brand: toAbsoluteUrl("/media/logos/laundrez-logo.svg"),
+      brand: require("../layout/assets/layout-svg-icons/laundrez-logo.svg"),
       green: toAbsoluteUrl("/media/logos/logo-light.png")
     }
   },

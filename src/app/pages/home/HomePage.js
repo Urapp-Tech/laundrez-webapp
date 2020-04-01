@@ -41,7 +41,6 @@ export default function HomePage() {
         {/* <Route path="/builder" component={Builder} /> */}
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/google-material" component={GoogleMaterialPage} />
-        <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/docs" component={DocsPage} />
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />

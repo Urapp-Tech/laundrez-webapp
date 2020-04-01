@@ -18,12 +18,7 @@ import Faqs from "./Faqs";
 import TermsAndCondtion from "./TermsAndCondition";
 import PrivacyPolicy from "./PrivacyPolicy";
 
-const GoogleMaterialPage = lazy(() =>
-  import("./google-material/GoogleMaterialPage")
-);
-const ReactBootstrapPage = lazy(() =>
-  import("./react-bootstrap/ReactBootstrapPage")
-);
+
 
 export default function HomePage() {
   // useEffect(() => {
@@ -40,7 +35,6 @@ export default function HomePage() {
         }
         {/* <Route path="/builder" component={Builder} /> */}
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/google-material" component={GoogleMaterialPage} />
         <Route path="/docs" component={DocsPage} />
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />

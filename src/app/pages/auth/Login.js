@@ -108,7 +108,6 @@ function Login(props) {
               const errors = {};
 
               if (!values.email) {
-                // https://github.com/formatjs/react-intl/blob/master/docs/API.md#injection-api
                 errors.email = intl.formatMessage({
                   id: "AUTH.VALIDATION.REQUIRED_FIELD"
                 });

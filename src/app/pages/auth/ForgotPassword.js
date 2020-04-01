@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { FormattedMessage, injectIntl } from "react-intl";
 import * as auth from "../../store/ducks/auth.duck";
 import { requestPassword } from "../../crud/auth.crud";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
@@ -140,4 +139,4 @@ class ForgotPassword extends Component {
   }
 }
 
-export default injectIntl(connect(null, auth.actions)(ForgotPassword));
+export default connect(null, auth.actions)(ForgotPassword);

@@ -9,7 +9,7 @@ export * from "./layout/LayoutConfig";
 export { default as LayoutConfig } from "./layout/LayoutConfig";
 export { default as mockAxios } from "./__mocks__/mockAxios";
 export { default as LayoutInitializer } from "./layout/LayoutInitializer";
-export { default as ThemeProvider } from "./materialUIThemeProvider/ThemeProvider";
+// export { default as ThemeProvider } from "./materialUIThemeProvider/ThemeProvider";
 
 /**
  * Ducks

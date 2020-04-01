@@ -1,5 +1,4 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
 
 export default class MenuItemText extends React.Component {
   render() {
@@ -27,8 +26,8 @@ export default class MenuItemText extends React.Component {
           {!item.translate ? (
             item.title
           ) : (
-            <FormattedMessage id={item.translate} defaultMessage={item.title} />
-          )}
+              item.title
+            )}
         </span>
 
         {item.badge && (

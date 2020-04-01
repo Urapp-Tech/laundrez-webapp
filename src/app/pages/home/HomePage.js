@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import DocsPage from "./docs/DocsPage";
 import { LayoutSplashScreen } from "../../../_metronic";
 import Services from "./Services";
 import OrderHistory from "./OrderHistory";
@@ -35,7 +34,6 @@ export default function HomePage() {
         }
         {/* <Route path="/builder" component={Builder} /> */}
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/docs" component={DocsPage} />
         <Route path="/services" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/mybasket" component={MyBasket} />

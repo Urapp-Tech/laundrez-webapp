@@ -1,5 +1,5 @@
-import React, { forwardRef } from "react";
-import clsx from "clsx";
+import React, { forwardRef } from 'react';
+import clsx from 'clsx';
 
 const Notice = forwardRef(
   (
@@ -11,7 +11,7 @@ const Notice = forwardRef(
         {...props}
         ref={ref}
         role="alert"
-        className={clsx("alert alert-light alert-elevate", className)}
+        className={clsx('alert alert-light alert-elevate', className)}
       >
         {icon && (
           <div ref={iconWrapperRef} className="alert-icon alert-icon-top">
@@ -30,6 +30,6 @@ const Notice = forwardRef(
 export default Notice;
 
 // Set display name for debugging.
-if (process.env.NODE_ENV !== "production") {
-  Notice.displayName = "Notice";
+if (process.env.NODE_ENV !== 'production') {
+  Notice.displayName = 'Notice';
 }

@@ -1,6 +1,6 @@
 export function removeCSSClass(ele, cls) {
-  const reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
-  ele.className = ele.className.replace(reg, " ");
+  const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+  ele.className = ele.className.replace(reg, ' ');
 }
 
 export function addCSSClass(ele, cls) {
@@ -16,13 +16,14 @@ export const toAbsoluteUrl = pathname => process.env.PUBLIC_URL + pathname;
  */
 export function removeStorage(key) {
   try {
-    localStorage.setItem(key, "");
-    localStorage.setItem(key + "_expiresIn", "");
+    localStorage.setItem(key, '');
+    localStorage.setItem(key + '_expiresIn', '');
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "removeStorage: Error removing key [" +
+      'removeStorage: Error removing key [' +
       key +
-      "] from localStorage: " +
+      '] from localStorage: ' +
       JSON.stringify(e)
     );
     return false;
@@ -40,7 +41,7 @@ export function removeStorage(key) {
 export function getStorage(key) {
   const now = Date.now(); //epoch time, lets deal only with integer
   // set expiration for storage
-  let expiresIn = localStorage.getItem(key + "_expiresIn");
+  let expiresIn = localStorage.getItem(key + '_expiresIn');
   if (expiresIn === undefined || expiresIn === null) {
     expiresIn = 0;
   }
@@ -55,10 +56,11 @@ export function getStorage(key) {
       const value = localStorage.getItem(key);
       return value;
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.log(
-        "getStorage: Error reading key [" +
+        'getStorage: Error reading key [' +
         key +
-        "] from localStorage: " +
+        '] from localStorage: ' +
         JSON.stringify(e)
       );
       return null;
@@ -82,12 +84,13 @@ export function setStorage(key, value, expires) {
   const schedule = now + expires * 1000;
   try {
     localStorage.setItem(key, value);
-    localStorage.setItem(key + "_expiresIn", schedule);
+    localStorage.setItem(key + '_expiresIn', schedule);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "setStorage: Error setting key [" +
+      'setStorage: Error setting key [' +
       key +
-      "] in localStorage: " +
+      '] in localStorage: ' +
       JSON.stringify(e)
     );
     return false;
@@ -98,8 +101,9 @@ export function setToken(token) {
   try {
     localStorage.setItem('token', token);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "setToken: Error setting key [ token ] in localStorage: " +
+      'setToken: Error setting key [ token ] in localStorage: ' +
       JSON.stringify(e)
     );
   }
@@ -108,8 +112,9 @@ export function getToken() {
   try {
     return localStorage.getItem('token');
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "getToken: Error setting key [ token ] in localStorage: " +
+      'getToken: Error setting key [ token ] in localStorage: ' +
       JSON.stringify(e)
     );
   }
@@ -118,8 +123,9 @@ export function setUser(user) {
   try {
     localStorage.setItem('user', JSON.stringify(user));
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "setToken: Error setting key [ user ] in localStorage: " +
+      'setToken: Error setting key [ user ] in localStorage: ' +
       JSON.stringify(e)
     );
   }
@@ -129,8 +135,9 @@ export function getUser() {
   try {
     return JSON.parse(localStorage.getItem('user'));
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "getToken: Error setting key [ user ] in localStorage: " +
+      'getToken: Error setting key [ user ] in localStorage: ' +
       JSON.stringify(e)
     );
   }
@@ -139,11 +146,12 @@ export function getUser() {
 export function clearStorage() {
   try {
 
-    localStorage.clear()
+    localStorage.clear();
   }
   catch (e) {
+    // eslint-disable-next-line no-console
     console.log(
-      "fail to clear storage" +
+      'fail to clear storage' +
       JSON.stringify(e)
     );
   }

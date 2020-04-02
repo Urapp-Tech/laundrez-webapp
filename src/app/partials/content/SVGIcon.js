@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { SVGInjector } from '@tanem/svg-injector';
 
 export function SVGIcon({src, className, parentElementId}) {
@@ -11,7 +11,7 @@ export function SVGIcon({src, className, parentElementId}) {
     SVGInjector(parentElement, {
         wrapper: 'span',
         beforeEach(svg) {
-            const classList = className.split(" ");
+            const classList = className.split(' ');
             classList.forEach(cn => {
                 svg.classList.add(cn);
             });

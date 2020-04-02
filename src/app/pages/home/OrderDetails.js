@@ -1,10 +1,10 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import OrderReviewItems from "../../partials/content/OrderReviewItems";
-import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
-import CircularProgress from "../../partials/layout/CircularProgress";
-import { Row, Col } from "react-bootstrap";
-import Map from "../../partials/layout/Map";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import OrderReviewItems from '../../partials/content/OrderReviewItems';
+import PickAndDropInfo from '../../partials/content/PickAndDropInfo';
+import CircularProgress from '../../partials/layout/CircularProgress';
+import { Row, Col } from 'react-bootstrap';
+import Map from '../../partials/layout/Map';
 export default function OrderDetails() {
     return (
         <>
@@ -18,7 +18,7 @@ export default function OrderDetails() {
                                     <div  >
                                         <Row className="border-bottom pt-4 pb-4" >
                                             <Col className="d-flex " >
-                                                <CircularProgress width="4rem" value={88} color={"#2CD285"} img={"tracking-green.svg"} />
+                                                <CircularProgress width="4rem" value={88} color={'#2CD285'} img={'tracking-green.svg'} />
                                                 <div className="d-flex ml-2 h-100 justify-content-between flex-column order-info" >
                                                     <span>Order Id: <b>EZ-45866</b></span>
                                                     <span>08:35 , 05-01-2020</span>
@@ -78,7 +78,7 @@ export default function OrderDetails() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Map height={"600px"} />
+                            <Map height={'600px'} />
                         </div>
                     </div>
                 </div>

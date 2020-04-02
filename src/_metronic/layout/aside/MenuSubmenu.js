@@ -1,7 +1,7 @@
-import React from "react";
-import MenuSection from "./MenuSection";
-import MenuItemSeparator from "./MenuItemSeparator";
-import MenuItem from "./MenuItem";
+import React from 'react';
+import MenuSection from './MenuSection';
+import MenuItemSeparator from './MenuItemSeparator';
+import MenuItem from './MenuItem';
 
 export default class MenuSubmenu extends React.Component {
   render() {

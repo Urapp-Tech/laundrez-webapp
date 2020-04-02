@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,no-loop-func,no-undef,no-restricted-globals,strict,no-unused-vars,no-cond-assign,eqeqeq,no-throw-literal,no-unreachable,no-useless-escape,no-redeclare,no-useless-concat,no-unused-expressions,no-sequences */
-import KTUtil from "./util";
+import KTUtil from './util';
 
-"use strict";
+'use strict';
 var KTMenu = function(elementId, options) {
     // Main object
     var the = this;
@@ -826,7 +826,7 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 }
 
 // Plugin global lazy initialization
-document.addEventListener("click", function (e) {
+document.addEventListener('click', function (e) {
     var body = KTUtil.get('body');
     var query;
     if ( query = body.querySelectorAll('.kt-menu__nav .kt-menu__item.kt-menu__item--submenu.kt-menu__item--hover:not(.kt-menu__item--tabs)[data-ktmenu-submenu-toggle="click"]') ) {

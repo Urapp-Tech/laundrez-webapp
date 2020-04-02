@@ -1,5 +1,5 @@
-import React from "react";
-import Garbage from "../../../_metronic/layout/assets/layout-svg-icons/garbage.svg";
+import React from 'react';
+import Garbage from '../../../_metronic/layout/assets/layout-svg-icons/garbage.svg';
 
 export default function SavedCard({ cardCount }) {
     return (
@@ -16,5 +16,5 @@ export default function SavedCard({ cardCount }) {
 
             </div>
         </>
-    )
+    );
 }

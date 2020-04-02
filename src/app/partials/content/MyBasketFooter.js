@@ -1,7 +1,7 @@
-import React from "react";
-import { InputGroup, FormControl } from "react-bootstrap";
-import { ReactComponent as Basket } from "../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg";
-import { ReactComponent as Coupon } from "../../../_metronic/layout/assets/layout-svg-icons/coupon.svg";
+import React from 'react';
+import { InputGroup, FormControl } from 'react-bootstrap';
+import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
+import { ReactComponent as Coupon } from '../../../_metronic/layout/assets/layout-svg-icons/coupon.svg';
 export default function MyBasketFooter() {
     return (
         <>
@@ -19,5 +19,5 @@ export default function MyBasketFooter() {
                 <span className="text kt-font-primary" >Add More to Basket</span>
             </div>
         </>
-    )
+    );
 }

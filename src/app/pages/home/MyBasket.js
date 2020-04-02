@@ -1,8 +1,8 @@
-import React from "react";
-import { Portlet, PortletBody, PortletHeader, PortletHeaderTitle, PortletFooter } from "../../partials/content/Portlet";
+import React from 'react';
+import { Portlet, PortletBody, PortletHeader, PortletHeaderTitle, PortletFooter } from '../../partials/content/Portlet';
 
-import MyBasketItem from "../../partials/content/MyBasketItem";
-import MyBasketFooter from "../../partials/content/MyBasketFooter";
+import MyBasketItem from '../../partials/content/MyBasketItem';
+import MyBasketFooter from '../../partials/content/MyBasketFooter';
 export default function MyBasket({ history }) {
     return (
         <>
@@ -39,7 +39,7 @@ export default function MyBasket({ history }) {
                     <div className="row row-full-height  ">
                         <div className="col-md-12 ">
                             <Portlet className="">
-                                <PortletHeader title={"Total Amount"}>
+                                <PortletHeader title={'Total Amount'}>
                                 </PortletHeader>
                                 <PortletBody className="mybasket-billing" >
                                     <div className="amounts-container " >
@@ -57,7 +57,7 @@ export default function MyBasket({ history }) {
                                         <h4>Grand Total</h4>
                                         <h4 className=" font-weight-bold kt-font-primary" >$431.20</h4>
                                     </div>
-                                    <button onClick={() => history.push("/deliveryaddress")} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
+                                    <button onClick={() => history.push('/deliveryaddress')} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
                                 </PortletBody>
                             </Portlet>
                         </div>

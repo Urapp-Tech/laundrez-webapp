@@ -1,7 +1,7 @@
-import React from "react";
-import MyCart from "../../../app/partials/layout/MyCart";
-import UserProfile from "../../../app/partials/layout/UserProfile";
-import BgCart from "../assets/layout-svg-icons/bg-cart.svg"
+import React from 'react';
+import MyCart from '../../../app/partials/layout/MyCart';
+import UserProfile from '../../../app/partials/layout/UserProfile';
+import BgCart from '../assets/layout-svg-icons/bg-cart.svg';
 export default class Topbar extends React.Component {
   render() {
     return (

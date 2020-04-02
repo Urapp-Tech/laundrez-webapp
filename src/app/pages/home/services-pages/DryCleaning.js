@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Portlet, PortletBody } from "../../../partials/content/Portlet";
-import ServiceModal from "../../../partials/layout/ServiceModal";
+import React, { useState } from 'react';
+import { Portlet, PortletBody } from '../../../partials/content/Portlet';
+import ServiceModal from '../../../partials/layout/ServiceModal';
 
 export default function DryCleaning() {
     const orders = [
@@ -98,11 +98,11 @@ export default function DryCleaning() {
                                 </PortletBody>
                             </Portlet>
                         </div>
-                    )
+                    );
                 })
                 }
             </div>
             <ServiceModal data={orders[0]} showModal={showModal} toggleModal={() => toggleModal(!showModal)} />
         </div>
-    )
+    );
 }

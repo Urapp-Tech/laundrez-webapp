@@ -2,15 +2,15 @@
  * Create React App entry point. This and `public/index.html` files can not be
  * changed or moved.
  */
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-import React from "react";
-import ReactDOM from "react-dom";
-import store from "./app/store/store";
-import App from "./App";
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import store from './app/store/store';
+import App from './App';
 import 'react-circular-progressbar/dist/styles.css';
-import "./index.scss"; // Standard version
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import './index.scss'; // Standard version
+import '@fortawesome/fontawesome-free/css/all.min.css';
 /**
  * Base URL of the website.
  *
@@ -36,5 +36,5 @@ ReactDOM.render(
     store={store}
     basename={PUBLIC_URL}
   />,
-  document.getElementById("root")
+  document.getElementById('root')
 );

@@ -1,121 +1,121 @@
-import React, { useState } from "react";
-import { withRouter, } from "react-router-dom";
-import { Table, Badge } from "react-bootstrap";
+import React, { useState } from 'react';
+import { withRouter, } from 'react-router-dom';
+import { Table, Badge } from 'react-bootstrap';
 // import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
-import CircularProgress from "./CircularProgress";
+import CircularProgress from './CircularProgress';
 // import { Portlet, PortletHeader, PortletBody, PortletHeaderToolbar } from "../content/Portlet";
-import Pagination from "react-js-pagination";
+import Pagination from 'react-js-pagination';
 
 function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
     const orders = [
         {
             orderNumber: 'EZ-45867',
             orderDateTime: '17:20 , 12-01-2020',
-            orderStatus: "placed",
+            orderStatus: 'placed',
             itemCount: '3',
             progressColor: '#357bf3',
             progressCount: '20',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45864',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "pickedup",
+            orderStatus: 'pickedup',
             itemCount: '13',
             progressColor: '#c367f1',
             progressCount: '25',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45867',
             orderDateTime: '17:20 , 12-01-2020',
-            orderStatus: "out",
+            orderStatus: 'out',
             itemCount: '3',
             progressColor: '#2CD285',
             progressCount: '100',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45866',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "placed",
+            orderStatus: 'placed',
             itemCount: '1',
             progressColor: '#357bf3',
             progressCount: '80',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45864',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "delivered",
+            orderStatus: 'delivered',
             itemCount: '13',
             progressColor: '#949eae',
             progressCount: '100',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45867',
             orderDateTime: '17:20 , 12-01-2020',
-            orderStatus: "placed",
+            orderStatus: 'placed',
             itemCount: '3',
             progressColor: '#357bf3',
             progressCount: '20',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45864',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "pickedup",
+            orderStatus: 'pickedup',
             itemCount: '13',
             progressColor: '#c367f1',
             progressCount: '25',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45867',
             orderDateTime: '17:20 , 12-01-2020',
-            orderStatus: "out",
+            orderStatus: 'out',
             itemCount: '3',
             progressColor: '#2CD285',
             progressCount: '100',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45866',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "placed",
+            orderStatus: 'placed',
             itemCount: '1',
             progressColor: '#357bf3',
             progressCount: '80',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45864',
             orderDateTime: '22:16 , 09-01-2020',
-            orderStatus: "delivered",
+            orderStatus: 'delivered',
             itemCount: '13',
             progressColor: '#949eae',
             progressCount: '100',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
         {
             orderNumber: 'EZ-45867',
             orderDateTime: '17:20 , 12-01-2020',
-            orderStatus: "placed",
+            orderStatus: 'placed',
             itemCount: '3',
             progressColor: '#357bf3',
             progressCount: '20',
-            progressImage: "",
+            progressImage: '',
             serviceCharges: '$15.00',
         },
 
@@ -140,28 +140,28 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                         return (< tr key={i} >
                             <td>
 
-                                {data.orderStatus === "delivered" ?
-                                    <CircularProgress value={data.progressCount} color={data.progressColor} img={"box.svg"} />
-                                    : data.orderStatus === "placed" ?
-                                        <CircularProgress value={data.progressCount} color={data.progressColor} img={"checklist.svg"} />
-                                        : data.orderStatus === "pickedup" ?
-                                            <CircularProgress value={data.progressCount} color={data.progressColor} img={"trolley.svg"} />
-                                            : data.orderStatus === "out" ?
-                                                <CircularProgress value={data.progressCount} color={data.progressColor} img={"tracking-green.svg"} />
+                                {data.orderStatus === 'delivered' ?
+                                    <CircularProgress value={data.progressCount} color={data.progressColor} img={'box.svg'} />
+                                    : data.orderStatus === 'placed' ?
+                                        <CircularProgress value={data.progressCount} color={data.progressColor} img={'checklist.svg'} />
+                                        : data.orderStatus === 'pickedup' ?
+                                            <CircularProgress value={data.progressCount} color={data.progressColor} img={'trolley.svg'} />
+                                            : data.orderStatus === 'out' ?
+                                                <CircularProgress value={data.progressCount} color={data.progressColor} img={'tracking-green.svg'} />
                                                 : null
 
                                 }
                             </td>
-                            <td className="cursor-pointer" onClick={() => history.push("/orderdetails")} >{data.orderNumber}</td>
+                            <td className="cursor-pointer" onClick={() => history.push('/orderdetails')} >{data.orderNumber}</td>
                             <td>{data.orderDateTime}</td>
                             <td>{
-                                data.orderStatus === "delivered" ?
+                                data.orderStatus === 'delivered' ?
                                     <Badge variant="order-delivered">Delivered</Badge>
-                                    : data.orderStatus === "placed" ?
+                                    : data.orderStatus === 'placed' ?
                                         <Badge variant="order-placed">Order Placed</Badge>
-                                        : data.orderStatus === "pickedup" ?
+                                        : data.orderStatus === 'pickedup' ?
                                             <Badge variant="order-pickedup">Order Pickedup</Badge>
-                                            : data.orderStatus === "out" ?
+                                            : data.orderStatus === 'out' ?
                                                 <Badge variant="order-out-delivery">Out for Delivery</Badge>
                                                 : null
 
@@ -172,34 +172,34 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                             {repeatOrder &&
                                 <td>
                                     {
-                                        data.orderStatus === "delivered" ?
+                                        data.orderStatus === 'delivered' ?
                                             <Badge variant="primary">Repeat Order</Badge>
                                             : null
                                     }
                                 </td>
                             }
-                        </tr>)
+                        </tr>);
                     })
                     }
                 </tbody>
             </Table>
             {showPagination ? <div className="d-flex justify-content-center kt-pagination kt-pagination--circle kt-pagination--brand " >
                 <Pagination
-                    innerClass={"kt-pagination__links"}
+                    innerClass={'kt-pagination__links'}
                     activePage={activePage}
                     itemsCountPerPage={10}
                     totalItemsCount={2000}
                     pageRangeDisplayed={5}
-                    activeClass={"kt-pagination__link--active"}
-                    linkClass={"kt-pagination__links"}
+                    activeClass={'kt-pagination__link--active'}
+                    linkClass={'kt-pagination__links'}
                     prevPageText={<i className="fa fa-angle-left "></i>}
                     nextPageText={<i className="fa fa-angle-right"></i>}
                     firstPageText={<i className="fa fa-angle-double-left"></i>}
                     lastPageText={<i className="fa fa-angle-double-right"></i>}
-                    itemClassNext={"kt-pagination__link--next"}
-                    itemClassPrev={"kt-pagination__link--prev"}
-                    itemClassFirst={"kt-pagination__link--first"}
-                    itemClassLast={"kt-pagination__link--last"}
+                    itemClassNext={'kt-pagination__link--next'}
+                    itemClassPrev={'kt-pagination__link--prev'}
+                    itemClassFirst={'kt-pagination__link--first'}
+                    itemClassLast={'kt-pagination__link--last'}
                     onChange={(pageNumber) => setActivePage(pageNumber)}
                 />
             </div> : null}

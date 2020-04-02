@@ -1,17 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import objectPath from "object-path";
-import Header from "./header/Header";
-import HeaderMobile from "./header/HeaderMobile";
-import AsideLeft from "./aside/AsideLeft";
+import React from 'react';
+import { connect } from 'react-redux';
+import objectPath from 'object-path';
+import Header from './header/Header';
+import HeaderMobile from './header/HeaderMobile';
+import AsideLeft from './aside/AsideLeft';
 // import Footer from "./footer/Footer";
-import ScrollTop from "../../app/partials/layout/ScrollTop";
-import HTMLClassService from "./HTMLClassService";
-import LayoutConfig from "./LayoutConfig";
-import MenuConfig from "./MenuConfig";
-import LayoutInitializer from "./LayoutInitializer";
-import KtContent from "./KtContent";
-import "./assets/Base.scss";
+import ScrollTop from '../../app/partials/layout/ScrollTop';
+import HTMLClassService from './HTMLClassService';
+import LayoutConfig from './LayoutConfig';
+import MenuConfig from './MenuConfig';
+import LayoutInitializer from './LayoutInitializer';
+import KtContent from './KtContent';
+import './assets/Base.scss';
 
 const htmlClassService = new HTMLClassService();
 
@@ -27,9 +27,9 @@ function Layout({
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes
   window.scrollTo(0, 0);
-  const contentCssClasses = htmlClassService.classes.content.join(" ");
+  const contentCssClasses = htmlClassService.classes.content.join(' ');
 
-  return selfLayout !== "blank" ? (
+  return selfLayout !== 'blank' ? (
     <LayoutInitializer
       menuConfig={MenuConfig}
       layoutConfig={LayoutConfig}
@@ -93,15 +93,15 @@ function Layout({
 
 const mapStateToProps = ({ builder: { layoutConfig } }) => ({
   layoutConfig,
-  selfLayout: objectPath.get(layoutConfig, "self.layout"),
-  asideDisplay: objectPath.get(layoutConfig, "aside.self.display"),
-  subheaderDisplay: objectPath.get(layoutConfig, "subheader.display"),
-  toolbarDisplay: objectPath.get(layoutConfig, "toolbar.dispaly"),
+  selfLayout: objectPath.get(layoutConfig, 'self.layout'),
+  asideDisplay: objectPath.get(layoutConfig, 'aside.self.display'),
+  subheaderDisplay: objectPath.get(layoutConfig, 'subheader.display'),
+  toolbarDisplay: objectPath.get(layoutConfig, 'toolbar.dispaly'),
   desktopHeaderDisplay: objectPath.get(
     layoutConfig,
-    "header.self.fixed.desktop"
+    'header.self.fixed.desktop'
   ),
-  contentContainerClasses: ""
+  contentContainerClasses: ''
   // contentContainerClasses: builder.selectors.getClasses(store, {
   //   path: "content_container",
   //   toString: true

@@ -1,10 +1,10 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import { Row, Col } from "react-bootstrap";
-import OrderReviewItems from "../../partials/content/OrderReviewItems";
-import PickAndDropInfo from "../../partials/content/PickAndDropInfo";
-import { ReactComponent as Basket } from "../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg";
-import Map from "../../partials/layout/Map";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Row, Col } from 'react-bootstrap';
+import OrderReviewItems from '../../partials/content/OrderReviewItems';
+import PickAndDropInfo from '../../partials/content/PickAndDropInfo';
+import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
+import Map from '../../partials/layout/Map';
 
 export default function OrderReview() {
     return (
@@ -43,7 +43,7 @@ export default function OrderReview() {
                                     <div>
                                         <Row className=" pb-3 pt-4" >
                                             <Col className=" d-flex  align-items-center" >
-                                                <Basket style={{ width: "1rem", height: "1rem" }} />
+                                                <Basket style={{ width: '1rem', height: '1rem' }} />
                                                 <span className="ml-1 kt-font-primary" >Add More to Basket</span>
                                             </Col>
                                             <Col className=" d-flex justify-content-between align-items-center" >
@@ -61,7 +61,7 @@ export default function OrderReview() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Map height={"600px"} />
+                            <Map height={'600px'} />
                         </div>
                     </div>
                 </div>

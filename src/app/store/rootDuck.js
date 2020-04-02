@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import * as auth from "./ducks/auth-duck";
-import { metronic } from "../../_metronic";
+import * as auth from './ducks/auth-duck';
+import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
   auth: auth.AuthReducer,

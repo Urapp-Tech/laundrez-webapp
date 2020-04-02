@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function MyCartItem({imageUrl}) {
@@ -29,11 +29,11 @@ export default function MyCartItem({imageUrl}) {
                 </div>
                 <div className="  d-flex flex-column justify-content-between align-items-center" >
 
-                    <img alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/plus.svg")} />
+                    <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
                     <span className="kt-font-info font-weight-bold">1</span>
 
-                    <img alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/minus.svg")} />
+                    <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
                 </div>
             </div>

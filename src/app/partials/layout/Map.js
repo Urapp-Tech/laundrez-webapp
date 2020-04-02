@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { compose, withProps } from "recompose";
+import React, { Component } from 'react';
+import { compose, withProps } from 'recompose';
 import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-} from "react-google-maps";
+} from 'react-google-maps';
 class Map extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class Map extends Component {
             mLat: -1,
             mLng: -1,
             showMarker: false
-        }
+        };
 
     }
     componentDidMount() {
@@ -23,7 +23,7 @@ class Map extends Component {
     handlePermission = () => {
 
         navigator.geolocation.getCurrentPosition((position) => {
-            this.setState({ lat: position.coords.latitude, lng: position.coords.longitude })
+            this.setState({ lat: position.coords.latitude, lng: position.coords.longitude });
         });
     }
     // addMarker = (e) => {
@@ -43,10 +43,10 @@ class Map extends Component {
              * The key "AIzaSyBkNaAGLEVq0YLQMi-PYEMabFeREadYe1Q" can be ONLY used in this sandbox (no forked).
              */
             googleMapURL:
-                "https://maps.googleapis.com/maps/api/js?key=AIzaSyDlMHMsN_lc1NDamUBcsyBvd2mh_UEoDfo&v=3.0exp&libraries=geometry,drawing,places",
-            loadingElement: <div style={{ height: `100%` }} />,
+                'https://maps.googleapis.com/maps/api/js?key=AIzaSyDlMHMsN_lc1NDamUBcsyBvd2mh_UEoDfo&v=3.0exp&libraries=geometry,drawing,places',
+            loadingElement: <div style={{ height: '100%' }} />,
             containerElement: <div style={{ height: `${this.props.height}` }} />,
-            mapElement: <div style={{ height: `100%` }} />
+            mapElement: <div style={{ height: '100%' }} />
         }),
         withScriptjs,
         withGoogleMap
@@ -73,7 +73,7 @@ class Map extends Component {
                         <Marker position={{ lat: this.state.mLat, lng: this.state.mLng }} />
                     )} */}
             </this.MyMapComponent>
-        )
+        );
     }
 }
 export default Map;

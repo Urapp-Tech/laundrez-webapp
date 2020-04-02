@@ -1,6 +1,6 @@
-import React from "react";
-import { toAbsoluteUrl } from "../../../_metronic";
-import "../../../_metronic/_assets/sass/pages/error/error-1.scss";
+import React from 'react';
+import { toAbsoluteUrl } from '../../../_metronic';
+import '../../../_metronic/_assets/sass/pages/error/error-1.scss';
 
 export function ErrorPage1() {
   return (
@@ -10,7 +10,7 @@ export function ErrorPage1() {
           className="kt-grid__item kt-grid__item--fluid kt-grid kt-error-v1"
           style={{
             backgroundImage: `url(${toAbsoluteUrl(
-              "/media/error/bg1.jpg"
+              '/media/error/bg1.jpg'
             )})`
           }}
         >

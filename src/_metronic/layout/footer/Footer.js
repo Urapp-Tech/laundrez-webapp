@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import objectPath from "object-path";
-import * as builder from "../../ducks/builder";
+import React from 'react';
+import { connect } from 'react-redux';
+import objectPath from 'object-path';
+import * as builder from '../../ducks/builder';
 
 class Footer extends React.Component {
   render() {
@@ -57,13 +57,13 @@ class Footer extends React.Component {
 
 const mapStateToProps = store => ({
   fluid:
-    objectPath.get(store.builder.layoutConfig, "footer.self.width") === "fluid",
+    objectPath.get(store.builder.layoutConfig, 'footer.self.width') === 'fluid',
   footerClasses: builder.selectors.getClasses(store, {
-    path: "footer",
+    path: 'footer',
     toString: true
   }),
   footerContainerClasses: builder.selectors.getClasses(store, {
-    path: "footer_container",
+    path: 'footer_container',
     toString: true
   })
 });

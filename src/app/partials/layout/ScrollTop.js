@@ -1,5 +1,5 @@
-import React from "react";
-import KTScrolltop from "../../../_metronic/_assets/js/scrolltop";
+import React from 'react';
+import KTScrolltop from '../../../_metronic/_assets/js/scrolltop';
 
 export default class ScrollTop extends React.Component {
   scrollTopCommonRef = React.createRef();

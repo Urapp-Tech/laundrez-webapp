@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
-import { Row, Col, Form } from "react-bootstrap";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link, Redirect } from 'react-router-dom';
+import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
+import { Row, Col, Form } from 'react-bootstrap';
 
 class ForgotPassword extends Component {
   state = { isRequested: false };

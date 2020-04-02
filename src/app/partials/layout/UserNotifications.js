@@ -1,9 +1,9 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
-import React from "react";
-import { Nav, Tab, Dropdown } from "react-bootstrap";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import HeaderDropdownToggle from "../content/CustomDropdowns/HeaderDropdownToggle";
-import { ReactComponent as CompilingIcon } from "../../../_metronic/layout/assets/layout-svg-icons/Compiling.svg";
+import React from 'react';
+import { Nav, Tab, Dropdown } from 'react-bootstrap';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import HeaderDropdownToggle from '../content/CustomDropdowns/HeaderDropdownToggle';
+import { ReactComponent as CompilingIcon } from '../../../_metronic/layout/assets/layout-svg-icons/Compiling.svg';
 
 const perfectScrollbarOptions = {
   wheelSpeed: 2,
@@ -11,12 +11,12 @@ const perfectScrollbarOptions = {
 };
 
 export default class UserNotifications extends React.Component {
-  state = { key: "Alerts" };
+  state = { key: 'Alerts' };
 
   getHeaderTopBarCssClassList = () => {
-    let result = "kt-header__topbar-icon ";
+    let result = 'kt-header__topbar-icon ';
     if (this.props.pulse) {
-      result += "kt-pulse kt-pulse--brand ";
+      result += 'kt-pulse kt-pulse--brand ';
     }
 
     const { iconType } = this.props;
@@ -28,7 +28,7 @@ export default class UserNotifications extends React.Component {
   };
 
   getSvgCssClassList = () => {
-    let result = "kt-svg-icon ";
+    let result = 'kt-svg-icon ';
     const { iconType } = this.props;
     if (iconType) {
       result += `kt-svg-icon--${iconType}`;
@@ -38,40 +38,40 @@ export default class UserNotifications extends React.Component {
   };
 
   getHetBackGroundCssClassList = () => {
-    let result = "kt-head ";
+    let result = 'kt-head ';
     if (this.props.skin) {
       result += `kt-head--skin-${this.props.skin} `;
     }
 
-    result += "kt-head--fit-x kt-head--fit-b";
+    result += 'kt-head--fit-x kt-head--fit-b';
     return result;
   };
 
   backGroundStyle = () => {
     if (!this.props.bgImage) {
-      return "none";
+      return 'none';
     }
 
-    return "url(" + this.props.bgImage + ")";
+    return 'url(' + this.props.bgImage + ')';
   };
 
   userNotificationsButtonCssClassList = () => {
-    let result = "btn ";
+    let result = 'btn ';
     if (this.props.type) {
       result += `btn-${this.props.type} `;
     }
 
-    result += "btn-sm btn-bold btn-font-md";
+    result += 'btn-sm btn-bold btn-font-md';
     return result;
   };
 
   ulTabsClassList = () => {
-    let result = "nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x  ";
+    let result = 'nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x  ';
     if (this.props.type) {
       result += `nav-tabs-line-${this.props.type} `;
     }
 
-    result += "kt-notification-item-padding-x";
+    result += 'kt-notification-item-padding-x';
     return result;
   };
 
@@ -141,11 +141,11 @@ export default class UserNotifications extends React.Component {
                   <Tab.Pane eventKey="Alerts">
                     <PerfectScrollbar
                       options={perfectScrollbarOptions}
-                      style={{ maxHeight: "100vh", position: "relative" }}
+                      style={{ maxHeight: '100vh', position: 'relative' }}
                     >
                       <div
                         className="kt-notification kt-margin-t-10 kt-margin-b-10"
-                        style={{ maxHeight: "40vh", position: "relative" }}
+                        style={{ maxHeight: '40vh', position: 'relative' }}
                       >
                         <div
                           className="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll"
@@ -316,11 +316,11 @@ export default class UserNotifications extends React.Component {
                   <Tab.Pane eventKey="Events">
                     <PerfectScrollbar
                       options={perfectScrollbarOptions}
-                      style={{ maxHeight: "100vh", position: "relative" }}
+                      style={{ maxHeight: '100vh', position: 'relative' }}
                     >
                       <div
                         className="kt-notification kt-margin-t-10 kt-margin-b-10"
-                        style={{ maxHeight: "40vh", position: "relative" }}
+                        style={{ maxHeight: '40vh', position: 'relative' }}
                       >
                         <div
                           className="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll"
@@ -517,7 +517,7 @@ export default class UserNotifications extends React.Component {
                   <Tab.Pane eventKey="Logs">
                     <div
                       className="kt-grid kt-grid--ver"
-                      style={{ minHeight: "200px" }}
+                      style={{ minHeight: '200px' }}
                     >
                       <div className="kt-grid kt-grid--hor kt-grid__item kt-grid__item--fluid kt-grid__item--middle">
                         <div className="kt-grid__item kt-grid__item--middle kt-align-center">

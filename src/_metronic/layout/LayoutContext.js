@@ -3,7 +3,7 @@ import React, {
   useContext,
   useEffect,
   useReducer
-} from "react";
+} from 'react';
 
 /**
  * Both context used to create inside react `redux`-like global state managed
@@ -32,18 +32,18 @@ const actionTypes = {
    * Initializes layout state from provided `{ pathname, menuConfig }` action
    * payload.
    */
-  INIT: "INIT",
+  INIT: 'INIT',
 
   /**
    * Updates current subheader from provided `{ title }` action payload.
    */
-  SET_SUBHEADER: "SET_SUBHEADER",
+  SET_SUBHEADER: 'SET_SUBHEADER',
 
   /**
    * Controls splash screen visibility.
    */
-  SHOW_SPLASH_SCREEN: "SHOW_SPLASH_SCREEN",
-  HIDE_SPLASH_SCREEN: "HIDE_SPLASH_SCREEN"
+  SHOW_SPLASH_SCREEN: 'SHOW_SPLASH_SCREEN',
+  HIDE_SPLASH_SCREEN: 'HIDE_SPLASH_SCREEN'
 };
 
 /**
@@ -85,7 +85,7 @@ function init({ pathname, menuConfig }) {
     findPageConfig(currentPage, menuConfig.header.items, breadcrumbs);
 
   breadcrumbs.reverse();
-  const state = { subheader: { title: "", breadcrumb: [], description: "" }, splashScreen: { refs: {} } };
+  const state = { subheader: { title: '', breadcrumb: [], description: '' }, splashScreen: { refs: {} } };
   if (pageConfig) {
     breadcrumbs.push(pageConfig);
     state.subheader.title = pageConfig.title;
@@ -226,7 +226,7 @@ export function useLayoutContext() {
   const context = useContext(LayoutContext.State);
 
   if (!context) {
-    throw new Error("");
+    throw new Error('');
   }
 
   return context;

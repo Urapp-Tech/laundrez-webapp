@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import objectPath from "object-path";
-import * as builder from "../../ducks/builder";
-import KTToggle from "../../_assets/js/toggle";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import objectPath from 'object-path';
+import * as builder from '../../ducks/builder';
+import KTToggle from '../../_assets/js/toggle';
 
 class HeaderMobile extends React.Component {
   toggleButtonRef = React.createRef();
@@ -68,22 +68,22 @@ const mapStateToProps = store => ({
   headerLogo: builder.selectors.getStickyLogo(store),
   asideDisplay: objectPath.get(
     store.builder.layoutConfig,
-    "aside.self.display"
+    'aside.self.display'
   ),
   headerMenuSelfDisplay:
-    objectPath.get(store.builder.layoutConfig, "header.menu.self.display") ===
+    objectPath.get(store.builder.layoutConfig, 'header.menu.self.display') ===
     true,
   toggleOptions: {
-    target: "body",
-    targetState: "kt-header__topbar--mobile-on",
-    togglerState: "kt-header-mobile__toolbar-topbar-toggler--active"
+    target: 'body',
+    targetState: 'kt-header__topbar--mobile-on',
+    togglerState: 'kt-header-mobile__toolbar-topbar-toggler--active'
   },
   headerMobileCssClasses: builder.selectors.getClasses(store, {
-    path: "header_mobile",
+    path: 'header_mobile',
     toString: true
   }),
   headerMobileAttributes: builder.selectors.getAttributes(store, {
-    path: "aside_menu"
+    path: 'aside_menu'
   })
 });
 

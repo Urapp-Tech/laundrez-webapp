@@ -1,7 +1,7 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import { Form, Row, Col } from "react-bootstrap";
-import Map from "../../partials/layout/Map";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Form, Row, Col } from 'react-bootstrap';
+import Map from '../../partials/layout/Map';
 
 export default function PickAndDrop({ history }) {
     return (
@@ -42,13 +42,13 @@ export default function PickAndDrop({ history }) {
                                             <Row>
                                                 <Form.Group as={Col} controlId="formGridStreet">
                                                     <Form.Check inline placeholder="" />
-                                                    <Form.Label className="address-label" ><img alt={'img'} src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2003 | Bay Street</Form.Label>
+                                                    <Form.Label className="address-label" ><img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} /> 2003 | Bay Street</Form.Label>
                                                 </Form.Group>
                                             </Row>
                                             <Row>
                                                 <Form.Group as={Col} controlId="formGridStreet">
                                                     <Form.Check inline placeholder="" />
-                                                    <Form.Label className="address-label" > <img alt={'img'} src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2660 | 590 Bay Street</Form.Label>
+                                                    <Form.Label className="address-label" > <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} /> 2660 | 590 Bay Street</Form.Label>
                                                 </Form.Group>
                                             </Row>
                                         </div>
@@ -61,7 +61,7 @@ export default function PickAndDrop({ history }) {
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button onClick={() => history.push("/orderreview")} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
+                                        <button onClick={() => history.push('/orderreview')} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>
@@ -72,7 +72,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            <Map height={"600px"} />
+                            <Map height={'600px'} />
 
                         </div>
                     </div>
@@ -80,5 +80,5 @@ export default function PickAndDrop({ history }) {
 
             </div>
         </>
-    )
+    );
 }

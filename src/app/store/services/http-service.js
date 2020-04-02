@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 import { API_URL } from './config';
 export class HttpService {
 
-    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer` }) {
+    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
         return ajax({
             url: `${API_URL}${url}`,
             headers,
@@ -15,7 +15,7 @@ export class HttpService {
         });
     } // get
 
-    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer` }) {
+    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
         return ajax({
             url: `${API_URL}${url}`,
             method: 'POST',
@@ -27,7 +27,7 @@ export class HttpService {
             createXHR: () => new XMLHttpRequest()
         });
     } // post
-    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer` }) {
+    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
         return ajax({
             url: `${API_URL}${url}`,
             method: 'PUT',
@@ -40,7 +40,7 @@ export class HttpService {
         });
     } // put
 
-    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer` }) {
+    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
         return ajax({
             url: `${API_URL}${url}`,
             method: 'DELETE',

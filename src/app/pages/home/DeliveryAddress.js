@@ -1,7 +1,7 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import { Col, Row, Form } from "react-bootstrap";
-import SavedAddress from "../../partials/content/SavedAddress";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Col, Row, Form } from 'react-bootstrap';
+import SavedAddress from '../../partials/content/SavedAddress';
 
 export default function DeliveryAddress() {
     return (
@@ -70,7 +70,7 @@ export default function DeliveryAddress() {
                                     </Row>
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
-                                            <Form.Check className="check-primary-addrs" inline style={{ color: "#2c436a" }} label="Use as Primary Address" />
+                                            <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
                                         </Form.Group>
                                     </Row>
                                     <Row id="save-address">
@@ -97,5 +97,5 @@ export default function DeliveryAddress() {
                 </div>
             </div>
         </>
-    )
+    );
 }

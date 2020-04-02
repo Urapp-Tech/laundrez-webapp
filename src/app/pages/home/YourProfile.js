@@ -1,8 +1,8 @@
-import React from "react";
-import { PortletBody, Portlet } from "../../partials/content/Portlet";
-import { Col, Row, Form } from "react-bootstrap";
-import Pin from "../../../_metronic/layout/assets/layout-svg-icons/pin.svg";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { PortletBody, Portlet } from '../../partials/content/Portlet';
+import { Col, Row, Form } from 'react-bootstrap';
+import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
+import { Link } from 'react-router-dom';
 
 
 export default function YourProfile() {
@@ -114,5 +114,5 @@ export default function YourProfile() {
                 </div>
             </div>
         </>
-    )
+    );
 }

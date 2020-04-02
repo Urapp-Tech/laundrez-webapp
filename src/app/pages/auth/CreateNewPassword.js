@@ -1,6 +1,6 @@
-import React from "react";
-import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
-import { Form } from "react-bootstrap";
+import React from 'react';
+import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
+import { Form } from 'react-bootstrap';
 
 export default function CreateNewPassword() {
 

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 // import { useSelector } from "react-redux";
 import {
   Portlet,
   PortletBody,
-} from "../../partials/content/Portlet";
-import OrderHistoryTable from "../../partials/layout/OrderHistoryTable";
-import Info from "../../../_metronic/layout/assets/layout-svg-icons/info.svg"
-import { Link } from "react-router-dom";
+} from '../../partials/content/Portlet';
+import OrderHistoryTable from '../../partials/layout/OrderHistoryTable';
+import Info from '../../../_metronic/layout/assets/layout-svg-icons/info.svg';
+import { Link } from 'react-router-dom';
 // import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
 // import { Link } from "react-router-dom";
 // import { Table } from "react-bootstrap";
@@ -71,7 +71,7 @@ export default function Dashboard() {
                     </PortletBody>
                   </Portlet>
                 </div>
-              )
+              );
             })
             }
             {/* <div className="kt-space-20" /> */}

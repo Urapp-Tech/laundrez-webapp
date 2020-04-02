@@ -1,6 +1,6 @@
-import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import DryCleaning from "./services-pages/DryCleaning";
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import DryCleaning from './services-pages/DryCleaning';
 
 export default function Services() {
     return (
@@ -12,5 +12,5 @@ export default function Services() {
             />
             <Route path="/services/drycleaning" component={DryCleaning} />
         </Switch>
-    )
+    );
 }   

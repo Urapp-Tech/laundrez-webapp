@@ -1,21 +1,21 @@
-import React, { Suspense } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import { LayoutSplashScreen } from "../../../_metronic";
-import Services from "./Services";
-import OrderHistory from "./OrderHistory";
-import MyBasket from "./MyBasket";
-import DeliveryAddress from "./DeliveryAddress";
-import PickAndDrop from "./PickAndDrop";
-import OrderReview from "./OrderReview";
-import OrderDetails from "./OrderDetails";
-import ContactUs from "./ContactUs";
-import PaymentSettings from "./PaymentSettings";
-import PaymentDetails from "./PaymentDetails";
-import YourProfile from "./YourProfile";
-import Faqs from "./Faqs";
-import TermsAndCondtion from "./TermsAndCondition";
-import PrivacyPolicy from "./PrivacyPolicy";
+import React, { Suspense } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import { LayoutSplashScreen } from '../../../_metronic';
+import Services from './Services';
+import OrderHistory from './OrderHistory';
+import MyBasket from './MyBasket';
+import DeliveryAddress from './DeliveryAddress';
+import PickAndDrop from './PickAndDrop';
+import OrderReview from './OrderReview';
+import OrderDetails from './OrderDetails';
+import ContactUs from './ContactUs';
+import PaymentSettings from './PaymentSettings';
+import PaymentDetails from './PaymentDetails';
+import YourProfile from './YourProfile';
+import Faqs from './Faqs';
+import TermsAndCondtion from './TermsAndCondition';
+import PrivacyPolicy from './PrivacyPolicy';
 
 
 

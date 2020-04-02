@@ -1,5 +1,5 @@
-import React from "react";
-import { Modal, Container, Row, Col, Form } from "react-bootstrap";
+import React from 'react';
+import { Modal, Container, Row, Col, Form } from 'react-bootstrap';
 
 export default function UpdateAddressModal({ showModal, toggleModal }) {
     return (
@@ -73,7 +73,7 @@ export default function UpdateAddressModal({ showModal, toggleModal }) {
                             </Row>
                             <Row>
                                 <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Check className="check-primary-addrs" inline style={{ color: "#2c436a" }} label="Use as Primary Address" />
+                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
                                 </Form.Group>
                             </Row>
                             <Row id="save-address">
@@ -87,5 +87,5 @@ export default function UpdateAddressModal({ showModal, toggleModal }) {
                 </Container>
             </Modal.Body>
         </Modal>
-    )
+    );
 }

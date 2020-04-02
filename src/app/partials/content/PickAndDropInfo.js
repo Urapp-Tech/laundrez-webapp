@@ -1,8 +1,8 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
-import Clock from "../../../_metronic/layout/assets/layout-svg-icons/clock.svg";
-import Calendar from "../../../_metronic/layout/assets/layout-svg-icons/calendar.svg";
-import Pin from "../../../_metronic/layout/assets/layout-svg-icons/pin.svg";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
+import Clock from '../../../_metronic/layout/assets/layout-svg-icons/clock.svg';
+import Calendar from '../../../_metronic/layout/assets/layout-svg-icons/calendar.svg';
+import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
 
 export default function PickAndDropInfo() {
     return (

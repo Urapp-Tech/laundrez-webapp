@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useRouteMatch } from "react-router-dom";
-import * as builder from "../ducks/builder";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useRouteMatch } from 'react-router-dom';
+import * as builder from '../ducks/builder';
 
 function KtContent({ children, contentContainerClasses }) {
   const match = useRouteMatch() || {};
-  const animationEndClass = "kt-grid--animateContent-finished";
+  const animationEndClass = 'kt-grid--animateContent-finished';
   const [cssClassesState, setCssClassesState] = useState([
-    "kt-grid--animateContent",
-    "kt-container",
-    contentContainerClasses.split(" "),
-    "kt-grid__item kt-grid__item--fluid",
+    'kt-grid--animateContent',
+    'kt-container',
+    contentContainerClasses.split(' '),
+    'kt-grid__item kt-grid__item--fluid',
     animationEndClass
   ]);
 
@@ -30,12 +30,12 @@ function KtContent({ children, contentContainerClasses }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match.url]);
 
-  return <div className={cssClassesState.join(" ")}>{children}</div>;
+  return <div className={cssClassesState.join(' ')}>{children}</div>;
 }
 
 const mapStateToProps = store => ({
   contentContainerClasses: builder.selectors.getClasses(store, {
-    path: "content_container",
+    path: 'content_container',
     toString: true
   })
 });

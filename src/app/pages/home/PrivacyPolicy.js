@@ -1,5 +1,5 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
 
 export default function PrivacyPolicy() {
     return (
@@ -50,5 +50,5 @@ interfere with any other persons’ use and enjoyment of this Service or of the 
                 </div>
             </div>
         </>
-    )
+    );
 }

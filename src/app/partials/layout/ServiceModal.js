@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } from 'react-bootstrap';
 
 function CustomToggle({ eventKey }) {
-    const [isOpen, toggle] = useState(false)
+    const [isOpen, toggle] = useState(false);
     const decoratedOnClick = useAccordionToggle(eventKey, () =>
         toggle(!isOpen)
     );
@@ -10,7 +10,7 @@ function CustomToggle({ eventKey }) {
     return (
         <div onClick={decoratedOnClick} className="faq-heading d-flex justify-content-between" >
             <div className="faq-question" > Can you clean items with leather, velvet, suede or fur?</div>
-            <div>{isOpen ? <img alt={'img'} className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-down.svg")} /> : <img alt={'img'} className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg")} />}</div>
+            <div>{isOpen ? <img alt={'img'} className="arrow-icon" src={require('../../../_metronic/layout/assets/layout-svg-icons/arrow-down.svg')} /> : <img alt={'img'} className="arrow-icon" src={require('../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg')} />}</div>
         </div>
     );
 }
@@ -44,11 +44,11 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
 
                                     <div className="w-25  d-flex justify-content-between align-items-center" >
 
-                                        <img alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/minus.svg")} />
+                                        <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
                                         <span className="qty">1</span>
 
-                                        <img alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/plus.svg")} />
+                                        <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
                                     </div>
 
@@ -87,5 +87,5 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
                 </Container>
             </Modal.Body>
         </Modal>
-    )
+    );
 }

@@ -1,15 +1,15 @@
-import objectPath from "object-path";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import objectPath from 'object-path';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import LayoutConfig from "../layout/LayoutConfig";
-import MenuConfig from "../layout/MenuConfig";
+import LayoutConfig from '../layout/LayoutConfig';
+import MenuConfig from '../layout/MenuConfig';
 
 export const actionTypes = {
-  SetMenuConfig: "builder/SET_MENU_CONFIG",
-  SetLayoutConfigs: "builder/SET_LAYOUT_CONFIGS",
-  SetLayoutConfigsWithPageRefresh: "builder/SET_LAYOUT_CONFIGS_WITH_PAGE_REFRESH",
-  SetHtmlClassService: "builder/SET_HTML_CLASS_SERVICE"
+  SetMenuConfig: 'builder/SET_MENU_CONFIG',
+  SetLayoutConfigs: 'builder/SET_LAYOUT_CONFIGS',
+  SetLayoutConfigsWithPageRefresh: 'builder/SET_LAYOUT_CONFIGS_WITH_PAGE_REFRESH',
+  SetHtmlClassService: 'builder/SET_HTML_CLASS_SERVICE'
 };
 
 export const selectors = {
@@ -18,7 +18,7 @@ export const selectors = {
 
     return htmlClassServiceObjects
       ? htmlClassServiceObjects.getClasses(params.path, params.toString)
-      : "";
+      : '';
   },
   getAttributes: (store, params) => {
     if (params.path) {
@@ -40,25 +40,25 @@ export const selectors = {
       return objectPath.get(layoutConfig, path);
     }
 
-    return "";
+    return '';
   },
 
   getLogo: ({ builder: { layoutConfig } }) => {
-    const menuAsideLeftSkin = objectPath.get(layoutConfig, "brand.self.logo");
+    const menuAsideLeftSkin = objectPath.get(layoutConfig, 'brand.self.logo');
     // set brand logo
-    const logoObject = objectPath.get(layoutConfig, "self.logo");
+    const logoObject = objectPath.get(layoutConfig, 'self.logo');
     let logo;
-    if (typeof logoObject === "string") {
+    if (typeof logoObject === 'string') {
       logo = logoObject;
     }
 
-    if (typeof logoObject === "object") {
-      logo = objectPath.get(logoObject, menuAsideLeftSkin + "");
+    if (typeof logoObject === 'object') {
+      logo = objectPath.get(logoObject, menuAsideLeftSkin + '');
     }
 
-    if (typeof logo === "undefined") {
+    if (typeof logo === 'undefined') {
       try {
-        const logos = objectPath.get(this.layoutConfig, "self.logo");
+        const logos = objectPath.get(this.layoutConfig, 'self.logo');
         logo = logos[Object.keys(logos)[0]];
       } catch (e) { }
     }
@@ -67,11 +67,11 @@ export const selectors = {
 
   getStickyLogo: store => {
     const { layoutConfig } = store.builder;
-    let logo = objectPath.get(layoutConfig, "self.logo.sticky");
-    if (typeof logo === "undefined") {
+    let logo = objectPath.get(layoutConfig, 'self.logo.sticky');
+    if (typeof logo === 'undefined') {
       logo = selectors.getLogo(store);
     }
-    return logo + "";
+    return logo + '';
   }
 };
 
@@ -84,8 +84,8 @@ const initialState = {
 export const reducer = persistReducer(
   {
     storage,
-    key: "build-demo1",
-    blacklist: ["htmlClassServiceObjects"]
+    key: 'build-demo1',
+    blacklist: ['htmlClassServiceObjects']
   },
   (state = initialState, { type, payload }) => {
     switch (type) {

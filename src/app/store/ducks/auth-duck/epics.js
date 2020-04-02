@@ -2,7 +2,7 @@ import { of } from 'rxjs';
 import { ofType, } from 'redux-observable';
 import { switchMap, pluck, catchError, map } from 'rxjs/operators';
 import { AuthActionTypes } from './actions-types';
-import * as utils from "../../../../_metronic/utils/utils";
+import * as utils from '../../../../_metronic/utils/utils';
 export class AuthEpics {
     static login(action$, state$, { ajaxPost }) {
         return action$.pipe(ofType(AuthActionTypes.LOGIN_PROG), switchMap(({ payload }) => {

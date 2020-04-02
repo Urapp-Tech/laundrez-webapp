@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { LayoutSplashScreen } from "./LayoutContext";
-import * as builder from "../ducks/builder";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LayoutSplashScreen } from './LayoutContext';
+import * as builder from '../ducks/builder';
 
 /**
  * Used to synchronize current layout `menuConfig`, `layoutConfig` and

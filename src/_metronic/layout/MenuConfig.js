@@ -503,76 +503,76 @@ export default {
     self: {},
     items: [
       {
-        title: "Home",
+        title: 'Home',
         root: true,
-        icon: "home-solid.svg",
-        page: "dashboard",
-        bullet: "dot"
+        icon: 'home-solid.svg',
+        page: 'dashboard',
+        bullet: 'dot'
       },
       {
-        title: "Services",
+        title: 'Services',
         root: true,
-        icon: "server-solid.svg",
-        page: "services",
-        bullet: "dot",
+        icon: 'server-solid.svg',
+        page: 'services',
+        bullet: 'dot',
         submenu: [
           {
-            title: "Dry Cleaning",
-            bullet: "dot",
-            page:"services/drycleaning"
+            title: 'Dry Cleaning',
+            bullet: 'dot',
+            page:'services/drycleaning'
           },
           {
-            title: "Wash & fold",
-            bullet: "dot",
+            title: 'Wash & fold',
+            bullet: 'dot',
           },
           {
-            title: "Commercial",
-            bullet: "dot",
+            title: 'Commercial',
+            bullet: 'dot',
           },
           {
-            title: "Home",
-            bullet: "dot",
+            title: 'Home',
+            bullet: 'dot',
           },
           {
-            title: "Outdoor Wear",
-            bullet: "dot",
+            title: 'Outdoor Wear',
+            bullet: 'dot',
           }
         ]
       },
       {
-        title: "Order History",
+        title: 'Order History',
         root: true,
-        icon: "order.svg",
-        page: "orderhistory",
-        bullet: "dot"
+        icon: 'order.svg',
+        page: 'orderhistory',
+        bullet: 'dot'
       },
       {
-        title: "Payment Setting",
+        title: 'Payment Setting',
         root: true,
-        icon: "receipt.svg",
-        page: "paymentsettings",
-        bullet: "dot"
+        icon: 'receipt.svg',
+        page: 'paymentsettings',
+        bullet: 'dot'
       },
       {
-        title: "Delivery Address",
+        title: 'Delivery Address',
         root: true,
-        icon: "tracking.svg",
-        page: "deliveryaddress",
-        bullet: "dot"
+        icon: 'tracking.svg',
+        page: 'deliveryaddress',
+        bullet: 'dot'
       },
       {
-        title: "Contact Us",
+        title: 'Contact Us',
         root: true,
-        icon: "email.svg",
-        page: "contactus",
-        bullet: "dot"
+        icon: 'email.svg',
+        page: 'contactus',
+        bullet: 'dot'
       },
       {
-        title: "FAQ's",
+        title: 'FAQ\'s',
         root: true,
-        icon: "question.svg",
-        page: "faqs",
-        bullet: "dot"
+        icon: 'question.svg',
+        page: 'faqs',
+        bullet: 'dot'
       },
       
     ]

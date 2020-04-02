@@ -5,19 +5,19 @@
  * components (e.g: `src/pages/auth/AuthPage`, `src/pages/home/HomePage`).
  */
 
-import React, { useEffect } from "react";
-import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import { shallowEqual, useSelector, useDispatch } from "react-redux";
-import { useLastLocation } from "react-router-last-location";
-import HomePage from "../pages/home/HomePage";
-import ErrorsPage from "../pages/errors/ErrorsPage";
-import LogoutPage from "../pages/auth/Logout";
-import { LayoutContextProvider } from "../../_metronic";
-import Layout from "../../_metronic/layout/Layout";
-import * as routerHelpers from "../router/RouterHelpers";
-import * as utils from "../../_metronic/utils/utils";
-import AuthPage from "../pages/auth/AuthPage";
-import { AuthActions } from "../store/ducks/auth-duck";
+import React, { useEffect } from 'react';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { useLastLocation } from 'react-router-last-location';
+import HomePage from '../pages/home/HomePage';
+import ErrorsPage from '../pages/errors/ErrorsPage';
+import LogoutPage from '../pages/auth/Logout';
+import { LayoutContextProvider } from '../../_metronic';
+import Layout from '../../_metronic/layout/Layout';
+import * as routerHelpers from '../router/RouterHelpers';
+import * as utils from '../../_metronic/utils/utils';
+import AuthPage from '../pages/auth/AuthPage';
+import { AuthActions } from '../store/ducks/auth-duck';
 
 export const Routes = withRouter(({ history }) => {
   const lastLocation = useLastLocation();
@@ -39,7 +39,7 @@ export const Routes = withRouter(({ history }) => {
       // this.props.setUser(userFromStorage);
       dispatch(AuthActions.setUser(userFromStorage));
     }
-  }, [dispatch, user])
+  }, [dispatch, user]);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>

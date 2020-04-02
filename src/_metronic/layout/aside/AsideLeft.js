@@ -1,16 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as builder from "../../ducks/builder";
-import Brand from "../brand/Brand";
-import PerfectScrollbar from "react-perfect-scrollbar";
-import Menu from "./Menu";
-import KTOffcanvas from "../../_assets/js/offcanvas";
-import FbImage from "../assets/layout-svg-icons/facebook.svg";
-import WhatsappImage from "../assets/layout-svg-icons/whatsapp.svg";
-import TwitterImage from "../assets/layout-svg-icons/twitter-sign.svg";
-import EmailImage from "../assets/layout-svg-icons/black-envelope.svg";
-import PowerImage from "../assets/layout-svg-icons/power.svg";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import * as builder from '../../ducks/builder';
+import Brand from '../brand/Brand';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import Menu from './Menu';
+import KTOffcanvas from '../../_assets/js/offcanvas';
+import FbImage from '../assets/layout-svg-icons/facebook.svg';
+import WhatsappImage from '../assets/layout-svg-icons/whatsapp.svg';
+import TwitterImage from '../assets/layout-svg-icons/twitter-sign.svg';
+import EmailImage from '../assets/layout-svg-icons/black-envelope.svg';
+import PowerImage from '../assets/layout-svg-icons/power.svg';
+import { Link } from 'react-router-dom';
 
 class AsideLeft extends React.Component {
   asideOffCanvasRef = React.createRef();
@@ -24,7 +24,6 @@ class AsideLeft extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <>
         <button className="kt-aside-close" id="kt_aside_close_btn">
@@ -53,10 +52,10 @@ class AsideLeft extends React.Component {
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
               <div className="d-flex justify-content-between   w-75 mt-3">
-                <img alt={"fb"} src={FbImage} />
-                <img alt={"whatsapp"} src={WhatsappImage} />
-                <img alt={"twitter"} src={TwitterImage} />
-                <img alt={"email"} src={EmailImage} />
+                <img alt={'fb'} src={FbImage} />
+                <img alt={'whatsapp'} src={WhatsappImage} />
+                <img alt={'twitter'} src={TwitterImage} />
+                <img alt={'email'} src={EmailImage} />
 
               </div>
               <div className="break-line mt-3" ></div>
@@ -65,7 +64,7 @@ class AsideLeft extends React.Component {
                 <Link to="/privacypolicy" > <h6 className="text-white" >Privacy Policy</h6></Link>
               </div>
               <Link to="/logout" className="logout-box cursor-pointer d-flex mt-3 " >
-                <img alt={"power"} src={PowerImage} />
+                <img alt={'power'} src={PowerImage} />
                 <span className="ml-3 logout-text  " >Logout</span>
               </Link>
             </div>
@@ -78,21 +77,21 @@ class AsideLeft extends React.Component {
 
 const mapStateToProps = store => ({
   disableAsideSelfDisplay:
-    builder.selectors.getConfig(store, "aside.self.display") === false,
+    builder.selectors.getConfig(store, 'aside.self.display') === false,
   disableScroll:
-    builder.selectors.getConfig(store, "aside.menu.dropdown") === "true" ||
+    builder.selectors.getConfig(store, 'aside.menu.dropdown') === 'true' ||
     false,
   asideClassesFromConfig: builder.selectors.getClasses(store, {
-    path: "aside",
+    path: 'aside',
     toString: true
   }),
   menuCanvasOptions: {
-    baseClass: "kt-aside",
+    baseClass: 'kt-aside',
     overlay: true,
-    closeBy: "kt_aside_close_btn",
+    closeBy: 'kt_aside_close_btn',
     toggleBy: {
-      target: "kt_aside_mobile_toggler",
-      state: "kt-header-mobile__toolbar-toggler--active"
+      target: 'kt_aside_mobile_toggler',
+      state: 'kt-header-mobile__toolbar-toggler--active'
     }
   }
 });

@@ -1,14 +1,14 @@
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 export default function OrderReviewItems() {
     return (
         <Row className="border-bottom mb-3" >
             <Col>
                 <div className=" d-flex justify-content-center align-items-center">
-                    <div style={{width:"8rem"}} className="rounded-circle  border-image-theme mb-3" >
+                    <div style={{width:'8rem'}} className="rounded-circle  border-image-theme mb-3" >
                         <img
-                            src={"https://i.ya-webdesign.com/images/clothes-model-png-2.png"}
+                            src={'https://i.ya-webdesign.com/images/clothes-model-png-2.png'}
                             alt="product"
                             className="img-fluid"
                         />

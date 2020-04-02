@@ -1,19 +1,19 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import { Col, Row, Form, Alert } from "react-bootstrap";
-import PaymentSetting from "../../../_metronic/layout/assets/layout-svg-icons/receipt.svg";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Col, Row, Form, Alert } from 'react-bootstrap';
+import PaymentSetting from '../../../_metronic/layout/assets/layout-svg-icons/receipt.svg';
 export default function PaymentDetails() {
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const getYears = function (endYear) {
         let currentYear = new Date().getFullYear(), years = [];
         while (currentYear <= endYear) {
             years.push(currentYear++);
         }
         return years;
-    }
+    };
     return (
         <>
-            <Alert variant={"success"}>
+            <Alert variant={'success'}>
                 <img src={PaymentSetting} alt={'img'} /> <span className="ml-2" >  Payment has been done on behalf of &nbsp; <b> ID:56482</b></span>
             </Alert>
             <h4 className="mb-3" >Payment Details</h4>
@@ -36,7 +36,7 @@ export default function PaymentDetails() {
                                                 <Form.Control as="select">
                                                     {
                                                         months.map((v, i) => {
-                                                            return <option key={i} value={v} >{v}</option>
+                                                            return <option key={i} value={v} >{v}</option>;
                                                         })
                                                     }
                                                 </Form.Control>
@@ -46,7 +46,7 @@ export default function PaymentDetails() {
                                                 <Form.Control as="select">
                                                     {
                                                         getYears(2040).map((v, i) => {
-                                                            return <option key={i} value={v} >{v}</option>
+                                                            return <option key={i} value={v} >{v}</option>;
                                                         })
                                                     }
                                                 </Form.Control>
@@ -60,7 +60,7 @@ export default function PaymentDetails() {
                                         </Row>
                                         <Row>
                                             <Form.Group as={Col} controlId="formGridBusser">
-                                                <Form.Check className="check-primary-addrs" inline style={{ color: "#2c436a" }} label="Remember Details" />
+                                                <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Remember Details" />
                                             </Form.Group>
                                         </Row>
                                         <Row className="justify-content-end" >

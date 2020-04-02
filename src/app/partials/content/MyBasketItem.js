@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function MyBasketItem() {
     return (
@@ -7,7 +7,7 @@ export default function MyBasketItem() {
             <div className="product d-flex justify-content-center align-items-center">
                 <div className="product-image" >
                     <img
-                        src={"https://i.ya-webdesign.com/images/clothes-model-png-2.png"}
+                        src={'https://i.ya-webdesign.com/images/clothes-model-png-2.png'}
                         alt="product"
                     />
                 </div>
@@ -16,14 +16,14 @@ export default function MyBasketItem() {
             <div className=" price d-flex justify-content-center  align-items-center" >$50.00</div>
             <div className=" quantity d-flex justify-content-center  justify-content-between align-items-center" >
 
-                <img className="ml-3" alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/plus.svg")} />
+                <img className="ml-3" alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
                 <span className="kt-font-info font-weight-bold">1</span>
 
-                <img className="mr-3" alt="img" src={require("../../../_metronic/layout/assets/layout-svg-icons/minus.svg")} />
+                <img className="mr-3" alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
             </div>
             <div className="sub-total d-flex justify-content-center align-items-center kt-font-primary font-weight-bold" >$150.00</div>
         </div>
-    )
+    );
 }

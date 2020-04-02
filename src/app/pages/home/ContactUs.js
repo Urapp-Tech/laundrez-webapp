@@ -1,6 +1,6 @@
-import React from "react";
-import { Portlet, PortletBody } from "../../partials/content/Portlet";
-import { Col, Row, Form } from "react-bootstrap";
+import React from 'react';
+import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Col, Row, Form } from 'react-bootstrap';
 export default function ContactUs() {
     return (
         <>
@@ -39,5 +39,5 @@ export default function ContactUs() {
                 </div>
             </div>
         </>
-    )
+    );
 }

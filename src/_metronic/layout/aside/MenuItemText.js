@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default class MenuItemText extends React.Component {
   render() {
@@ -10,19 +10,19 @@ export default class MenuItemText extends React.Component {
         {item.icon && <img className="  img-fluid mr-3" src={require(`../assets/layout-svg-icons/${item.icon}`)} alt="icon" />}
 
 
-        {parentItem && parentItem.bullet === "dot" && (
+        {parentItem && parentItem.bullet === 'dot' && (
           <i className="kt-menu__link-bullet kt-menu__link-bullet--dot">
             <span />
           </i>
         )}
 
-        {parentItem && parentItem.bullet === "line" && (
+        {parentItem && parentItem.bullet === 'line' && (
           <i className="kt-menu__link-bullet kt-menu__link-bullet--line">
             <span />
           </i>
         )}
 
-        <span className="kt-menu__link-text" style={{ whiteSpace: "nowrap" }}>
+        <span className="kt-menu__link-text" style={{ whiteSpace: 'nowrap' }}>
           {!item.translate ? (
             item.title
           ) : (

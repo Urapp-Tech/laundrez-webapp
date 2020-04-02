@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Pin from "../../../_metronic/layout/assets/layout-svg-icons/pin.svg";
-import Garbage from "../../../_metronic/layout/assets/layout-svg-icons/garbage.svg";
-import UpdateAddressModal from "../layout/UpdateAddressModal";
+import React, { useState } from 'react';
+import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
+import Garbage from '../../../_metronic/layout/assets/layout-svg-icons/garbage.svg';
+import UpdateAddressModal from '../layout/UpdateAddressModal';
 
 
 export default function SavedAddress() {
@@ -19,5 +19,5 @@ export default function SavedAddress() {
             </span>
             <UpdateAddressModal showModal={openModal} toggleModal={() => setOpenModal(!openModal)} />
         </div>
-    )
+    );
 }

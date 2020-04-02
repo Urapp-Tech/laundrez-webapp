@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 
 
-export default function CircularProgress({ color, img, value, width = "2.2rem" }) {
+export default function CircularProgress({ color, img, value, width = '2.2rem' }) {
 
     return (<div style={{ width: width }} >
         <CircularProgressbarWithChildren
@@ -10,13 +10,13 @@ export default function CircularProgress({ color, img, value, width = "2.2rem" }
             background={true}
             styles={buildStyles({
                 pathColor: color,
-                backgroundColor: "#fff"
+                backgroundColor: '#fff'
             })}
 
         >
-            <img alt={"img"}
+            <img alt={'img'}
                 src={require(`../../../_metronic/layout/assets/layout-svg-icons/${img}`)}
             />
         </CircularProgressbarWithChildren>
-    </div>)
+    </div>);
 }

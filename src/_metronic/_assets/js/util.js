@@ -1,5 +1,5 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,no-loop-func,no-undef,no-restricted-globals,strict,no-unused-vars,no-cond-assign,eqeqeq,no-throw-literal,no-unreachable,no-useless-escape,no-redeclare,no-useless-concat,no-unused-expressions,no-sequences */
-"use strict";
+'use strict';
 /**
  * @class KTUtil  base utilize class that privides helper functions
  */
@@ -210,10 +210,10 @@ var KTUtil = function() {
          */
         getURLParam: function(paramName) {
             var searchString = window.location.search.substring(1),
-                i, val, params = searchString.split("&");
+                i, val, params = searchString.split('&');
 
             for (i = 0; i < params.length; i++) {
-                val = params[i].split("=");
+                val = params[i].split('=');
                 if (val[0] == paramName) {
                     return unescape(val[1]);
                 }
@@ -353,7 +353,7 @@ var KTUtil = function() {
                 // WebKit always returns auto if the element is positioned
                 position = KTUtil.css(elem, 'position');
 
-                if (position === "absolute" || position === "relative" || position === "fixed") {
+                if (position === 'absolute' || position === 'relative' || position === 'fixed') {
                     // IE returns 0 when zIndex is not specified
                     // other browsers return a string
                     // we ignore the case of nested elements with an explicit value of 0
@@ -382,7 +382,7 @@ var KTUtil = function() {
             while (el && el !== document) {
                 position = KTUtil.css(el, 'position');
 
-                if (position === "fixed") {
+                if (position === 'fixed') {
                     return true;
                 }
 
@@ -525,7 +525,7 @@ var KTUtil = function() {
                 return;
             }
 
-            var classesArr = classes.split(" ");
+            var classesArr = classes.split(' ');
 
             for (var i = 0; i < classesArr.length; i++) {
                 if (KTUtil.hasClass(el, KTUtil.trim(classesArr[i])) == false) {
@@ -605,39 +605,39 @@ var KTUtil = function() {
                 // the node may be the document itself, nodeType 9 = DOCUMENT_NODE
                 doc = node;
             } else {
-                throw new Error("Invalid node passed to fireEvent: " + node.id);
+                throw new Error('Invalid node passed to fireEvent: ' + node.id);
             }
 
             if (node.dispatchEvent) {
                 // Gecko-style approach (now the standard) takes more work
-                var eventClass = "";
+                var eventClass = '';
 
                 // Different events have different event classes.
                 // If this switch statement can't map an eventName to an eventClass,
                 // the event firing is going to fail.
                 switch (eventName) {
-                case "click": // Dispatching of 'click' appears to not work correctly in Safari. Use 'mousedown' or 'mouseup' instead.
-                case "mouseenter":
-                case "mouseleave":
-                case "mousedown":
-                case "mouseup":
-                    eventClass = "MouseEvents";
+                case 'click': // Dispatching of 'click' appears to not work correctly in Safari. Use 'mousedown' or 'mouseup' instead.
+                case 'mouseenter':
+                case 'mouseleave':
+                case 'mousedown':
+                case 'mouseup':
+                    eventClass = 'MouseEvents';
                     break;
 
-                case "focus":
-                case "change":
-                case "blur":
-                case "select":
-                    eventClass = "HTMLEvents";
+                case 'focus':
+                case 'change':
+                case 'blur':
+                case 'select':
+                    eventClass = 'HTMLEvents';
                     break;
 
                 default:
-                    throw "fireEvent: Couldn't find an event class for event '" + eventName + "'.";
+                    throw 'fireEvent: Couldn\'t find an event class for event \'' + eventName + '\'.';
                     break;
                 }
                 var event = doc.createEvent(eventClass);
 
-                var bubbles = eventName == "change" ? false : true;
+                var bubbles = eventName == 'change' ? false : true;
                 event.initEvent(eventName, bubbles, true); // All events created as bubbling and cancelable.
 
                 event.synthetic = true; // allow detection of synthetic events
@@ -647,7 +647,7 @@ var KTUtil = function() {
                 // IE-old school style
                 var event = doc.createEventObject();
                 event.synthetic = true; // allow detection of synthetic events
-                node.fireEvent("on" + eventName, event);
+                node.fireEvent('on' + eventName, event);
             }
         },
 
@@ -1030,7 +1030,7 @@ var KTUtil = function() {
                 if (defaultView && defaultView.getComputedStyle) {
                     // sanitize property name to css notation
                     // (hyphen separated words eg. font-Size)
-                    styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
+                    styleProp = styleProp.replace(/([A-Z])/g, '-$1').toLowerCase();
                     return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
                 } else if (el.currentStyle) { // IE
                     // sanitize property name to camelCase
@@ -1045,7 +1045,7 @@ var KTUtil = function() {
                                 oldRsLeft = el.runtimeStyle.left;
                             el.runtimeStyle.left = el.currentStyle.left;
                             el.style.left = value || 0;
-                            value = el.style.pixelLeft + "px";
+                            value = el.style.pixelLeft + 'px';
                             el.style.left = oldLeft;
                             el.runtimeStyle.left = oldRsLeft;
                             return value;
@@ -1192,7 +1192,7 @@ var KTUtil = function() {
 
                     target = target.parentNode;
                 }
-            }
+            };
 
             KTUtil.addEvent(element, event, window.KTUtilDelegatedEventHandlers[eventId]);
 
@@ -1346,7 +1346,7 @@ var KTUtil = function() {
         },
 
         ready: function(callback) {
-            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
                 callback();
             } else {
                 document.addEventListener('DOMContentLoaded', callback);
@@ -1560,7 +1560,7 @@ var KTUtil = function() {
         getScrollTop: function() {
             return  (document.scrollingElement || document.documentElement).scrollTop;
         }
-    }
+    };
 }();
 
 // webpack support
@@ -1576,6 +1576,6 @@ KTUtil.ready(function() {
 // CSS3 Transitions only after page load(.kt-page-loading class added to body tag and remove with JS on page load)
 window.onload = function() {
     KTUtil.removeClass(KTUtil.get('body'), 'kt-page--loading');
-}
+};
 
 export default KTUtil;

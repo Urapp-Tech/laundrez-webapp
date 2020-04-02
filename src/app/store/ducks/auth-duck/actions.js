@@ -1,4 +1,4 @@
-import { AuthActionTypes } from "./actions-types";
+import { AuthActionTypes } from './actions-types';
 
 export class AuthActions {
 
@@ -6,7 +6,7 @@ export class AuthActions {
         return {
             type: AuthActionTypes.LOGIN_PROG,
             payload: { body }
-        }
+        };
     }
     static setUser(user) {
         return {

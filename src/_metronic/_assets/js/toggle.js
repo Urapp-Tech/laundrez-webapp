@@ -1,7 +1,7 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid,no-loop-func,no-undef,no-restricted-globals,strict,no-unused-vars,no-cond-assign,eqeqeq,no-throw-literal,no-unreachable,no-useless-escape,no-redeclare,no-useless-concat,no-unused-expressions,no-sequences */
-import KTUtil from "./util";
+import KTUtil from './util';
 
-"use strict";
+'use strict';
 
 // plugin setup
 var KTToggle = function(elementId, options) {

@@ -1,14 +1,13 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import "../../../_metronic/_assets/sass/pages/login/login-1.scss";
-import BgAuth from "../../../_metronic/layout/assets/layout-svg-icons/login-bg.svg";
-import Login from "./Login";
-import Registration from "./Registration";
-import ForgotPassword from "./ForgotPassword";
-import CreateNewPassword from "./CreateNewPassword";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import '../../../_metronic/_assets/sass/pages/login/login-1.scss';
+import BgAuth from '../../../_metronic/layout/assets/layout-svg-icons/login-bg.svg';
+import Login from './Login';
+import Registration from './Registration';
+import ForgotPassword from './ForgotPassword';
+import CreateNewPassword from './CreateNewPassword';
 
 export default function AuthPage() {
-  console.log("authPage");
   return (
     <>
       <div className="kt-grid kt-grid--ver kt-grid--root">

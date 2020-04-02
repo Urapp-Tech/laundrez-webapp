@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as utils from "../../../_metronic/utils/utils";
-import { AuthActions } from '../../store/ducks/auth-duck'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import * as utils from '../../../_metronic/utils/utils';
+import { AuthActions } from '../../store/ducks/auth-duck';
 // import { login } from "../../crud/auth.crud";
-import { Row, Col, Form, Alert } from "react-bootstrap";
-import FbLogo from "../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg";
-import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
+import { Row, Col, Form, Alert } from 'react-bootstrap';
+import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg';
+import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 
 function Login({ history }) {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
   const user = useSelector(store => store?.auth?.user);
-  const [error, setError] = useState({ show: false, message: "" });
+  const [error, setError] = useState({ show: false, message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
   const onLoginClick = () => {
-    setError({ show: false, message: "" });
+    setError({ show: false, message: '' });
     if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)
     ) {
-      setError({ show: true, message: "Email is not valid" });
+      setError({ show: true, message: 'Email is not valid' });
       return;
     }
 
     else if (!formValues.password) {
-      setError({ show: true, message: "Password is not valid" });
+      setError({ show: true, message: 'Password is not valid' });
       return;
     }
     let body = {
@@ -33,13 +33,13 @@ function Login({ history }) {
     };
     dispatch(AuthActions.login(body));
 
-  }
+  };
   useEffect(() => {
     const token = utils.getToken();
     if (token && user) {
       history.replace('/admin/orders');
     }
-  }, [user,history])
+  }, [user,history]);
 
 
   return (
@@ -53,7 +53,7 @@ function Login({ history }) {
             </h3>
           </div>
           {error.show &&
-            <Alert variant={"danger"}>
+            <Alert variant={'danger'}>
               {error.message}
             </Alert>
           }
@@ -70,7 +70,7 @@ function Login({ history }) {
               </Form.Group>
               <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
-            <button onClick={onLoginClick} disabled={isProgress} className={isProgress ? "text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light" : "btn btn-primary  btn-primary-gradient btn-block mt-4"} > Login </button>
+            <button onClick={onLoginClick} disabled={isProgress} className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Login </button>
             <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
           </div>
           <div className="kt-login__options mt-5">

@@ -9,7 +9,7 @@ export default function CreateNewPassword() {
             <div className="kt-login__body">
                 <div className="kt-login__form">
                     <div className="kt-login__title">
-                        <img src={Logo} />
+                        <img src={Logo} alt={'logo'} />
                         <h3 className="text-primary" >
                             Create Password
                         </h3>

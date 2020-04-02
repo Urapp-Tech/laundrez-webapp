@@ -39,7 +39,7 @@ export const Routes = withRouter(({ history }) => {
       // this.props.setUser(userFromStorage);
       dispatch(AuthActions.setUser(userFromStorage));
     }
-  }, [])
+  }, [dispatch, user])
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>

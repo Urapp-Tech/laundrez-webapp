@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } from "react-bootstrap";
 
-function CustomToggle({ children, eventKey }) {
+function CustomToggle({ eventKey }) {
     const [isOpen, toggle] = useState(false)
     const decoratedOnClick = useAccordionToggle(eventKey, () =>
         toggle(!isOpen)
@@ -10,7 +10,7 @@ function CustomToggle({ children, eventKey }) {
     return (
         <div onClick={decoratedOnClick} className="faq-heading d-flex justify-content-between" >
             <div className="faq-question" > Can you clean items with leather, velvet, suede or fur?</div>
-            <div>{isOpen ? <img className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-down.svg")} /> : <img className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg")} />}</div>
+            <div>{isOpen ? <img alt={'img'} className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-down.svg")} /> : <img alt={'img'} className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg")} />}</div>
         </div>
     );
 }
@@ -31,7 +31,7 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-info" >
                                 <div className="item-image" >
-                                    <img className="image" src={data.serviceImage} />
+                                    <img alt={'img'} className="image" src={data.serviceImage} />
                                 </div>
                                 <div className="item-info" >
                                     <h3>{data.serviceTitle}</h3>

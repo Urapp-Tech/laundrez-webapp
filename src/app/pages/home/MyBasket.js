@@ -1,7 +1,6 @@
 import React from "react";
 import { Portlet, PortletBody, PortletHeader, PortletHeaderTitle, PortletFooter } from "../../partials/content/Portlet";
 
-import { InputGroup, FormControl } from "react-bootstrap";
 import MyBasketItem from "../../partials/content/MyBasketItem";
 import MyBasketFooter from "../../partials/content/MyBasketFooter";
 export default function MyBasket({ history }) {
@@ -58,7 +57,7 @@ export default function MyBasket({ history }) {
                                         <h4>Grand Total</h4>
                                         <h4 className=" font-weight-bold kt-font-primary" >$431.20</h4>
                                     </div>
-                                    <button onClick={()=>history.push("/deliveryaddress")} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
+                                    <button onClick={() => history.push("/deliveryaddress")} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
                                 </PortletBody>
                             </Portlet>
                         </div>

@@ -2,7 +2,6 @@ import React, {
   createContext,
   useContext,
   useEffect,
-  useMemo,
   useReducer
 } from "react";
 
@@ -82,8 +81,8 @@ function init({ pathname, menuConfig }) {
   const currentPage = pathname.slice(1 /* Remove leading slash. */);
   let breadcrumbs = [];
   const pageConfig =
-      findPageConfig(currentPage, menuConfig.aside.items, breadcrumbs) ||
-      findPageConfig(currentPage, menuConfig.header.items, breadcrumbs);
+    findPageConfig(currentPage, menuConfig.aside.items, breadcrumbs) ||
+    findPageConfig(currentPage, menuConfig.header.items, breadcrumbs);
 
   breadcrumbs.reverse();
   const state = { subheader: { title: "", breadcrumb: [], description: "" }, splashScreen: { refs: {} } };
@@ -135,30 +134,30 @@ function reducer(state, { type, payload }) {
  */
 export function LayoutContextProvider({ history, children, menuConfig }) {
   const [state, dispatch] = useReducer(
-      reducer,
-      { menuConfig, pathname: history.location.pathname },
-      // See https://reactjs.org/docs/hooks-reference.html#lazy-initialization
-      init
+    reducer,
+    { menuConfig, pathname: history.location.pathname },
+    // See https://reactjs.org/docs/hooks-reference.html#lazy-initialization
+    init
   );
 
   // Subscribe to history changes and reinitialize on each change.
   useEffect(
-      () =>
-          history.listen(({ pathname }) => {
-            dispatch({
-              type: actionTypes.INIT,
-              payload: { pathname, menuConfig }
-            });
-          }),
+    () =>
+      history.listen(({ pathname }) => {
+        dispatch({
+          type: actionTypes.INIT,
+          payload: { pathname, menuConfig }
+        });
+      }),
 
-      /**
-       * Passing `history` and `menuConfig` to `deps` ensures that `useEffect`
-       * will cleanup current `history` listener and will dispatch `INIT`
-       * with `menuConfig` reference from current render.
-       *
-       * @see https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect
-       */
-      [history, menuConfig]
+    /**
+     * Passing `history` and `menuConfig` to `deps` ensures that `useEffect`
+     * will cleanup current `history` listener and will dispatch `INIT`
+     * with `menuConfig` reference from current render.
+     *
+     * @see https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect
+     */
+    [history, menuConfig]
   );
 
   // const { refs: splashScreenRefs } = state.splashScreen;
@@ -189,11 +188,11 @@ export function LayoutContextProvider({ history, children, menuConfig }) {
 
   // Pass state and dispatch to it's contexts.
   return (
-      <LayoutContext.State.Provider value={state}>
-        <LayoutContext.Dispatch.Provider value={dispatch}>
-          {children}
-        </LayoutContext.Dispatch.Provider>
-      </LayoutContext.State.Provider>
+    <LayoutContext.State.Provider value={state}>
+      <LayoutContext.Dispatch.Provider value={dispatch}>
+        {children}
+      </LayoutContext.Dispatch.Provider>
+    </LayoutContext.State.Provider>
   );
 }
 

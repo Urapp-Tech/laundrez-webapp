@@ -42,13 +42,13 @@ export default function PickAndDrop({ history }) {
                                             <Row>
                                                 <Form.Group as={Col} controlId="formGridStreet">
                                                     <Form.Check inline placeholder="" />
-                                                    <Form.Label className="address-label" ><img src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2003 | Bay Street</Form.Label>
+                                                    <Form.Label className="address-label" ><img alt={'img'} src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2003 | Bay Street</Form.Label>
                                                 </Form.Group>
                                             </Row>
                                             <Row>
                                                 <Form.Group as={Col} controlId="formGridStreet">
                                                     <Form.Check inline placeholder="" />
-                                                    <Form.Label className="address-label" > <img src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2660 | 590 Bay Street</Form.Label>
+                                                    <Form.Label className="address-label" > <img alt={'img'} src={require("../../../_metronic/layout/assets/layout-svg-icons/pin.svg")} /> 2660 | 590 Bay Street</Form.Label>
                                                 </Form.Group>
                                             </Row>
                                         </div>

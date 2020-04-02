@@ -14,7 +14,7 @@ export default function PaymentDetails() {
     return (
         <>
             <Alert variant={"success"}>
-                <img src={PaymentSetting} /> <span className="ml-2" >  Payment has been done on behalf of &nbsp; <b> ID:56482</b></span>
+                <img src={PaymentSetting} alt={'img'} /> <span className="ml-2" >  Payment has been done on behalf of &nbsp; <b> ID:56482</b></span>
             </Alert>
             <h4 className="mb-3" >Payment Details</h4>
             <div className="row">

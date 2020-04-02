@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as utils from "../../../_metronic/utils/utils";
-import clsx from "clsx";
 import { AuthActions } from '../../store/ducks/auth-duck'
 // import { login } from "../../crud/auth.crud";
 import { Row, Col, Form, Alert } from "react-bootstrap";
@@ -40,7 +39,7 @@ function Login({ history }) {
     if (token && user) {
       history.replace('/admin/orders');
     }
-  }, [user])
+  }, [user,history])
 
 
   return (
@@ -48,7 +47,7 @@ function Login({ history }) {
       <div className="kt-login__body">
         <div className="kt-login__form">
           <div className="kt-login__title">
-            <img src={Logo} />
+            <img src={Logo} alt={'img'} />
             <h3 className="text-primary" >
               Sign In To Customer
             </h3>
@@ -72,7 +71,7 @@ function Login({ history }) {
               <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
             <button onClick={onLoginClick} disabled={isProgress} className={isProgress ? "text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light" : "btn btn-primary  btn-primary-gradient btn-block mt-4"} > Login </button>
-            <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} className="mr-2" /> Login with Facebook </button>
+            <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
           </div>
           <div className="kt-login__options mt-5">
             <Row className="justify-content-center " >

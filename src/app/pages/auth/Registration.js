@@ -6,13 +6,12 @@ import { Row, Col, Form } from "react-bootstrap";
 
 
 function Registration(props) {
-  const { intl } = props;
 
   return (
     <div className="kt-login__body">
       <div className="kt-login__form">
         <div className="kt-login__title">
-          <img src={Logo} />
+          <img src={Logo} alt={'logo'} />
           <h3 className="text-primary" >
             Get Registered
             </h3>

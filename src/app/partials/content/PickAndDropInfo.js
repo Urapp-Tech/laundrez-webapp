@@ -13,14 +13,14 @@ export default function PickAndDropInfo() {
 
                     <div className="d-flex w-100  justify-content-start align-items-start" >
                         <span>
-                            <img src={Calendar} className="w-75 h-75" />
+                            <img alt={'img'} src={Calendar} className="w-75 h-75" />
                         </span>
                         <span>Wed, 19 Feb 2020</span>
 
                     </div>
                     <div className="d-flex w-100 justify-content-start align-items-start" >
                         <span>
-                            <img src={Clock} className="w-75 h-75" />
+                            <img alt={'img'} src={Clock} className="w-75 h-75" />
                         </span>
                         <span>10:00 - 11:00 AM</span>
                     </div>
@@ -33,14 +33,14 @@ export default function PickAndDropInfo() {
 
                     <div className="d-flex w-100  justify-content-start align-items-start" >
                         <span>
-                            <img className="w-75 h-75" src={Calendar} />
+                            <img alt={'img'} className="w-75 h-75" src={Calendar} />
                         </span>
                         <span>Wed, 19 Feb 2020</span>
 
                     </div>
                     <div className="d-flex w-100 justify-content-start align-items-start" >
                         <span>
-                            <img src={Clock} className="w-75 h-75" />
+                            <img alt={'img'} src={Clock} className="w-75 h-75" />
                         </span>
                         <span>10:00 - 11:00 AM</span>
                     </div>
@@ -50,7 +50,7 @@ export default function PickAndDropInfo() {
             <Col>
                 <div className=" d-flex street-container h-100  justify-content-center align-items-center">
                     <span>
-                        <img src={Pin} className="pin-image img-fluid " />
+                        <img alt={'img'} src={Pin} className="pin-image img-fluid " />
 
                     </span>
                     <span className="ml-2 street-text" > 2003 | 750 Bay Street</span>

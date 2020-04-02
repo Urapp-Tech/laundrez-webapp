@@ -10,7 +10,7 @@ function CustomToggle({ eventKey, value }) {
     return (
         <div onClick={decoratedOnClick} className="cursor-pointer faq-heading d-flex justify-content-between" >
             {isOpen ? <h6 className="text-primary"> {value}</h6> : <h6> {value}</h6>}
-            <div>{isOpen ? <img className="arrow-icon " src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-down-primary.svg")} /> : <img className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg")} />}</div>
+            <div>{isOpen ? <img alt={'img'} className="arrow-icon " src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-down-primary.svg")} /> : <img alt={'img'} className="arrow-icon" src={require("../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg")} />}</div>
         </div>
     );
 }

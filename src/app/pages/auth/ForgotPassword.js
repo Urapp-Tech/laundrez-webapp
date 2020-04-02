@@ -8,7 +8,6 @@ class ForgotPassword extends Component {
   state = { isRequested: false };
 
   render() {
-    const { intl } = this.props;
     const { isRequested } = this.state;
 
     if (isRequested) {
@@ -20,7 +19,7 @@ class ForgotPassword extends Component {
         <div className="kt-login__body">
           <div className="kt-login__form">
             <div className="kt-login__title">
-              <img src={Logo} />
+              <img src={Logo} alt={'img'} />
               <h3 className="text-primary" >
                 Forgot Password
               </h3>

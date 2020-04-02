@@ -7,7 +7,7 @@ import { toAbsoluteUrl } from "../../../_metronic";
 
 class UserProfile extends React.Component {
   render() {
-    const { user, showAvatar, showBadge, } = this.props;
+    const { showAvatar, showBadge, } = this.props;
     return (
       <Link to="/profile" className="d-flex justify-content-center align-items-center" >
         <div className="kt-header__topbar-item kt-header__topbar-item--user"  >

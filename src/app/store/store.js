@@ -1,6 +1,5 @@
 import { applyMiddleware, compose, createStore } from "redux";
-import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { persistStore } from "redux-persist";
+import { createEpicMiddleware } from 'redux-observable';
 import { createLogger } from 'redux-logger';
 import { HttpService } from "./services/http-service";
 

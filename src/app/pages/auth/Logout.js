@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { LayoutSplashScreen } from "../../../_metronic";
 import { AuthActions } from "../../store/ducks/auth-duck";
@@ -9,7 +9,7 @@ export default function Logout() {
   useEffect(() => {
     utils.clearStorage();
     dispatch(AuthActions.logout());
-  }, [])
+  }, [dispatch])
 
   return utils.getToken() ? <LayoutSplashScreen /> : <Redirect to="/auth" />;
 }

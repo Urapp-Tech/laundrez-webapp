@@ -10,12 +10,12 @@ export default function SavedAddress() {
         <div className="border-bottom pb-3  d-flex justify-content-between align-items-center" >
             <div onClick={() => setOpenModal(!openModal)} className="cursor-pointer d-flex street-container   justify-content-start align-items-center">
                 <span>
-                    <img src={Pin} className="pin-image img-fluid " />
+                    <img src={Pin} className="pin-image img-fluid " alt={'pin'} />
                 </span>
                 <span className="ml-2 street-text cursor " > 2003 | 750 Bay Street</span>
             </div>
             <span className="cursor-pointer" >
-                <img src={Garbage} className="pin-image img-fluid " />
+                <img src={Garbage} className="pin-image img-fluid " alt={'img'} />
             </span>
             <UpdateAddressModal showModal={openModal} toggleModal={() => setOpenModal(!openModal)} />
         </div>

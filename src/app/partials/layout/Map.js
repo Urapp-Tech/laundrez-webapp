@@ -4,7 +4,6 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Marker
 } from "react-google-maps";
 class Map extends Component {
     constructor(props) {
@@ -68,13 +67,13 @@ class Map extends Component {
         //         </this.MyMapComponent>
         //     )
         // else
-            return (
-                <this.MyMapComponent defaultZoom={12} defaultCenter={{ lat: 24.892755, lng: 67.072342 }} onClick={this.addMarker}>
-                    {/* {this.state.showMarker && (
+        return (
+            <this.MyMapComponent defaultZoom={12} defaultCenter={{ lat: 24.892755, lng: 67.072342 }} onClick={this.addMarker}>
+                {/* {this.state.showMarker && (
                         <Marker position={{ lat: this.state.mLat, lng: this.state.mLng }} />
                     )} */}
-                </this.MyMapComponent>
-            )
+            </this.MyMapComponent>
+        )
     }
 }
 export default Map;

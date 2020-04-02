@@ -34,7 +34,7 @@ export default function YourProfile() {
                                 <h6 className="m-0" >2660 | 590 Bay Street</h6>
                             </div>
                             <div className="d-flex align-items-end" >
-                                <img src={Pin} className="pin-image img-fluid" />
+                                <img src={Pin} alt={'img'} className="pin-image img-fluid" />
                                 <Link to="/deliveryaddress" >
                                     <h6 className="text-primary ml-1 mb-0" >Add Address</h6>
                                 </Link>

@@ -11,7 +11,7 @@ export default function SavedCard({ cardCount }) {
                     <h6 className="ml-2 street-text cursor m-0" >4929 5529 6776 1495</h6>
                 </div>
                 <span className="cursor-pointer" >
-                    <img src={Garbage} className="pin-image img-fluid " />
+                    <img alt={'img'} src={Garbage} className="pin-image img-fluid " />
                 </span>
 
             </div>

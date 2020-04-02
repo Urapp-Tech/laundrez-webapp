@@ -19,8 +19,7 @@ export function removeStorage(key) {
     localStorage.setItem(key, '');
     localStorage.setItem(key + '_expiresIn', '');
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'removeStorage: Error removing key [' +
       key +
       '] from localStorage: ' +
@@ -56,8 +55,8 @@ export function getStorage(key) {
       const value = localStorage.getItem(key);
       return value;
     } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(
+
+      console.error(
         'getStorage: Error reading key [' +
         key +
         '] from localStorage: ' +
@@ -86,8 +85,7 @@ export function setStorage(key, value, expires) {
     localStorage.setItem(key, value);
     localStorage.setItem(key + '_expiresIn', schedule);
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'setStorage: Error setting key [' +
       key +
       '] in localStorage: ' +
@@ -101,8 +99,7 @@ export function setToken(token) {
   try {
     localStorage.setItem('token', token);
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'setToken: Error setting key [ token ] in localStorage: ' +
       JSON.stringify(e)
     );
@@ -112,8 +109,7 @@ export function getToken() {
   try {
     return localStorage.getItem('token');
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'getToken: Error setting key [ token ] in localStorage: ' +
       JSON.stringify(e)
     );
@@ -123,8 +119,7 @@ export function setUser(user) {
   try {
     localStorage.setItem('user', JSON.stringify(user));
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'setToken: Error setting key [ user ] in localStorage: ' +
       JSON.stringify(e)
     );
@@ -135,8 +130,7 @@ export function getUser() {
   try {
     return JSON.parse(localStorage.getItem('user'));
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'getToken: Error setting key [ user ] in localStorage: ' +
       JSON.stringify(e)
     );
@@ -149,8 +143,7 @@ export function clearStorage() {
     localStorage.clear();
   }
   catch (e) {
-    // eslint-disable-next-line no-console
-    console.log(
+    console.error(
       'fail to clear storage' +
       JSON.stringify(e)
     );

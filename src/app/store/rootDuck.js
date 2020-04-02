@@ -1,15 +1,14 @@
-import { all } from "redux-saga/effects";
 import { combineReducers } from "redux";
 
 import * as auth from "./ducks/auth.duck";
+import AuthReducer from "./ducks/auth-duck/reducer";
 import { metronic } from "../../_metronic";
 
 export const rootReducer = combineReducers({
-  auth: auth.reducer,
+  auth: AuthReducer,
   // i18n: metronic.i18n.reducer,
   builder: metronic.builder.reducer
 });
 
-export function* rootSaga() {
-  yield all([auth.saga()]);
-}
+//TODO: root epic will come here
+

@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import * as auth from "../../store/ducks/auth.duck";
-import { register } from "../../crud/auth.crud";
+// import * as auth from "../../store/ducks/auth.duck";
+// import { register } from "../../crud/auth.crud";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
 import { Row, Col, Form } from "react-bootstrap";
 
@@ -276,5 +276,5 @@ function Registration(props) {
 export default
   connect(
     null,
-    auth.actions
+    null
   )(Registration)

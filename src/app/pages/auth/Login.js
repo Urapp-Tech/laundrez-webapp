@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import clsx from "clsx";
 import * as auth from "../../store/ducks/auth.duck";
-import { login } from "../../crud/auth.crud";
+// import { login } from "../../crud/auth.crud";
 import { Row, Col, Form, Alert } from "react-bootstrap";
 import FbLogo from "../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
@@ -37,15 +37,15 @@ function Login(props) {
     enableLoading();
     setTimeout(() => {
 
-      login(formValues.email, formValues.password)
-        .then(({ data: { accessToken } }) => {
-          disableLoading();
-          props.login(accessToken);
-        })
-        .catch(() => {
-          disableLoading();
-          setError({ show: true, message: "login detail is incorrect" })
-        });;
+      // login(formValues.email, formValues.password)
+      //   .then(({ data: { accessToken } }) => {
+      //     disableLoading();
+      //     props.login(accessToken);
+      //   })
+      //   .catch(() => {
+      //     disableLoading();
+      //     setError({ show: true, message: "login detail is incorrect" })
+      //   });;
     }, 1000)
   }
 

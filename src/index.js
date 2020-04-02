@@ -6,8 +6,6 @@ import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
-import axios from "axios";
-import { mockAxios, setupAxios } from "./_metronic";
 import store from "./app/store/store";
 import App from "./App";
 import 'react-circular-progressbar/dist/styles.css';
@@ -26,19 +24,16 @@ const { PUBLIC_URL } = process.env;
  *
  * @see https://github.com/ctimmerm/axios-mock-adapter
  */
-/* const mock = */ mockAxios(axios);
 
 /**
  * Inject metronic interceptors for axios.
  *
  * @see https://github.com/axios/axios#interceptors
  */
-setupAxios(axios, store);
 
 ReactDOM.render(
   <App
     store={store}
-    // persistor={persistor}
     basename={PUBLIC_URL}
   />,
   document.getElementById("root")

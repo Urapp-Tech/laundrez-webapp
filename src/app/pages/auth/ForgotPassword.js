@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-// import * as auth from "../../store/ducks/auth.duck";
-// import { requestPassword } from "../../crud/auth.crud";
 import Logo from "../../../_metronic/layout/assets/layout-svg-icons/Logo.svg";
 import { Row, Col, Form } from "react-bootstrap";
 

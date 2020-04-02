@@ -1,18 +1,26 @@
 import { applyMiddleware, compose, createStore } from "redux";
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { persistStore } from "redux-persist";
 import { createLogger } from 'redux-logger';
+import { HttpService } from "./services/http-service";
 
 
-import { rootReducer } from "./rootDuck";
+import { rootReducer, rootEpic } from "./rootDuck";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const loggerMiddleware = createLogger();
 
-//TODO: create epic middleware here
-// const sagaMiddleware = createSagaMiddleware();
+const epicMiddleware = createEpicMiddleware({
+    dependencies: {
+        ajaxGet: HttpService.get,
+        ajaxPost: HttpService.post,
+        ajaxPut: HttpService.put,
+        ajaxDel: HttpService.delete,
+    }
+});
 const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(loggerMiddleware))
+    composeEnhancers(applyMiddleware(epicMiddleware, loggerMiddleware))
 );
 
 /**
@@ -20,7 +28,6 @@ const store = createStore(
  * @see https://github.com/rt2zz/redux-persist#persistor-object
  */
 // export const persistor = persistStore(store);
-//TODO: run root epic here
-// sagaMiddleware.run(rootSaga);
+epicMiddleware.run(rootEpic);
 
 export default store;

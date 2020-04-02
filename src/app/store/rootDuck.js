@@ -1,14 +1,20 @@
 import { combineReducers } from "redux";
-
-import * as auth from "./ducks/auth.duck";
-import AuthReducer from "./ducks/auth-duck/reducer";
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import * as auth from "./ducks/auth-duck";
 import { metronic } from "../../_metronic";
 
-export const rootReducer = combineReducers({
-  auth: AuthReducer,
-  // i18n: metronic.i18n.reducer,
+const appReducer = combineReducers({
+  auth: auth.AuthReducer, 
   builder: metronic.builder.reducer
 });
+export const rootReducer = (state, action) => {
+  if (action.type === auth.AuthActionTypes.LOGOUT) {
+      state = undefined;
+  }
+  return appReducer(state, action);
+};
+export const rootEpic = combineEpics(
+  // more epics functions go here
+  auth.AuthEpics.login
 
-//TODO: root epic will come here
-
+);

@@ -8,24 +8,6 @@ export function addCSSClass(ele, cls) {
 }
 
 export const toAbsoluteUrl = pathname => process.env.PUBLIC_URL + pathname;
-
-export function setupAxios(axios, store) {
-  axios.interceptors.request.use(
-    config => {
-      const {
-        auth: { authToken }
-      } = store.getState();
-
-      if (authToken) {
-        config.headers.Authorization = `Bearer ${authToken}`;
-      }
-
-      return config;
-    },
-    err => Promise.reject(err)
-  );
-}
-
 /*  removeStorage: removes a key from localStorage and its sibling expiracy key
     params:
         key <string>     : localStorage key to remove
@@ -39,9 +21,9 @@ export function removeStorage(key) {
   } catch (e) {
     console.log(
       "removeStorage: Error removing key [" +
-        key +
-        "] from localStorage: " +
-        JSON.stringify(e)
+      key +
+      "] from localStorage: " +
+      JSON.stringify(e)
     );
     return false;
   }
@@ -75,9 +57,9 @@ export function getStorage(key) {
     } catch (e) {
       console.log(
         "getStorage: Error reading key [" +
-          key +
-          "] from localStorage: " +
-          JSON.stringify(e)
+        key +
+        "] from localStorage: " +
+        JSON.stringify(e)
       );
       return null;
     }
@@ -104,11 +86,66 @@ export function setStorage(key, value, expires) {
   } catch (e) {
     console.log(
       "setStorage: Error setting key [" +
-        key +
-        "] in localStorage: " +
-        JSON.stringify(e)
+      key +
+      "] in localStorage: " +
+      JSON.stringify(e)
     );
     return false;
   }
   return true;
 }
+export function setToken(token) {
+  try {
+    localStorage.setItem('token', token);
+  } catch (e) {
+    console.log(
+      "setToken: Error setting key [ token ] in localStorage: " +
+      JSON.stringify(e)
+    );
+  }
+}
+export function getToken() {
+  try {
+    return localStorage.getItem('token');
+  } catch (e) {
+    console.log(
+      "getToken: Error setting key [ token ] in localStorage: " +
+      JSON.stringify(e)
+    );
+  }
+}
+export function setUser(user) {
+  try {
+    localStorage.setItem('user', JSON.stringify(user));
+  } catch (e) {
+    console.log(
+      "setToken: Error setting key [ user ] in localStorage: " +
+      JSON.stringify(e)
+    );
+  }
+
+}
+export function getUser() {
+  try {
+    return JSON.parse(localStorage.getItem('user'));
+  } catch (e) {
+    console.log(
+      "getToken: Error setting key [ user ] in localStorage: " +
+      JSON.stringify(e)
+    );
+  }
+
+}
+export function clearStorage() {
+  try {
+
+    localStorage.clear()
+  }
+  catch (e) {
+    console.log(
+      "fail to clear storage" +
+      JSON.stringify(e)
+    );
+  }
+}
+

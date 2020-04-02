@@ -1,6 +1,10 @@
-import actionTypes from './actions-types'
+import { AuthActionTypes } from './actions-types';
 const initialAuthState = {
-    user: null, /* {
+  isProgress: false,
+  isError: false,
+  errorMsg: '',
+  errorStatus: 0,
+  user: null, /* {
       "id": 1,
       "username": "admin",
       "email": "admin@demo.com",
@@ -25,12 +29,21 @@ const initialAuthState = {
         "instagram": "https://instagram.com/admin"
       }
     }, */
-    authToken: undefined
 };
-export default function reducer(state = initialAuthState, action) {
-    switch (action.type) {
+export function AuthReducer(state = initialAuthState, action) {
+  switch (action.type) {
+    case AuthActionTypes.LOGIN_PROG:
+      return { ...state, isProgress: true };
 
-        default:
-            return state;
-    }
+    case AuthActionTypes.LOGIN_SUCC:
+      return { ...state, isProgress: false, user: action.payload.user };
+
+    case AuthActionTypes.LOGIN_FAIL:
+      return { ...state, isProgress: false, isError: true, errorText: action.payload.message, errorStatus: action.payload.status };
+
+    case AuthActionTypes.SET_USER:
+      return { ...state, user: action.payload.user };
+    default:
+      return state;
+  }
 };

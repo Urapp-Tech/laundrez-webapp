@@ -1,10 +1,23 @@
-export const actions = {
-    login: authToken => ({ type: actionTypes.Login, payload: { authToken } }),
-    register: authToken => ({
-        type: actionTypes.Register,
-        payload: { authToken }
-    }),
-    logout: () => ({ type: actionTypes.Logout }),
-    requestUser: user => ({ type: actionTypes.UserRequested, payload: { user } }),
-    fulfillUser: user => ({ type: actionTypes.UserLoaded, payload: { user } })
-};
+import { AuthActionTypes } from "./actions-types";
+
+export class AuthActions {
+
+    static login(body) {
+        return {
+            type: AuthActionTypes.LOGIN_PROG,
+            payload: { body }
+        }
+    }
+    static setUser(user) {
+        return {
+            type: AuthActionTypes.SET_USER,
+            payload: { user }
+        };
+    }
+    static logout() {
+        return {
+            type: AuthActionTypes.LOGOUT
+        };
+    }
+
+}

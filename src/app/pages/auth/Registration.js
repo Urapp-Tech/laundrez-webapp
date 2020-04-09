@@ -1,11 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 import { Row, Col, Form, Alert } from 'react-bootstrap';
 import { HttpService } from '../../store/services/http-service';
-import { of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+
 
 
 export default function Registration({ history }) {

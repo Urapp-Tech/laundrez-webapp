@@ -4,13 +4,15 @@ import { Link } from 'react-router-dom';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 import { Row, Col, Form, Alert } from 'react-bootstrap';
 import { HttpService } from '../../store/services/http-service';
+import { of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 
 export default function Registration({ history }) {
 
   const [isSuccess, setSuccess] = useState(false);
   const [error, setError] = useState({ isError: false, message: '' });
-  const isProgress = useSelector(store => store?.auth?.isProgress);
+  const [isProgress, setProgress] = useState(false);
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({
     firstName: '',
@@ -62,14 +64,17 @@ export default function Registration({ history }) {
       postalCode: formValues.postalCode,
       password: formValues.password
     };
+    setProgress(true);
     HttpService.post('/User/signup/', body).subscribe(() => {
+      setProgress(false);
       setSuccess(true);
       window.scrollTo(0, 0);
       setTimeout(() => {
         history.replace('/auth/login');
       }, 3000);
-
+      
     }, (err) => {
+      setProgress(false);
       window.scrollTo(0, 0);
       setError({ isError: true, message: err.response.Message });
     });

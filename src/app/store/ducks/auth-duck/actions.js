@@ -19,5 +19,10 @@ export class AuthActions {
             type: AuthActionTypes.LOGOUT
         };
     }
+    static clearError() {
+        return {
+            type: AuthActionTypes.CLEAR_ERROR
+        };
+    }
 
 }

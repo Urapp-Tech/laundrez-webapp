@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import * as utils from '../../../_metronic/utils/utils';
 import { AuthActions } from '../../store/ducks/auth-duck';
-// import { login } from "../../crud/auth.crud";
 import { Row, Col, Form, Alert } from 'react-bootstrap';
 import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
@@ -11,20 +9,25 @@ import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 function Login({ history }) {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
-  const user = useSelector(store => store?.auth?.user);
-  const [error, setError] = useState({ show: false, message: '' });
+  const isError = useSelector(store => store?.auth?.isError);
+  const errorMessage = useSelector(store => store?.auth?.errorMsg);
+  const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
-  const onLoginClick = () => {
-    setError({ show: false, message: '' });
+  const onLoginClick = useCallback(() => {
+    if (isError) {
+      dispatch(AuthActions.clearError());
+    }
+    if (notValid.error)
+      setNotValid({ error: false, type: '', message: '' });
     if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)
     ) {
-      setError({ show: true, message: 'Email is not valid' });
+      setNotValid({ error: true, type: 'email', message: 'Email is not valid' });
       return;
     }
 
     else if (!formValues.password) {
-      setError({ show: true, message: 'Password is not valid' });
+      setNotValid({ error: true, type: 'password', message: 'Password is not valid' });
       return;
     }
     let body = {
@@ -33,13 +36,7 @@ function Login({ history }) {
     };
     dispatch(AuthActions.login(body));
 
-  };
-  useEffect(() => {
-    const token = utils.getToken();
-    if (token && user) {
-      history.replace('/admin/orders');
-    }
-  }, [user,history]);
+  }, [isError, dispatch, notValid, setNotValid, formValues]);
 
 
   return (
@@ -52,14 +49,15 @@ function Login({ history }) {
               Sign In To Customer
             </h3>
           </div>
-          {error.show &&
+          {isError &&
             <Alert variant={'danger'}>
-              {error.message}
+              {errorMessage}
             </Alert>
           }
           <div className="kt-form " >
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Control type="email" placeholder="Email" defaultValue={formValues.email} value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
+              {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Form.Group className="" controlId="exampleForm.ControlInput2">
               <Form.Control type="password" placeholder="Password" defaultValue={formValues.password} value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
@@ -67,10 +65,16 @@ function Login({ history }) {
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >
               <Form.Group className="m-0 remember-me" controlId="remember-me">
                 <Form.Check type="checkbox" inline label="Remember me" />
+                {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
               </Form.Group>
               <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
-            <button onClick={onLoginClick} disabled={isProgress} className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Login </button>
+            <button
+              onClick={onLoginClick}
+              disabled={isProgress}
+              className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} >
+              Login
+             </button>
             <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
           </div>
           <div className="kt-login__options mt-5">

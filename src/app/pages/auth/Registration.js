@@ -1,11 +1,81 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
-import { Row, Col, Form } from 'react-bootstrap';
+import { Row, Col, Form, Alert } from 'react-bootstrap';
+import { HttpService } from '../../store/services/http-service';
 
 
-function Registration(props) {
+export default function Registration({ history }) {
+
+  const [isSuccess, setSuccess] = useState(false);
+  const [error, setError] = useState({ isError: false, message: '' });
+  const isProgress = useSelector(store => store?.auth?.isProgress);
+  const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
+  const [formValues, setFormValues] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNo: '',
+    postalCode: '',
+    password: ''
+
+  });
+
+  const onSignUpClick = useCallback((e) => {
+    e.preventDefault();
+    if (error.isError) {
+      setError({ isError: false, message: '' });
+    }
+    if (notValid.error) {
+      setNotValid({ error: false, type: '', message: '' });
+    }
+    if (formValues.firstName.length < 3) {
+      setNotValid({ error: true, type: 'firstName', message: 'First Name is too short' });
+      return;
+    }
+    else if (formValues.lastName.length < 3) {
+      setNotValid({ error: true, type: 'lastName', message: 'Last Name is too short' });
+      return;
+    }
+    else if (formValues.phoneNo.length < 8) {
+      setNotValid({ error: true, type: 'phoneNo', message: 'Phone Number is too short' });
+      return;
+    }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)) {
+      setNotValid({ error: true, type: 'email', message: 'Invalid email' });
+      return;
+    }
+    else if (formValues.password.length < 8) {
+      setNotValid({ error: true, type: 'password', message: 'Password must contain 8 characters' });
+      return;
+    }
+    else if (formValues.postalCode.length < 1) {
+      setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+      return;
+    }
+    let body = {
+      firstName: formValues.firstName,
+      lastName: formValues.lastName,
+      email: formValues.email,
+      phoneNo: formValues.phoneNo,
+      postalCode: formValues.postalCode,
+      password: formValues.password
+    };
+    HttpService.post('/User/signup/', body).subscribe(() => {
+      setSuccess(true);
+      window.scrollTo(0, 0);
+      setTimeout(() => {
+        history.replace('/auth/login');
+      }, 3000);
+
+    }, (err) => {
+      window.scrollTo(0, 0);
+      setError({ isError: true, message: err.response.Message });
+    });
+
+  }, [formValues, setNotValid, notValid, setSuccess, history, error, setError]);
+
 
   return (
     <div className="kt-login__body">
@@ -16,27 +86,77 @@ function Registration(props) {
             Get Registered
             </h3>
         </div>
-
-        <Form className="kt-form " >
+        {isSuccess &&
+          <Alert variant={'success'}>
+            Singup Successfull redirecting to login.
+            </Alert>
+        }
+        {error.isError &&
+          <Alert variant={'danger'}>
+            {error.message}
+          </Alert>
+        }
+        <Form className="kt-form " onSubmit={onSignUpClick} >
           <Form.Group >
-            <Form.Control type="text" placeholder="First Name" />
+            <Form.Control
+              type="text"
+              value={formValues.firstName}
+              onChange={(e) => setFormValues({ ...formValues, firstName: e.target.value })}
+              placeholder="First Name"
+            />
+            {(notValid.error && notValid.type === 'firstName') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Form.Group >
-            <Form.Control type="text" placeholder="Last Name" />
+            <Form.Control
+              type="text"
+              value={formValues.lastName}
+              onChange={(e) => setFormValues({ ...formValues, lastName: e.target.value })}
+              placeholder="Last Name"
+            />
+            {(notValid.error && notValid.type === 'lastName') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Form.Group>
-            <Form.Control type="number" placeholder="Phone Number" />
+            <Form.Control
+              type="text"
+              value={formValues.phoneNo}
+              onChange={(e) => setFormValues({ ...formValues, phoneNo: e.target.value })}
+              placeholder="Phone Number"
+            />
+            {(notValid.error && notValid.type === 'phoneNo') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Form.Group>
-            <Form.Control type="email" placeholder="Email" />
+            <Form.Control
+              type="email"
+              value={formValues.email}
+              onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
+              placeholder="Email"
+            />
+            {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Form.Group>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control
+              type="password"
+              value={formValues.password}
+              onChange={(e) => setFormValues({ ...formValues, password: e.target.value })}
+              placeholder="Email"
+            />
+            {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Form.Group>
-            <Form.Control type="postalcode" placeholder="Postal Code" />
+            <Form.Control
+              type="text"
+              value={formValues.postalCode}
+              onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
+              placeholder="Postal Code"
+            />
+            {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
-          <button className="btn btn-primary  btn-primary-gradient btn-block mt-4" > Sign Up </button>
+          <button
+            disabled={isProgress}
+            type={'submit'}
+            className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} >
+            Sign Up
+             </button>
         </Form>
         <div className="kt-login__options mt-5">
           <Row className="justify-content-center " >
@@ -46,232 +166,8 @@ function Registration(props) {
             </Col>
           </Row>
         </div>
-
-        {/* <Formik
-          initialValues={{
-            email: "",
-            fullname: "",
-            username: "",
-            password: "",
-            acceptTerms: true,
-            confirmPassword: ""
-          }}
-          validate={values => {
-            const errors = {};
-
-            if (!values.email) {
-              errors.email = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
-              });
-            } else if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = intl.formatMessage({
-                id: "AUTH.VALIDATION.INVALID_FIELD"
-              });
-            }
-
-            if (!values.fullname) {
-              errors.fullname = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
-              });
-            }
-
-            if (!values.username) {
-              errors.username = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
-              });
-            }
-
-            if (!values.password) {
-              errors.password = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
-              });
-            }
-
-            if (!values.confirmPassword) {
-              errors.confirmPassword = intl.formatMessage({
-                id: "AUTH.VALIDATION.REQUIRED_FIELD"
-              });
-            } else if (values.password !== values.confirmPassword) {
-              errors.confirmPassword =
-                "Password and Confirm Password didn't match.";
-            }
-
-            if (!values.acceptTerms) {
-              errors.acceptTerms = "Accept Terms";
-            }
-
-            return errors;
-          }}
-          onSubmit={(values, { setStatus, setSubmitting }) => {
-            register(
-              values.email,
-              values.fullname,
-              values.username,
-              values.password
-            )
-              .then(({ data: { accessToken } }) => {
-                props.register(accessToken);
-              })
-              .catch(() => {
-                setSubmitting(false);
-                setStatus(
-                  intl.formatMessage({
-                    id: "AUTH.VALIDATION.INVALID_LOGIN"
-                  })
-                );
-              });
-          }}
-        >
-          {({
-            values,
-            status,
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting
-          }) => (
-            <form onSubmit={handleSubmit} noValidate autoComplete="off">
-              {status && (
-                <div role="alert" className="alert alert-danger">
-                  <div className="alert-text">{status}</div>
-                </div>
-              )}
-
-              <div className="form-group mb-0">
-                <TextField
-                  margin="normal"
-                  label="Fullname"
-                  className="kt-width-full"
-                  name="fullname"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.fullname}
-                  helperText={touched.fullname && errors.fullname}
-                  error={Boolean(touched.fullname && errors.fullname)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
-                  label="Email"
-                  margin="normal"
-                  className="kt-width-full"
-                  name="email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  helperText={touched.email && errors.email}
-                  error={Boolean(touched.email && errors.email)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
-                  margin="normal"
-                  label="Username"
-                  className="kt-width-full"
-                  name="username"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.username}
-                  helperText={touched.username && errors.username}
-                  error={Boolean(touched.username && errors.username)}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <TextField
-                  type="password"
-                  margin="normal"
-                  label="Password"
-                  className="kt-width-full"
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.password}
-                  helperText={touched.password && errors.password}
-                  error={Boolean(touched.password && errors.password)}
-                />
-              </div>
-
-              <div className="form-group">
-                <TextField
-                  type="password"
-                  margin="normal"
-                  label="Confirm Password"
-                  className="kt-width-full"
-                  name="confirmPassword"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.confirmPassword}
-                  helperText={touched.confirmPassword && errors.confirmPassword}
-                  error={Boolean(
-                    touched.confirmPassword && errors.confirmPassword
-                  )}
-                />
-              </div>
-
-              <div className="form-group mb-0">
-                <FormControlLabel
-                  label={
-                    <>
-                      I agree the{" "}
-                      <Link
-                        to="/terms"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Terms & Conditions
-                      </Link>
-                    </>
-                  }
-                  control={
-                    <Checkbox
-                      color="primary"
-                      name="acceptTerms"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      checked={values.acceptTerms}
-                    />
-                  }
-                />
-              </div>
-
-              <div className="kt-login__actions">
-                <Link
-                  to="/auth/forgot-password"
-                  className="kt-link kt-login__link-forgot"
-                >
-                  <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON" />
-                </Link>
-
-                <Link to="/auth">
-                  <button type="button" className="btn btn-secondary btn-elevate kt-login__btn-secondary">
-                    Back
-                  </button>
-                </Link>
-
-                <button
-                  disabled={isSubmitting || !values.acceptTerms}
-                  className="btn btn-primary btn-elevate kt-login__btn-primary"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          )}
-        </Formik> */}
       </div>
     </div>
   );
 }
 
-export default
-  connect(
-    null,
-    null
-  )(Registration);

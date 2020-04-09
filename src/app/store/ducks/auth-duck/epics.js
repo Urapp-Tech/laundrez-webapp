@@ -17,7 +17,7 @@ export class AuthEpics {
                 };
             })
                 , catchError((err) => {
-                    return of({ type: AuthActionTypes.LOGIN_FAIL, payload: { message: err?.response?.message, status: err?.status } });
+                    return of({ type: AuthActionTypes.LOGIN_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));

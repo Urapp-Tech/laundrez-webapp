@@ -39,10 +39,13 @@ export function AuthReducer(state = initialAuthState, action) {
       return { ...state, isProgress: false, user: action.payload.user };
 
     case AuthActionTypes.LOGIN_FAIL:
-      return { ...state, isProgress: false, isError: true, errorText: action.payload.message, errorStatus: action.payload.status };
+      return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
     case AuthActionTypes.SET_USER:
       return { ...state, user: action.payload.user };
+
+    case AuthActionTypes.CLEAR_ERROR:
+      return { ...state, isError: false, errorMsg: '', errorStatus: 0, };
     default:
       return state;
   }

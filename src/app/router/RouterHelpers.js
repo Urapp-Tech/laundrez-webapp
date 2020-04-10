@@ -8,7 +8,7 @@ function acceptLocation(lastLocation) {
     lastLocation.pathname &&
     lastLocation.pathname !== '/' &&
     lastLocation.pathname.indexOf('auth') === -1 &&
-    lastLocation.pathname !== '/logout'
+    lastLocation.pathname !== '/customer/logout'
   ) {
     return true;
   }

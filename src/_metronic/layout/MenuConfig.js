@@ -543,35 +543,35 @@ export default {
         title: 'Order History',
         root: true,
         icon: 'order.svg',
-        page: 'orderhistory',
+        page: 'customer/orderhistory',
         bullet: 'dot'
       },
       {
         title: 'Payment Setting',
         root: true,
         icon: 'receipt.svg',
-        page: 'paymentsettings',
+        page: 'customer/paymentsettings',
         bullet: 'dot'
       },
       {
         title: 'Delivery Address',
         root: true,
         icon: 'tracking.svg',
-        page: 'deliveryaddress',
+        page: 'customer/deliveryaddress',
         bullet: 'dot'
       },
       {
         title: 'Contact Us',
         root: true,
         icon: 'email.svg',
-        page: 'contactus',
+        page: 'customer/contactus',
         bullet: 'dot'
       },
       {
         title: 'FAQ\'s',
         root: true,
         icon: 'question.svg',
-        page: 'faqs',
+        page: 'customer/faqs',
         bullet: 'dot'
       },
       

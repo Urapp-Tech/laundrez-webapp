@@ -50,7 +50,7 @@ export default class MyCart extends React.Component {
                   <CartNum4Icon className=" kt-svg-icon--primary" />
                 </div>
                 <div className="kt-mycart__button">
-                  <Link to="/mybasket"  className="btn btn-outline-light btn-sm">
+                  <Link to="/customer/mybasket"  className="btn btn-outline-light btn-sm">
                     2 Items
                   </Link>
                 </div>

@@ -60,10 +60,10 @@ class AsideLeft extends React.Component {
               </div>
               <div className="break-line mt-3" ></div>
               <div className="border-bottom mt-3 " >
-                <Link to="/termsandcondition" > <h6 className="text-white" >Terms & Conditions</h6></Link>
-                <Link to="/privacypolicy" > <h6 className="text-white" >Privacy Policy</h6></Link>
+                <Link to="/customer/termsandcondition" > <h6 className="text-white" >Terms & Conditions</h6></Link>
+                <Link to="/customer/privacypolicy" > <h6 className="text-white" >Privacy Policy</h6></Link>
               </div>
-              <Link to="/logout" className="logout-box cursor-pointer d-flex mt-3 " >
+              <Link to="/customer/logout" className="logout-box cursor-pointer d-flex mt-3 " >
                 <img alt={'power'} src={PowerImage} />
                 <span className="ml-3 logout-text  " >Logout</span>
               </Link>

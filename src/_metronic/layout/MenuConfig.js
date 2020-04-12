@@ -506,7 +506,7 @@ export default {
         title: 'Home',
         root: true,
         icon: 'home-solid.svg',
-        page: 'dashboard',
+        page: 'customer/dashboard',
         bullet: 'dot'
       },
       {
@@ -519,7 +519,7 @@ export default {
           {
             title: 'Dry Cleaning',
             bullet: 'dot',
-            page:'services/drycleaning'
+            page:'customer/services/drycleaning'
           },
           {
             title: 'Wash & fold',

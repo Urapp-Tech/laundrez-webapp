@@ -8,9 +8,9 @@ export default function Services() {
             <Redirect
                 exact={true}
                 from="/services"
-                to="/services/drycleaning"
+                to="/customer/services/drycleaning"
             />
-            <Route path="/services/drycleaning" component={DryCleaning} />
+            <Route path="/customer/services/drycleaning" component={DryCleaning} />
         </Switch>
     );
 }   

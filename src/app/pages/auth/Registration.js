@@ -88,7 +88,7 @@ export default function Registration({ history }) {
       setSuccess(true);
       window.scrollTo(0, 0);
       setTimeout(() => {
-        history.replace('/auth/login');
+        history.replace('/customer/auth/login');
       }, 3000);
 
     }, (err) => {

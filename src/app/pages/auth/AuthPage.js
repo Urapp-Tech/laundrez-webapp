@@ -26,7 +26,7 @@ export default function AuthPage() {
                   component={ForgotPassword}
                 />
                  <Route
-                  path="/auth/create-new-password"
+                  path="/customer/auth/reset-password"
                   component={CreateNewPassword}
                 />
                 <Redirect from="/customer/auth" exact={true} to="/customer/auth/login" />

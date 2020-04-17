@@ -40,7 +40,7 @@ export default function ForgotPassword({ history }) {
       setProgress(false);
       window.scrollTo(0, 0);
       setTimeout(() => {
-        history.replace('/auth/login');
+        history.replace('/customer/auth/login');
       }, 3000);
     }, (err) => {
       setProgress(false);

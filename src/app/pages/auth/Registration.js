@@ -30,27 +30,47 @@ export default function Registration({ history }) {
     if (notValid.error) {
       setNotValid({ error: false, type: '', message: '' });
     }
+    if (!formValues.firstName) {
+      setNotValid({ error: true, type: 'firstName', message: 'Please provide first name' });
+      return;
+    }
     if (formValues.firstName.length < 3) {
       setNotValid({ error: true, type: 'firstName', message: 'First Name is too short' });
       return;
     }
-    else if (formValues.lastName.length < 3) {
+    if (!formValues.lastName) {
+      setNotValid({ error: true, type: 'lastName', message: 'Please provide last name' });
+      return;
+    }
+    if (formValues.lastName.length < 3) {
       setNotValid({ error: true, type: 'lastName', message: 'Last Name is too short' });
       return;
     }
-    else if (formValues.phoneNo.length < 8) {
+    if (!formValues.phoneNo) {
+      setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
+      return;
+    }
+    if (formValues.phoneNo.length < 8) {
       setNotValid({ error: true, type: 'phoneNo', message: 'Phone Number is too short' });
       return;
     }
-    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)) {
+    if(!formValues.email){
+      setNotValid({ error: true, type: 'email', message: 'Please provide email' });
+      return;
+    }
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)) {
       setNotValid({ error: true, type: 'email', message: 'Invalid email' });
       return;
     }
-    else if (formValues.password.length < 8) {
+    if (!formValues.password) {
+      setNotValid({ error: true, type: 'password', message: 'Please provide password' });
+      return;
+    }
+    if (formValues.password.length < 8) {
       setNotValid({ error: true, type: 'password', message: 'Password must contain 8 characters' });
       return;
     }
-    else if (formValues.postalCode.length < 1) {
+    if (formValues.postalCode.length < 1) {
       setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
       return;
     }
@@ -70,7 +90,7 @@ export default function Registration({ history }) {
       setTimeout(() => {
         history.replace('/auth/login');
       }, 3000);
-      
+
     }, (err) => {
       setProgress(false);
       window.scrollTo(0, 0);
@@ -120,7 +140,7 @@ export default function Registration({ history }) {
           </Form.Group>
           <Form.Group>
             <Form.Control
-              type="text"
+              type="number"
               value={formValues.phoneNo}
               onChange={(e) => setFormValues({ ...formValues, phoneNo: e.target.value })}
               placeholder="Phone Number"
@@ -147,7 +167,7 @@ export default function Registration({ history }) {
           </Form.Group>
           <Form.Group>
             <Form.Control
-              type="text"
+              type="number"
               value={formValues.postalCode}
               onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
               placeholder="Postal Code"
@@ -165,7 +185,7 @@ export default function Registration({ history }) {
           <Row className="justify-content-center " >
             <Col>
               <span>Already Have an Account </span>
-              <Link to="/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Signin </h6> </Link>
+              <Link to="/customer/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Signin </h6> </Link>
             </Col>
           </Row>
         </div>

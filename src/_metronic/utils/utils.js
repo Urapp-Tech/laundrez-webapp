@@ -97,7 +97,7 @@ export function setStorage(key, value, expires) {
 }
 export function setToken(token) {
   try {
-    localStorage.setItem('token', token);
+    localStorage.setItem('_token', token);
   } catch (e) {
     console.error(
       'setToken: Error setting key [ token ] in localStorage: ' +
@@ -107,7 +107,7 @@ export function setToken(token) {
 }
 export function getToken() {
   try {
-    return localStorage.getItem('token');
+    return localStorage.getItem('_token');
   } catch (e) {
     console.error(
       'getToken: Error setting key [ token ] in localStorage: ' +
@@ -117,7 +117,7 @@ export function getToken() {
 }
 export function setUser(user) {
   try {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('_user', JSON.stringify(user));
   } catch (e) {
     console.error(
       'setToken: Error setting key [ user ] in localStorage: ' +
@@ -128,7 +128,7 @@ export function setUser(user) {
 }
 export function getUser() {
   try {
-    return JSON.parse(localStorage.getItem('user'));
+    return JSON.parse(localStorage.getItem('_user'));
   } catch (e) {
     console.error(
       'getToken: Error setting key [ user ] in localStorage: ' +

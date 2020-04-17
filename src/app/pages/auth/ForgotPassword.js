@@ -8,7 +8,7 @@ import { HttpService } from '../../store/services/http-service';
 export default function ForgotPassword({ history }) {
 
   const [email, setEmail] = useState('');
-  const [notValidEmail, setNotValidEmail] = useState(false);
+  const [notValidEmail, setNotValidEmail] = useState({ error: false, message: '' });
   const [sucess, setSuccess] = useState(false);
   const [error, setError] = useState({ isError: false, message: '' });
   const [isProgress, setProgress] = useState(false);
@@ -19,12 +19,16 @@ export default function ForgotPassword({ history }) {
       setError({ isError: false, message: '' });
     }
     if (notValidEmail) {
-      setNotValidEmail(false);
+      setNotValidEmail({ error: false, message: '' });
+    }
+    if (!email) {
+      setNotValidEmail({ error: true, message: 'Please provide email' });
+      return;
     }
     if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)
     ) {
-      setNotValidEmail(true);
+      setNotValidEmail({ error: true, message: 'Email is not valid' });
       return;
     }
     let body = {
@@ -74,7 +78,7 @@ export default function ForgotPassword({ history }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {notValidEmail && <label className="text-danger" > Email is not valid </label>}
+              {notValidEmail.error && <label className="text-danger" >{notValidEmail.message}</label>}
             </Form.Group>
             <button
               disabled={isProgress}
@@ -88,7 +92,7 @@ export default function ForgotPassword({ history }) {
             <Row className="justify-content-center " >
               <Col>
                 <span>Don't have an account yet ? </span>
-                <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+                <Link to="/customer/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
               </Col>
             </Row>
           </div>

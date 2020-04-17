@@ -13,12 +13,18 @@ function Login({ history }) {
   const errorMessage = useSelector(store => store?.auth?.errorMsg);
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
-  const onLoginClick = useCallback(() => {
+  const onLoginClick = useCallback((e) => {
+    e.preventDefault();
     if (isError) {
       dispatch(AuthActions.clearError());
     }
     if (notValid.error)
       setNotValid({ error: false, type: '', message: '' });
+
+    if (!formValues.email) {
+      setNotValid({ error: true, type: 'email', message: 'Please provide email' });
+      return;
+    }
     if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)
     ) {
@@ -26,8 +32,12 @@ function Login({ history }) {
       return;
     }
 
-    else if (!formValues.password) {
-      setNotValid({ error: true, type: 'password', message: 'Password is not valid' });
+    if (!formValues.password) {
+      setNotValid({ error: true, type: 'password', message: 'Please provide password' });
+      return;
+    }
+    if (formValues.password.length < 8) {
+      setNotValid({ error: true, type: 'password', message: 'Password must contain 8 characters' });
       return;
     }
     let body = {
@@ -54,34 +64,33 @@ function Login({ history }) {
               {errorMessage}
             </Alert>
           }
-          <div className="kt-form " >
+          <Form className="kt-form " onSubmit={onLoginClick} >
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Control type="email" placeholder="Email" defaultValue={formValues.email} value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
               {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Form.Group className="" controlId="exampleForm.ControlInput2">
               <Form.Control type="password" placeholder="Password" defaultValue={formValues.password} value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
+              {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >
               <Form.Group className="m-0 remember-me" controlId="remember-me">
                 <Form.Check type="checkbox" inline label="Remember me" />
-                {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
               </Form.Group>
-              <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
+              <Link to="/customer/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
             <button
-              onClick={onLoginClick}
               disabled={isProgress}
               className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} >
               Login
              </button>
             <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
-          </div>
+          </Form>
           <div className="kt-login__options mt-5">
             <Row className="justify-content-center " >
               <Col>
                 <span>Don't have an account yet ? </span>
-                <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+                <Link to="/customer/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
               </Col>
             </Row>
           </div>

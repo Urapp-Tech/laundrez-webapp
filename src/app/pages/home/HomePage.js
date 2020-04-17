@@ -30,23 +30,23 @@ export default function HomePage() {
       <Switch>
         {
           /* Redirect from root URL to /dashboard. */
-          <Redirect exact from="/" to="/customer/dashboard" />
+          <Redirect exact from="/" to="/dashboard" />
         }
-        <Route path="/customer/dashboard" component={Dashboard} />
-        <Route path="/customer/services/:category" component={Services} />
-        <Route path="/customer/orderhistory" component={OrderHistory} />
-        <Route path="/customer/mybasket" component={MyBasket} />
-        <Route path="/customer/deliveryaddress" component={DeliveryAddress} />
-        <Route path="/customer/pickanddrop" component={PickAndDrop} />
-        <Route path="/customer/orderreview" component={OrderReview} />
-        <Route path="/customer/orderdetails" component={OrderDetails} />
-        <Route path="/customer/contactus" component={ContactUs} />
-        <Route path="/customer/paymentsettings" component={PaymentSettings} />
-        <Route path="/customer/paymentdetails" component={PaymentDetails} />
-        <Route path="/customer/profile" component={YourProfile} />
-        <Route path="/customer/faqs" component={Faqs} />
-        <Route path="/customer/termsandcondition" component={TermsAndCondtion} />
-        <Route path="/customer/privacypolicy" component={PrivacyPolicy} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/services/:category" component={Services} />
+        <Route path="/orderhistory" component={OrderHistory} />
+        <Route path="/mybasket" component={MyBasket} />
+        <Route path="/deliveryaddress" component={DeliveryAddress} />
+        <Route path="/pickanddrop" component={PickAndDrop} />
+        <Route path="/orderreview" component={OrderReview} />
+        <Route path="/orderdetails" component={OrderDetails} />
+        <Route path="/contactus" component={ContactUs} />
+        <Route path="/paymentsettings" component={PaymentSettings} />
+        <Route path="/paymentdetails" component={PaymentDetails} />
+        <Route path="/profile" component={YourProfile} />
+        <Route path="/faqs" component={Faqs} />
+        <Route path="/termsandcondition" component={TermsAndCondtion} />
+        <Route path="/privacypolicy" component={PrivacyPolicy} />
 
 
 

@@ -40,7 +40,7 @@ export default function ForgotPassword({ history }) {
       setProgress(false);
       window.scrollTo(0, 0);
       setTimeout(() => {
-        history.replace('/customer/auth/login');
+        history.replace('/auth/login');
       }, 3000);
     }, (err) => {
       setProgress(false);
@@ -92,7 +92,7 @@ export default function ForgotPassword({ history }) {
             <Row className="justify-content-center " >
               <Col>
                 <span>Don't have an account yet ? </span>
-                <Link to="/customer/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+                <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
               </Col>
             </Row>
           </div>

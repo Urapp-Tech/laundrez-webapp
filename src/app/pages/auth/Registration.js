@@ -88,7 +88,7 @@ export default function Registration({ history }) {
       setSuccess(true);
       window.scrollTo(0, 0);
       setTimeout(() => {
-        history.replace('/customer/auth/login');
+        history.replace('/auth/login');
       }, 3000);
 
     }, (err) => {
@@ -185,7 +185,7 @@ export default function Registration({ history }) {
           <Row className="justify-content-center " >
             <Col>
               <span>Already Have an Account </span>
-              <Link to="/customer/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Signin </h6> </Link>
+              <Link to="/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Signin </h6> </Link>
             </Col>
           </Row>
         </div>

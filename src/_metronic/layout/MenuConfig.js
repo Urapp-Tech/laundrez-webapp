@@ -506,7 +506,7 @@ export default {
         title: 'Home',
         root: true,
         icon: 'home-solid.svg',
-        page: 'customer/dashboard',
+        page: 'dashboard',
         bullet: 'dot'
       },
       {
@@ -516,62 +516,62 @@ export default {
         page: 'services',
         bullet: 'dot',
         submenu: [
-          {
-            title: 'Dry Cleaning',
-            bullet: 'dot',
-            page:'customer/services/drycleaning'
-          },
-          {
-            title: 'Wash & fold',
-            bullet: 'dot',
-          },
-          {
-            title: 'Commercial',
-            bullet: 'dot',
-          },
-          {
-            title: 'Home',
-            bullet: 'dot',
-          },
-          {
-            title: 'Outdoor Wear',
-            bullet: 'dot',
-          }
+          // {
+          //   title: 'Dry Cleaning',
+          //   bullet: 'dot',
+          //   page:'services/drycleaning'
+          // },
+          // {
+          //   title: 'Wash & fold',
+          //   bullet: 'dot',
+          // },
+          // {
+          //   title: 'Commercial',
+          //   bullet: 'dot',
+          // },
+          // {
+          //   title: 'Home',
+          //   bullet: 'dot',
+          // },
+          // {
+          //   title: 'Outdoor Wear',
+          //   bullet: 'dot',
+          // }
         ]
       },
       {
         title: 'Order History',
         root: true,
         icon: 'order.svg',
-        page: 'customer/orderhistory',
+        page: 'orderhistory',
         bullet: 'dot'
       },
       {
         title: 'Payment Setting',
         root: true,
         icon: 'receipt.svg',
-        page: 'customer/paymentsettings',
+        page: 'paymentsettings',
         bullet: 'dot'
       },
       {
         title: 'Delivery Address',
         root: true,
         icon: 'tracking.svg',
-        page: 'customer/deliveryaddress',
+        page: 'deliveryaddress',
         bullet: 'dot'
       },
       {
         title: 'Contact Us',
         root: true,
         icon: 'email.svg',
-        page: 'customer/contactus',
+        page: 'contactus',
         bullet: 'dot'
       },
       {
         title: 'FAQ\'s',
         root: true,
         icon: 'question.svg',
-        page: 'customer/faqs',
+        page: 'faqs',
         bullet: 'dot'
       },
       

@@ -9,7 +9,7 @@ class UserProfile extends React.Component {
   render() {
     const { showAvatar, showBadge, } = this.props;
     return (
-      <Link to="/customer/profile" className="d-flex justify-content-center align-items-center" >
+      <Link to="/profile" className="d-flex justify-content-center align-items-center" >
         <div className="kt-header__topbar-item kt-header__topbar-item--user"  >
           <div className="kt-header__topbar-user">
 

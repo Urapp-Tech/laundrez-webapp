@@ -77,7 +77,7 @@ function Login({ history }) {
               <Form.Group className="m-0 remember-me" controlId="remember-me">
                 <Form.Check type="checkbox" inline label="Remember me" />
               </Form.Group>
-              <Link to="/customer/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
+              <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
             </Row>
             <button
               disabled={isProgress}
@@ -90,7 +90,7 @@ function Login({ history }) {
             <Row className="justify-content-center " >
               <Col>
                 <span>Don't have an account yet ? </span>
-                <Link to="/customer/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
+                <Link to="/auth/registration" > <h6 className="mb-0 ml-2 d-inline " > Sign Up </h6> </Link>
               </Col>
             </Row>
           </div>

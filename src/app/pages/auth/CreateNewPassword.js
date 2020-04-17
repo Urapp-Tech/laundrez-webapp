@@ -61,7 +61,7 @@ export default function CreateNewPassword({ history }) {
             setSuccess(true);
             window.scrollTo(0, 0);
             setTimeout(() => {
-                history.replace('/customer/auth/login');
+                history.replace('/auth/login');
             }, 3000);
 
         }, (err) => {

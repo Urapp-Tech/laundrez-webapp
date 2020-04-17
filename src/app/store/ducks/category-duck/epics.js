@@ -12,7 +12,7 @@ export class CategoryEpics {
                     return {
                         title: v.title,
                         bullet: 'dot',
-                        page: `customer/services/${v.title}`
+                        page: `services/${v.title}`
                     };
                 });
                 return of(

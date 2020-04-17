@@ -73,7 +73,7 @@ export default function Dashboard({ history }) {
           <div className="d-flex flex-wrap w-100 ">
             {categories.map((data, i) => {
               return (
-                <div key={i} className=" margin-card  " onClick={() => history.push(`/customer/services/${data.title}`)} >
+                <div key={i} className=" margin-card  " onClick={() => history.push(`/services/${data.title}`)} >
                   <Portlet className="justify-content-center  category-card kt-portlet--border-bottom-brand">
                     <PortletBody className="justify-content-center align-items-center" >
                       <h5 className=" text-break " >{data.title}</h5>

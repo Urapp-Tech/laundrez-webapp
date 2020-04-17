@@ -11,7 +11,7 @@ export default function Logout() {
     dispatch(AuthActions.logout());
   }, [dispatch]);
 
-  return utils.getToken() ? <LayoutSplashScreen /> : <Redirect to="/customer/auth" />;
+  return utils.getToken() ? <LayoutSplashScreen /> : <Redirect to="/auth" />;
 }
 
 //TODO: Logout functionality here

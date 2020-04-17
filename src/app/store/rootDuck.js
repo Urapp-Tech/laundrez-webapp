@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
 import * as auth from './ducks/auth-duck';
+import * as category from './ducks/category-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
   auth: auth.AuthReducer,
-  builder: metronic.builder.reducer
+  builder: metronic.builder.reducer,
+  category: category.CategoryReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {
@@ -15,6 +17,7 @@ export const rootReducer = (state, action) => {
 };
 export const rootEpic = combineEpics(
   // more epics functions go here
-  auth.AuthEpics.login
+  auth.AuthEpics.login,
+  category.CategoryEpics.getCategories
 
 );

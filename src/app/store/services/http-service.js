@@ -1,11 +1,12 @@
 import { ajax } from 'rxjs/ajax';
 
 import { API_URL } from './config';
+import * as utils from '../../../_metronic/utils/utils';
 export class HttpService {
 
-    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
+    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
         return ajax({
-            url: `${API_URL}${url}`,
+            url: `${API_URL}/api${url}`,
             headers,
             method: 'GET',
             async: true,
@@ -15,9 +16,9 @@ export class HttpService {
         });
     } // get
 
-    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
+    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
         return ajax({
-            url: `${API_URL}${url}`,
+            url: `${API_URL}/api${url}`,
             method: 'POST',
             body,
             headers,
@@ -27,9 +28,9 @@ export class HttpService {
             createXHR: () => new XMLHttpRequest()
         });
     } // post
-    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
+    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
         return ajax({
-            url: `${API_URL}${url}`,
+            url: `${API_URL}/api${url}`,
             method: 'PUT',
             body,
             headers,
@@ -40,9 +41,9 @@ export class HttpService {
         });
     } // put
 
-    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer' }) {
+    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
         return ajax({
-            url: `${API_URL}${url}`,
+            url: `${API_URL}/api${url}`,
             method: 'DELETE',
             body,
             headers,

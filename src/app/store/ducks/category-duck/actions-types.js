@@ -1,0 +1,6 @@
+export const CategoryActionTypes = {
+    CATEGORIES_PROG: 'CATEGORIES_PROG',
+    CATEGORIES_SUCC: 'CATEGORIES_SUCC',
+    CATEGORIES_FAIL: 'CATEGORIES_FAIL',
+
+};

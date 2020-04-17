@@ -62,7 +62,7 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-faq" >
                                 <div className="d-flex justify-content-end mb-3" >
-                                    <button onClick={toggleModal} type="button" className="close"><span aria-hidden="true">×</span><span className="sr-only">Close</span></button>
+                                    <div onClick={toggleModal}  className="fas fa-times"></div>
                                 </div>
                                 <div className="accordion-container mb-2" >
                                     <Accordion defaultActiveKey="0">

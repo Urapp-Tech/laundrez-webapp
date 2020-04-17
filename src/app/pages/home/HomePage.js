@@ -33,7 +33,7 @@ export default function HomePage() {
           <Redirect exact from="/" to="/customer/dashboard" />
         }
         <Route path="/customer/dashboard" component={Dashboard} />
-        <Route path="/customer/services" component={Services} />
+        <Route path="/customer/services/:category" component={Services} />
         <Route path="/customer/orderhistory" component={OrderHistory} />
         <Route path="/customer/mybasket" component={MyBasket} />
         <Route path="/customer/deliveryaddress" component={DeliveryAddress} />

@@ -13,7 +13,7 @@ export default function UpdateAddressModal({ showModal, toggleModal }) {
             <Modal.Body  >
                 <Container>
                     <div className="d-flex justify-content-end mb-3" >
-                        <button onClick={toggleModal} type="button" className="close"><span aria-hidden="true">×</span><span className="sr-only">Close</span></button>
+                        <div onClick={toggleModal} className="fas fa-times cursor-pointer"></div>
                     </div>
                     <Row className="show-grid">
                         <Col md={6}>

@@ -9,7 +9,8 @@ export const actionTypes = {
   SetMenuConfig: 'builder/SET_MENU_CONFIG',
   SetLayoutConfigs: 'builder/SET_LAYOUT_CONFIGS',
   SetLayoutConfigsWithPageRefresh: 'builder/SET_LAYOUT_CONFIGS_WITH_PAGE_REFRESH',
-  SetHtmlClassService: 'builder/SET_HTML_CLASS_SERVICE'
+  SetHtmlClassService: 'builder/SET_HTML_CLASS_SERVICE',
+  SetSubMenuOfService: 'builder/SET_SUB_MENU_OF_SERVICE'
 };
 
 export const selectors = {
@@ -88,6 +89,7 @@ export const reducer = persistReducer(
     blacklist: ['htmlClassServiceObjects']
   },
   (state = initialState, { type, payload }) => {
+
     switch (type) {
       case actionTypes.SetMenuConfig:
         return { ...state, menuConfig: payload };
@@ -100,6 +102,17 @@ export const reducer = persistReducer(
       }
       case actionTypes.SetHtmlClassService:
         return { ...state, htmlClassServiceObjects: payload };
+
+      case actionTypes.SetSubMenuOfService:
+        let items = [];
+        let menuConfig = {};
+        menuConfig = { ...state.menuConfig };
+        items = [...menuConfig.aside.items];
+        let service = items[1];
+        service.submenu = [...payload];
+        items[1] = { ...service };
+        menuConfig.aside.items = [...items];
+        return { ...state, menuConfig: menuConfig };
 
       default:
         return state;
@@ -123,5 +136,6 @@ export const actions = {
   setHtmlClassService: payload => ({
     payload,
     type: actionTypes.SetHtmlClassService
-  })
+  }),
+  setSubMenuServices: payload => ({ payload, type: actionTypes.SetSubMenuOfService })
 };

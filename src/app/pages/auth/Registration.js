@@ -54,7 +54,7 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'phoneNo', message: 'Phone Number is too short' });
       return;
     }
-    if(!formValues.email){
+    if (!formValues.email) {
       setNotValid({ error: true, type: 'email', message: 'Please provide email' });
       return;
     }
@@ -110,9 +110,13 @@ export default function Registration({ history }) {
             </h3>
         </div>
         {isSuccess &&
-          <Alert variant={'success'}>
-            Singup Successfull redirecting to login.
+          <>
+            <Alert className="flex-column" variant={'success'}>
+              <div className="text-center" > You account has been successfully created.</div>
+
             </Alert>
+            <div className="kt-spinner kt-spinner--center kt-spinner--primary mt-4" ></div>
+          </>
         }
         {error.isError &&
           <Alert variant={'danger'}>
@@ -161,7 +165,7 @@ export default function Registration({ history }) {
               type="password"
               value={formValues.password}
               onChange={(e) => setFormValues({ ...formValues, password: e.target.value })}
-              placeholder="Email"
+              placeholder="Password"
             />
             {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>

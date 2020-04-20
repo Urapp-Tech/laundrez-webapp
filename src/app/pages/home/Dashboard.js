@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback } from 'react';
 // import { useSelector } from "react-redux";
 import {
   Portlet,
@@ -7,63 +7,21 @@ import {
 import OrderHistoryTable from '../../partials/layout/OrderHistoryTable';
 import Info from '../../../_metronic/layout/assets/layout-svg-icons/info.svg';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { CategoryActions } from '../../store/ducks/category-duck';
+import { useSelector } from 'react-redux';
 import { API_URL } from '../../store/services/config';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
-// import OrderImage from "../../../_metronic/layout/assets/layout-svg-icons/order-2.svg";
-// import { Link } from "react-router-dom";
-// import { Table } from "react-bootstrap";
-// import { Badge } from "react-bootstrap";
-// import CircularProgress from "../../partials/layout/CircularProgress";
+
 
 export default function Dashboard({ history }) {
 
-  const dispatch = useDispatch();
   const categories = useSelector(store => store?.category?.categories);
 
-  useEffect(() => {
-    dispatch(CategoryActions.getCategories());
-  }, [dispatch]);
-
-  // const categories = [
-  //   {
-  //     categoryTitle: 'Dry Cleaning',
-  //     categoryPrice: '$5.00',
-  //     categoryImage: 'https://image.flaticon.com/icons/svg/1818/1818882.svg',
-  //   },
-  //   {
-  //     categoryTitle: 'Wash & Fold',
-  //     categoryPrice: '$8.00',
-  //     categoryImage:
-  //       'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/among_nature_p1xb.svg',
-  //   },
-  //   {
-  //     categoryTitle: 'Commercial',
-  //     categoryPrice: '$2.00',
-  //     categoryImage: 'https://flatvectors.com/wp-content/uploads/travel-man.svg',
-  //   },
-  //   {
-  //     categoryTitle: 'Dry Cleaning',
-  //     categoryPrice: '$5.00',
-  //     categoryImage: 'https://image.flaticon.com/icons/svg/1818/1818882.svg',
-  //   },
-  //   {
-  //     categoryTitle: 'Wash & Fold',
-  //     categoryPrice: '$8.00',
-  //     categoryImage:
-  //       'https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/among_nature_p1xb.svg',
-  //   },
-  //   // {
-  //   //   categoryTitle: 'Commercial',
-  //   //   categoryPrice: '$2.00',
-  //   //   categoryImage: 'https://flatvectors.com/wp-content/uploads/travel-man.svg',
-  //   // },
-  // ];
-
-
-
-
+  const onClickCategory = useCallback((id, category) => {
+    history.push({
+      pathname: `/services/${id}`,
+      state: { category }
+    });
+  }, [history]);
 
   return (
     <>
@@ -73,7 +31,7 @@ export default function Dashboard({ history }) {
           <div className="d-flex flex-wrap w-100 ">
             {categories.map((data, i) => {
               return (
-                <div key={i} className=" margin-card  " onClick={() => history.push(`/services/${data.title}`)} >
+                <div key={i} className=" margin-card  " onClick={() => onClickCategory(data.id, data)} >
                   <Portlet className="justify-content-center  category-card kt-portlet--border-bottom-brand">
                     <PortletBody className="justify-content-center align-items-center" >
                       <h5 className=" text-break " >{data.title}</h5>

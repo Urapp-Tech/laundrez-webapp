@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import { LayoutSplashScreen } from '../../../_metronic';
@@ -16,14 +16,17 @@ import YourProfile from './YourProfile';
 import Faqs from './Faqs';
 import TermsAndCondtion from './TermsAndCondition';
 import PrivacyPolicy from './PrivacyPolicy';
+import { CategoryActions } from '../../store/ducks/category-duck';
+import { useDispatch } from 'react-redux';
 
 
 
 export default function HomePage() {
-  // useEffect(() => {
-  //   console.log('Home page');
-  // }, []) // [] - is required if you need only one call
-  // https://reactjs.org/docs/hooks-reference.html#useeffect
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(CategoryActions.getCategories());
+  }, [dispatch]);
+
 
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
@@ -33,7 +36,7 @@ export default function HomePage() {
           <Redirect exact from="/" to="/dashboard" />
         }
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/services/:category" component={Services} />
+        <Route path="/services/:categoryId" component={Services} />
         <Route path="/orderhistory" component={OrderHistory} />
         <Route path="/mybasket" component={MyBasket} />
         <Route path="/deliveryaddress" component={DeliveryAddress} />

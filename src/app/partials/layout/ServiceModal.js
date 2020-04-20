@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } from 'react-bootstrap';
+import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
+import { API_URL } from '../../store/services/config';
 
 function CustomToggle({ eventKey }) {
     const [isOpen, toggle] = useState(false);
@@ -15,13 +17,13 @@ function CustomToggle({ eventKey }) {
     );
 }
 
-export default function ServiceModal({ data, showModal, toggleModal }) {
+export default function ServiceModal({ data, showModal, closeModal }) {
 
     return (
         <Modal
             size="lg"
             show={showModal}
-            onHide={toggleModal}
+            onHide={closeModal}
             aria-labelledby="example-modal-sizes-title-lg"
         >
 
@@ -31,16 +33,16 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-info" >
                                 <div className="item-image" >
-                                    <img alt={'img'} className="image" src={data.serviceImage} />
+                                    <img alt={'img'} className="image" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
                                 </div>
                                 <div className="item-info" >
-                                    <h3>{data.serviceTitle}</h3>
+                                    <h3>{data.title}</h3>
                                     <div className="item-description"  >
-                                        {data.serviceDesc}
+                                        {data.description}
                                     </div>
                                 </div>
                                 <div className="item-quantity-price" >
-                                    <h2 className="font-weight-bold price" >{data.serviceCharges}</h2>
+                                    <h2 className="font-weight-bold price" >${data.price}</h2>
 
                                     <div className="w-25  d-flex justify-content-between align-items-center" >
 
@@ -62,7 +64,7 @@ export default function ServiceModal({ data, showModal, toggleModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-faq" >
                                 <div className="d-flex justify-content-end mb-3" >
-                                    <div onClick={toggleModal}  className="fas fa-times"></div>
+                                    <div onClick={closeModal}  className="fas fa-times"></div>
                                 </div>
                                 <div className="accordion-container mb-2" >
                                     <Accordion defaultActiveKey="0">

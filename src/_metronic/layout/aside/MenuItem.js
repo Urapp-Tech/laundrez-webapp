@@ -7,14 +7,14 @@ import clsx from 'clsx';
 
 export default class MenuItem extends React.Component {
   asideLeftLIRef = React.createRef();
-  isDropdown =  document.body.classList.contains('kt-aside-menu--dropdown');
+  isDropdown = document.body.classList.contains('kt-aside-menu--dropdown');
 
   submenuToggle =
     this.props.item.toggle === 'click'
       ? 'click'
       : objectPath.get(this.props.item, 'submenu.type') === 'tabs'
-      ? 'tabs'
-      : 'hover';
+        ? 'tabs'
+        : 'hover';
 
   /**
    * Use for fixed left aside menu, to show menu on mouseenter event.
@@ -97,7 +97,10 @@ export default class MenuItem extends React.Component {
         data-ktmenu-dropdown-toggle-class={item['dropdown-toggle-class']}
       >
         {!item.submenu && (
-          <Link to={`/${item.page}`} className="kt-menu__link kt-menu__toggle">
+          <Link to={{
+            pathname: `/${item.page}`,
+            state: { category: item.category }
+          }} className="kt-menu__link kt-menu__toggle">
             <MenuItemText item={item} parentItem={parentItem} />
           </Link>
         )}

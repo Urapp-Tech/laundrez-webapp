@@ -1,0 +1,6 @@
+export const ServiceActionTypes = {
+    SERVICES_PROG: 'SERVICES_PROG',
+    SERVICES_SUCC: 'SERVICES_SUCC',
+    SERVICES_FAIL: 'SERVICES_FAIL',
+
+};

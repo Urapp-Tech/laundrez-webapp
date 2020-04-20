@@ -12,7 +12,8 @@ export class CategoryEpics {
                     return {
                         title: v.title,
                         bullet: 'dot',
-                        page: `services/${v.title}`
+                        page: `services/${v.id}`,
+                        category: v
                     };
                 });
                 return of(

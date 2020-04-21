@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { toAbsoluteUrl } from '../../../_metronic';
+import userImage from '../../../_metronic/layout/assets/layout-svg-icons/user.svg';
 
 
 class UserProfile extends React.Component {
@@ -13,7 +13,7 @@ class UserProfile extends React.Component {
         <div className="kt-header__topbar-item kt-header__topbar-item--user"  >
           <div className="kt-header__topbar-user">
 
-            {showAvatar && <img alt="Pic" className="rounded-circle" src={toAbsoluteUrl('/media/users/300_25.jpg')} />}
+            {showAvatar && <img alt="Pic" className="rounded-circle" src={userImage} />}
 
             {showBadge && (
               <span className="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">

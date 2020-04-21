@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } from 'react-bootstrap';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
 import { API_URL } from '../../store/services/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { ServiceActions } from '../../store/ducks/service-duck';
 
-function CustomToggle({ eventKey }) {
+function CustomToggle({ eventKey, question }) {
     const [isOpen, toggle] = useState(false);
     const decoratedOnClick = useAccordionToggle(eventKey, () =>
         toggle(!isOpen)
@@ -11,13 +13,37 @@ function CustomToggle({ eventKey }) {
 
     return (
         <div onClick={decoratedOnClick} className="faq-heading d-flex justify-content-between" >
-            <div className="faq-question" > Can you clean items with leather, velvet, suede or fur?</div>
+            <div className="faq-question" >{question}</div>
             <div>{isOpen ? <img alt={'img'} className="arrow-icon" src={require('../../../_metronic/layout/assets/layout-svg-icons/arrow-down.svg')} /> : <img alt={'img'} className="arrow-icon" src={require('../../../_metronic/layout/assets/layout-svg-icons/arrow-right.svg')} />}</div>
         </div>
     );
 }
 
 export default function ServiceModal({ data, showModal, closeModal }) {
+
+    const dispatch = useDispatch();
+    const serviceFaq = useSelector(store => store?.service?.serviceFaq);
+    const [qtyCount, setQtyCount] = useState(1);
+
+    useEffect(() => {
+        dispatch(ServiceActions.clearServiceFaq());
+        dispatch(ServiceActions.getServieFaq(data.id));
+    }, [data, dispatch]);
+
+    const incrementQtyCount = useCallback(() => {
+        let count = qtyCount;
+        count++;
+
+        setQtyCount(count);
+    }, [qtyCount]);
+
+    const decrementQtyCount = useCallback(() => {
+        let count = qtyCount;
+        if (count > 1)
+            count--;
+        setQtyCount(count);
+    }, [qtyCount]);
+
 
     return (
         <Modal
@@ -46,11 +72,11 @@ export default function ServiceModal({ data, showModal, closeModal }) {
 
                                     <div className="w-25  d-flex justify-content-between align-items-center" >
 
-                                        <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
+                                        <img alt="img" className="cursor-pointer" onClick={decrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
-                                        <span className="qty">1</span>
+                                        <span className="qty">{qtyCount}</span>
 
-                                        <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
+                                        <img alt="img" className="cursor-pointer" onClick={incrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
                                     </div>
 
@@ -64,20 +90,24 @@ export default function ServiceModal({ data, showModal, closeModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-faq" >
                                 <div className="d-flex justify-content-end mb-3" >
-                                    <div onClick={closeModal}  className="fas fa-times"></div>
+                                    <div onClick={closeModal} className="fas fa-times"></div>
                                 </div>
-                                <div className="accordion-container mb-2" >
-                                    <Accordion defaultActiveKey="0">
-                                        <CustomToggle eventKey="1">Click me!</CustomToggle>
+                                {serviceFaq.map((v, i) => {
+                                    return (<div key={i} className="accordion-container mb-2" >
+                                        <Accordion defaultActiveKey="0">
+                                            <CustomToggle question={v.question} eventKey="1">Click me!</CustomToggle>
 
-                                        <Accordion.Collapse eventKey="1">
-                                            <div className="faq-ans" >
-                                                Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat. Donec vehicula elit eu erat pulvinar, vel congue ex egestas. Praesent egestas purus dolor, a porta arcu pharetra quis. Sed vestibulum semper ligula, id accumsan orci ornare ut. Donec id pharetra nunc, ut sollicitudin mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam dapibus nisl at diam scelerisque luctus. Nam mattis, velit in malesuada maximus, erat ligula eleifend eros, et lacinia nunc ante vel odio.
-                                                Praesent eu dolor eu orci vehicula euismod. Vivamus sed sollicitudin libero, vel malesuada velit. Nullam et maximus lorem. Suspendisse maximus dolor quis consequat volutpat. Donec vehicula elit eu erat pulvinar, vel congue ex egestas. Praesent egestas purus dolor, a porta arcu pharetra quis. Sed vestibulum semper ligula, id accumsan orci ornare ut. Donec id pharetra nunc, ut sollicitudin mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam dapibus nisl at diam scelerisque luctus. Nam mattis, velit in malesuada maximus, erat ligula eleifend eros, et lacinia nunc ante vel odio.
-                                            </div>
-                                        </Accordion.Collapse>
-                                    </Accordion>
-                                </div>
+                                            <Accordion.Collapse eventKey="1">
+                                                <div className="faq-ans" >
+                                                    {v.answer}
+                                                </div>
+                                            </Accordion.Collapse>
+                                        </Accordion>
+                                    </div>);
+                                })
+                                }
+
+
 
 
 

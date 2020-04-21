@@ -21,6 +21,7 @@ export const rootEpic = combineEpics(
   // more epics functions go here
   auth.AuthEpics.login,
   category.CategoryEpics.getCategories,
-  service.ServiceEpics.getServices
+  service.ServiceEpics.getServices,
+  service.ServiceEpics.getServiceFaq
 
 );

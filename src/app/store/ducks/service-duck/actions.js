@@ -9,4 +9,17 @@ export class ServiceActions {
         };
     }
 
+    static getServieFaq(serviceId) {
+        return {
+            type: ServiceActionTypes.GET_SERVICE_FAQ_PROG,
+            payload: { serviceId }
+        };
+    }
+
+    static clearServiceFaq() {
+        return {
+            type: ServiceActionTypes.CLEAR_SERVICE_FAQ,
+        };
+    }
+
 }

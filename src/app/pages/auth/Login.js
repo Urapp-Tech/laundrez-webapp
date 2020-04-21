@@ -66,11 +66,11 @@ function Login({ history }) {
           }
           <Form className="kt-form " onSubmit={onLoginClick} >
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Email" defaultValue={formValues.email} value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
+              <Form.Control type="email" placeholder="Email"  value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
               {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Form.Group className="" controlId="exampleForm.ControlInput2">
-              <Form.Control type="password" placeholder="Password" defaultValue={formValues.password} value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
+              <Form.Control type="password" placeholder="Password"  value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
               {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >

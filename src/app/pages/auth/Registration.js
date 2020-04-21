@@ -74,11 +74,14 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
       return;
     }
+    let phoneNo = formValues.phoneNo;
+    phoneNo = phoneNo.substr(1);
+    phoneNo = '+1' + phoneNo;
     let body = {
       firstName: formValues.firstName,
       lastName: formValues.lastName,
       email: formValues.email,
-      phoneNo: formValues.phoneNo,
+      phoneNo: phoneNo,
       postalCode: formValues.postalCode,
       password: formValues.password
     };

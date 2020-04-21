@@ -6,6 +6,9 @@
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
 .text-out-for-delivery {
   color: $order-out-delivery;
 }

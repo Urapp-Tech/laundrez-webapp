@@ -5,7 +5,7 @@ import BgAuth from '../../../_metronic/layout/assets/layout-svg-icons/login-bg.s
 import Login from './Login';
 import Registration from './Registration';
 import ForgotPassword from './ForgotPassword';
-import CreateNewPassword from './CreateNewPassword';
+import ResetPassword from './ResetPassword';
 
 export default function AuthPage() {
   return (
@@ -27,7 +27,7 @@ export default function AuthPage() {
                 />
                  <Route
                   path="/auth/reset-password"
-                  component={CreateNewPassword}
+                  component={ResetPassword}
                 />
                 <Redirect from="/auth" exact={true} to="/auth/login" />
                 <Redirect to="/auth/login" />

@@ -66,18 +66,18 @@ function Login({ history }) {
           }
           <Form className="kt-form " onSubmit={onLoginClick} >
             <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Control type="email" placeholder="Email"  value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
+              <Form.Control type="email" placeholder="Email" value={formValues.email} onChange={(e) => setFormValues({ email: e.target.value, password: formValues.password })} />
               {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Form.Group className="" controlId="exampleForm.ControlInput2">
-              <Form.Control type="password" placeholder="Password"  value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
+              <Form.Control type="password" placeholder="Password" value={formValues.password} onChange={(e) => setFormValues({ email: formValues.email, password: e.target.value })} />
               {(notValid.error && notValid.type === 'password') && <label className="text-danger" > {notValid.message} </label>}
             </Form.Group>
             <Row className="justify-content-between pr-3 pl-3 mt-3 " >
               <Form.Group className="m-0 remember-me" controlId="remember-me">
                 <Form.Check type="checkbox" inline label="Remember me" />
               </Form.Group>
-              <Link to="/auth/forgot-password" > <h6 className="m-0" > Forget Password? </h6></Link>
+              <Link to="/auth/forgot-password" > <h6 className="m-0" > Forgot Password? </h6></Link>
             </Row>
             <button
               disabled={isProgress}

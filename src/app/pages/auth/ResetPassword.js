@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
-import { Form, Alert } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { Form, Alert, Row, Col } from 'react-bootstrap';
+import { useLocation, Link } from 'react-router-dom';
 import { HttpService } from '../../store/services/http-service';
 
 
@@ -9,7 +9,7 @@ import { HttpService } from '../../store/services/http-service';
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
-export default function CreateNewPassword({ history }) {
+export default function ResetPassword({ history }) {
     const [error, setError] = useState({ isError: false, message: '' });
     const [isProgress, setProgress] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -100,6 +100,7 @@ export default function CreateNewPassword({ history }) {
                                 type="password"
                                 placeholder="New Password"
                                 value={formValues.newPassword}
+                                disabled={error.isError}
                                 onChange={(e) => setFormValues({ ...formValues, newPassword: e.target.value })}
                             />
                             {(notValid.error && notValid.type === 'newPassword') && <label className="text-danger" > {notValid.message} </label>}
@@ -109,12 +110,21 @@ export default function CreateNewPassword({ history }) {
                                 type="password"
                                 placeholder="Re-enter New Password"
                                 value={formValues.reNewPassword}
+                                disabled={error.isError}
                                 onChange={(e) => setFormValues({ ...formValues, reNewPassword: e.target.value })}
                             />
                             {(notValid.error && notValid.type === 'reNewPassword') && <label className="text-danger" > {notValid.message} </label>}
                         </Form.Group>
-                        <button  className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Submit </button>
+                        <button disabled={error.isError} className={ error.isError?'disabled cursor-not-allowed text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 ':isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Submit </button>
+                        <div className="kt-login__options pt-4  flex-column align-items-center">
 
+                            <Row className="justify-content-center " >
+                                <Col>
+                                    <span>Back to </span>
+                                    <Link to="/auth/login" > <h6 className="mb-0 ml-2 d-inline " > Sign In </h6> </Link>
+                                </Col>
+                            </Row>
+                        </div>
                     </Form>
                 </div>
             </div>

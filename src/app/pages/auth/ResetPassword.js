@@ -52,11 +52,11 @@ export default function ResetPassword({ history }) {
             return;
         }
         let body = {
-            email: query.get('email'),
+            email: email,
             newPassword: formValues.newPassword
         };
         setProgress(true);
-        HttpService.put('/User/resetpassword', body).subscribe(() => {
+        HttpService.put(`/User/resetpassword?expiry=${expiry}`, body).subscribe(() => {
             setProgress(false);
             setSuccess(true);
             window.scrollTo(0, 0);
@@ -70,7 +70,7 @@ export default function ResetPassword({ history }) {
             setError({ isError: true, message: err.response?.Message });
         });
 
-    }, [formValues, notValid, history, query]);
+    }, [formValues, notValid, history, expiry, email]);
 
 
 
@@ -115,7 +115,7 @@ export default function ResetPassword({ history }) {
                             />
                             {(notValid.error && notValid.type === 'reNewPassword') && <label className="text-danger" > {notValid.message} </label>}
                         </Form.Group>
-                        <button disabled={error.isError} className={ error.isError?'disabled cursor-not-allowed text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 ':isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Submit </button>
+                        <button disabled={error.isError} className={error.isError ? 'disabled cursor-not-allowed text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 ' : isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} > Submit </button>
                         <div className="kt-login__options pt-4  flex-column align-items-center">
 
                             <Row className="justify-content-center " >

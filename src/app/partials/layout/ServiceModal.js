@@ -62,9 +62,10 @@ export default function ServiceModal({ data, showModal, closeModal }) {
     return (
         <Modal
             size="lg"
+            centered
             show={showModal}
             onHide={closeModal}
-            aria-labelledby="example-modal-sizes-title-lg"
+          
         >
 
             <Modal.Body  >

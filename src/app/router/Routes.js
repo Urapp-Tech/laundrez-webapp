@@ -16,6 +16,8 @@ import Layout from '../../_metronic/layout/Layout';
 import * as utils from '../../_metronic/utils/utils';
 import AuthPage from '../pages/auth/AuthPage';
 import { AuthActions } from '../store/ducks/auth-duck';
+import { MyBasketStorage } from '../store/ducks/mybasket-duck/basket-storage';
+import { MyBasketActions } from '../store/ducks/mybasket-duck/actions';
 
 export const Routes = withRouter(({ history }) => {
 
@@ -35,6 +37,12 @@ export const Routes = withRouter(({ history }) => {
       dispatch(AuthActions.setUser(userFromStorage));
     }
   }, [dispatch, user]);
+  useEffect(() => {
+    const items = MyBasketStorage.getBasket();
+    if (items) {
+      dispatch(MyBasketActions.setBasket(items));
+    }
+  }, [dispatch]);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>

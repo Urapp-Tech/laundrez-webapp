@@ -29,4 +29,11 @@ export class MyBasketActions {
         };
     }
 
+    static setBasket(items) {
+        return {
+            type: MyBasketActionTypes.SET_BASKET,
+            payload: { items }
+        };
+    }
+
 }

@@ -49,10 +49,13 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
     amount = Math.abs(amount).toFixed(2);
     setTotalAmount(amount);
   }, [basketItems, calculateTotal]);
+
+
   const calculateHST = useCallback(() => {
     let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
     setTotalHST(hst);
   }, [totalAmont]);
+
 
   const calculateGrandTotal = useCallback(() => {
     let grandTotal = Number(totalAmont) + Number(totalHST);
@@ -72,6 +75,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
   return (
     <Dropdown className="kt-header__topbar-item" drop="down" alignRight>
       <Dropdown.Toggle as={HeaderDropdownToggle} id="dropdown-toggle-my-cart">
+        {Object.keys(basketItems).length === 0 ? null : <span className="notify-bubble">{Object.keys(basketItems).length}</span>}
         <span
           className={clsx('kt-header__topbar-icon', {
             'kt-header__topbar-icon--brand': iconType === 'brand'

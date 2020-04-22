@@ -23,9 +23,9 @@ class Brand extends React.Component {
         id="kt_aside_brand"
       >
         <div className="kt-aside__brand-logo">
-          <Link to="">
+          <div >
             <img alt="logo" src={this.props.headerLogo} />
-          </Link>
+          </div>
         </div>
 
         {this.props.asideSelfMinimizeToggle && (

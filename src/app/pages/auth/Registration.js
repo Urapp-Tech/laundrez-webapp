@@ -62,8 +62,8 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
       return;
     }
-    if (!/[+](1)?[0-9]{11}$/g.test(formValues.phoneNo)) {
-      setNotValid({ error: true, type: 'phoneNo', message: 'Phone number must contain 10 characters and matches the format (+1XXXXXXXXXX)' });
+    if (!(/[+](1)?[0-9]{11}$/g.test(formValues.phoneNo))) {
+      setNotValid({ error: true, type: 'phoneNo', message: 'Please provide a valid phone number matching the format +1XXXXXXXXXX' });
       return;
     }
 

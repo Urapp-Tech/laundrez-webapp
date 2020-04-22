@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthActions } from '../../store/ducks/auth-duck';
@@ -13,6 +13,13 @@ function Login({ history }) {
   const errorMessage = useSelector(store => store?.auth?.errorMsg);
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    return () => {
+      dispatch(AuthActions.clearError());
+    };
+  }, [dispatch]);
+
   const onLoginClick = useCallback((e) => {
     e.preventDefault();
     if (isError) {

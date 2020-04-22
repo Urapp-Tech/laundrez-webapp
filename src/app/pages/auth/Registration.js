@@ -16,11 +16,23 @@ export default function Registration({ history }) {
     firstName: '',
     lastName: '',
     email: '',
-    phoneNo: '+1',
+    phoneNo: '',
     postalCode: '',
     password: ''
 
   });
+
+  const onFocusPhoneNumInput = useCallback(() => {
+    if (formValues.phoneNo.length === 0) {
+      setFormValues({ ...formValues, phoneNo: '+1' });
+    }
+  }, [formValues]);
+
+  const onBlurPhoneNumInput = useCallback(() => {
+    if (formValues.phoneNo.length < 3) {
+      setFormValues({ ...formValues, phoneNo: '' });
+    }
+  }, [formValues]);
 
   const onSignUpClick = useCallback((e) => {
     e.preventDefault();
@@ -152,6 +164,8 @@ export default function Registration({ history }) {
               value={formValues.phoneNo}
               onChange={(e) => setFormValues({ ...formValues, phoneNo: e.target.value })}
               placeholder="Phone Number"
+              onFocus={onFocusPhoneNumInput}
+              onBlur={onBlurPhoneNumInput}
             />
             {(notValid.error && notValid.type === 'phoneNo') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>

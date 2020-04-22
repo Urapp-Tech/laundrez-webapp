@@ -1,4 +1,11 @@
 export const MyBasketActionTypes = {
-    
+
+    ADD_TO_BASKET: 'ADD_TO_BASKET',
+
+    INCREMENT_QTY: 'INCREMENT_QTY',
+
+    DECREMENT_QTY: 'DECREMENT_QTY',
+
+    REMOVE_FROM_BASKET: 'REMOVE_FROM_BASKET'
 
 };

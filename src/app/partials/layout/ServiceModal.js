@@ -4,6 +4,7 @@ import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-i
 import { API_URL } from '../../store/services/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { ServiceActions } from '../../store/ducks/service-duck';
+import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 
 function CustomToggle({ eventKey, question }) {
     const [isOpen, toggle] = useState(false);
@@ -23,26 +24,39 @@ export default function ServiceModal({ data, showModal, closeModal }) {
 
     const dispatch = useDispatch();
     const serviceFaq = useSelector(store => store?.service?.serviceFaq);
-    const [qtyCount, setQtyCount] = useState(1);
+    const [item, setItem] = useState({});
 
     useEffect(() => {
         dispatch(ServiceActions.clearServiceFaq());
         dispatch(ServiceActions.getServieFaq(data.id));
+        let item = { ...data };
+        item['qty'] = data.minQty;
+        setItem(item);
     }, [data, dispatch]);
 
     const incrementQtyCount = useCallback(() => {
-        let count = qtyCount;
+        let itemObj = { ...item };
+        let count = itemObj.qty;
         count++;
+        itemObj['qty'] = count;
+        setItem(itemObj);
 
-        setQtyCount(count);
-    }, [qtyCount]);
+    }, [item]);
 
     const decrementQtyCount = useCallback(() => {
-        let count = qtyCount;
-        if (count > 1)
+        let itemObj = { ...item };
+        let count = itemObj.qty;
+        if (count > item.minQty)
             count--;
-        setQtyCount(count);
-    }, [qtyCount]);
+        itemObj['qty'] = count;
+        setItem(itemObj);
+
+    }, [item]);
+
+    const addToBasket = useCallback(() => {
+        dispatch(MyBasketActions.addToBasket(item));
+        closeModal();
+    }, [dispatch, item, closeModal]);
 
 
     return (
@@ -59,22 +73,22 @@ export default function ServiceModal({ data, showModal, closeModal }) {
                         <Col xs={6} md={6}>
                             <div className="service-modal-info" >
                                 <div className="item-image" >
-                                    <img alt={'img'} className="image" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
+                                    <img alt={'img'} className="image" src={item.image ? `${API_URL}/${item.image}` : defaultImage} />
                                 </div>
                                 <div className="item-info" >
-                                    <h3>{data.title}</h3>
+                                    <h3>{item.title}</h3>
                                     <div className="item-description"  >
-                                        {data.description}
+                                        {item.description}
                                     </div>
                                 </div>
                                 <div className="item-quantity-price" >
-                                    <h2 className="font-weight-bold price" >${data.price}</h2>
+                                    <h2 className="font-weight-bold price" >${item.price}</h2>
 
                                     <div className="w-25  d-flex justify-content-between align-items-center" >
 
                                         <img alt="img" className="cursor-pointer" onClick={decrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
-                                        <span className="qty">{qtyCount}</span>
+                                        <span className="qty">{item.qty}</span>
 
                                         <img alt="img" className="cursor-pointer" onClick={incrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
@@ -83,7 +97,7 @@ export default function ServiceModal({ data, showModal, closeModal }) {
 
                                 </div>
                                 <div className="item-add">
-                                    <Button variant="primary" block className="" >Add to Basket</Button>
+                                    <Button variant="primary" block className="" onClick={addToBasket} >Add to Basket</Button>
                                 </div>
                             </div>
                         </Col>

@@ -1,9 +1,66 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Portlet, PortletBody, PortletHeader, PortletHeaderTitle, PortletFooter } from '../../partials/content/Portlet';
 
 import MyBasketItem from '../../partials/content/MyBasketItem';
 import MyBasketFooter from '../../partials/content/MyBasketFooter';
+import { useDispatch, useSelector } from 'react-redux';
+import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
+import { API_URL } from '../../store/services/config';
+import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
+
 export default function MyBasket({ history }) {
+
+    const dispatch = useDispatch();
+    const basketItems = useSelector(store => store?.mybasket?.items);
+
+    const [totalAmont, setTotalAmount] = useState(0);
+    const [totalHST, setTotalHST] = useState(0);
+    const [grandTotal, setGrandTotal] = useState(0);
+
+    const incrementQty = useCallback((id) => {
+        dispatch(MyBasketActions.incrementQty(id));
+    }, [dispatch]);
+
+    const decrementQty = useCallback((id) => {
+        if (basketItems[id].qty > basketItems[id].minQty)
+            dispatch(MyBasketActions.decrementQty(id));
+    }, [dispatch, basketItems]);
+
+    const removeFromBasket = useCallback((id) => {
+        dispatch(MyBasketActions.removeFromBasket(id));
+    }, [dispatch]);
+
+    const calculateTotal = useCallback((accumulator, key) => {
+        let item = basketItems[key];
+        let price = item.price;
+        let qty = item.qty;
+        let amount = price * qty;
+        return accumulator + amount;
+    }, [basketItems]);
+
+    const calculateAmount = useCallback(() => {
+        let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
+        amount = Math.abs(amount).toFixed(2);
+        setTotalAmount(amount);
+    }, [basketItems, calculateTotal]);
+
+    const calculateHST = useCallback(() => {
+        let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
+        setTotalHST(hst);
+    }, [totalAmont]);
+
+    const calculateGrandTotal = useCallback(() => {
+        let grandTotal = Number(totalAmont) + Number(totalHST);
+        grandTotal = Math.abs(grandTotal).toFixed(2);
+        setGrandTotal(grandTotal);
+    }, [totalAmont, totalHST]);
+
+    useEffect(() => {
+        calculateAmount();
+        calculateHST();
+        calculateGrandTotal();
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
+
     return (
         <>
             <h4 className="mb-3" >My Basket</h4>
@@ -26,7 +83,27 @@ export default function MyBasket({ history }) {
 
                                 </PortletHeader>
                                 <PortletBody className="" >
-                                    <MyBasketItem />
+
+                                    {
+                                        Object.keys(basketItems).map((v, i) => {
+                                            return (<MyBasketItem
+                                                key={i}
+                                                imageUrl={basketItems[v].image ? `${API_URL}/${basketItems[v].image}` : defaultImage}
+                                                title={basketItems[v].title}
+                                                qty={basketItems[v].qty}
+                                                price={basketItems[v].price}
+                                                incrementQty={() => incrementQty(basketItems[v].id)}
+                                                decrementQty={() => decrementQty(basketItems[v].id)}
+                                                removeFromBasket={() => removeFromBasket(basketItems[v].id)}
+                                            />);
+                                        })
+                                    }
+                                    {
+                                        Object.keys(basketItems).length === 0
+                                            ?
+                                            <h6 className="text-center" > No items in the basket </h6>
+                                            : null
+                                    }
                                 </PortletBody>
                                 <PortletFooter className="mybasket-footer d-flex     justify-content-between border-0" >
                                     <MyBasketFooter />
@@ -45,17 +122,17 @@ export default function MyBasket({ history }) {
                                     <div className="amounts-container " >
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >Total Amount</span>
-                                            <span className=" amount-num font-weight-bold"  >$400</span>
+                                            <span className=" amount-num font-weight-bold"  >${totalAmont}</span>
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >HST 13%</span>
-                                            <span className="amount-num font-weight-bold" >$31.20</span>
+                                            <span className="amount-num font-weight-bold" >${totalHST}</span>
                                         </div>
 
                                     </div>
                                     <div className="d-flex justify-content-between mt-3" >
                                         <h4>Grand Total</h4>
-                                        <h4 className=" font-weight-bold kt-font-primary" >$431.20</h4>
+                                        <h4 className=" font-weight-bold kt-font-primary" >${grandTotal}</h4>
                                     </div>
                                     <button onClick={() => history.push('/deliveryaddress')} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
                                 </PortletBody>

@@ -1,39 +1,39 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 
-export default function MyCartItem({imageUrl}) {
+
+export default function MyCartItem({ imageUrl, title, qty, price, incrementQty, decrementQty }) {
     return (
         <div className="kt-mycart__item">
             <div className="kt-mycart__container">
                 <div className="d-flex align-items-center" >
-                    <Link to="cart-item" className="kt-mycart__pic">
+                    <div to="cart-item" className="kt-mycart__pic">
                         <img
                             src={imageUrl}
                             alt="product"
                         />
-                    </Link>
+                    </div>
                     <div className="kt-mycart__info">
-                        <Link to="cart-item" className="kt-mycart__title">
-                            Wash & Fold 15Lbs
-                        </Link>
+                        <div to="cart-item" className="kt-mycart__title">
+                            {title}
+                        </div>
                         <span className="kt-mycart__desc">
-                            Profile info, Timeline etc
-      </span>
+
+                        </span>
 
                         <div className="kt-mycart__action">
-                            <span className="kt-mycart__price kt-font-primary">$ 450</span>
+                            <span className="kt-mycart__price kt-font-primary">$ {price}</span>
                         </div>
                     </div>
 
                 </div>
                 <div className="  d-flex flex-column justify-content-between align-items-center" >
 
-                    <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
+                    <img alt="img" onClick={incrementQty} className="cursor-pointer" src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
 
-                    <span className="kt-font-info font-weight-bold">1</span>
+                    <span className="kt-font-info font-weight-bold">{qty}</span>
 
-                    <img alt="img" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
+                    <img alt="img" onClick={decrementQty} className="cursor-pointer" src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
 
                 </div>
             </div>

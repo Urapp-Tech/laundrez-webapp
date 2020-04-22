@@ -1,7 +1,32 @@
-// import { MyBasketActionTypes } from './actions-types';
+import { MyBasketActionTypes } from './actions-types';
 
 export class MyBasketActions {
 
-    
+    static addToBasket(item) {
+        return {
+            type: MyBasketActionTypes.ADD_TO_BASKET,
+            payload: { item }
+        };
+    }
+
+    static incrementQty(id) {
+        return {
+            type: MyBasketActionTypes.INCREMENT_QTY,
+            payload: { id }
+        };
+    }
+    static decrementQty(id) {
+        return {
+            type: MyBasketActionTypes.DECREMENT_QTY,
+            payload: { id }
+        };
+    }
+
+    static removeFromBasket(id) {
+        return {
+            type: MyBasketActionTypes.REMOVE_FROM_BASKET,
+            payload: { id }
+        };
+    }
 
 }

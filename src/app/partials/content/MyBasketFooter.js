@@ -2,6 +2,7 @@ import React from 'react';
 import { InputGroup, FormControl } from 'react-bootstrap';
 import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
 import { ReactComponent as Coupon } from '../../../_metronic/layout/assets/layout-svg-icons/coupon.svg';
+import { Link } from 'react-router-dom';
 export default function MyBasketFooter() {
     return (
         <>
@@ -16,7 +17,7 @@ export default function MyBasketFooter() {
             </div>
             <div className="d-flex add-more-container " >
                 <Basket className="image-basket" />
-                <span className="text kt-font-primary" >Add More to Basket</span>
+                <Link to="/dashboard" className="text kt-font-primary" >Add More to Basket</Link>
             </div>
         </>
     );

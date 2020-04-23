@@ -383,3 +383,25 @@
 	// box-shadow: 1px 1px 1px gray;
 	
 }
+
+.order-review-item{
+  .product-image {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    border: 3px solid kt-base-color(label, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-position: center;
+      background-size: cover;
+      border-radius: 50px;
+      // border:2px solid kt-base-color(label, 2);
+    }
+  }
+}

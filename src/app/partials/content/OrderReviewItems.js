@@ -1,27 +1,27 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-export default function OrderReviewItems() {
+export default function OrderReviewItems({ qty, title, imageUrl, price }) {
     return (
-        <Row className="border-bottom mb-3" >
+        <Row className="border-bottom mb-3 order-review-item" >
             <Col>
                 <div className=" d-flex justify-content-center align-items-center">
-                    <div style={{width:'8rem'}} className="rounded-circle  border-image-theme mb-3" >
+                    <div sty className="rounded-circle product-image  border-image-theme mb-3" >
                         <img
-                            src={'https://i.ya-webdesign.com/images/clothes-model-png-2.png'}
+                            src={imageUrl}
                             alt="product"
                             className="img-fluid"
                         />
                     </div>
-                    <div className="ml-2 font-weight-bold"  >Wash & Fold 15 Lbs</div>
+                    <div className="ml-2 font-weight-bold w-25 "  >{title}</div>
                 </div>
             </Col>
             <Col className="d-flex justify-content-center align-items-center" >
-                <span> 3 Items </span>
+                <span> {qty} Items </span>
 
             </Col>
             <Col className="d-flex justify-content-end align-items-center" >
-                <span className="kt-font-primary font-weight-bold"> $150.00 </span>
+                <span className="kt-font-primary font-weight-bold"> ${Math.abs(qty * price).toFixed(2)} </span>
             </Col>
 
         </Row>

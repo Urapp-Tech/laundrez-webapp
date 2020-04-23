@@ -11,7 +11,7 @@ export default function MyBasketItem({ imageUrl, title, qty, price, incrementQty
                         alt="product"
                     />
                 </div>
-                <div className="ml-2 font-weight-bold"  >{title}</div>
+                <div className="ml-2 font-weight-bold w-25 "  >{title}</div>
             </div>
             <div className=" price d-flex justify-content-center  align-items-center" >${price}</div>
             <div className=" quantity d-flex justify-content-center  justify-content-between align-items-center" >

@@ -1,12 +1,57 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Row, Col } from 'react-bootstrap';
 import OrderReviewItems from '../../partials/content/OrderReviewItems';
 import PickAndDropInfo from '../../partials/content/PickAndDropInfo';
 import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
 import Map from '../../partials/layout/Map';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { API_URL } from '../../store/services/config';
+import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
+
 
 export default function OrderReview() {
+
+    const basketItems = useSelector(store => store?.mybasket?.items);
+
+    const [totalAmont, setTotalAmount] = useState(0);
+    const [totalHST, setTotalHST] = useState(0);
+    const [grandTotal, setGrandTotal] = useState(0);
+
+
+
+
+    const calculateTotal = useCallback((accumulator, key) => {
+        let item = basketItems[key];
+        let price = item.price;
+        let qty = item.qty;
+        let amount = price * qty;
+        return accumulator + amount;
+    }, [basketItems]);
+
+    const calculateAmount = useCallback(() => {
+        let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
+        amount = Math.abs(amount).toFixed(2);
+        setTotalAmount(amount);
+    }, [basketItems, calculateTotal]);
+
+    const calculateHST = useCallback(() => {
+        let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
+        setTotalHST(hst);
+    }, [totalAmont]);
+
+    const calculateGrandTotal = useCallback(() => {
+        let grandTotal = Number(totalAmont) + Number(totalHST);
+        grandTotal = Math.abs(grandTotal).toFixed(2);
+        setGrandTotal(grandTotal);
+    }, [totalAmont, totalHST]);
+
+    useEffect(() => {
+        calculateAmount();
+        calculateHST();
+        calculateGrandTotal();
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
     return (
         <>
             <h4 className="mb-3" >Order Review</h4>
@@ -17,8 +62,20 @@ export default function OrderReview() {
                             <Portlet className="">
                                 <PortletBody>
                                     <div>
-                                        <OrderReviewItems />
-                                        <OrderReviewItems />
+                                        {
+                                            Object.keys(basketItems).map((v, i) => {
+                                                return (<OrderReviewItems
+                                                    key={i}
+                                                    imageUrl={basketItems[v].image ? `${API_URL}/${basketItems[v].image}` : defaultImage}
+                                                    title={basketItems[v].title}
+                                                    qty={basketItems[v].qty}
+                                                    price={basketItems[v].price}
+
+                                                />);
+                                            })
+                                        }
+                                        {/* <OrderReviewItems />
+                                        <OrderReviewItems /> */}
                                     </div>
                                     <div>
                                         <PickAndDropInfo />
@@ -35,7 +92,7 @@ export default function OrderReview() {
                                         <Row className=" border-bottom pb-3 pt-4" >
                                             <Col className=" d-flex justify-content-between align-items-center" >
                                                 <h5>Payable Amount</h5>
-                                                <h6 className="kt-font-primary font-weight-bold" >$431.20</h6>
+                                                <h6 className="kt-font-primary font-weight-bold" >${grandTotal}</h6>
                                             </Col>
                                         </Row>
                                     </div>
@@ -44,7 +101,7 @@ export default function OrderReview() {
                                         <Row className=" pb-3 pt-4" >
                                             <Col className=" d-flex  align-items-center" >
                                                 <Basket style={{ width: '1rem', height: '1rem' }} />
-                                                <span className="ml-1 kt-font-primary" >Add More to Basket</span>
+                                                <Link to="/dashboard" className="ml-1 kt-font-primary" >Add More to Basket</Link>
                                             </Col>
                                             <Col className=" d-flex justify-content-between align-items-center" >
                                                 <button className="btn btn-block btn-primary-gradient btn-primary">Continue</button>

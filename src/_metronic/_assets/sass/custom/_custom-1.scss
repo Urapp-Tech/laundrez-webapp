@@ -159,7 +159,7 @@
     align-items: center;
     .per-item {
       font-weight: normal;
-      font-size: 0.4em ;
+      font-size: 0.4em;
       color: kt-get($kt-font-color, text);
     }
     .price {
@@ -408,4 +408,10 @@
       // border:2px solid kt-base-color(label, 2);
     }
   }
+}
+.toast-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 4;
 }

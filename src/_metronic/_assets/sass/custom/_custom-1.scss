@@ -44,8 +44,8 @@
 
 // category cards
 .category-card {
-  width: 15.3rem;
-  height: 250px;
+  width: 14rem;
+  height: 230px;
   box-shadow: 0 6px 20px 0 #2435532b;
   margin-left: auto;
   margin-right: auto;
@@ -86,6 +86,47 @@
 // margin b/w each service card
 .margin-card {
   margin-left: 15px;
+}
+
+// service cards
+.service-card {
+  width: 14.5rem;
+  height: 250px;
+  box-shadow: 0 6px 20px 0 #2435532b;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffffff;
+  cursor: pointer;
+
+  .service-image {
+    width: 113.4px;
+    height: 123.9px;
+    object-fit: contain;
+  }
+  h2 {
+    color: kt-state-color(primary, base);
+  }
+  .card-description {
+    width: 164px;
+    height: 28px;
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .service-card {
+    width: 17.3rem;
+    height: 260px;
+  }
 }
 
 //service modal info

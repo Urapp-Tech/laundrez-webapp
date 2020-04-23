@@ -29,7 +29,7 @@ export default function Services() {
     const closeModal = useCallback(() => {
         setShowModal(false);
         setSelectedService(null);
-    },[]);
+    }, []);
 
     return (
         <div>
@@ -38,10 +38,10 @@ export default function Services() {
                 {services.map((data, i) => {
                     return (
                         <div key={i} className="margin-card " onClick={() => onCardClick(i)} >
-                            <Portlet className="justify-content-center category-card kt-portlet--border-bottom-brand">
-                                <PortletBody className="justify-content-center align-items-center" >
-                                    <h5>{data.title}</h5>
-                                    <img className="category-image mb-1" alt="img" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
+                            <Portlet className="justify-content-center service-card kt-portlet--border-bottom-brand">
+                                <PortletBody className="justify-content-center align-items-center">
+                                    <h5 className="mt-3" >{data.title}</h5>
+                                    <img className="service-image mb-1" alt="img" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
                                     <div className="text-truncate card-description" >{data.shortDescription}</div>
                                     <h2 className="font-weight-bold price" >${data.price}</h2>
                                 </PortletBody>

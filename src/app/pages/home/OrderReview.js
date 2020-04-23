@@ -11,7 +11,7 @@ import { API_URL } from '../../store/services/config';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
 
 
-export default function OrderReview() {
+export default function OrderReview({ history }) {
 
     const basketItems = useSelector(store => store?.mybasket?.items);
 
@@ -104,7 +104,7 @@ export default function OrderReview() {
                                                 <Link to="/dashboard" className="ml-1 kt-font-primary" >Add More to Basket</Link>
                                             </Col>
                                             <Col className=" d-flex justify-content-between align-items-center" >
-                                                <button className="btn btn-block btn-primary-gradient btn-primary">Continue</button>
+                                                <button onClick={()=>history.push('/paymentdetails')}  className="btn btn-block btn-primary-gradient btn-primary">Continue</button>
 
                                             </Col>
                                         </Row>

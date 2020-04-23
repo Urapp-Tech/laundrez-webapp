@@ -51,6 +51,9 @@ export default function PickAndDrop({ history }) {
                                                     <Form.Label className="address-label" > <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} /> 2660 | 590 Bay Street</Form.Label>
                                                 </Form.Group>
                                             </Row>
+                                            <Row>
+                                                <button onClick={() => history.push('/deliveryaddress')} className="btn mb-3 ml-3 btn-primary-gradient btn-primary ">Add Address</button>
+                                            </Row>
                                         </div>
                                     </Form>
 

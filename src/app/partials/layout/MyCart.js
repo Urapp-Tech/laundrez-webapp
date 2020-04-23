@@ -156,9 +156,9 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
                 </div>
               </div>
               <div className="kt-mycart__button kt-align-right">
-                <button type="button" className=" btn-block btn-primary-gradient btn btn-primary">
+                <Link to="/mybasket" className=" btn-block btn-primary-gradient btn btn-primary">
                   Place Order
-                  </button>
+                  </Link>
               </div>
             </div>
           </div>

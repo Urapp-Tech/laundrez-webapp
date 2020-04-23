@@ -65,7 +65,7 @@ export default function ServiceModal({ data, showModal, closeModal }) {
             centered
             show={showModal}
             onHide={closeModal}
-          
+
         >
 
             <Modal.Body  >
@@ -81,9 +81,13 @@ export default function ServiceModal({ data, showModal, closeModal }) {
                                     <div className="item-description"  >
                                         {item.description}
                                     </div>
+                                    <span>Minimum Order : {item.minQty}</span>
                                 </div>
                                 <div className="item-quantity-price" >
-                                    <h2 className="font-weight-bold price" >${item.price}</h2>
+                                    <div>
+                                        <h2 className="font-weight-bold price" >${item.price}<span className="per-item" > / item</span></h2>
+
+                                    </div>
 
                                     <div className="w-25  d-flex justify-content-between align-items-center" >
 

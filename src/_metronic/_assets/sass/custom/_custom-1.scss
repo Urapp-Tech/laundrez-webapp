@@ -157,6 +157,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .per-item {
+      font-weight: normal;
+      font-size: 0.4em ;
+      color: kt-get($kt-font-color, text);
+    }
     .price {
       color: kt-state-color(primary, base);
     }
@@ -368,23 +373,22 @@
 }
 
 .notify-bubble {
-	position: absolute;
-	top: 30%;
-  height:1.4rem;
+  position: absolute;
+  top: 30%;
+  height: 1.4rem;
   width: 1.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-	background: linear-gradient(to bottom, #ed8f31, #ffa304);;
+  background: linear-gradient(to bottom, #ed8f31, #ffa304);
   color: #ffffff;
   border: solid 1px #ffffff;
-	font-size: 0.65em;
-	border-radius: 50%;
-	// box-shadow: 1px 1px 1px gray;
-	
+  font-size: 0.65em;
+  border-radius: 50%;
+  // box-shadow: 1px 1px 1px gray;
 }
 
-.order-review-item{
+.order-review-item {
   .product-image {
     width: 4rem;
     height: 4rem;

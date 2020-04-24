@@ -39,7 +39,7 @@ export class AuthEpics {
             })
                 , catchError((err) => {
                     AuthStorage.clearStorage();
-                    return of({ type: AuthActionTypes.GET_PROFILE_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    return of({ type: AuthActionTypes.GET_PROFILE_FAIL, payload: { err, message: err?.response?.message?err?.response?.message:err?.response?.Message, status: err?.status } });
                 }));
 
         }));

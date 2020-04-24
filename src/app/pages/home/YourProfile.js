@@ -307,6 +307,7 @@ export default function YourProfile() {
                                                 <Form.Control
                                                     type="email"
                                                     placeholder=""
+                                                    disabled
                                                     value={formValues.email}
                                                     onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
                                                 />

@@ -73,8 +73,8 @@ export default function MyBasket({ history }) {
                                     title={
                                         <div className="w-100 d-flex justify-content-between">
                                             <PortletHeaderTitle className="" ></PortletHeaderTitle>
-                                            <PortletHeaderTitle className="w-50  d-flex justify-content-center" >Products</PortletHeaderTitle>
-                                            <PortletHeaderTitle className="w-50 d-flex justify-content-center" >Price</PortletHeaderTitle>
+                                            <PortletHeaderTitle className="w-50  d-flex justify-content-center ml-3" >Products</PortletHeaderTitle>
+                                            <PortletHeaderTitle className="w-50 d-flex justify-content-center ml-3" >Price</PortletHeaderTitle>
                                             <PortletHeaderTitle className="w-50 d-flex justify-content-center" >Quantity</PortletHeaderTitle>
                                             <PortletHeaderTitle className="w-50 d-flex justify-content-center" >Subtotal</PortletHeaderTitle>
                                         </div>

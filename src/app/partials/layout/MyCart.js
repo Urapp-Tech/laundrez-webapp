@@ -73,7 +73,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
 
 
   return (
-    <Dropdown className="kt-header__topbar-item" drop="down" alignRight>
+    <Dropdown  className="kt-header__topbar-item" drop="down" alignRight>
       <Dropdown.Toggle as={HeaderDropdownToggle} id="dropdown-toggle-my-cart">
         {Object.keys(basketItems).length === 0 ? null : <span className="notify-bubble">{Object.keys(basketItems).length}</span>}
         <span
@@ -105,9 +105,9 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
                 <CartNum4Icon className=" kt-svg-icon--primary" />
               </div>
               <div className="kt-mycart__button">
-                <Link to="/mybasket" className="btn btn-outline-light btn-sm">
+                <span className="btn btn-outline-light btn-sm">
                   {Object.keys(basketItems).length} Items
-                  </Link>
+                  </span>
               </div>
             </div>
 

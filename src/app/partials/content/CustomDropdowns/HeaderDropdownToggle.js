@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const HeaderDropdownToggle = React.forwardRef((props, ref) => {
+  useEffect(() => {
+    let item = document.getElementById('place-order-item');
+    if (item)
+      item.classList.remove('dropdown-item');
+  });
   return (
     <div
       ref={ref}

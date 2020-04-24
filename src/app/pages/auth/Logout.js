@@ -3,15 +3,15 @@ import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { LayoutSplashScreen } from '../../../_metronic';
 import { AuthActions } from '../../store/ducks/auth-duck';
-import * as utils from '../../../_metronic/utils/utils';
+import { AuthStorage } from '../../store/ducks/auth-duck/auth-storage';
 export default function Logout() {
   const dispatch = useDispatch();
   useEffect(() => {
-    utils.clearStorage();
+    AuthStorage.clearStorage();
     dispatch(AuthActions.logout());
   }, [dispatch]);
 
-  return utils.getToken() ? <LayoutSplashScreen /> : <Redirect to="/auth" />;
+  return AuthStorage.getToken() ? <LayoutSplashScreen /> : <Redirect to="/auth" />;
 }
 
 //TODO: Logout functionality here

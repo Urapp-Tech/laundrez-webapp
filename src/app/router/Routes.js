@@ -13,11 +13,11 @@ import ErrorsPage from '../pages/errors/ErrorsPage';
 import LogoutPage from '../pages/auth/Logout';
 import { LayoutContextProvider } from '../../_metronic';
 import Layout from '../../_metronic/layout/Layout';
-import * as utils from '../../_metronic/utils/utils';
 import AuthPage from '../pages/auth/AuthPage';
 import { AuthActions } from '../store/ducks/auth-duck';
 import { MyBasketStorage } from '../store/ducks/mybasket-duck/basket-storage';
 import { MyBasketActions } from '../store/ducks/mybasket-duck/actions';
+import { AuthStorage } from '../store/ducks/auth-duck/auth-storage';
 
 export const Routes = withRouter(({ history }) => {
 
@@ -25,14 +25,14 @@ export const Routes = withRouter(({ history }) => {
   const { isAuthorized, menuConfig, user } = useSelector(
     ({ auth, builder: { menuConfig } }) => ({
       menuConfig,
-      isAuthorized: utils.getToken() !== null,
+      isAuthorized: AuthStorage.getUser() !== null,
       user: auth.user
     }),
     shallowEqual
   );
   useEffect(() => {
-    const token = utils.getToken();
-    const userFromStorage = utils.getUser();
+    const token = AuthStorage.getToken();
+    const userFromStorage = AuthStorage.getUser();
     if (token && Object.keys(userFromStorage).length && user === null) {
       dispatch(AuthActions.setUser(userFromStorage));
     }

@@ -1,10 +1,10 @@
 import { ajax } from 'rxjs/ajax';
 
 import { API_URL } from './config';
-import * as utils from '../../../_metronic/utils/utils';
+import { AuthStorage } from '../ducks/auth-duck/auth-storage';
 export class HttpService {
 
-    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
+    static get(url, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AuthStorage.getToken()}`}) {
         return ajax({
             url: `${API_URL}/api${url}`,
             headers,
@@ -16,7 +16,7 @@ export class HttpService {
         });
     } // get
 
-    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
+    static post(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AuthStorage.getToken()}`}) {
         return ajax({
             url: `${API_URL}/api${url}`,
             method: 'POST',
@@ -28,7 +28,7 @@ export class HttpService {
             createXHR: () => new XMLHttpRequest()
         });
     } // post
-    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
+    static put(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AuthStorage.getToken()}`}) {
         return ajax({
             url: `${API_URL}/api${url}`,
             method: 'PUT',
@@ -41,7 +41,7 @@ export class HttpService {
         });
     } // put
 
-    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${utils.getToken()}`}) {
+    static delete(url, body, headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${AuthStorage.getToken()}`}) {
         return ajax({
             url: `${API_URL}/api${url}`,
             method: 'DELETE',

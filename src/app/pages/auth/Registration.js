@@ -46,18 +46,11 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'firstName', message: 'Please provide first name' });
       return;
     }
-    // if (formValues.firstName.length < 3) {
-    //   setNotValid({ error: true, type: 'firstName', message: 'First Name is too short' });
-    //   return;
-    // }
+    
     if (!formValues.lastName) {
       setNotValid({ error: true, type: 'lastName', message: 'Please provide last name' });
       return;
     }
-    // if (formValues.lastName.length < 3) {
-    //   setNotValid({ error: true, type: 'lastName', message: 'Last Name is too short' });
-    //   return;
-    // }
     if (!formValues.phoneNo) {
       setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
       return;

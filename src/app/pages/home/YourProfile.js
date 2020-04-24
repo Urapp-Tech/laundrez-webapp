@@ -3,12 +3,19 @@ import { PortletBody, Portlet } from '../../partials/content/Portlet';
 import { Col, Row, Form, Toast } from 'react-bootstrap';
 import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { HttpService } from '../../store/services/http-service';
+import { AuthActions } from '../../store/ducks/auth-duck';
 
 
 export default function YourProfile() {
+    const dispatch = useDispatch();
     const user = useSelector(store => store?.auth?.user);
+    const isErrorProfile = useSelector(store => store?.auth?.isError);
+    const isErrorMessage = useSelector(store => store?.auth?.errorMsg);
+    const profileUpdateSucc = useSelector(store => store?.auth?.profileUpdateSucc);
+    const isProgressProfile = useSelector(store => store?.auth.isProgress);
+
     const [isSuccess, setSuccess] = useState(false);
     const [error, setError] = useState({ isError: false, message: '' });
     const [isProgress, setProgress] = useState(false);
@@ -16,7 +23,7 @@ export default function YourProfile() {
     const [formValues, setFormValues] = useState({
         firstName: '',
         lastName: '',
-        username: '',
+        email: '',
         phoneNo: '',
         postalCode: '',
         newPassword: '',
@@ -27,9 +34,18 @@ export default function YourProfile() {
     useEffect(() => {
         let { firstName,
             lastName,
-            username,
+            email,
+            phoneNo,
+            postalCode
+
         } = user;
-        setFormValues({ firstName, lastName, username });
+        setFormValues({
+            firstName,
+            lastName,
+            email,
+            phoneNo,
+            postalCode
+        });
     }, [user]);
 
     const onClickChangePassword = useCallback(() => {
@@ -68,19 +84,92 @@ export default function YourProfile() {
         }, (err) => {
             setProgress(false);
             window.scrollTo(0, 0);
-            setTimeout(() => {
-                setError({ isError: false, message: '' });
-            }, 3000);
             setError({ isError: true, message: err.response.Message });
         });
 
     }, [formValues, notValid]);
+
+    const onClickUpdateProfile = useCallback((e) => {
+        e.preventDefault();
+        if (isErrorProfile) {
+            dispatch(AuthActions.clearError());
+        }
+        if (notValid.error) {
+            setNotValid({ error: false, type: '', message: '' });
+        }
+        if (!formValues.firstName) {
+            setNotValid({ error: true, type: 'firstName', message: 'Please provide first name' });
+            return;
+        }
+
+        if (!formValues.lastName) {
+            setNotValid({ error: true, type: 'lastName', message: 'Please provide last name' });
+            return;
+        }
+        if (!formValues.phoneNo) {
+            setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
+            return;
+        }
+        if (!(/[+](1)?[0-9]{11}$/g.test(formValues.phoneNo))) {
+            setNotValid({ error: true, type: 'phoneNo', message: 'Please provide a valid phone number matching the format +1XXXXXXXXXX' });
+            return;
+        }
+
+        if (!formValues.email) {
+            setNotValid({ error: true, type: 'email', message: 'Please provide email' });
+            return;
+        }
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formValues.email)) {
+            setNotValid({ error: true, type: 'email', message: 'Invalid email' });
+            return;
+        }
+        if (formValues.postalCode.length < 1) {
+            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+            return;
+        }
+        let body = {
+            firstName: formValues.firstName,
+            lastName: formValues.lastName,
+            email: formValues.email,
+            phoneNo: formValues.phoneNo,
+            postalCode: formValues.postalCode,
+        };
+        dispatch(AuthActions.updateProfile(body));
+
+    }, [formValues, notValid, isErrorProfile, dispatch]);
+
+
+    useEffect(() => {
+        let _setTimeout;
+        if (profileUpdateSucc) {
+            clearTimeout(_setTimeout);
+            _setTimeout = setTimeout(() => {
+                dispatch(AuthActions.clearSuccess());
+            }, 3000);
+        }
+    }, [profileUpdateSucc, dispatch]);
+
+    useEffect(() => {
+        let _setTimeout;
+        if (error.isError) {
+            clearTimeout(_setTimeout);
+            _setTimeout = setTimeout(() => {
+                setError({ isError: false, message: '' });
+            }, 3000);
+        }
+        else if (isErrorProfile) {
+            clearTimeout(_setTimeout);
+            _setTimeout = setTimeout(() => {
+                dispatch(AuthActions.clearError());
+            }, 3000);
+        }
+    }, [error, isErrorProfile, dispatch]);
     return (
         <>
             <h4 className="mb-3" >Your Profile</h4>
 
 
-            <div
+            {isSuccess && <div
                 className="toast-container"
             >
                 <Toast show={isSuccess} onClose={() => setSuccess(false)}  >
@@ -92,17 +181,34 @@ export default function YourProfile() {
                     <Toast.Body>Password updated successfully</Toast.Body>
                 </Toast>
 
-            </div>
-            {error.isError && <div
+            </div>}
+
+            {profileUpdateSucc && <div
                 className="toast-container"
             >
-                <Toast show={error.isError} onClose={() => setError({ isError: false, message: '' })} >
+                <Toast show={profileUpdateSucc} onClose={() => dispatch(AuthActions.clearSuccess())}  >
+                    <Toast.Header>
+                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                        <strong className="mr-auto">Success</strong>
+
+                    </Toast.Header>
+                    <Toast.Body>Profile updated successfully</Toast.Body>
+                </Toast>
+
+            </div>}
+            {(error.isError || isErrorProfile) && <div
+                className="toast-container"
+            >
+                <Toast show={error.isError || isErrorProfile} onClose={() => {
+                    setError({ isError: false, message: '' });
+                    dispatch(AuthActions.clearError());
+                }} >
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
                         <strong className="mr-auto">Error</strong>
 
                     </Toast.Header>
-                    <Toast.Body>{error.message}</Toast.Body>
+                    <Toast.Body>{isErrorProfile ? isErrorMessage : error.message}</Toast.Body>
                 </Toast>
             </div>}
 
@@ -117,15 +223,15 @@ export default function YourProfile() {
                             </div>
                             <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                 <h6 className="text-secondary m-0" >Phone Number</h6>
-                                <h6 className="m-0" >+1 54 523 5478</h6>
+                                <h6 className="m-0" >{user?.phoneNo}</h6>
                             </div>
                             <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                 <h6 className="text-secondary m-0" >Email Address</h6>
-                                <h6 className="m-0" >{user?.username}</h6>
+                                <h6 className="m-0" >{user?.email}</h6>
                             </div>
                             <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                 <h6 className="text-secondary m-0" >Postal Code</h6>
-                                <h6 className="m-0" >M6G 2B4</h6>
+                                <h6 className="m-0" >{user?.postalCode}</h6>
                             </div>
                             <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                 <h6 className="text-secondary m-0" >Address 1</h6>
@@ -156,17 +262,19 @@ export default function YourProfile() {
                                                     value={formValues.firstName}
                                                     onChange={(e) => setFormValues({ ...formValues, firstName: e.target.value })}
                                                 />
+                                                {(notValid.error && notValid.type === 'firstName') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
                                             <Form.Group as={Col} controlId="phone">
                                                 <Form.Label>Phone Number</Form.Label>
                                                 <Form.Control
-                                                    type="number"
+                                                    type="tel"
                                                     placeholder=""
                                                     value={formValues.phoneNo}
                                                     onChange={(e) => setFormValues({ ...formValues, phoneNo: e.target.value })}
                                                 />
+                                                {(notValid.error && notValid.type === 'phoneNo') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
@@ -178,6 +286,7 @@ export default function YourProfile() {
                                                     value={formValues.postalCode}
                                                     onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
                                                 />
+                                                {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
@@ -189,6 +298,7 @@ export default function YourProfile() {
                                                     value={formValues.lastName}
                                                     onChange={(e) => setFormValues({ ...formValues, lastName: e.target.value })}
                                                 />
+                                                {(notValid.error && notValid.type === 'lastName') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
@@ -197,13 +307,14 @@ export default function YourProfile() {
                                                 <Form.Control
                                                     type="email"
                                                     placeholder=""
-                                                    value={formValues.username}
-                                                    onChange={(e) => setFormValues({ ...formValues, username: e.target.value })}
+                                                    value={formValues.email}
+                                                    onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
                                                 />
+                                                {(notValid.error && notValid.type === 'email') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row >
-                                            <button className="btn btn-primary  btn-primary-gradient btn-block" > Update Profile</button>
+                                            <button onClick={onClickUpdateProfile} className={isProgressProfile ? 'btn btn-primary  btn-primary-gradient btn-block pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Update Profile</button>
                                         </Row>
                                     </Form>
                                 </div>

@@ -24,5 +24,22 @@ export class AuthActions {
             type: AuthActionTypes.CLEAR_ERROR
         };
     }
+    static getProfile() {
+        return {
+            type: AuthActionTypes.GET_PROFILE_PROG
+        };
+    }
+    static updateProfile(body) {
+        return {
+            type: AuthActionTypes.UPDATE_PROFILE_PROG,
+            payload: { body }
+        };
+    }
+    static clearSuccess() {
+        return {
+            type: AuthActionTypes.CLEAR_SUCCESS,
+
+        };
+    }
 
 }

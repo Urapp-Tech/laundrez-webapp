@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { HttpService } from '../../store/services/http-service';
 import { AuthActions } from '../../store/ducks/auth-duck';
+import { AddressActions } from '../../store/ducks/address-duck/actions';
 
 
 export default function YourProfile() {
@@ -30,6 +31,10 @@ export default function YourProfile() {
         verifyPassword: '',
 
     });
+    const addresses = useSelector(store => store?.address?.addresses);
+    useEffect(() => {
+        dispatch(AddressActions.getAddresses());
+    }, [dispatch]);
 
     useEffect(() => {
         let { firstName,
@@ -233,10 +238,14 @@ export default function YourProfile() {
                                 <h6 className="text-secondary m-0" >Postal Code</h6>
                                 <h6 className="m-0" >{user?.postalCode}</h6>
                             </div>
-                            <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
-                                <h6 className="text-secondary m-0" >Address 1</h6>
-                                <h6 className="m-0" >2660 | 590 Bay Street</h6>
-                            </div>
+                            {addresses.map((v, i) => {
+                                return (<div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
+                                    <h6 className="text-secondary m-0" >Address {i + 1}</h6>
+                                    <h6 className="m-0" >{v?.postalCode} | {v?.streetAddress}</h6>
+                                </div>);
+
+                            })
+                            }
                             <div className="d-flex align-items-end" >
                                 <img src={Pin} alt={'img'} className="pin-image img-fluid" />
                                 <Link to="/deliveryaddress" >

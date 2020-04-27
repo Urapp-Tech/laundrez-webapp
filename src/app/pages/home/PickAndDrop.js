@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Form, Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddressActions } from '../../store/ducks/address-duck/actions';
 
 export default function PickAndDrop({ history }) {
+
+    const dispatch = useDispatch();
+    const addresses = useSelector(store => store?.address?.addresses);
+    useEffect(() => {
+        dispatch(AddressActions.getAddresses());
+    }, [dispatch]);
     return (
         <>
             <h4 className="mb-3" >Pick And Drop</h4>
@@ -39,18 +47,27 @@ export default function PickAndDrop({ history }) {
                                     </Form>
                                     <Form>
                                         <div className="border-bottom mt-3 d-block"  >
-                                            <Row>
-                                                <Form.Group as={Col} controlId="formGridStreet">
-                                                    <Form.Check inline placeholder="" />
-                                                    <Form.Label className="address-label" ><img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} /> 2003 | Bay Street</Form.Label>
-                                                </Form.Group>
-                                            </Row>
-                                            <Row>
+                                            {
+                                                addresses.map((v, i) => {
+                                                    return (
+                                                        <Row>
+                                                            <Form.Group as={Col} controlId="formGridStreet">
+                                                                <Form.Check inline placeholder="" />
+                                                                <Form.Label className="address-label" >
+                                                                    <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} />
+                                                                    <span className="ml-1" >{v?.postalCode} | {v?.streetAddress}</span></Form.Label>
+                                                            </Form.Group>
+                                                        </Row>
+                                                    );
+                                                })
+
+                                            }
+                                            {/* <Row>
                                                 <Form.Group as={Col} controlId="formGridStreet">
                                                     <Form.Check inline placeholder="" />
                                                     <Form.Label className="address-label" > <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} /> 2660 | 590 Bay Street</Form.Label>
                                                 </Form.Group>
-                                            </Row>
+                                            </Row> */}
                                             <Row>
                                                 <button onClick={() => history.push('/deliveryaddress')} className="btn mb-3 ml-3 btn-primary-gradient btn-primary ">Add Address</button>
                                             </Row>

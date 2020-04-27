@@ -4,7 +4,7 @@ import Garbage from '../../../_metronic/layout/assets/layout-svg-icons/garbage.s
 import UpdateAddressModal from '../layout/UpdateAddressModal';
 
 
-export default function SavedAddress() {
+export default function SavedAddress({ address }) {
     const [openModal, setOpenModal] = useState(false);
     return (
         <div className="border-bottom pb-3  d-flex justify-content-between align-items-center" >
@@ -12,12 +12,12 @@ export default function SavedAddress() {
                 <span>
                     <img src={Pin} className="pin-image img-fluid " alt={'pin'} />
                 </span>
-                <span className="ml-2 street-text cursor " > 2003 | 750 Bay Street</span>
+                <span className="ml-2 street-text cursor " > {address?.postalCode} | {address?.streetAddress}</span>
             </div>
             <span className="cursor-pointer" >
                 <img src={Garbage} className="pin-image img-fluid " alt={'img'} />
             </span>
-            <UpdateAddressModal showModal={openModal} toggleModal={() => setOpenModal(!openModal)} />
+            <UpdateAddressModal address={address} showModal={openModal} toggleModal={() => setOpenModal(!openModal)} />
         </div>
     );
 }

@@ -1,10 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Col, Row, Form } from 'react-bootstrap';
 import SavedAddress from '../../partials/content/SavedAddress';
 import GooglePlacesAutocomplete, { geocodeByAddress } from 'react-google-places-autocomplete';
-import { /* useSelector */ } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { AddressActions } from '../../store/ducks/address-duck/actions';
 export default function DeliveryAddress() {
+    const dispatch = useDispatch();
     const [formValues, setFormValues] = useState({
         street: '',
         state: '',
@@ -19,7 +21,14 @@ export default function DeliveryAddress() {
         formattedAddress: ''
     });
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
-    // const user = useSelector(store => store?.auth?.user);
+    const user = useSelector(store => store?.auth?.user);
+
+    const addresses = useSelector(store => store?.address?.addresses);
+
+    useEffect(() => {
+        dispatch(AddressActions.getAddresses());
+    }, [dispatch]);
+
 
     const onFocusPhoneNumInput = useCallback(() => {
         if (formValues.phoneNo.length === 0) {
@@ -79,7 +88,7 @@ export default function DeliveryAddress() {
                 });
 
             });
-    },[formValues]);
+    }, [formValues]);
     const onClickSaveAddress = useCallback(() => {
         // if (error.isError) {
         //     setError({ isError: false, message: '' });
@@ -101,18 +110,19 @@ export default function DeliveryAddress() {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide a valid phone number matching the format +1XXXXXXXXXX' });
             return;
         }
-        // let body = {
-        //     userId: user.id,
-        //     type: formValues.propertyType,
-        //     streetAddress: formValues.street,
-        //     city: formValues.city,
-        //     state: formValues.state,
-        //     postalCode: formValues.postalCode,
-        //     phone: formValues.phoneNo,
-        //     lang: formValues.lng,
-        //     lat: formValues.lat,
-        // };
-    }, [formValues, notValid, /* user */]);
+        let body = {
+            userId: user.id,
+            type: formValues.propertyType,
+            streetAddress: formValues.street,
+            city: formValues.city,
+            state: formValues.state,
+            postalCode: formValues.postalCode,
+            phone: formValues.phoneNo,
+            lang: formValues.lng,
+            lat: formValues.lat,
+        };
+        dispatch(AddressActions.saveAddress(body));
+    }, [formValues, notValid, user, dispatch]);
     return (
         <>
             <h4 className="mb-3" >Delivery Address</h4>
@@ -258,7 +268,11 @@ export default function DeliveryAddress() {
                             <h5 className="mb-3" >Saved Address</h5>
                             <div className="row" >
                                 <div className="col-md-12">
-                                    <SavedAddress />
+                                    {
+                                        addresses.map((v, i) => {
+                                            return (<SavedAddress address={v} key={i} />);
+                                        })
+                                    }
                                 </div>
                             </div>
                         </PortletBody>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Col, Row, Form } from 'react-bootstrap';
 import SavedAddress from '../../partials/content/SavedAddress';
-import GooglePlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete, { geocodeByAddress } from 'react-google-places-autocomplete';
 export default function DeliveryAddress() {
     const [formValues, setFormValues] = useState({
         street: '',
@@ -24,7 +24,6 @@ export default function DeliveryAddress() {
         geocodeByAddress(obj.description)
             .then(results => {
                 let _results = results[0];
-                console.log(_results);
                 let lat = _results.geometry.location.lat();
                 let lng = _results.geometry.location.lng();
                 let formattedAddress = _results.formatted_address;

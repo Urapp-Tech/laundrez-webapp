@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Row, Col } from 'react-bootstrap';
-
+import ScrollTop from '../../partials/layout/ScrollTop';
 export default function PrivacyPolicy() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="container py-5" >
+            <ScrollTop />
             <h4 className="mb-3" >Privacy Policy</h4>
             <Row >
                 <Col md={12} >

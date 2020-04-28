@@ -97,6 +97,11 @@ export default class MenuItem extends React.Component {
         data-ktmenu-dropdown-toggle-class={item['dropdown-toggle-class']}
       >
         {!item.submenu && (
+          item.page ==='contactus'?
+          <a href="mailto:someone@example.com?Subject=Hello%20again" className="kt-menu__link kt-menu__toggle">
+            <MenuItemText item={item} parentItem={parentItem} />
+          </a>
+          :
           <Link to={{
             pathname: `/${item.page}`,
             state: { category: item.category }
@@ -107,7 +112,7 @@ export default class MenuItem extends React.Component {
 
         {item.submenu && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a className="kt-menu__link kt-menu__toggle">
+          <a href="mailto:someone@example.com?Subject=Hello%20again" className="kt-menu__link kt-menu__toggle">
             <MenuItemText item={item} parentItem={parentItem} />
           </a>
         )}

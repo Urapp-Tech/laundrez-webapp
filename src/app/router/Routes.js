@@ -18,6 +18,8 @@ import { AuthActions } from '../store/ducks/auth-duck';
 import { MyBasketStorage } from '../store/ducks/mybasket-duck/basket-storage';
 import { MyBasketActions } from '../store/ducks/mybasket-duck/actions';
 import { AuthStorage } from '../store/ducks/auth-duck/auth-storage';
+import SuccessToast from '../partials/content/SuccessToast';
+import ErrorToast from '../partials/content/ErrorToast';
 
 export const Routes = withRouter(({ history }) => {
 
@@ -63,6 +65,8 @@ export const Routes = withRouter(({ history }) => {
           <Redirect to="/auth/login" />
         ) : (
             <Layout>
+              <SuccessToast />
+              <ErrorToast />
               <HomePage />
             </Layout>
           )}

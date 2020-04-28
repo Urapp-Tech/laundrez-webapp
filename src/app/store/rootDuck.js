@@ -5,6 +5,7 @@ import * as category from './ducks/category-duck';
 import * as service from './ducks/service-duck';
 import * as mybasket from './ducks/mybasket-duck';
 import * as address from './ducks/address-duck';
+import * as notification from './ducks/notification-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
@@ -13,7 +14,8 @@ const appReducer = combineReducers({
   category: category.CategoryReducer,
   service: service.ServiceReducer,
   mybasket: mybasket.MyBasketReducer,
-  address: address.AddressReducer
+  address: address.AddressReducer,
+  notification: notification.NotificationReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {

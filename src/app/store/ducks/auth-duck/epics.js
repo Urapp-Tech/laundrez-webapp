@@ -4,6 +4,7 @@ import { switchMap, pluck, catchError, map, flatMap } from 'rxjs/operators';
 import { AuthActionTypes } from './actions-types';
 import { AuthStorage } from './auth-storage';
 import { AuthActions } from './actions';
+import { NotificationActions } from '../notification-duck';
 export class AuthEpics {
     static login(action$, state$, { ajaxPost }) {
         return action$.pipe(ofType(AuthActionTypes.LOGIN_PROG), switchMap(({ payload }) => {
@@ -39,7 +40,7 @@ export class AuthEpics {
             })
                 , catchError((err) => {
                     AuthStorage.clearStorage();
-                    return of({ type: AuthActionTypes.GET_PROFILE_FAIL, payload: { err, message: err?.response?.message?err?.response?.message:err?.response?.Message, status: err?.status } });
+                    return of({ type: AuthActionTypes.GET_PROFILE_FAIL, payload: { err, message: err?.response?.message ? err?.response?.message : err?.response?.Message, status: err?.status } });
                 }));
 
         }));
@@ -47,19 +48,30 @@ export class AuthEpics {
 
     static updateProfile(action$, state$, { ajaxPut }) {
         return action$.pipe(ofType(AuthActionTypes.UPDATE_PROFILE_PROG), switchMap(({ payload }) => {
-            return ajaxPut('/User', payload.body).pipe(pluck('response'), map(obj => {
+            return ajaxPut('/User', payload.body).pipe(pluck('response'), flatMap(obj => {
                 let { id, username, firstName, lastName, email, phoneNo, postalCode } = obj.result;
                 let user = { id, username, firstName, lastName, email, phoneNo, postalCode };
                 AuthStorage.setUser(user);
                 window.scrollTo(0, 0);
-               
-                return {
+
+                return of({
                     type: AuthActionTypes.UPDATE_PROFILE_SUCC,
                     payload: { user }
-                };
+                }, NotificationActions.showSuccessNotification('Profile updated successfully'));
             }), catchError((err) => {
                 window.scrollTo(0, 0);
-                return of({ type: AuthActionTypes.UPDATE_PROFILE_FAIL, payload: { err, message: err?.response?.message ? err?.response?.message : err?.response?.Message, status: err?.status } });
+
+                return of(
+                    {
+                        type: AuthActionTypes.UPDATE_PROFILE_FAIL,
+                        payload: {
+                            err,
+                            message: err?.response?.message ? err?.response?.message : err?.response?.Message,
+                            status: err?.status
+                        }
+                    },
+                    NotificationActions.showErrorNotification(err?.response?.message ? err?.response?.message : err?.response?.Message)
+                );
             }));
 
         }));

@@ -1,24 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { PortletBody, Portlet } from '../../partials/content/Portlet';
-import { Col, Row, Form, Toast } from 'react-bootstrap';
+import { Col, Row, Form } from 'react-bootstrap';
 import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { HttpService } from '../../store/services/http-service';
 import { AuthActions } from '../../store/ducks/auth-duck';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
+import { NotificationActions } from '../../store/ducks/notification-duck';
 
 
 export default function YourProfile() {
     const dispatch = useDispatch();
     const user = useSelector(store => store?.auth?.user);
     const isErrorProfile = useSelector(store => store?.auth?.isError);
-    const isErrorMessage = useSelector(store => store?.auth?.errorMsg);
-    const profileUpdateSucc = useSelector(store => store?.auth?.profileUpdateSucc);
     const isProgressProfile = useSelector(store => store?.auth.isProgress);
 
-    const [isSuccess, setSuccess] = useState(false);
-    const [error, setError] = useState({ isError: false, message: '' });
     const [isProgress, setProgress] = useState(false);
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const [formValues, setFormValues] = useState({
@@ -75,24 +72,21 @@ export default function YourProfile() {
         setProgress(true);
         HttpService.put('/User/changepassword/', body).subscribe(() => {
             setProgress(false);
-            setSuccess(true);
             setFormValues({
                 ...formValues,
                 newPassword: '',
                 verifyPassword: '',
             });
             window.scrollTo(0, 0);
-            setTimeout(() => {
-                setSuccess(false);
-            }, 3000);
+            dispatch(NotificationActions.showSuccessNotification('Password changed successfully'));
 
         }, (err) => {
             setProgress(false);
             window.scrollTo(0, 0);
-            setError({ isError: true, message: err.response.Message });
+            dispatch(NotificationActions.showErrorNotification(err?.response?.Message || err?.response?.message));
         });
 
-    }, [formValues, notValid]);
+    }, [formValues, notValid, dispatch]);
 
     const onClickUpdateProfile = useCallback((e) => {
         e.preventDefault();
@@ -143,81 +137,9 @@ export default function YourProfile() {
 
     }, [formValues, notValid, isErrorProfile, dispatch]);
 
-
-    useEffect(() => {
-        let _setTimeout;
-        if (profileUpdateSucc) {
-            clearTimeout(_setTimeout);
-            _setTimeout = setTimeout(() => {
-                dispatch(AuthActions.clearSuccess());
-            }, 3000);
-        }
-    }, [profileUpdateSucc, dispatch]);
-
-    useEffect(() => {
-        let _setTimeout;
-        if (error.isError) {
-            clearTimeout(_setTimeout);
-            _setTimeout = setTimeout(() => {
-                setError({ isError: false, message: '' });
-            }, 3000);
-        }
-        else if (isErrorProfile) {
-            clearTimeout(_setTimeout);
-            _setTimeout = setTimeout(() => {
-                dispatch(AuthActions.clearError());
-            }, 3000);
-        }
-    }, [error, isErrorProfile, dispatch]);
     return (
         <>
             <h4 className="mb-3" >Your Profile</h4>
-
-
-            {isSuccess && <div
-                className="toast-container"
-            >
-                <Toast show={isSuccess} onClose={() => setSuccess(false)}  >
-                    <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                        <strong className="mr-auto">Success</strong>
-
-                    </Toast.Header>
-                    <Toast.Body>Password updated successfully</Toast.Body>
-                </Toast>
-
-            </div>}
-
-            {profileUpdateSucc && <div
-                className="toast-container"
-            >
-                <Toast show={profileUpdateSucc} onClose={() => dispatch(AuthActions.clearSuccess())}  >
-                    <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                        <strong className="mr-auto">Success</strong>
-
-                    </Toast.Header>
-                    <Toast.Body>Profile updated successfully</Toast.Body>
-                </Toast>
-
-            </div>}
-            {(error.isError || isErrorProfile) && <div
-                className="toast-container"
-            >
-                <Toast show={error.isError || isErrorProfile} onClose={() => {
-                    setError({ isError: false, message: '' });
-                    dispatch(AuthActions.clearError());
-                }} >
-                    <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                        <strong className="mr-auto">Error</strong>
-
-                    </Toast.Header>
-                    <Toast.Body>{isErrorProfile ? isErrorMessage : error.message}</Toast.Body>
-                </Toast>
-            </div>}
-
-
             <div className="row">
                 <div className="col-md-5">
                     <Portlet className="">

@@ -98,7 +98,7 @@ export default class MenuItem extends React.Component {
       >
         {!item.submenu && (
           item.page ==='contactus'?
-          <a href="mailto:someone@example.com?Subject=Hello%20again" className="kt-menu__link kt-menu__toggle">
+          <a href="mailto:laundrez.dev@gmail.com" className="kt-menu__link kt-menu__toggle">
             <MenuItemText item={item} parentItem={parentItem} />
           </a>
           :
@@ -112,7 +112,7 @@ export default class MenuItem extends React.Component {
 
         {item.submenu && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a href="mailto:someone@example.com?Subject=Hello%20again" className="kt-menu__link kt-menu__toggle">
+          <a  className="kt-menu__link kt-menu__toggle">
             <MenuItemText item={item} parentItem={parentItem} />
           </a>
         )}

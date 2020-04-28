@@ -192,7 +192,7 @@ export default function Registration({ history }) {
           <Row className="justify-content-center " >
             <Col className=" mt-4 mb-4" >
               <span className=" text-center" >
-                By signing up. you accept our<Link to="/" > <h6 className="mb-0  d-inline " > Terms and Conditions </h6> </Link> and<Link to="/" > <h6 className="mb-0  d-inline " > Privacy Policy </h6> </Link>
+                By signing up. you accept our<Link to="/termsandcondition" > <h6 className="mb-0  d-inline " > Terms and Conditions </h6> </Link> and<Link to="/privacypolicy" > <h6 className="mb-0  d-inline " > Privacy Policy </h6> </Link>
               </span>
             </Col>
           </Row>

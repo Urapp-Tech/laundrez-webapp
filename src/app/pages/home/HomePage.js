@@ -14,8 +14,6 @@ import PaymentSettings from './PaymentSettings';
 import PaymentDetails from './PaymentDetails';
 import YourProfile from './YourProfile';
 import Faqs from './Faqs';
-import TermsAndCondtion from './TermsAndCondition';
-import PrivacyPolicy from './PrivacyPolicy';
 import { CategoryActions } from '../../store/ducks/category-duck';
 import { useDispatch } from 'react-redux';
 
@@ -48,8 +46,7 @@ export default function HomePage() {
         <Route path="/paymentdetails" component={PaymentDetails} />
         <Route path="/profile" component={YourProfile} />
         <Route path="/faqs" component={Faqs} />
-        <Route path="/termsandcondition" component={TermsAndCondtion} />
-        <Route path="/privacypolicy" component={PrivacyPolicy} />
+       
 
 
 

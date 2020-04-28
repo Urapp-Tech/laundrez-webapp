@@ -20,6 +20,8 @@ import { MyBasketActions } from '../store/ducks/mybasket-duck/actions';
 import { AuthStorage } from '../store/ducks/auth-duck/auth-storage';
 import SuccessToast from '../partials/content/SuccessToast';
 import ErrorToast from '../partials/content/ErrorToast';
+import TermsAndCondtion from '../pages/home/TermsAndCondition';
+import PrivacyPolicy from '../pages/home/PrivacyPolicy';
 
 export const Routes = withRouter(({ history }) => {
 
@@ -49,6 +51,8 @@ export const Routes = withRouter(({ history }) => {
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>
       <Switch>
+        <Route path="/termsandcondition" component={TermsAndCondtion} />
+        <Route path="/privacypolicy" component={PrivacyPolicy} />
         {!isAuthorized ? (
           /* Render auth page when user at `/auth` and not authorized. */
           <AuthPage />

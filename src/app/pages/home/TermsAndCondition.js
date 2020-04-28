@@ -1,12 +1,13 @@
 import React from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
+import { Row, Col } from 'react-bootstrap';
 
 export default function TermsAndCondtion() {
     return (
-        <>
-            <h4 className="mb-3" >Terms & Conditions</h4>
-            <div className="row">
-                <div className="col-xl-12">
+        <div className="container py-5" >
+            <h4 className="mb-3 " >Terms & Conditions</h4>
+            <Row >
+                <Col md={12}>
                     <Portlet className="">
                         <PortletBody>
                             <h4 className="text-primary mb-3" >Last Update: 1April, 2019</h4>
@@ -47,8 +48,8 @@ export default function TermsAndCondtion() {
 interfere with any other persons’ use and enjoyment of this Service or of the Internet generally.</p>
                         </PortletBody>
                     </Portlet>
-                </div>
-            </div>
-        </>
+                </Col>
+            </Row>
+        </div>
     );
 }

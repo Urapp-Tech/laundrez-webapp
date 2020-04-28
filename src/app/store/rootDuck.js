@@ -6,6 +6,7 @@ import * as service from './ducks/service-duck';
 import * as mybasket from './ducks/mybasket-duck';
 import * as address from './ducks/address-duck';
 import * as notification from './ducks/notification-duck';
+import * as faq from './ducks/faq-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
@@ -15,7 +16,8 @@ const appReducer = combineReducers({
   service: service.ServiceReducer,
   mybasket: mybasket.MyBasketReducer,
   address: address.AddressReducer,
-  notification: notification.NotificationReducer
+  notification: notification.NotificationReducer,
+  faq: faq.FaqReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {
@@ -38,6 +40,8 @@ export const rootEpic = combineEpics(
   address.AddressEpics.saveAddress,
   address.AddressEpics.getAddresses,
   address.AddressEpics.updateAddress,
+
+  faq.FaqEpics.getFaqs
 
 
 

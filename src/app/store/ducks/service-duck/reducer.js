@@ -1,10 +1,11 @@
 import { ServiceActionTypes } from './actions-types';
 const initState = {
-  isProgress: false,
+  isProgress: true,
   isError: false,
   errorMsg: '',
   errorStatus: 0,
   services: [],
+  service: null,
   serviceFaq: []
 };
 export function ServiceReducer(state = initState, action) {
@@ -18,18 +19,24 @@ export function ServiceReducer(state = initState, action) {
     case ServiceActionTypes.SERVICES_FAIL:
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
+    case ServiceActionTypes.CLEAR_SERVICES:
+      return { ...state, services: [] };
 
-    case ServiceActionTypes.GET_SERVICE_FAQ_PROG:
+
+    case ServiceActionTypes.GET_SERVICE_PROG:
       return { ...state, isProgress: true };
 
-    case ServiceActionTypes.GET_SERVICE_FAQ_SUCC:
-      return { ...state, isProgress: false, serviceFaq: action.payload.serviceFaq };
+    case ServiceActionTypes.GET_SERVICE_SUCC:
+      return { ...state, isProgress: false, service: action.payload.service };
 
-    case ServiceActionTypes.GET_SERVICE_FAQ_FAIL:
+    case ServiceActionTypes.GET_SERVICE_FAIL:
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
-    case ServiceActionTypes.CLEAR_SERVICE_FAQ:
-      return { ...state, serviceFaq: [] };
+
+    case ServiceActionTypes.CLEAR_SERVICE:
+      return { ...state, service: null };
+
+
     default:
       return state;
   }

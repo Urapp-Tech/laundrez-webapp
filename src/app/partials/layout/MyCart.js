@@ -124,6 +124,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
                       title={basketItems[v].title}
                       qty={basketItems[v].qty}
                       price={basketItems[v].price}
+                      categoryTitle={basketItems[v]?.category?.title}
                       incrementQty={() => incrementQty(basketItems[v].id)}
                       decrementQty={() => decrementQty(basketItems[v].id)}
                     />);

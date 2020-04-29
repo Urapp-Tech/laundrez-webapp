@@ -3,7 +3,6 @@ import { Modal, Container, Row, Col, Button, Accordion, useAccordionToggle } fro
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
 import { API_URL } from '../../store/services/config';
 import { useDispatch, useSelector } from 'react-redux';
-import { ServiceActions } from '../../store/ducks/service-duck';
 import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 
 function CustomToggle({ eventKey, question }) {
@@ -20,19 +19,18 @@ function CustomToggle({ eventKey, question }) {
     );
 }
 
-export default function ServiceModal({ data, showModal, closeModal }) {
+export default function ServiceModal({ showModal, closeModal }) {
 
     const dispatch = useDispatch();
-    const serviceFaq = useSelector(store => store?.service?.serviceFaq);
+    const isProgress = useSelector(store => store?.service?.isProgress);
+    const service = useSelector(store => store?.service?.service);
     const [item, setItem] = useState({});
 
     useEffect(() => {
-        dispatch(ServiceActions.clearServiceFaq());
-        dispatch(ServiceActions.getServieFaq(data.id));
-        let item = { ...data };
-        item['qty'] = data.minQty;
+        let item = { ...service };
+        item['qty'] = service.minQty;
         setItem(item);
-    }, [data, dispatch]);
+    }, [service]);
 
     const incrementQtyCount = useCallback(() => {
         let itemObj = { ...item };
@@ -65,77 +63,81 @@ export default function ServiceModal({ data, showModal, closeModal }) {
             centered
             show={showModal}
             onHide={closeModal}
-
         >
 
             <Modal.Body  >
-                <Container>
-                    <Row className="show-grid">
-                        <Col xs={6} md={6}>
-                            <div className="service-modal-info" >
-                                <div className="item-image" >
-                                    <img alt={'img'} className="image" src={item.image ? `${API_URL}/${item.image}` : defaultImage} />
-                                </div>
-                                <div className="item-info" >
-                                    <h3>{item.title}</h3>
-                                    <div className="item-description"  >
-                                        {item.description}
+                {
+                    isProgress ?
+                        <div className="kt-spinner kt-spinner--center kt-spinner--primary mt-4" ></div>
+                        :
+                        <Container>
+                            <Row className="show-grid">
+                                <Col xs={6} md={6}>
+                                    <div className="service-modal-info" >
+                                        <div className="item-image" >
+                                            <img alt={'img'} className="image" src={item.image ? `${API_URL}/${item.image}` : defaultImage} />
+                                        </div>
+                                        <div className="item-info" >
+                                            <h3>{item.title}</h3>
+                                            <div className="item-description"  >
+                                                {item.description}
+                                            </div>
+                                            <span>Minimum Order : {item.minQty}</span>
+                                        </div>
+                                        <div className="item-quantity-price" >
+                                            <div>
+                                                <h2 className="font-weight-bold price" >${item.price}<span className="per-item" > / item</span></h2>
+
+                                            </div>
+
+                                            <div className="w-25  d-flex justify-content-between align-items-center" >
+
+                                                <img alt="img" className="cursor-pointer" onClick={decrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
+
+                                                <span className="qty">{item.qty}</span>
+
+                                                <img alt="img" className="cursor-pointer" onClick={incrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
+
+                                            </div>
+
+
+                                        </div>
+                                        <div className="item-add">
+                                            <Button variant="primary" block className="" onClick={addToBasket} >Add to Basket</Button>
+                                        </div>
                                     </div>
-                                    <span>Minimum Order : {item.minQty}</span>
-                                </div>
-                                <div className="item-quantity-price" >
-                                    <div>
-                                        <h2 className="font-weight-bold price" >${item.price}<span className="per-item" > / item</span></h2>
+                                </Col>
+                                <Col xs={6} md={6}>
+                                    <div className="service-modal-faq" >
+                                        <div className="d-flex justify-content-end mb-3" >
+                                            <div onClick={closeModal} className="fas fa-times"></div>
+                                        </div>
+                                        {item?.listFAQ?.map((v, i) => {
+                                            return (<div key={i} className="accordion-container mb-2" >
+                                                <Accordion defaultActiveKey="0">
+                                                    <CustomToggle question={v.question} eventKey="1">Click me!</CustomToggle>
+
+                                                    <Accordion.Collapse eventKey="1">
+                                                        <div className="faq-ans" >
+                                                            {v.answer}
+                                                        </div>
+                                                    </Accordion.Collapse>
+                                                </Accordion>
+                                            </div>);
+                                        })
+                                        }
+
+
+
+
 
                                     </div>
-
-                                    <div className="w-25  d-flex justify-content-between align-items-center" >
-
-                                        <img alt="img" className="cursor-pointer" onClick={decrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/minus.svg')} />
-
-                                        <span className="qty">{item.qty}</span>
-
-                                        <img alt="img" className="cursor-pointer" onClick={incrementQtyCount} src={require('../../../_metronic/layout/assets/layout-svg-icons/plus.svg')} />
-
-                                    </div>
+                                </Col>
+                            </Row>
 
 
-                                </div>
-                                <div className="item-add">
-                                    <Button variant="primary" block className="" onClick={addToBasket} >Add to Basket</Button>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col xs={6} md={6}>
-                            <div className="service-modal-faq" >
-                                <div className="d-flex justify-content-end mb-3" >
-                                    <div onClick={closeModal} className="fas fa-times"></div>
-                                </div>
-                                {serviceFaq.map((v, i) => {
-                                    return (<div key={i} className="accordion-container mb-2" >
-                                        <Accordion defaultActiveKey="0">
-                                            <CustomToggle question={v.question} eventKey="1">Click me!</CustomToggle>
-
-                                            <Accordion.Collapse eventKey="1">
-                                                <div className="faq-ans" >
-                                                    {v.answer}
-                                                </div>
-                                            </Accordion.Collapse>
-                                        </Accordion>
-                                    </div>);
-                                })
-                                }
-
-
-
-
-
-                            </div>
-                        </Col>
-                    </Row>
-
-
-                </Container>
+                        </Container>
+                }
             </Modal.Body>
         </Modal>
     );

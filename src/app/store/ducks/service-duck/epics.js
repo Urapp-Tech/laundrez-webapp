@@ -22,22 +22,24 @@ export class ServiceEpics {
         }));
     }
 
-    static getServiceFaq(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(ServiceActionTypes.GET_SERVICE_FAQ_PROG), switchMap(({ payload }) => {
-            return ajaxGet(`/FAQ/all?page[number]=1&page[size]=1000&filters[serviceId]=${payload.serviceId}`).pipe(pluck('response'), flatMap(obj => {
-                let serviceFaq = obj.result;
+    static getService(action$, state$, { ajaxGet }) {
+        return action$.pipe(ofType(ServiceActionTypes.GET_SERVICE_PROG), switchMap(({ payload }) => {
+            return ajaxGet(`/Service/${payload.serviceId}`).pipe(pluck('response'), flatMap(obj => {
+                let service = obj.result;
                 return of(
                     {
-                        type: ServiceActionTypes.GET_SERVICE_FAQ_SUCC,
-                        payload: { serviceFaq }
+                        type: ServiceActionTypes.GET_SERVICE_SUCC,
+                        payload: { service }
                     },
 
                 );
             })
                 , catchError((err) => {
-                    return of({ type: ServiceActionTypes.GET_SERVICE_FAQ_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    return of({ type: ServiceActionTypes.GET_SERVICE_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));
     }
+
+    
 }

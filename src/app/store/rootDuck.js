@@ -35,7 +35,7 @@ export const rootEpic = combineEpics(
   category.CategoryEpics.getCategories,
 
   service.ServiceEpics.getServices,
-  service.ServiceEpics.getServiceFaq,
+  service.ServiceEpics.getService,
 
   address.AddressEpics.saveAddress,
   address.AddressEpics.getAddresses,

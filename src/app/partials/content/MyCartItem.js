@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-export default function MyCartItem({ imageUrl, title, qty, price, incrementQty, decrementQty }) {
+export default function MyCartItem({ imageUrl, title, qty, price, incrementQty, decrementQty, categoryTitle }) {
     return (
         <div className="kt-mycart__item">
             <div className="kt-mycart__container">
@@ -18,7 +18,7 @@ export default function MyCartItem({ imageUrl, title, qty, price, incrementQty, 
                             {title}
                         </div>
                         <span className="kt-mycart__desc">
-
+                            {categoryTitle}
                         </span>
 
                         <div className="kt-mycart__action">

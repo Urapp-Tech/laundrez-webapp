@@ -14,21 +14,27 @@ export default function Services() {
     const { location } = useHistory();
     const { state } = location;
     const services = useSelector(store => store?.service?.services);
-
-    const [selectedService, setSelectedService] = useState(null);
+    const service = useSelector(store => store?.service?.service);
 
     useEffect(() => {
+        dispatch(ServiceActions.clearServices());
         dispatch(ServiceActions.getServices(categoryId));
     }, [dispatch, categoryId]);
 
+    useEffect(() => {
+        if (service) {
+            setShowModal(true);
+        }
+
+    }, [service]);
+
     const onCardClick = useCallback((index) => {
-        setShowModal(true);
-        setSelectedService(services[index]);
-    }, [services]);
+        dispatch(ServiceActions.clearService());
+        dispatch(ServiceActions.getService(services[index].id));
+    }, [services, dispatch]);
 
     const closeModal = useCallback(() => {
         setShowModal(false);
-        setSelectedService(null);
     }, []);
 
     return (
@@ -51,7 +57,7 @@ export default function Services() {
                 })
                 }
             </div>
-            {selectedService && <ServiceModal data={selectedService} showModal={showModal} closeModal={closeModal} />}
+            {service && <ServiceModal showModal={showModal} closeModal={closeModal} />}
         </div>
     );
 }   

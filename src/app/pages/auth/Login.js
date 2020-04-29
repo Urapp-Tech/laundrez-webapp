@@ -5,7 +5,8 @@ import { AuthActions } from '../../store/ducks/auth-duck';
 import { Row, Col, Form, Alert } from 'react-bootstrap';
 import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
-
+// import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 function Login({ history }) {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
@@ -14,6 +15,9 @@ function Login({ history }) {
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
+  const responseFacebook = (response) => {
+    // console.log(response);
+  };
   useEffect(() => {
     return () => {
       dispatch(AuthActions.clearError());
@@ -21,7 +25,7 @@ function Login({ history }) {
   }, [dispatch]);
 
   const onLoginClick = useCallback((e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (isError) {
       dispatch(AuthActions.clearError());
     }
@@ -91,7 +95,13 @@ function Login({ history }) {
               className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block mt-4 pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block mt-4'} >
               Login
              </button>
-            <button className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
+            <FacebookLogin
+              appId="537368230120537"
+              callback={responseFacebook}
+              render={renderProps => (
+                <button onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
+              )}
+            />
           </Form>
           <div className="kt-login__options mt-5">
             <Row className="justify-content-center " >

@@ -40,6 +40,7 @@ export const rootEpic = combineEpics(
   address.AddressEpics.saveAddress,
   address.AddressEpics.getAddresses,
   address.AddressEpics.updateAddress,
+  address.AddressEpics.deleteAddress,
 
   faq.FaqEpics.getFaqs
 

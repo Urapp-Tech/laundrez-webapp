@@ -7,12 +7,15 @@ const initState = {
   addresses: [],
 };
 export function AddressReducer(state = initState, action) {
+  let array = [];
   switch (action.type) {
     case AddressActionTypes.SAVE_ADDRESS_PROG:
       return { ...state, isProgress: true };
 
     case AddressActionTypes.SAVE_ADDRESS_SUCC:
-      return { ...state, isProgress: false, };
+      array = [...state.addresses];
+      array.push(action.payload.address);
+      return { ...state, isProgress: false, addresses: array };
 
     case AddressActionTypes.SAVE_ADDRESS_FAIL:
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
@@ -29,6 +32,19 @@ export function AddressReducer(state = initState, action) {
     case AddressActionTypes.UPDATE_ADDRESS_FAIL:
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
+
+
+
+    case AddressActionTypes.DELETE_ADDRESS_PROG:
+      return { ...state, isProgress: true };
+
+    case AddressActionTypes.DELETE_ADDRESS_SUCC:
+      array = [...state.addresses];
+      array.splice(action.payload.index, 1);
+      return { ...state, isProgress: false, addresses: array };
+
+    case AddressActionTypes.DELETE_ADDRESS_FAIL:
+      return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
 
 

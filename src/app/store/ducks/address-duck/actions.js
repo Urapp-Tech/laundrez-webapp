@@ -24,5 +24,13 @@ export class AddressActions {
         };
     }
 
+    static deleteAddress(id, index) {
+        return {
+            type: AddressActionTypes.DELETE_ADDRESS_PROG,
+            payload: { id, index }
+
+        };
+    }
+
 
 }

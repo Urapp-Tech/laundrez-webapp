@@ -15,19 +15,37 @@ export default function DeliveryAddress() {
         postalCode: '',
         suiteNumber: '',
         busserCode: '',
-        propertyType: '',
+        propertyType: 'Residential',
         lat: '',
         lng: '',
         formattedAddress: ''
     });
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
-
+    const isProgress = useSelector(store => store?.address?.isProgress);
     const addresses = useSelector(store => store?.address?.addresses);
-
+    const isSuccess = useSelector(store => store?.notification?.isSuccess);
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            setFormValues({
+                street: '',
+                state: '',
+                city: '',
+                phoneNo: '',
+                postalCode: '',
+                suiteNumber: '',
+                busserCode: '',
+                propertyType: 'Residential',
+                lat: '',
+                lng: '',
+                formattedAddress: ''
+            });
+        }
+    }, [isSuccess]);
 
 
     const onFocusPhoneNumInput = useCallback(() => {
@@ -90,9 +108,6 @@ export default function DeliveryAddress() {
             });
     }, [formValues]);
     const onClickSaveAddress = useCallback(() => {
-        // if (error.isError) {
-        //     setError({ isError: false, message: '' });
-        //   }
         if (notValid.error) {
             setNotValid({ error: false, type: '', message: '' });
         }
@@ -100,12 +115,15 @@ export default function DeliveryAddress() {
             setNotValid({ error: true, type: 'formattedAddress', message: 'Please provide address' });
             return;
         }
-
-
+        if (!formValues.postalCode) {
+            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+            return;
+        }
         if (!formValues.phoneNo) {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
             return;
         }
+
         if (!(/[+](1)?[0-9]{11}$/g.test(formValues.phoneNo))) {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide a valid phone number matching the format +1XXXXXXXXXX' });
             return;
@@ -118,8 +136,8 @@ export default function DeliveryAddress() {
             state: formValues.state,
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
-            lang: formValues.lng,
-            lat: formValues.lat,
+            lang: Math.abs(formValues.lng).toFixed(5),
+            lat: Math.abs(formValues.lat).toFixed(5),
         };
         dispatch(AddressActions.saveAddress(body));
     }, [formValues, notValid, user, dispatch]);
@@ -253,7 +271,7 @@ export default function DeliveryAddress() {
                                         </Form.Group>
                                     </Row>
                                     <Row id="save-address">
-                                        <button onClick={onClickSaveAddress} className="btn btn-primary  btn-primary-gradient btn-block" > Save Address</button>
+                                        <button onClick={onClickSaveAddress} className={isProgress ? 'btn btn-primary  btn-primary-gradient btn-block pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Save Address</button>
                                     </Row>
 
                                 </div>
@@ -262,22 +280,22 @@ export default function DeliveryAddress() {
                         </PortletBody>
                     </Portlet>
                 </div>
-                <div className="col-md-4">
+                <Col md={4}>
                     <Portlet className="">
                         <PortletBody>
                             <h5 className="mb-3" >Saved Address</h5>
-                            <div className="row" >
-                                <div className="col-md-12">
+                            <Row >
+                                <Col md={12} className="mb-3">
                                     {
                                         addresses.map((v, i) => {
-                                            return (<SavedAddress address={v} key={i} />);
+                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} />);
                                         })
                                     }
-                                </div>
-                            </div>
+                                </Col>
+                            </Row>
                         </PortletBody>
                     </Portlet>
-                </div>
+                </Col>
             </div>
         </>
     );

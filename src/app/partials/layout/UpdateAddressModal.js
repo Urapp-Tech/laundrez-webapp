@@ -147,6 +147,9 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             show={showModal}
             onHide={toggleModal}
             aria-labelledby="example-modal-sizes-title-lg"
+            centered
+            scrollable
+            
         >
 
             <Modal.Body  >

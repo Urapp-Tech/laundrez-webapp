@@ -18,7 +18,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         propertyType: '',
         lat: '',
         lng: '',
-        formattedAddress: ''
+        mainAddress: ''
     });
     useEffect(() => {
         let { street,
@@ -31,7 +31,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             propertyType,
             lat,
             lng,
-            formattedAddress } = address;
+            mainAddress } = address;
         setFormValues({
             street,
             state,
@@ -43,7 +43,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             propertyType,
             lat,
             lng,
-            formattedAddress
+            mainAddress
         });
     }, [address]);
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
@@ -65,7 +65,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                 let _results = results[0];
                 let lat = _results.geometry.location.lat();
                 let lng = _results.geometry.location.lng();
-                let formattedAddress = _results.formatted_address;
+                let mainAddress = _results.formatted_address;
                 let addressComponents = _results.address_components;
                 let state = '';
                 let city = '';
@@ -102,7 +102,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                     postalCode,
                     lat,
                     lng,
-                    formattedAddress
+                    mainAddress
                 });
 
             });
@@ -114,8 +114,8 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         if (notValid.error) {
             setNotValid({ error: false, type: '', message: '' });
         }
-        if (!formValues.formattedAddress) {
-            setNotValid({ error: true, type: 'formattedAddress', message: 'Please provide address' });
+        if (!formValues.mainAddress) {
+            setNotValid({ error: true, type: 'mainAddress', message: 'Please provide address' });
             return;
         }
 
@@ -131,15 +131,17 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         let body = {
             userId: user.id,
             type: formValues.propertyType,
-            streetAddress: formValues.street,
+            street: formValues.street,
             city: formValues.city,
             state: formValues.state,
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
-            lang: formValues.lng,
-            lat: formValues.lat,
+            suite: formValues.suiteNumber,
+            lng: Math.abs(formValues.lng).toFixed(5),
+            lat: Math.abs(formValues.lat).toFixed(5),
+            mainAddress: formValues.mainAddress
         };
-        dispatch(AddressActions.saveAddress(body));
+        dispatch(AddressActions.updateAddress(body));
     }, [formValues, notValid, user, dispatch]);
     return (
         <Modal
@@ -167,11 +169,11 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                                             onSelect={handleSelect}
                                             inputClassName="form-control"
                                             placeholder=''
-                                            initialValue={formValues.formattedAddress}
+                                            initialValue={formValues.mainAddress}
 
 
                                         />
-                                        {(notValid.error && notValid.type === 'formattedAddress') && <label className="text-danger" > {notValid.message} </label>}
+                                        {(notValid.error && notValid.type === 'mainAddress') && <label className="text-danger" > {notValid.message} </label>}
                                     </Form.Group>
                                 </Row>
                                 <Row>

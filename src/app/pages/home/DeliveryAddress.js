@@ -18,7 +18,8 @@ export default function DeliveryAddress() {
         propertyType: 'Residential',
         lat: '',
         lng: '',
-        formattedAddress: ''
+        mainAddress: '',
+        isPrimary: false
     });
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
@@ -42,7 +43,7 @@ export default function DeliveryAddress() {
                 propertyType: 'Residential',
                 lat: '',
                 lng: '',
-                formattedAddress: ''
+                mainAddress: ''
             });
         }
     }, [isSuccess]);
@@ -65,7 +66,7 @@ export default function DeliveryAddress() {
                 let _results = results[0];
                 let lat = _results.geometry.location.lat();
                 let lng = _results.geometry.location.lng();
-                let formattedAddress = _results.formatted_address;
+                let mainAddress = _results.formatted_address;
                 let addressComponents = _results.address_components;
                 let state = '';
                 let city = '';
@@ -102,7 +103,7 @@ export default function DeliveryAddress() {
                     postalCode,
                     lat,
                     lng,
-                    formattedAddress
+                    mainAddress
                 });
 
             });
@@ -111,8 +112,8 @@ export default function DeliveryAddress() {
         if (notValid.error) {
             setNotValid({ error: false, type: '', message: '' });
         }
-        if (!formValues.formattedAddress) {
-            setNotValid({ error: true, type: 'formattedAddress', message: 'Please provide address' });
+        if (!formValues.mainAddress) {
+            setNotValid({ error: true, type: 'mainAddress', message: 'Please provide address' });
             return;
         }
         if (!formValues.postalCode) {
@@ -131,13 +132,15 @@ export default function DeliveryAddress() {
         let body = {
             userId: user.id,
             type: formValues.propertyType,
-            streetAddress: formValues.street,
+            street: formValues.street,
             city: formValues.city,
             state: formValues.state,
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
-            lang: Math.abs(formValues.lng).toFixed(5),
+            suite: formValues.suiteNumber,
+            lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
+            mainAddress: formValues.mainAddress
         };
         dispatch(AddressActions.saveAddress(body));
     }, [formValues, notValid, user, dispatch]);
@@ -159,11 +162,11 @@ export default function DeliveryAddress() {
                                                     onSelect={handleSelect}
                                                     inputClassName="form-control"
                                                     placeholder=''
-                                                    initialValue={formValues.formattedAddress}
+                                                    initialValue={formValues.mainAddress}
 
 
                                                 />
-                                                {(notValid.error && notValid.type === 'formattedAddress') && <label className="text-danger" > {notValid.message} </label>}
+                                                {(notValid.error && notValid.type === 'mainAddress') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
@@ -253,7 +256,7 @@ export default function DeliveryAddress() {
                                             {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
                                     </Row>
-                                    <Row>
+                                    {/* <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
                                             <Form.Label>Busser Code</Form.Label>
                                             <Form.Control
@@ -264,10 +267,10 @@ export default function DeliveryAddress() {
                                             />
                                             {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
-                                    </Row>
+                                    </Row> */}
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
-                                            <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
+                                            <Form.Check value={formValues.isPrimary} onChange={(e) => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
                                         </Form.Group>
                                     </Row>
                                     <Row id="save-address">

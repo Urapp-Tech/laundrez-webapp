@@ -29,13 +29,13 @@ export default function Services() {
     }, [service]);
 
     const onCardClick = useCallback((index) => {
-        dispatch(ServiceActions.clearService());
         dispatch(ServiceActions.getService(services[index].id));
     }, [services, dispatch]);
 
     const closeModal = useCallback(() => {
+        dispatch(ServiceActions.clearService());
         setShowModal(false);
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

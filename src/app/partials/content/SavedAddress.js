@@ -12,7 +12,7 @@ export default function SavedAddress({ address, deleteAddress }) {
                 <span>
                     <img src={Pin} className="pin-image img-fluid " alt={'pin'} />
                 </span>
-                <span className="ml-2 street-text cursor " > {address?.postalCode} | {address?.streetAddress}</span>
+                <span className="ml-2 street-text cursor " > {address?.postalCode} | {address?.street}</span>
             </div>
             <span className="cursor-pointer" >
                 <img onClick={deleteAddress} src={Garbage} className="pin-image img-fluid " alt={'img'} />

@@ -124,7 +124,10 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             return;
         }
 
-
+        if (!formValues.postalCode) {
+            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+            return;
+        }
         if (!formValues.phoneNo) {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
             return;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
 import { Form, Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
@@ -9,9 +9,19 @@ export default function PickAndDrop({ history }) {
 
     const dispatch = useDispatch();
     const addresses = useSelector(store => store?.address?.addresses);
+    const [primaryAddress, setPrimaryAddress] = useState({});
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
     }, [dispatch]);
+    const getPrimaryAddressLatLng = useCallback(() => {
+        if (addresses.length) {
+            let primaryAddress = addresses.find((v) => v.isPrimary);
+            setPrimaryAddress(primaryAddress);
+        }
+    }, [addresses]);
+    useEffect(() => {
+        getPrimaryAddressLatLng();
+    }, [addresses, getPrimaryAddressLatLng]);
     return (
         <>
             <h4 className="mb-3" >Pick And Drop</h4>
@@ -23,11 +33,11 @@ export default function PickAndDrop({ history }) {
                                 <PortletBody>
                                     <Form>
                                         <Row className="border-bottom" >
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} controlId="formGridStreet1">
                                                 <Form.Label>Pickup Date</Form.Label>
                                                 <Form.Control type="date" placeholder="" />
                                             </Form.Group>
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} controlId="formGridStreet2">
                                                 <Form.Label>Pickup Time</Form.Label>
                                                 <Form.Control type="time" placeholder="" />
                                             </Form.Group>
@@ -35,11 +45,11 @@ export default function PickAndDrop({ history }) {
                                     </Form>
                                     <Form>
                                         <Row className="border-bottom mt-3" >
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} controlId="formGridStreet3">
                                                 <Form.Label>Dropoff Date</Form.Label>
                                                 <Form.Control type="date" placeholder="" />
                                             </Form.Group>
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} controlId="formGridStreet4">
                                                 <Form.Label>Dropoff Time</Form.Label>
                                                 <Form.Control type="time" placeholder="" />
                                             </Form.Group>
@@ -51,11 +61,11 @@ export default function PickAndDrop({ history }) {
                                                 addresses.map((v, i) => {
                                                     return (
                                                         <Row>
-                                                            <Form.Group as={Col} controlId="formGridStreet">
+                                                            <Form.Group as={Col} controlId="formGridStreet5">
                                                                 <Form.Check inline placeholder="" />
                                                                 <Form.Label className="address-label" >
                                                                     <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} />
-                                                                    <span className="ml-1" >{v?.postalCode} | {v?.streetAddress}</span></Form.Label>
+                                                                    <span className="ml-1" >{v?.postalCode} | {v?.street}</span></Form.Label>
                                                             </Form.Group>
                                                         </Row>
                                                     );
@@ -92,7 +102,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            <Map height={'600px'} />
+                            <Map height={'600px'} lat={Number(primaryAddress.lat)} lng={Number(primaryAddress.lng)} showMarker={true} />
 
                         </div>
                     </div>

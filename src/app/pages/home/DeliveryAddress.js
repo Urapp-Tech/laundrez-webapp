@@ -23,7 +23,7 @@ export default function DeliveryAddress() {
     });
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
-    const isProgress = useSelector(store => store?.address?.isProgress);
+    const isProgress = useSelector(store => store?.address?.isProgressSave);
     const addresses = useSelector(store => store?.address?.addresses);
     const isSuccess = useSelector(store => store?.notification?.isSuccess);
     useEffect(() => {
@@ -140,7 +140,8 @@ export default function DeliveryAddress() {
             suite: formValues.suiteNumber,
             lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
-            mainAddress: formValues.mainAddress
+            mainAddress: formValues.mainAddress,
+            isPrimary:formValues.isPrimary
         };
         dispatch(AddressActions.saveAddress(body));
     }, [formValues, notValid, user, dispatch]);
@@ -291,7 +292,7 @@ export default function DeliveryAddress() {
                                 <Col md={12} className="mb-3">
                                     {
                                         addresses.map((v, i) => {
-                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} />);
+                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} index={i}/>);
                                         })
                                     }
                                 </Col>

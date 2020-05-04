@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import GooglePlacesAutocomplete, { geocodeByAddress } from 'react-google-places-autocomplete';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
 
-export default function UpdateAddressModal({ showModal, toggleModal, address }) {
+export default function UpdateAddressModal({ showModal, toggleModal, address, index }) {
 
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState({
@@ -14,11 +14,12 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         phoneNo: '',
         postalCode: '',
         suiteNumber: '',
-        busserCode: '',
         propertyType: '',
         lat: '',
         lng: '',
-        mainAddress: ''
+        mainAddress: '',
+        isPrimary: false,
+        id: 0
     });
     useEffect(() => {
         let { street,
@@ -26,28 +27,32 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             city,
             phone,
             postalCode,
-            suiteNumber,
-            busserCode,
-            propertyType,
+            suite,
+            type,
             lat,
             lng,
-            mainAddress } = address;
+            isPrimary,
+            mainAddress,
+            id } = address;
         setFormValues({
             street,
             state,
             city,
             phoneNo:phone,
             postalCode,
-            suiteNumber,
-            busserCode,
-            propertyType,
+            suiteNumber:suite,
+            propertyType:type,
             lat,
             lng,
-            mainAddress
+            isPrimary,
+            mainAddress,
+            id
         });
     }, [address]);
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
+    const isProgress = useSelector(store => store?.address?.isProgressUpdate);
+
     const onFocusPhoneNumInput = useCallback(() => {
         if (formValues.phoneNo.length === 0) {
             setFormValues({ ...formValues, phoneNo: '+1' });
@@ -137,12 +142,14 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
             suite: formValues.suiteNumber,
-            lng: Math.abs(formValues.lng).toFixed(5),
-            lat: Math.abs(formValues.lat).toFixed(5),
-            mainAddress: formValues.mainAddress
+            lng: String(Math.abs(formValues.lng).toFixed(5)),
+            lat: String(Math.abs(formValues.lat).toFixed(5)),
+            mainAddress: formValues.mainAddress,
+            isPrimary: formValues.isPrimary,
+            id: formValues.id
         };
-        dispatch(AddressActions.updateAddress(body));
-    }, [formValues, notValid, user, dispatch]);
+        dispatch(AddressActions.updateAddress(body,index));
+    }, [formValues, notValid, user, dispatch, index]);
     return (
         <Modal
             size="lg"
@@ -258,30 +265,18 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                                         value={formValues.propertyType}
                                         onChange={(e) => setFormValues({ ...formValues, propertyType: e.target.value })}
                                     >
-                                        <option value={'residential'} >Residential</option>
+                                        <option value={'Residential'} >Residential</option>
                                     </Form.Control>
                                     {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                 </Form.Group>
                             </Row>
                             <Row>
                                 <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Label>Busser Code</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder=""
-                                        value={formValues.busserCode}
-                                        onChange={(e) => setFormValues({ ...formValues, busserCode: e.target.value })}
-                                    />
-                                    {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
+                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" checked={formValues.isPrimary} onChange={(e)=> setFormValues({...formValues, isPrimary: e.target.checked})} />
                                 </Form.Group>
                             </Row>
                             <Row id="save-address">
-                                <button onClick={onClickSaveAddress} className="btn btn-primary  btn-primary-gradient btn-block" > Update Address</button>
+                                <button onClick={onClickSaveAddress} className={isProgress ? 'btn btn-primary  btn-primary-gradient btn-block pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Update Address</button>
                             </Row>
                         </Col>
 

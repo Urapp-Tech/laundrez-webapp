@@ -140,7 +140,8 @@ export default function DeliveryAddress() {
             suite: formValues.suiteNumber,
             lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
-            mainAddress: formValues.mainAddress
+            mainAddress: formValues.mainAddress,
+            isPrimary:formValues.isPrimary
         };
         dispatch(AddressActions.saveAddress(body));
     }, [formValues, notValid, user, dispatch]);

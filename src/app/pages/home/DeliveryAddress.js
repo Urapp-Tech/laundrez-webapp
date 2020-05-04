@@ -291,7 +291,7 @@ export default function DeliveryAddress() {
                                 <Col md={12} className="mb-3">
                                     {
                                         addresses.map((v, i) => {
-                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} />);
+                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} index={i}/>);
                                         })
                                     }
                                 </Col>

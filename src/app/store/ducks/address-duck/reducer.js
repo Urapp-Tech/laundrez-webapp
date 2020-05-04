@@ -27,7 +27,9 @@ export function AddressReducer(state = initState, action) {
       return { ...state, isProgress: true };
 
     case AddressActionTypes.UPDATE_ADDRESS_SUCC:
-      return { ...state, isProgress: false, };
+      array = [...state.addresses];
+      array[action.payload.index] = action.payload.address;
+      return { ...state, isProgress: false, addresses: array};
 
     case AddressActionTypes.UPDATE_ADDRESS_FAIL:
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };

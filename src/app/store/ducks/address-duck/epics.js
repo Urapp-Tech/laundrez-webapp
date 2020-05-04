@@ -49,11 +49,11 @@ export class AddressEpics {
 
     static updateAddress(action$, state$, { ajaxPut }) {
         return action$.pipe(ofType(AddressActionTypes.UPDATE_ADDRESS_PROG), switchMap(({ payload }) => {
-            return ajaxPut('/Address').pipe(pluck('response'), flatMap(obj => {
+            return ajaxPut('/Address',payload.body).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
                         type: AddressActionTypes.UPDATE_ADDRESS_SUCC,
-                        payload: { address: obj.result }
+                        payload: { address: obj.result, index: payload.index }
                     },
                 );
             })

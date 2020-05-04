@@ -16,10 +16,10 @@ export class AddressActions {
         };
     }
 
-    static updateAddress(body) {
+    static updateAddress(body, index) {
         return {
             type: AddressActionTypes.UPDATE_ADDRESS_PROG,
-            payload: { body }
+            payload: { body, index }
 
         };
     }

@@ -55,10 +55,13 @@ export class AddressEpics {
                         type: AddressActionTypes.UPDATE_ADDRESS_SUCC,
                         payload: { address: obj.result, index: payload.index }
                     },
+                    NotificationActions.showSuccessNotification('Address Updated successfully')
                 );
             })
                 , catchError((err) => {
-                    return of({ type: AddressActionTypes.UPDATE_ADDRESS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    return of({ type: AddressActionTypes.UPDATE_ADDRESS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                    );
                 }));
 
         }));

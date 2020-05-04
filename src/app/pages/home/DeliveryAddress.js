@@ -23,7 +23,7 @@ export default function DeliveryAddress() {
     });
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
-    const isProgress = useSelector(store => store?.address?.isProgress);
+    const isProgress = useSelector(store => store?.address?.isProgressSave);
     const addresses = useSelector(store => store?.address?.addresses);
     const isSuccess = useSelector(store => store?.notification?.isSuccess);
     useEffect(() => {

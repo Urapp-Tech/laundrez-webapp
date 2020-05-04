@@ -51,6 +51,8 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
     }, [address]);
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
+    const isProgress = useSelector(store => store?.address?.isProgressUpdate);
+
     const onFocusPhoneNumInput = useCallback(() => {
         if (formValues.phoneNo.length === 0) {
             setFormValues({ ...formValues, phoneNo: '+1' });
@@ -147,8 +149,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             id: formValues.id
         };
         dispatch(AddressActions.updateAddress(body,index));
-        toggleModal();
-    }, [formValues, notValid, user, dispatch, index, toggleModal]);
+    }, [formValues, notValid, user, dispatch, index]);
     return (
         <Modal
             size="lg"
@@ -275,7 +276,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                 </Form.Group>
                             </Row>
                             <Row id="save-address">
-                                <button onClick={onClickSaveAddress} className="btn btn-primary  btn-primary-gradient btn-block" > Update Address</button>
+                                <button onClick={onClickSaveAddress} className={isProgress ? 'btn btn-primary  btn-primary-gradient btn-block pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Update Address</button>
                             </Row>
                         </Col>
 

@@ -61,8 +61,8 @@ export default function PickAndDrop({ history }) {
                                                 addresses.map((v, i) => {
                                                     return (
                                                         <Row key={i}>
-                                                            <Form.Group as={Col} controlId="formGridStreet5" >
-                                                                <Form.Check inline placeholder="" type="radio" checked={v.id === selectedAddress.id} onChange={()=> setSelectedAddress(v)} />
+                                                            <Form.Group as={Col} controlId={`addresses${i}`} >
+                                                                <Form.Check inline placeholder="" type="radio" checked={v.id === selectedAddress.id} onChange={() => setSelectedAddress(v)} />
                                                                 <Form.Label className="address-label" >
                                                                     <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} />
                                                                     <span className="ml-1" >{v?.postalCode} | {v?.street}</span></Form.Label>

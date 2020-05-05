@@ -9,14 +9,14 @@ export default function PickAndDrop({ history }) {
 
     const dispatch = useDispatch();
     const addresses = useSelector(store => store?.address?.addresses);
-    const [primaryAddress, setPrimaryAddress] = useState({});
+    const [selectedAddress, setSelectedAddress] = useState({});
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
     }, [dispatch]);
     const getPrimaryAddressLatLng = useCallback(() => {
         if (addresses.length) {
-            let primaryAddress = addresses.find((v) => v.isPrimary);
-            setPrimaryAddress(primaryAddress);
+            let selectedAddress = addresses.find((v) => v.isPrimary);
+            setSelectedAddress(selectedAddress);
         }
     }, [addresses]);
     useEffect(() => {
@@ -60,9 +60,9 @@ export default function PickAndDrop({ history }) {
                                             {
                                                 addresses.map((v, i) => {
                                                     return (
-                                                        <Row>
-                                                            <Form.Group as={Col} controlId="formGridStreet5">
-                                                                <Form.Check inline placeholder="" />
+                                                        <Row key={i}>
+                                                            <Form.Group as={Col} controlId={`addresses${i}`} >
+                                                                <Form.Check inline placeholder="" type="radio" checked={v.id === selectedAddress.id} onChange={() => setSelectedAddress(v)} />
                                                                 <Form.Label className="address-label" >
                                                                     <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} />
                                                                     <span className="ml-1" >{v?.postalCode} | {v?.street}</span></Form.Label>
@@ -102,7 +102,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            <Map height={'600px'} lat={Number(primaryAddress.lat)} lng={Number(primaryAddress.lng)} showMarker={true} />
+                            <Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />
 
                         </div>
                     </div>

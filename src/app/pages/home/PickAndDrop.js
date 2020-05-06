@@ -102,7 +102,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            <Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />
+                            { <Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />}
 
                         </div>
                     </div>

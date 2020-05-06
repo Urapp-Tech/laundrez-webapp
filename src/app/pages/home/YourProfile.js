@@ -163,7 +163,7 @@ export default function YourProfile() {
                             {addresses.map((v, i) => {
                                 return (<div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                     <h6 className="text-secondary m-0" >Address {i + 1}</h6>
-                                    <h6 className="m-0" >{v?.postalCode} | {v?.streetAddress}</h6>
+                                    <h6 className="m-0" >{v?.postalCode} | {v?.street}</h6>
                                 </div>);
 
                             })

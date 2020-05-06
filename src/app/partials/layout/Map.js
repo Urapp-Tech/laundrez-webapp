@@ -43,7 +43,7 @@ class Map extends Component {
 
     render() {
         return (
-            <this.MyMapComponent defaultZoom={12} center={{ lat: this.state.lat, lng: this.state.lng }} /* defaultCenter={{ lat: 24.892755, lng: 67.072342 }} */>
+            <this.MyMapComponent defaultZoom={12} center={this.props.lat?{ lat: this.props.lat, lng: this.props.lng }:{ lat: this.state.lat, lng: this.state.lng }} /* defaultCenter={{ lat: 24.892755, lng: 67.072342 }} */>
                 {this.props.showMarker && (
                     <Marker position={{ lat: this.props.lat, lng: this.props.lng }} />
                 )}

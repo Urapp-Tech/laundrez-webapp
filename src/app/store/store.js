@@ -17,16 +17,12 @@ const epicMiddleware = createEpicMiddleware({
         ajaxDel: HttpService.delete,
     }
 });
+let middlewares = process.env.NODE_ENV === 'production' ? applyMiddleware(epicMiddleware) : applyMiddleware(epicMiddleware, loggerMiddleware);
 const store = createStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(epicMiddleware, loggerMiddleware))
+    composeEnhancers(middlewares)
 );
 
-/**
- * @see https://github.com/rt2zz/redux-persist#persiststorestore-config-callback
- * @see https://github.com/rt2zz/redux-persist#persistor-object
- */
-// export const persistor = persistStore(store);
 epicMiddleware.run(rootEpic);
 
 export default store;

@@ -25,7 +25,7 @@ function Login({ history }) {
   }, [dispatch]);
 
   const onLoginClick = useCallback((e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (isError) {
       dispatch(AuthActions.clearError());
     }
@@ -96,7 +96,8 @@ function Login({ history }) {
               Login
              </button>
             <FacebookLogin
-              appId="537368230120537"
+              appId="1000433136825993"
+              fields="name,email,picture"
               callback={responseFacebook}
               render={renderProps => (
                 <button onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
@@ -111,7 +112,6 @@ function Login({ history }) {
               </Col>
             </Row>
           </div>
-
         </div>
       </div>
     </>

@@ -12,6 +12,7 @@ export default function MyBasket({ history }) {
 
     const dispatch = useDispatch();
     const basketItems = useSelector(store => store?.mybasket?.items);
+    const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
 
     const [totalAmont, setTotalAmount] = useState(0);
     const [totalHST, setTotalHST] = useState(0);
@@ -45,9 +46,9 @@ export default function MyBasket({ history }) {
     }, [basketItems, calculateTotal]);
 
     const calculateHST = useCallback(() => {
-        let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
+        let hst = Math.abs(totalAmont * (hstPercentage / 100)).toFixed(2);
         setTotalHST(hst);
-    }, [totalAmont]);
+    }, [totalAmont, hstPercentage]);
 
     const calculateGrandTotal = useCallback(() => {
         let grandTotal = Number(totalAmont) + Number(totalHST);
@@ -125,7 +126,7 @@ export default function MyBasket({ history }) {
                                             <span className=" amount-num font-weight-bold"  >${totalAmont}</span>
                                         </div>
                                         <div className="d-flex justify-content-between">
-                                            <span className="amount-text" >HST 13%</span>
+                                            <span className="amount-text" >HST {hstPercentage}%</span>
                                             <span className="amount-num font-weight-bold" >${totalHST}</span>
                                         </div>
 

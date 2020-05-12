@@ -20,6 +20,7 @@ const perfectScrollbarOptions = {
 export default function MyCart({ bgImage, useSVG, icon, iconType }) {
 
   const dispatch = useDispatch();
+  const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
   const basketItems = useSelector(store => store?.mybasket?.items);
 
   const [totalAmont, setTotalAmount] = useState(0);
@@ -52,9 +53,9 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
 
 
   const calculateHST = useCallback(() => {
-    let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
+    let hst = Math.abs(totalAmont * (hstPercentage / 100)).toFixed(2);
     setTotalHST(hst);
-  }, [totalAmont]);
+  }, [totalAmont, hstPercentage]);
 
 
   const calculateGrandTotal = useCallback(() => {
@@ -146,7 +147,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
               <div className="kt-mycart__section">
                 <div className="kt-mycart__subtitel">
                   <span>Total Amount</span>
-                  <span>HST 13%</span>
+                  <span>HST {hstPercentage}%</span>
                   <span>Grand Total</span>
                 </div>
 

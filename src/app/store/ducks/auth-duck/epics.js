@@ -28,7 +28,7 @@ export class AuthEpics {
     }
 
     static getProfile(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(AuthActionTypes.GET_PROFILE_PROG), switchMap(({ payload }) => {
+        return action$.pipe(ofType(AuthActionTypes.GET_PROFILE_PROG), switchMap(() => {
             return ajaxGet('/User').pipe(pluck('response'), map(obj => {
                 let { id, username, firstName, lastName, email, phoneNo, postalCode } = obj.result;
                 let user = { id, username, firstName, lastName, email, phoneNo, postalCode };

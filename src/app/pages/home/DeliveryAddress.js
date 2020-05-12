@@ -271,7 +271,7 @@ export default function DeliveryAddress() {
                                     </Row> */}
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
-                                            <Form.Check value={formValues.isPrimary} onChange={(e) => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
+                                            <Form.Check value={formValues.isPrimary} onChange={() => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
                                         </Form.Group>
                                     </Row>
                                     <Row id="save-address">

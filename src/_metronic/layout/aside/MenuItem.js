@@ -20,7 +20,7 @@ export default class MenuItem extends React.Component {
    * Use for fixed left aside menu, to show menu on mouseenter event.
    * @param event Event
    */
-  mouseEnter = event => {
+  mouseEnter = () => {
     if (!this.isDropdown) {
       return;
     }
@@ -38,7 +38,7 @@ export default class MenuItem extends React.Component {
    * Mouse Leave event
    * @param event: MouseEvent
    */
-  mouseLeave = event => {
+  mouseLeave = () => {
     if (!this.isDropdown) {
       return;
     }

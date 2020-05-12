@@ -29,7 +29,7 @@ export class AddressEpics {
     }
 
     static getAddresses(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(AddressActionTypes.GET_ADDRESSES_PROG), switchMap(({ payload }) => {
+        return action$.pipe(ofType(AddressActionTypes.GET_ADDRESSES_PROG), switchMap(() => {
             return ajaxGet('/Address/getallbycustomer').pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
@@ -49,7 +49,7 @@ export class AddressEpics {
 
     static updateAddress(action$, state$, { ajaxPut }) {
         return action$.pipe(ofType(AddressActionTypes.UPDATE_ADDRESS_PROG), switchMap(({ payload }) => {
-            return ajaxPut('/Address',payload.body).pipe(pluck('response'), flatMap(obj => {
+            return ajaxPut('/Address', payload.body).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
                         type: AddressActionTypes.UPDATE_ADDRESS_SUCC,
@@ -69,7 +69,7 @@ export class AddressEpics {
 
     static deleteAddress(action$, state$, { ajaxDel }) {
         return action$.pipe(ofType(AddressActionTypes.DELETE_ADDRESS_PROG), switchMap(({ payload }) => {
-            return ajaxDel(`/Address/${payload.id}`).pipe(pluck('response'), flatMap(obj => {
+            return ajaxDel(`/Address/${payload.id}`).pipe(pluck('response'), flatMap(() => {
                 return of(
                     {
                         type: AddressActionTypes.DELETE_ADDRESS_SUCC,

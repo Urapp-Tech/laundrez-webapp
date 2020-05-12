@@ -118,7 +118,7 @@ function reducer(state, { type, payload }) {
   }
 
   if (type === actionTypes.HIDE_SPLASH_SCREEN) {
-    const { [payload.id]: skip, ...nextRefs } = state.splashScreen.refs;
+    const { /* [payload.id]: skip, */ ...nextRefs } = state.splashScreen.refs;
 
     return {
       ...state,

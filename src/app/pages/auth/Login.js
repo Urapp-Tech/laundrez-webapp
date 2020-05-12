@@ -6,7 +6,7 @@ import { Row, Col, Form, Alert } from 'react-bootstrap';
 import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.svg';
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 
-function Login({ history }) {
+function Login() {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
   const isError = useSelector(store => store?.auth?.isError);

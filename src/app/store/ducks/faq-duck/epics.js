@@ -4,7 +4,7 @@ import { switchMap, pluck, catchError, flatMap } from 'rxjs/operators';
 import { FaqActionTypes } from './actions-types';
 export class FaqEpics {
     static getFaqs(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(FaqActionTypes.FAQS_PROG), switchMap(({ payload }) => {
+        return action$.pipe(ofType(FaqActionTypes.FAQS_PROG), switchMap(() => {
             return ajaxGet('/FAQ/all?page[number]=1&page[size]=1000').pipe(pluck('response'), flatMap(obj => {
 
                 return of(

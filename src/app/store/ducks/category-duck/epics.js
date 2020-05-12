@@ -5,10 +5,10 @@ import { actions } from '../../../../_metronic/ducks/builder';
 import { CategoryActionTypes } from './actions-types';
 export class CategoryEpics {
     static getCategories(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(CategoryActionTypes.CATEGORIES_PROG), switchMap(({ payload }) => {
+        return action$.pipe(ofType(CategoryActionTypes.CATEGORIES_PROG), switchMap(() => {
             return ajaxGet('/Category/all?page[number]=1&page[size]=1000').pipe(pluck('response'), flatMap(obj => {
                 let categories = obj.result;
-                let submenu = categories.map((v, i) => {
+                let submenu = categories.map((v) => {
                     return {
                         title: v.title,
                         bullet: 'dot',

@@ -27,6 +27,7 @@ export const PortletHeaderToolbar = forwardRef(
 
 export const PortletHeader = forwardRef(
   (
+    // eslint-disable-next-line no-unused-vars
     { icon, title, toolbar, className, sticky = false, labelRef, ...props },
     ref
   ) => {

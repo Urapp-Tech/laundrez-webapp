@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import MenuItemText from './MenuItemText';
 import MenuSubmenu from './MenuSubmenu';
 import clsx from 'clsx';
+import { connect } from 'react-redux';
 
-export default class MenuItem extends React.Component {
+class MenuItem extends React.Component {
   asideLeftLIRef = React.createRef();
   isDropdown = document.body.classList.contains('kt-aside-menu--dropdown');
 
@@ -72,9 +73,8 @@ export default class MenuItem extends React.Component {
   };
 
   render() {
-    const { item, currentUrl, parentItem, layoutConfig } = this.props;
+    const { item, currentUrl, parentItem, layoutConfig, config } = this.props;
     const isActive = this.isMenuItemIsActive(item);
-
     return (
       <li
         ref={this.asideLeftLIRef}
@@ -97,22 +97,22 @@ export default class MenuItem extends React.Component {
         data-ktmenu-dropdown-toggle-class={item['dropdown-toggle-class']}
       >
         {!item.submenu && (
-          item.page ==='contactus'?
-          <a href="mailto:laundrez.dev@gmail.com" className="kt-menu__link kt-menu__toggle">
-            <MenuItemText item={item} parentItem={parentItem} />
-          </a>
-          :
-          <Link to={{
-            pathname: `/${item.page}`,
-            state: { category: item.category }
-          }} className="kt-menu__link kt-menu__toggle">
-            <MenuItemText item={item} parentItem={parentItem} />
-          </Link>
+          item.page === 'contactus' ?
+            <a href={`mailto:${config?.system?.ContactEmail}`} className="kt-menu__link kt-menu__toggle">
+              <MenuItemText item={item} parentItem={parentItem} />
+            </a>
+            :
+            <Link to={{
+              pathname: `/${item.page}`,
+              state: { category: item.category }
+            }} className="kt-menu__link kt-menu__toggle">
+              <MenuItemText item={item} parentItem={parentItem} />
+            </Link>
         )}
 
         {item.submenu && (
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          <a  className="kt-menu__link kt-menu__toggle">
+          <a className="kt-menu__link kt-menu__toggle">
             <MenuItemText item={item} parentItem={parentItem} />
           </a>
         )}
@@ -145,3 +145,9 @@ export default class MenuItem extends React.Component {
     );
   }
 }
+const mapStateToProps = (store) => {
+  return {
+    config: store.lov.config
+  };
+};
+export default connect(mapStateToProps, null)(MenuItem);

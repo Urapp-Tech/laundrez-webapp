@@ -4,11 +4,22 @@ import { Form, Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
+import ReactDatePicker from 'react-datepicker';
+import moment from 'moment';
 
 export default function PickAndDrop({ history }) {
 
     const dispatch = useDispatch();
     const addresses = useSelector(store => store?.address?.addresses);
+    const timeSlots = useSelector(store => store?.lov?.config?.timeSlots);
+    const dropOfThreshold = useSelector(store => store?.lov?.config?.system.DropOfThreshold);
+    const [formValues, setFormValues] = useState({
+        pickupDate: '',
+        pickupTime: '',
+        dropoffDate: '',
+        dropoffTime: '',
+        driverInstruction: ''
+    });
     const [selectedAddress, setSelectedAddress] = useState({});
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
@@ -22,6 +33,18 @@ export default function PickAndDrop({ history }) {
     useEffect(() => {
         getPrimaryAddressLatLng();
     }, [addresses, getPrimaryAddressLatLng]);
+
+    const isSunday = date => {
+        const day = new Date(date).getDay();
+        return day !== 0;
+    };
+    const today = 24;
+    const dropoffStartHours = Number(dropOfThreshold) + today;
+    const dropoffStartDays = Math.ceil(dropoffStartHours / 24);
+    const allowedDaysThreshold = 7;
+    const pickupMaxDate = moment(new Date(), 'DD-MM-YYYY').add(allowedDaysThreshold, 'days').toDate();
+    const dropOffMinDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(dropoffStartHours, 'hours').toDate();
+    const dropOffMaxDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(allowedDaysThreshold + dropoffStartDays, 'days').toDate();
     return (
         <>
             <h4 className="mb-3" >Pick And Drop</h4>
@@ -35,11 +58,28 @@ export default function PickAndDrop({ history }) {
                                         <Row className="border-bottom" >
                                             <Form.Group as={Col} controlId="formGridStreet1">
                                                 <Form.Label>Pickup Date</Form.Label>
-                                                <Form.Control type="date" placeholder="" />
+                                                <ReactDatePicker
+                                                    selected={formValues.pickupDate}
+                                                    onChange={(e) => setFormValues({ ...formValues, pickupDate: e })}
+                                                    className="form-control react-date-picker-custom"
+                                                    placeholderText={'mm/dd/yyyy'}
+                                                    minDate={new Date()}
+                                                    maxDate={pickupMaxDate}
+                                                    filterDate={isSunday}
+                                                />
                                             </Form.Group>
                                             <Form.Group as={Col} controlId="formGridStreet2">
                                                 <Form.Label>Pickup Time</Form.Label>
-                                                <Form.Control type="time" placeholder="" />
+                                                <Form.Control as="select" className="pickup-slots"
+                                                    value={formValues.pickupTime}
+                                                    onChange={(e) => setFormValues({ ...formValues, pickupTime: e.target.value })}
+                                                >
+                                                    {
+                                                        timeSlots.map((v, i) => {
+                                                            return (<option key={i} value={v.value} >{v.value}</option>);
+                                                        })
+                                                    }
+                                                </Form.Control>
                                             </Form.Group>
                                         </Row>
                                     </Form>
@@ -47,11 +87,29 @@ export default function PickAndDrop({ history }) {
                                         <Row className="border-bottom mt-3" >
                                             <Form.Group as={Col} controlId="formGridStreet3">
                                                 <Form.Label>Dropoff Date</Form.Label>
-                                                <Form.Control type="date" placeholder="" />
+                                                <ReactDatePicker
+                                                    disabled={!formValues.pickupDate}
+                                                    selected={formValues.dropoffDate}
+                                                    onChange={(e) => setFormValues({ ...formValues, dropoffDate: e })}
+                                                    className="form-control react-date-picker-custom"
+                                                    placeholderText={'mm/dd/yyyy'}
+                                                    minDate={dropOffMinDate}
+                                                    maxDate={dropOffMaxDate}
+                                                    filterDate={isSunday}
+                                                />
                                             </Form.Group>
                                             <Form.Group as={Col} controlId="formGridStreet4">
                                                 <Form.Label>Dropoff Time</Form.Label>
-                                                <Form.Control type="time" placeholder="" />
+                                                <Form.Control as="select" className="pickup-slots"
+                                                    value={formValues.dropoffTime}
+                                                    onChange={(e) => setFormValues({ ...formValues, dropoffTime: e.target.value })}
+                                                >
+                                                    {
+                                                        timeSlots.map((v, i) => {
+                                                            return (<option key={i} value={v.value} >{v.value}</option>);
+                                                        })
+                                                    }
+                                                </Form.Control>
                                             </Form.Group>
                                         </Row>
                                     </Form>
@@ -102,7 +160,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            { <Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />}
+                            {<Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />}
 
                         </div>
                     </div>

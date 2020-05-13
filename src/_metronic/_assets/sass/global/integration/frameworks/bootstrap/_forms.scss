@@ -100,7 +100,7 @@
     (
       lineawesome: 1.4rem,
       fontawesome: 1.2rem,
-      flaticon: 1.2rem
+      flaticon: 1.2rem,
     )
   );
 
@@ -132,11 +132,14 @@
   }
 }
 select {
-	background: url("../../../../../../layout/assets/layout-svg-icons/arrow-down.svg") no-repeat;
-	background-size: 10px 10px;
-	background-position: right 20px top 14px;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-	padding: 4px 20px;
-  }
+  background: url("../../../../../../layout/assets/layout-svg-icons/arrow-down.svg") no-repeat;
+  background-size: 10px 10px;
+  background-position: right 20px top 14px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 4px 20px;
+}
+.pickup-slots{
+  background: url("../../../../../../layout/assets/layout-svg-icons/clock-primary.svg") 97% 50% no-repeat !important;
+}

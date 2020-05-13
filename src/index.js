@@ -12,6 +12,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import './index.scss'; // Standard version
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'react-google-places-autocomplete/dist/index.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
 /**
  * Base URL of the website.
  *

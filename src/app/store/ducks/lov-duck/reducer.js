@@ -4,7 +4,10 @@ const initialAuthState = {
   isError: false,
   errorMsg: '',
   errorStatus: 0,
-  config: {}
+  config: {
+    system: {},
+    timeSlots: []
+  }
 
 };
 export function LovReducer(state = initialAuthState, action) {

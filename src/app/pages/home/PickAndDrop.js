@@ -120,7 +120,7 @@ export default function PickAndDrop({ history }) {
                                                     return (
                                                         <Row key={i}>
                                                             <Form.Group as={Col} controlId={`addresses${i}`} >
-                                                                <Form.Check inline placeholder="" type="radio" checked={v.id === selectedAddress.id} onChange={() => setSelectedAddress(v)} />
+                                                                <Form.Check inline placeholder="" type="radio" checked={v?.id === selectedAddress?.id} onChange={() => setSelectedAddress(v)} />
                                                                 <Form.Label className="address-label" >
                                                                     <img alt={'img'} src={require('../../../_metronic/layout/assets/layout-svg-icons/pin.svg')} />
                                                                     <span className="ml-1" >{v?.postalCode} | {v?.street}</span></Form.Label>
@@ -160,7 +160,7 @@ export default function PickAndDrop({ history }) {
                     <div className="row row-full-height">
                         <div className="col-md-12 ">
 
-                            {<Map height={'600px'} lat={Number(selectedAddress.lat)} lng={Number(selectedAddress.lng)} showMarker={true} />}
+                            {<Map height={'600px'} lat={Number(selectedAddress?.lat)} lng={Number(selectedAddress?.lng)} showMarker={true} />}
 
                         </div>
                     </div>

@@ -8,6 +8,7 @@ import * as address from './ducks/address-duck';
 import * as notification from './ducks/notification-duck';
 import * as faq from './ducks/faq-duck';
 import * as lov from './ducks/lov-duck';
+import * as order from './ducks/order-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
@@ -19,7 +20,8 @@ const appReducer = combineReducers({
   address: address.AddressReducer,
   notification: notification.NotificationReducer,
   faq: faq.FaqReducer,
-  lov: lov.LovReducer
+  lov: lov.LovReducer,
+  order: order.OrderReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {

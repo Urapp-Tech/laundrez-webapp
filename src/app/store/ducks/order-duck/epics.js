@@ -29,12 +29,12 @@ export class OrderEpics {
     }
 
     static getOrders(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(OrderActionTypes.GET_ORDERS_PROG), switchMap(() => {
-            return ajaxGet('/Order/getallbycustomer').pipe(pluck('response'), flatMap(obj => {
+        return action$.pipe(ofType(OrderActionTypes.GET_ORDERS_PROG), switchMap(({payload}) => {
+            return ajaxGet(`/order/history?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
                         type: OrderActionTypes.GET_ORDERS_SUCC,
-                        payload: { addresses: obj.result }
+                        payload: obj
                     },
                 );
             })

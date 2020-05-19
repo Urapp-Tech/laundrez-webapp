@@ -14,14 +14,15 @@ import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-i
 
 export default function Dashboard({ history }) {
 
-  const categories = useSelector(store => store?.category?.categories);
 
+  const categories = useSelector(store => store?.category?.categories);
   const onClickCategory = useCallback((id, category) => {
     history.push({
       pathname: `/services/${id}`,
       state: { category }
     });
   }, [history]);
+
 
   return (
     <>

@@ -9,9 +9,10 @@ export class OrderActions {
 
         };
     }
-    static getOrderes() {
+    static getOrders(page = 1, pageSize = 10, ) {
         return {
             type: OrderActionTypes.GET_ORDERS_PROG,
+            payload: { page, pageSize }
 
         };
     }

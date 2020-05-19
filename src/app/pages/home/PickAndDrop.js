@@ -4,6 +4,7 @@ import { Form, Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
+import { OrderActions } from '../../store/ducks/order-duck/actions';
 import ReactDatePicker from 'react-datepicker';
 import moment from 'moment';
 
@@ -20,6 +21,9 @@ export default function PickAndDrop({ history }) {
         dropoffTime: '',
         driverInstruction: ''
     });
+
+    const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
+
     const [selectedAddress, setSelectedAddress] = useState({});
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
@@ -33,6 +37,29 @@ export default function PickAndDrop({ history }) {
     useEffect(() => {
         getPrimaryAddressLatLng();
     }, [addresses, getPrimaryAddressLatLng]);
+
+    const PlaceOrder = useCallback(() => {
+
+        if (!formValues.pickupDate) {
+            setNotValid({ error: true, type: 'pickupDate', message: 'Pick Up Date Not Selected' });
+            return;
+        }
+        if (!formValues.pickupTime) {
+            setNotValid({ error: true, type: 'pickupTime', message: 'Pick Up Time Not Selected' });
+            return;
+        }
+        if (!formValues.dropoffDate) {
+            setNotValid({ error: true, type: 'dropoffDate', message: 'Drop Off Date Not Selected' });
+            return;
+        }
+        if (!formValues.dropoffTime) {
+            setNotValid({ error: true, type: 'dropoffTime', message: 'Drop Off Time Not Selected' });
+            return;
+        }
+        let body = { ...formValues, address: selectedAddress };
+        dispatch(OrderActions.setPickupAndDropoff({ ...body }));
+        history.push('/orderreview');
+    }, [formValues, history, selectedAddress, dispatch]);
 
     const isSunday = date => {
         const day = new Date(date).getDay();
@@ -58,28 +85,39 @@ export default function PickAndDrop({ history }) {
                                         <Row className="border-bottom" >
                                             <Form.Group as={Col} controlId="formGridStreet1">
                                                 <Form.Label>Pickup Date</Form.Label>
-                                                <ReactDatePicker
-                                                    selected={formValues.pickupDate}
-                                                    onChange={(e) => setFormValues({ ...formValues, pickupDate: e })}
-                                                    className="form-control react-date-picker-custom"
-                                                    placeholderText={'mm/dd/yyyy'}
-                                                    minDate={new Date()}
-                                                    maxDate={pickupMaxDate}
-                                                    filterDate={isSunday}
-                                                />
+                                                <Form.Row>
+                                                    <ReactDatePicker
+                                                        selected={formValues.pickupDate}
+                                                        onChange={(e) => {
+                                                            setFormValues({ ...formValues, pickupDate: e });
+                                                            setNotValid({ error: false, type:'', message:'' });
+                                                        }}
+                                                        className="form-control react-date-picker-custom"
+                                                        placeholderText={'mm/dd/yyyy'}
+                                                        minDate={new Date()}
+                                                        maxDate={pickupMaxDate}
+                                                        filterDate={isSunday}
+                                                    />
+                                                    {(notValid.error && notValid.type === 'pickupDate') && <label className="text-danger" > {notValid.message} </label>}
+                                                </Form.Row>
                                             </Form.Group>
                                             <Form.Group as={Col} controlId="formGridStreet2">
                                                 <Form.Label>Pickup Time</Form.Label>
                                                 <Form.Control as="select" className="pickup-slots"
                                                     value={formValues.pickupTime}
-                                                    onChange={(e) => setFormValues({ ...formValues, pickupTime: e.target.value })}
-                                                >
+                                                    onChange={(e) => {
+                                                        setFormValues({ ...formValues, pickupTime: e.target.value });
+                                                        setNotValid({ error: false, type:'', message:'' });
+                                                    }
+                                                }>
+                                                    <option value={''} >Please Select Pick Up Time</option>
                                                     {
                                                         timeSlots.map((v, i) => {
                                                             return (<option key={i} value={v.value} >{v.value}</option>);
                                                         })
                                                     }
                                                 </Form.Control>
+                                                {(notValid.error && notValid.type === 'pickupTime') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                     </Form>
@@ -87,29 +125,40 @@ export default function PickAndDrop({ history }) {
                                         <Row className="border-bottom mt-3" >
                                             <Form.Group as={Col} controlId="formGridStreet3">
                                                 <Form.Label>Dropoff Date</Form.Label>
-                                                <ReactDatePicker
-                                                    disabled={!formValues.pickupDate}
-                                                    selected={formValues.dropoffDate}
-                                                    onChange={(e) => setFormValues({ ...formValues, dropoffDate: e })}
-                                                    className="form-control react-date-picker-custom"
-                                                    placeholderText={'mm/dd/yyyy'}
-                                                    minDate={dropOffMinDate}
-                                                    maxDate={dropOffMaxDate}
-                                                    filterDate={isSunday}
-                                                />
+                                                <Form.Row>
+                                                    <ReactDatePicker
+                                                        disabled={!formValues.pickupDate}
+                                                        selected={formValues.dropoffDate}
+                                                        onChange={(e) => {
+                                                            setFormValues({ ...formValues, dropoffDate: e });
+                                                            setNotValid({ error: false, type:'', message:'' });
+                                                        }}
+                                                        className="form-control react-date-picker-custom"
+                                                        placeholderText={'mm/dd/yyyy'}
+                                                        minDate={dropOffMinDate}
+                                                        maxDate={dropOffMaxDate}
+                                                        filterDate={isSunday}
+                                                    />
+                                                    {(notValid.error && notValid.type === 'dropoffDate') && <label className="text-danger" > {notValid.message} </label>}
+                                                </Form.Row>
                                             </Form.Group>
                                             <Form.Group as={Col} controlId="formGridStreet4">
                                                 <Form.Label>Dropoff Time</Form.Label>
                                                 <Form.Control as="select" className="pickup-slots"
                                                     value={formValues.dropoffTime}
-                                                    onChange={(e) => setFormValues({ ...formValues, dropoffTime: e.target.value })}
-                                                >
+                                                    onChange={(e) => {
+                                                        setFormValues({ ...formValues, dropoffTime: e.target.value });
+                                                        setNotValid({ error: false, type:'', message:'' });
+                                                    }
+                                                }>
+                                                    <option value={''} >Please Select Drop Off Time</option>
                                                     {
                                                         timeSlots.map((v, i) => {
                                                             return (<option key={i} value={v.value} >{v.value}</option>);
                                                         })
                                                     }
                                                 </Form.Control>
+                                                {(notValid.error && notValid.type === 'dropoffTime') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                     </Form>
@@ -145,11 +194,11 @@ export default function PickAndDrop({ history }) {
                                     <Row className=" mt-3" >
                                         <Form.Group as={Col} controlId="formGridPhone">
                                             <Form.Label>Driver Instruction</Form.Label>
-                                            <Form.Control as="textarea" rows="3" placeholder="" />
+                                            <Form.Control as="textarea" rows="3" placeholder="" onChange={(e) => setFormValues({ ...formValues, driverInstruction: e.target.value })} />
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button onClick={() => history.push('/orderreview')} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
+                                        <button onClick={() => PlaceOrder()} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>

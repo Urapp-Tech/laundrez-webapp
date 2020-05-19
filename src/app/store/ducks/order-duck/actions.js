@@ -32,5 +32,11 @@ export class OrderActions {
         };
     }
 
+    static setPickupAndDropoff(body) {
+        return {
+            type: OrderActionTypes.SET_PICKUP_AND_DROPOFF,
+            payload: {...body} 
+        };
+    }
 
 }

@@ -14,6 +14,7 @@ import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-i
 export default function OrderReview({ history }) {
 
     const basketItems = useSelector(store => store?.mybasket?.items);
+    const driverInstruction = useSelector(store => store?.order?.currentOrder?.driverInstruction);
 
     const [totalAmont, setTotalAmount] = useState(0);
     const [totalHST, setTotalHST] = useState(0);
@@ -84,7 +85,7 @@ export default function OrderReview({ history }) {
                                         <Row className="mt-3 border-bottom pb-3" >
                                             <Col className="driver-inst d-flex flex-column" >
                                                 <label>Driver Instruction</label>
-                                                <span className="" >Please come to the side door and call on my mobile. Don't ring the bell.</span>
+                                                <span className="" >{driverInstruction}</span>
                                             </Col>
                                         </Row>
                                     </div>

@@ -50,7 +50,8 @@ export const rootEpic = combineEpics(
 
   lov.LovEpics.getLov,
 
-  order.OrderEpics.getOrders
+  order.OrderEpics.getOrders,
+  order.OrderEpics.postOrder
 
 
 

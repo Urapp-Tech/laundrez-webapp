@@ -8,6 +8,8 @@ export const MyBasketActionTypes = {
 
     REMOVE_FROM_BASKET: 'REMOVE_FROM_BASKET',
 
-    SET_BASKET: 'SET_BASKET'
+    SET_BASKET: 'SET_BASKET',
+
+    CLEAR_BASKET: 'CLEAR_BASKET'
 
 };

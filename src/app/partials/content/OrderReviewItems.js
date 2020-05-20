@@ -6,7 +6,7 @@ export default function OrderReviewItems({ qty, title, imageUrl, price }) {
         <Row className="border-bottom mb-3 order-review-item" >
             <Col>
                 <div className=" d-flex justify-content-center align-items-center">
-                    <div sty className="rounded-circle product-image  border-image-theme mb-3" >
+                    <div className="rounded-circle product-image  border-image-theme mb-3" >
                         <img
                             src={imageUrl}
                             alt="product"

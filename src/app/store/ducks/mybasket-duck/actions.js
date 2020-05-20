@@ -35,5 +35,10 @@ export class MyBasketActions {
             payload: { items }
         };
     }
+    static clearBasket() {
+        return {
+            type: MyBasketActionTypes.CLEAR_BASKET
+        };
+    }
 
 }

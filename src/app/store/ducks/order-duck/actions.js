@@ -2,9 +2,9 @@ import { OrderActionTypes } from './actions-types';
 
 export class OrderActions {
 
-    static saveOrder(body) {
+    static postOrder(body) {
         return {
-            type: OrderActionTypes.SAVE_ORDER_PROG,
+            type: OrderActionTypes.POST_ORDER_PROG,
             payload: { body }
 
         };

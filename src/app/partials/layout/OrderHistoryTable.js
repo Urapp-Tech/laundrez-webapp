@@ -33,39 +33,39 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                         return (< tr key={i} >
                             <td>
 
-                                {data.orderStatus === 'delivered' ?
+                                {data.status === 'delivered' ?
                                     <CircularProgress value={data.progressCount} color={data.progressColor} img={'box.svg'} />
-                                    : data.orderStatus === 'placed' ?
+                                    : data.status === 'placed' ?
                                         <CircularProgress value={data.progressCount} color={data.progressColor} img={'checklist.svg'} />
-                                        : data.orderStatus === 'pickedup' ?
+                                        : data.status === 'pickedup' ?
                                             <CircularProgress value={data.progressCount} color={data.progressColor} img={'trolley.svg'} />
-                                            : data.orderStatus === 'out' ?
+                                            : data.status === 'out' ?
                                                 <CircularProgress value={data.progressCount} color={data.progressColor} img={'tracking-green.svg'} />
                                                 : null
 
                                 }
                             </td>
                             <td className="cursor-pointer" onClick={() => history.push('/orderdetails')} >{data.orderNumber}</td>
-                            <td>{data.orderDateTime}</td>
+                            <td>{data.orderDate}</td>
                             <td>{
-                                data.orderStatus === 'delivered' ?
+                                data.status === 'delivered' ?
                                     <Badge variant="order-delivered">Delivered</Badge>
-                                    : data.orderStatus === 'placed' ?
+                                    : data.status === 'placed' ?
                                         <Badge variant="order-placed">Order Placed</Badge>
-                                        : data.orderStatus === 'pickedup' ?
+                                        : data.status === 'pickedup' ?
                                             <Badge variant="order-pickedup">Order Pickedup</Badge>
-                                            : data.orderStatus === 'out' ?
+                                            : data.status === 'out' ?
                                                 <Badge variant="order-out-delivery">Out for Delivery</Badge>
                                                 : null
 
 
 
                             }</td>
-                            <td>{data.itemCount}</td>
+                            <td>{data.listDetail.length}</td>
                             {repeatOrder &&
                                 <td>
                                     {
-                                        data.orderStatus === 'delivered' ?
+                                        data.status === 'delivered' ?
                                             <Badge variant="primary">Repeat Order</Badge>
                                             : null
                                     }

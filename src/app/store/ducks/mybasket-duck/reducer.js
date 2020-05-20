@@ -42,6 +42,10 @@ export function MyBasketReducer(state = initState, action) {
 
     case MyBasketActionTypes.SET_BASKET:
       return { ...state, items: action.payload.items };
+
+    case MyBasketActionTypes.CLEAR_BASKET:
+      MyBasketStorage.clearBasket();
+      return { ...state, items: {} };
     default:
       return state;
   }

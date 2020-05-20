@@ -3,24 +3,27 @@ import { ofType, } from 'redux-observable';
 import { switchMap, pluck, catchError, flatMap } from 'rxjs/operators';
 import { OrderActionTypes } from './actions-types';
 import { NotificationActions } from '../notification-duck/actions';
+import { MyBasketActions } from '../mybasket-duck/actions';
 export class OrderEpics {
-    static saveOrder(action$, state$, { ajaxPost }) {
-        return action$.pipe(ofType(OrderActionTypes.SAVE_ORDER_PROG), switchMap(({ payload }) => {
-            return ajaxPost('/Order', payload.body).pipe(pluck('response'), flatMap(obj => {
+    static postOrder(action$, state$, { ajaxPost, history }) {
+        return action$.pipe(ofType(OrderActionTypes.POST_ORDER_PROG), switchMap(({ payload }) => {
+            return ajaxPost('/order', payload.body).pipe(pluck('response'), flatMap(obj => {
                 window.scrollTo(0, 0);
+                history.replace('/dashboard');
                 return of(
                     {
-                        type: OrderActionTypes.SAVE_ORDER_SUCC,
+                        type: OrderActionTypes.POST_ORDER_SUCC,
                         payload: { address: obj.result }
                     },
-                    NotificationActions.showSuccessNotification('Order saved successfully')
+                    NotificationActions.showSuccessNotification('Order placed successfully'),
+                    MyBasketActions.clearBasket()
                 );
             })
                 , catchError((err) => {
 
                     window.scrollTo(0, 0);
                     return of(
-                        { type: OrderActionTypes.SAVE_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                        { type: OrderActionTypes.POST_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
                         NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
                     );
                 }));
@@ -29,7 +32,7 @@ export class OrderEpics {
     }
 
     static getOrders(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(OrderActionTypes.GET_ORDERS_PROG), switchMap(({payload}) => {
+        return action$.pipe(ofType(OrderActionTypes.GET_ORDERS_PROG), switchMap(({ payload }) => {
             return ajaxGet(`/order/history?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {

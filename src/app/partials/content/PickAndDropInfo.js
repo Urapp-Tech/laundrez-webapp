@@ -20,7 +20,7 @@ export default function PickAndDropInfo() {
                         <span>
                             <img alt={'img'} src={Calendar} className="w-75 h-75" />
                         </span>
-                            <span>{moment(order.pickupDate).format('ddd, Do MMM YYYY')}</span>
+                        <span>{moment(order.pickupDate).format('ddd, Do MMM YYYY')}</span>
 
                     </div>
                     <div className="d-flex w-100 justify-content-start align-items-start" >
@@ -58,7 +58,7 @@ export default function PickAndDropInfo() {
                         <img alt={'img'} src={Pin} className="pin-image img-fluid " />
 
                     </span>
-    <span className="ml-2 street-text" > {order.address.postalCode} | {order.address.street}</span>
+                    <span className="ml-2 street-text" > {order.address?.postalCode} | {order.address?.street}</span>
 
                 </div>
             </Col>

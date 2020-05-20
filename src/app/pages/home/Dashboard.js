@@ -35,7 +35,7 @@ export default function Dashboard({ history }) {
                 <div key={i} className=" margin-card  " onClick={() => onClickCategory(data.id, data)} >
                   <Portlet className="justify-content-center  category-card kt-portlet--border-bottom-brand">
                     <PortletBody className="justify-content-center align-items-center" >
-                      <h5 className=" text-break " >{data.title}</h5>
+                      <h5 className=" text-break text-center" >{data.title}</h5>
                       <img className="category-image" alt="img" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
                       {/* <h6>Starting From</h6>
                       <h2 className="font-weight-bold" >{data.categoryPrice}</h2> */}

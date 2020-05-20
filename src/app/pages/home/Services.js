@@ -46,7 +46,7 @@ export default function Services() {
                         <div key={i} className="margin-card " onClick={() => onCardClick(i)} >
                             <Portlet className="justify-content-center service-card kt-portlet--border-bottom-brand">
                                 <PortletBody className="justify-content-center align-items-center">
-                                    <h5 className="mt-3" >{data.title}</h5>
+                                    <h5 className="mt-3 text-center text-break" >{data.title}</h5>
                                     <img className="service-image mb-1" alt="img" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
                                     <div className="text-truncate card-description" >{data.shortDescription}</div>
                                     <h2 className="font-weight-bold price" >${data.price}</h2>

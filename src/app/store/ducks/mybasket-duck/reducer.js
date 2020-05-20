@@ -5,7 +5,8 @@ const initState = {
   isError: false,
   errorMsg: '',
   errorStatus: 0,
-  items: {}
+  items: {},
+  coupon: null
 };
 export function MyBasketReducer(state = initState, action) {
   let item = {};
@@ -46,6 +47,15 @@ export function MyBasketReducer(state = initState, action) {
     case MyBasketActionTypes.CLEAR_BASKET:
       MyBasketStorage.clearBasket();
       return { ...state, items: {} };
+
+    case MyBasketActionTypes.VALIDATE_COUPON_PROG:
+      return { ...state, isProgress: true, };
+    case MyBasketActionTypes.VALIDATE_COUPON_SUCC:
+      return { ...state, isProgress: false, coupon: action.payload.coupon };
+    case MyBasketActionTypes.VALIDATE_COUPON_FAIL:
+      return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
+
     default:
       return state;
   }

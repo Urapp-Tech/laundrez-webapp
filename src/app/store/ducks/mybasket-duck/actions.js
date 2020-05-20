@@ -41,4 +41,11 @@ export class MyBasketActions {
         };
     }
 
+    static validateCoupon(code) {
+        return {
+            type: MyBasketActionTypes.VALIDATE_COUPON_PROG,
+            payload: { code }
+        };
+    }
+
 }

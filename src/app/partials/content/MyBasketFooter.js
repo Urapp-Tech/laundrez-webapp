@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputGroup, FormControl, Form } from 'react-bootstrap';
 import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
 import { ReactComponent as Coupon } from '../../../_metronic/layout/assets/layout-svg-icons/coupon.svg';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 export default function MyBasketFooter() {
+
+    const dispatch = useDispatch();
+    const isProgressCoupon = useSelector(store => store?.mybasket?.isProgress);
     const [formValues, setFormValues] = useState({
         promoCode: '',
         useReferral: false
     });
+
+    useEffect(() => {
+        if (formValues.promoCode)
+            dispatch(MyBasketActions.validateCoupon(formValues.promoCode));
+    }, [formValues.promoCode, dispatch]);
+
     return (
         <>
             <div className="promo-container ">
@@ -15,7 +26,15 @@ export default function MyBasketFooter() {
                     <span className="mb-3 mr-2 " > Add Promo Code </span>
                     <InputGroup className="mb-3 promo-input">
                         <InputGroup.Prepend>
-                            <InputGroup.Text className="bg-transparent" id="inputGroup-sizing-sm"><Coupon /></InputGroup.Text>
+                            <InputGroup.Text className="bg-transparent" id="inputGroup-sizing-sm">
+                                {
+                                    isProgressCoupon ?
+                                        <div className="kt-spinner  kt-spinner--md kt-spinner--center kt-spinner--primary" >
+                                        </div>
+                                        :
+                                        <Coupon />
+                                }
+                            </InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
                             disabled={formValues.useReferral}

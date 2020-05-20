@@ -72,9 +72,9 @@ export default function OrderReview({ history }) {
     }, [basketItems, calculateTotal]);
 
     const calculateHST = useCallback(() => {
-        let hst = Math.abs(totalAmount * (13 / 100)).toFixed(2);
+        let hst = Math.abs(totalAmount * (config?.system?.HSTPercentage / 100)).toFixed(2);
         setTotalHST(hst);
-    }, [totalAmount]);
+    }, [totalAmount, config]);
 
     const calculateGrandTotal = useCallback(() => {
         let grandTotal = Number(totalAmount) + Number(totalHST);

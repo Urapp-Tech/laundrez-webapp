@@ -147,12 +147,14 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
               <div className="kt-mycart__section">
                 <div className="kt-mycart__subtitel">
                   <span>Total Amount</span>
+                  <span>Discount</span>
                   <span>HST {hstPercentage}%</span>
                   <span>Grand Total</span>
                 </div>
 
                 <div className="kt-mycart__prices">
                   <span>$ {totalAmont}</span>
+                  <span>$ 0.00</span>
                   <span>$ {totalHST}</span>
                   <span className="kt-font-primary">$ {grandTotal}</span>
                 </div>

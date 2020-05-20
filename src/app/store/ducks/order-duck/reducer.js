@@ -34,12 +34,12 @@ export function OrderReducer(state = initState, action) {
       obj['isEmpty'] = false;
       return { ...state, currentOrder: { ...obj } };
 
-      case OrderActionTypes.POST_ORDER_PROG:
-        return { ...state, isProgressPost: true, };
-      case OrderActionTypes.POST_ORDER_SUCC:
-        return { ...state, isProgressPost: false,  };
-      case OrderActionTypes.POST_ORDER_FAIL:
-        return { ...state, isProgressPost: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+    case OrderActionTypes.POST_ORDER_PROG:
+      return { ...state, isProgressPost: true, };
+    case OrderActionTypes.POST_ORDER_SUCC:
+      return { ...state, isProgressPost: false, };
+    case OrderActionTypes.POST_ORDER_FAIL:
+      return { ...state, isProgressPost: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
     case OrderActionTypes.GET_ORDERS_PROG:
       return { ...state, isProgressOrders: true, };

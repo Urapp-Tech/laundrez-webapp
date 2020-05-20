@@ -51,7 +51,9 @@ export const rootEpic = combineEpics(
   lov.LovEpics.getLov,
 
   order.OrderEpics.getOrders,
-  order.OrderEpics.postOrder
+  order.OrderEpics.postOrder,
+
+  mybasket.MyBasketEpics.validateCoupon
 
 
 

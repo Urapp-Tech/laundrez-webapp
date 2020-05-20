@@ -106,7 +106,7 @@ export default function MyBasket({ history }) {
                                             : null
                                     }
                                 </PortletBody>
-                                <PortletFooter className="mybasket-footer d-flex     justify-content-between border-0" >
+                                <PortletFooter className="mybasket-footer d-flex justify-content-between border-0" >
                                     <MyBasketFooter />
                                 </PortletFooter>
                             </Portlet>
@@ -124,6 +124,10 @@ export default function MyBasket({ history }) {
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >Total Amount</span>
                                             <span className=" amount-num font-weight-bold"  >${totalAmont}</span>
+                                        </div>
+                                        <div className="d-flex justify-content-between">
+                                            <span className="amount-text" >Discount </span>
+                                            <span className="amount-num font-weight-bold" >$0.00</span>
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >HST {hstPercentage}%</span>

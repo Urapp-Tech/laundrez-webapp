@@ -18,13 +18,14 @@ export default function OrderReview({ history }) {
     const driverInstruction = useSelector(store => store?.order?.currentOrder?.driverInstruction);
     const currentOrder = useSelector(store => store?.order?.currentOrder);
     const config = useSelector(store => store?.lov?.config);
+    const coupon = useSelector(store => store?.mybasket?.coupon);
     const isProgress = useSelector(store => store?.order?.isProgressPost);
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalHST, setTotalHST] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
     useEffect(() => {
-        if (currentOrder.isEmpty) {
-            history.replace('/pickanddrop');
+        if (!currentOrder.start) {
+            history.replace('/mybasket');
         }
     }, [currentOrder, history]);
 
@@ -65,11 +66,26 @@ export default function OrderReview({ history }) {
         return accumulator + amount;
     }, [basketItems]);
 
+    const calculateDiscount = useCallback((totalAmount) => {
+        let type = coupon?.offerType;
+        let _totalAmount;
+        if (type === 'Amount') {
+            _totalAmount = totalAmount - coupon?.offerValue;
+        }
+        else if (type === 'Percentage') {
+            _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
+        }
+        return _totalAmount;
+    }, [coupon]);
+
     const calculateAmount = useCallback(() => {
         let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
         amount = Math.abs(amount).toFixed(2);
+        if (coupon) {
+            amount = calculateDiscount(amount);
+        }
         setTotalAmount(amount);
-    }, [basketItems, calculateTotal]);
+    }, [basketItems, calculateTotal, coupon, calculateDiscount]);
 
     const calculateHST = useCallback(() => {
         let hst = Math.abs(totalAmount * (config?.system?.HSTPercentage / 100)).toFixed(2);
@@ -86,7 +102,7 @@ export default function OrderReview({ history }) {
         calculateAmount();
         calculateHST();
         calculateGrandTotal();
-    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal,coupon]);
     return (
         <>
             <h4 className="mb-3" >Order Review</h4>

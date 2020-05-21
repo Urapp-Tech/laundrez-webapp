@@ -27,6 +27,11 @@ export default function PickAndDrop({ history }) {
 
     const [selectedAddress, setSelectedAddress] = useState(undefined);
     useEffect(() => {
+        if (!currentOrder.start) {
+            history.replace('/mybasket');
+        }
+    }, [currentOrder, history]);
+    useEffect(() => {
         dispatch(AddressActions.getAddresses());
         let { pickupDate,
             pickupTime,

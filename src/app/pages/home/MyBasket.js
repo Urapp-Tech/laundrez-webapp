@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 import { API_URL } from '../../store/services/config';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
+import { OrderActions } from '../../store/ducks/order-duck';
 
 export default function MyBasket({ history }) {
 
@@ -14,6 +15,7 @@ export default function MyBasket({ history }) {
     const basketItems = useSelector(store => store?.mybasket?.items);
     const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
 
+    const coupon = useSelector(store => store?.mybasket?.coupon);
     const [totalAmont, setTotalAmount] = useState(0);
     const [totalHST, setTotalHST] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
@@ -39,11 +41,26 @@ export default function MyBasket({ history }) {
         return accumulator + amount;
     }, [basketItems]);
 
+    const calculateDiscount = useCallback((totalAmount) => {
+        let type = coupon?.offerType;
+        let _totalAmount;
+        if (type === 'Amount') {
+            _totalAmount = totalAmount - coupon?.offerValue;
+        }
+        else if (type === 'Percentage') {
+            _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
+        }
+        return _totalAmount;
+    }, [coupon]);
+
     const calculateAmount = useCallback(() => {
         let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
         amount = Math.abs(amount).toFixed(2);
+        if (coupon) {
+            amount = calculateDiscount(amount);
+        }
         setTotalAmount(amount);
-    }, [basketItems, calculateTotal]);
+    }, [basketItems, calculateTotal, coupon, calculateDiscount]);
 
     const calculateHST = useCallback(() => {
         let hst = Math.abs(totalAmont * (hstPercentage / 100)).toFixed(2);
@@ -60,7 +77,12 @@ export default function MyBasket({ history }) {
         calculateAmount();
         calculateHST();
         calculateGrandTotal();
-    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, coupon]);
+
+    const onClickPlaceOrder = useCallback(() => {
+        dispatch(OrderActions.orderStart());
+        history.push('/pickanddrop');
+    }, [dispatch, history]);
 
     return (
         <>
@@ -127,7 +149,12 @@ export default function MyBasket({ history }) {
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >Discount </span>
-                                            <span className="amount-num font-weight-bold" >$0.00</span>
+                                            {/* <span className="amount-num font-weight-bold" >$0.00</span> */}
+                                            {coupon ?
+                                                <span className="amount-num font-weight-bold" >{coupon?.offerType === 'Amount' ? `$${coupon?.offerValue}` : `${coupon?.offerValue}%`} </span>
+                                                :
+                                                <span className="amount-num font-weight-bold" >$0.00</span>
+                                            }
                                         </div>
                                         <div className="d-flex justify-content-between">
                                             <span className="amount-text" >HST {hstPercentage}%</span>
@@ -139,7 +166,7 @@ export default function MyBasket({ history }) {
                                         <h4>Grand Total</h4>
                                         <h4 className=" font-weight-bold kt-font-primary" >${grandTotal}</h4>
                                     </div>
-                                    <button onClick={() => history.push('/pickanddrop')} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
+                                    <button onClick={onClickPlaceOrder} className="btn btn-block btn-primary-gradient btn-primary">Place Order</button>
                                 </PortletBody>
                             </Portlet>
                         </div>

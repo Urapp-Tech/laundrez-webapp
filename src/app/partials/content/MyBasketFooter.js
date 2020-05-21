@@ -9,15 +9,32 @@ export default function MyBasketFooter() {
 
     const dispatch = useDispatch();
     const isProgressCoupon = useSelector(store => store?.mybasket?.isProgress);
+    const coupon = useSelector(store => store?.mybasket?.coupon);
     const [formValues, setFormValues] = useState({
         promoCode: '',
         useReferral: false
     });
+    const [typedPromo, setTypedPromo] = useState(false);
 
     useEffect(() => {
-        if (formValues.promoCode)
+        if (formValues.promoCode) {
+            setTypedPromo(true);
             dispatch(MyBasketActions.validateCoupon(formValues.promoCode));
-    }, [formValues.promoCode, dispatch]);
+        }
+        else if (typedPromo && !formValues.promoCode){
+
+            dispatch(MyBasketActions.clearCoupon());
+        }
+    }, [formValues.promoCode, dispatch, typedPromo]);
+
+    useEffect(() => {
+        if (coupon?.code) {
+            setFormValues({
+                promoCode: coupon?.code,
+                useReferral: false
+            });
+        }
+    }, [coupon]);
 
     return (
         <>

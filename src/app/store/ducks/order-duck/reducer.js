@@ -14,7 +14,7 @@ const initState = {
     dropoffTime: '',
     driverInstruction: '',
     address: undefined,
-    isEmpty: true
+    start: false
   },
   paging: {}
 };
@@ -22,6 +22,11 @@ export function OrderReducer(state = initState, action) {
   // let array = [];
   let obj = {};
   switch (action.type) {
+
+    case OrderActionTypes.ORDER_START:
+      obj = { ...state.currentOrder };
+      obj['start'] = true;
+      return { ...state, currentOrder: obj };
 
     case OrderActionTypes.SET_PICKUP_AND_DROPOFF:
       obj = { ...state.currentOrder };
@@ -31,7 +36,6 @@ export function OrderReducer(state = initState, action) {
       obj['dropoffTime'] = action.payload.dropoffTime;
       obj['driverInstruction'] = action.payload.driverInstruction;
       obj['address'] = action.payload.address;
-      obj['isEmpty'] = false;
       return { ...state, currentOrder: { ...obj } };
 
     case OrderActionTypes.POST_ORDER_PROG:

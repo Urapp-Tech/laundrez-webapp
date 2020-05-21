@@ -22,8 +22,10 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
   const dispatch = useDispatch();
   const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
   const basketItems = useSelector(store => store?.mybasket?.items);
+  const coupon = useSelector(store => store?.mybasket?.coupon);
 
-  const [totalAmont, setTotalAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  // const [discountTotal, setDiscountTotal] = useState(0);
   const [totalHST, setTotalHST] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
 
@@ -45,30 +47,49 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
     return accumulator + amount;
   }, [basketItems]);
 
+  const calculateDiscount = useCallback((totalAmount) => {
+    let type = coupon?.offerType;
+    let _totalAmount;
+    if (type === 'Amount') {
+      _totalAmount = totalAmount - coupon?.offerValue;
+    }
+    else if (type === 'Percentage') {
+      _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
+    }
+    return _totalAmount;
+  }, [coupon]);
+
   const calculateAmount = useCallback(() => {
     let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
     amount = Math.abs(amount).toFixed(2);
+    if (coupon) {
+      amount = calculateDiscount(amount);
+    }
     setTotalAmount(amount);
-  }, [basketItems, calculateTotal]);
+  }, [basketItems, calculateTotal, coupon, calculateDiscount]);
+
+
 
 
   const calculateHST = useCallback(() => {
-    let hst = Math.abs(totalAmont * (hstPercentage / 100)).toFixed(2);
+    let hst = Math.abs(totalAmount * (hstPercentage / 100)).toFixed(2);
     setTotalHST(hst);
-  }, [totalAmont, hstPercentage]);
+  }, [totalAmount, hstPercentage]);
 
 
   const calculateGrandTotal = useCallback(() => {
-    let grandTotal = Number(totalAmont) + Number(totalHST);
+    let grandTotal = Number(totalAmount) + Number(totalHST);
     grandTotal = Math.abs(grandTotal).toFixed(2);
     setGrandTotal(grandTotal);
-  }, [totalAmont, totalHST]);
+  }, [totalAmount, totalHST]);
 
   useEffect(() => {
     calculateAmount();
     calculateHST();
     calculateGrandTotal();
-  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
+  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, coupon]);
+
+
 
 
 
@@ -153,8 +174,12 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
                 </div>
 
                 <div className="kt-mycart__prices">
-                  <span>$ {totalAmont}</span>
-                  <span>$ 0.00</span>
+                  <span>$ {totalAmount}</span>
+                  {coupon ?
+                    <span>{coupon?.offerType === 'Amount' ? `$${coupon?.offerValue}` : `${coupon?.offerValue}%`}</span>
+                    :
+                    <span>$ 0.00</span>
+                  }
                   <span>$ {totalHST}</span>
                   <span className="kt-font-primary">$ {grandTotal}</span>
                 </div>

@@ -56,6 +56,9 @@ export function MyBasketReducer(state = initState, action) {
       return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
 
+    case MyBasketActionTypes.CLEAR_COUPON:
+      return { ...state, coupon: null };
+
     default:
       return state;
   }

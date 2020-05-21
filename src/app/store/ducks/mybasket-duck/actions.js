@@ -48,4 +48,10 @@ export class MyBasketActions {
         };
     }
 
+    static clearCoupon() {
+        return {
+            type: MyBasketActionTypes.CLEAR_COUPON,
+        };
+    }
+
 }

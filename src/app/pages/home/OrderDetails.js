@@ -5,7 +5,9 @@ import PickAndDropInfo from '../../partials/content/PickAndDropInfo';
 import CircularProgress from '../../partials/layout/CircularProgress';
 import { Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
-export default function OrderDetails() {
+import moment from 'moment';
+export default function OrderDetails({ history }) {
+    const order = history?.location.state?.order;
     return (
         <>
             <h4 className="mb-3" >Order Details</h4>
@@ -20,8 +22,9 @@ export default function OrderDetails() {
                                             <Col className="d-flex " >
                                                 <CircularProgress width="4rem" value={88} color={'#2CD285'} img={'tracking-green.svg'} />
                                                 <div className="d-flex ml-2 h-100 justify-content-between flex-column order-info" >
-                                                    <span>Order Id: <b>EZ-45866</b></span>
-                                                    <span>08:35 , 05-01-2020</span>
+                                                    <span>Order Id: <b>{order?.orderNumber}</b></span>
+                                                    {/* <span>08:35 , 05-01-2020</span> */}
+                                                    <span>{moment(order?.orderDate).format('hh:mm')} , {moment(order?.orderDate).format('DD-MM-YYYY')}</span>
                                                     <span className="text-out-for-delivery font-weight-bold" > Out for Delivery </span>
                                                 </div>
                                             </Col>

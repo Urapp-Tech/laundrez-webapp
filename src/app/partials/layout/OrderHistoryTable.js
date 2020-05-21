@@ -5,6 +5,7 @@ import CircularProgress from './CircularProgress';
 import Pagination from 'react-js-pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { OrderActions } from '../../store/ducks/order-duck';
+import { Order } from '../../store/ducks/order-duck/constants';
 
 function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
     const dispatch = useDispatch();
@@ -33,30 +34,37 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                         return (< tr key={i} >
                             <td>
 
-                                {data.status === 'delivered' ?
+                                {data.status === Order.Delivered ?
                                     <CircularProgress value={data.progressCount} color={data.progressColor} img={'box.svg'} />
-                                    : data.status === 'placed' ?
+                                    : data.status === Order.OrderPlaced ?
                                         <CircularProgress value={data.progressCount} color={data.progressColor} img={'checklist.svg'} />
-                                        : data.status === 'pickedup' ?
+                                        : data.status === Order.PickUp ?
                                             <CircularProgress value={data.progressCount} color={data.progressColor} img={'trolley.svg'} />
-                                            : data.status === 'out' ?
+                                            : data.status === Order.DropOff ?
                                                 <CircularProgress value={data.progressCount} color={data.progressColor} img={'tracking-green.svg'} />
                                                 : null
 
                                 }
                             </td>
-                            <td className="cursor-pointer" onClick={() => history.push('/orderdetails')} >{data.orderNumber}</td>
+                            <td className="cursor-pointer" onClick={() => history.push({
+                                pathname: '/orderdetails',
+                                state: { order: data }
+                            })} >{data.orderNumber}</td>
                             <td>{data.orderDate}</td>
                             <td>{
-                                data.status === 'delivered' ?
+                                data.status === Order.Delivered ?
                                     <Badge variant="order-delivered">Delivered</Badge>
-                                    : data.status === 'placed' ?
+                                    : data.status === Order.OrderPlaced ?
                                         <Badge variant="order-placed">Order Placed</Badge>
-                                        : data.status === 'pickedup' ?
+                                        : data.status === Order.PickUp ?
                                             <Badge variant="order-pickedup">Order Pickedup</Badge>
-                                            : data.status === 'out' ?
+                                            : data.status === Order.DropOff ?
                                                 <Badge variant="order-out-delivery">Out for Delivery</Badge>
-                                                : null
+                                                : data.status === Order.InProgress ?
+                                                    <Badge variant="order-inprogress">In Progress</Badge>
+                                                    : data.status === Order.Cancelled ?
+                                                        <Badge variant="order-cancelled">Cancelled</Badge>
+                                                        : null
 
 
 
@@ -65,7 +73,7 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                             {repeatOrder &&
                                 <td>
                                     {
-                                        data.status === 'delivered' ?
+                                        data.status === Order.Delivered ?
                                             <Badge variant="primary">Repeat Order</Badge>
                                             : null
                                     }

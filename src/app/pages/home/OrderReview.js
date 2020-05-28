@@ -56,7 +56,8 @@ export default function OrderReview({ history }) {
             })),
         };
         dispatch(OrderActions.postOrder(body));
-    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch]);
+        history.push('/paymentdetails');
+    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, history]);
 
 
     const calculateTotal = useCallback((accumulator, key) => {

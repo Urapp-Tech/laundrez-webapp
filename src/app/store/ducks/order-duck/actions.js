@@ -25,6 +25,13 @@ export class OrderActions {
     //     };
     // }
 
+    static makePayment(body) {
+        return {
+            type: OrderActionTypes.MAKE_PAYMENT_PROG,
+            payload: { body }
+        };
+    }
+
     static cancelOrder(id) {
         return {
             type: OrderActionTypes.CANCEL_ORDER_PROG,

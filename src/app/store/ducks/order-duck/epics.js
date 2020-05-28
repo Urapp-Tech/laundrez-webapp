@@ -5,18 +5,18 @@ import { OrderActionTypes } from './actions-types';
 import { NotificationActions } from '../notification-duck/actions';
 import { MyBasketActions } from '../mybasket-duck/actions';
 export class OrderEpics {
-    static postOrder(action$, state$, { ajaxPost, history }) {
+    static postOrder(action$, state$, { ajaxPost, }) {
         return action$.pipe(ofType(OrderActionTypes.POST_ORDER_PROG), switchMap(({ payload }) => {
             return ajaxPost('/order', payload.body).pipe(pluck('response'), flatMap(obj => {
-                window.scrollTo(0, 0);
-                history.replace('/dashboard');
+                // window.scrollTo(0, 0);
+                // history.replace('/dashboard');
                 return of(
                     {
                         type: OrderActionTypes.POST_ORDER_SUCC,
-                        payload: { address: obj.result }
+                        payload: { order: obj.result }
                     },
-                    NotificationActions.showSuccessNotification('Order placed successfully'),
-                    MyBasketActions.clearBasket()
+                    // NotificationActions.showSuccessNotification('Order placed successfully'),
+                    // MyBasketActions.clearBasket()
                 );
             })
                 , catchError((err) => {
@@ -82,6 +82,24 @@ export class OrderEpics {
             })
                 , catchError((err) => {
                     return of({ type: OrderActionTypes.CANCEL_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                }));
+
+        }));
+    }
+
+    static makePayment(action$, state$, { ajaxPost, }) {
+        return action$.pipe(ofType(OrderActionTypes.MAKE_PAYMENT_PROG), switchMap(({ payload }) => {
+            return ajaxPost('/Order/makepayment', payload.body).pipe(pluck('response'), flatMap(() => {
+                return of(
+                    {
+                        type: OrderActionTypes.MAKE_PAYMENT_SUCC,
+                    },
+                    MyBasketActions.clearBasket(),
+                    NotificationActions.showSuccessNotification('Order placed successfully'),
+                );
+            })
+                , catchError((err) => {
+                    return of({ type: OrderActionTypes.MAKE_PAYMENT_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));

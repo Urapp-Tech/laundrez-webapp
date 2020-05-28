@@ -3,6 +3,7 @@ const initState = {
   isProgressPost: false,
   isProgressUpdate: false,
   isProgressOrders: false,
+  isProgressPayment: false,
   isError: false,
   errorMsg: '',
   errorStatus: 0,
@@ -16,7 +17,8 @@ const initState = {
     address: undefined,
     start: false
   },
-  paging: {}
+  paging: {},
+  order: {}
 };
 export function OrderReducer(state = initState, action) {
   // let array = [];
@@ -41,7 +43,7 @@ export function OrderReducer(state = initState, action) {
     case OrderActionTypes.POST_ORDER_PROG:
       return { ...state, isProgressPost: true, };
     case OrderActionTypes.POST_ORDER_SUCC:
-      return { ...state, isProgressPost: false, };
+      return { ...state, isProgressPost: false, order: action.payload.order };
     case OrderActionTypes.POST_ORDER_FAIL:
       return { ...state, isProgressPost: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
@@ -53,6 +55,13 @@ export function OrderReducer(state = initState, action) {
       return { ...state, isProgressOrders: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
 
+
+    case OrderActionTypes.MAKE_PAYMENT_PROG:
+      return { ...state, isProgressPayment: true, };
+    case OrderActionTypes.MAKE_PAYMENT_SUCC:
+      return { ...state, isProgressPayment: false, };
+    case OrderActionTypes.MAKE_PAYMENT_FAIL:
+      return { ...state, isProgressPayment: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
     default:
       return state;
   }

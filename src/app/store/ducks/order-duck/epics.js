@@ -70,18 +70,18 @@ export class OrderEpics {
         }));
     }
 
-    static deleteOrder(action$, state$, { ajaxDel }) {
-        return action$.pipe(ofType(OrderActionTypes.DELETE_ORDER_PROG), switchMap(({ payload }) => {
-            return ajaxDel(`/Order/${payload.id}`).pipe(pluck('response'), flatMap(() => {
+    static cancelOrder(action$, state$, { ajaxPut, history }) {
+        return action$.pipe(ofType(OrderActionTypes.CANCEL_ORDER_PROG), switchMap(({ payload }) => {
+            return ajaxPut(`/Order/cancel/${payload.id}`).pipe(pluck('response'), flatMap(() => {
+                history.replace('/dashboard');
                 return of(
                     {
-                        type: OrderActionTypes.DELETE_ORDER_SUCC,
-                        payload: { index: payload.index }
+                        type: OrderActionTypes.CANCEL_ORDER_SUCC,
                     },
                 );
             })
                 , catchError((err) => {
-                    return of({ type: OrderActionTypes.DELETE_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    return of({ type: OrderActionTypes.CANCEL_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));

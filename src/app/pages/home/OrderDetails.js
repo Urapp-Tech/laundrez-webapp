@@ -7,8 +7,11 @@ import { Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
 import moment from 'moment';
 import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
+import { useDispatch } from 'react-redux';
+import { OrderActions } from '../../store/ducks/order-duck';
 export default function OrderDetails({ history }) {
     const order = history?.location.state?.order;
+    const dispatch = useDispatch();
     return (
         <>
             <h4 className="mb-3" >Order Details</h4>
@@ -59,7 +62,7 @@ export default function OrderDetails({ history }) {
                                                 </div>
                                             </Col>
                                             <Col>
-                                                {order.status === Order.OrderPlaced ? <button className="btn btn-block btn-primary-gradient btn-primary">Cancel or Change Order</button> : null}
+                                                {order.status === Order.OrderPlaced ? <button onClick={() => dispatch(OrderActions.cancelOrder(order?.id))} className="btn btn-block btn-primary-gradient btn-primary">Cancel Order</button> : null}
                                             </Col>
                                         </Row>
                                     </div>

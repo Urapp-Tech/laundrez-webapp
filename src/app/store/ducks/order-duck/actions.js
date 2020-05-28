@@ -17,18 +17,18 @@ export class OrderActions {
         };
     }
 
-    static updateOrder(body, index) {
-        return {
-            type: OrderActionTypes.UPDATE_ORDER_PROG,
-            payload: { body, index }
+    // static updateOrder(body, index) {
+    //     return {
+    //         type: OrderActionTypes.UPDATE_ORDER_PROG,
+    //         payload: { body, index }
 
-        };
-    }
+    //     };
+    // }
 
-    static deleteOrder(id, index) {
+    static cancelOrder(id) {
         return {
-            type: OrderActionTypes.DELETE_ORDER_PROG,
-            payload: { id, index }
+            type: OrderActionTypes.CANCEL_ORDER_PROG,
+            payload: { id }
 
         };
     }

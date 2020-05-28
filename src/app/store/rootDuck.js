@@ -9,6 +9,7 @@ import * as notification from './ducks/notification-duck';
 import * as faq from './ducks/faq-duck';
 import * as lov from './ducks/lov-duck';
 import * as order from './ducks/order-duck';
+import * as card from './ducks/card-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
@@ -21,7 +22,8 @@ const appReducer = combineReducers({
   notification: notification.NotificationReducer,
   faq: faq.FaqReducer,
   lov: lov.LovReducer,
-  order: order.OrderReducer
+  order: order.OrderReducer,
+  card: card.CardReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {
@@ -54,7 +56,11 @@ export const rootEpic = combineEpics(
   order.OrderEpics.postOrder,
   order.OrderEpics.cancelOrder,
 
-  mybasket.MyBasketEpics.validateCoupon
+  mybasket.MyBasketEpics.validateCoupon,
+
+  card.CardEpics.getCards,
+  card.CardEpics.saveCard,
+  card.CardEpics.deleteCard,
 
 
 

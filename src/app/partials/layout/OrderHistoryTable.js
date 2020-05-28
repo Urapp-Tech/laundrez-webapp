@@ -5,7 +5,7 @@ import CircularProgress from './CircularProgress';
 import Pagination from 'react-js-pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { OrderActions } from '../../store/ducks/order-duck';
-import { Order } from '../../store/ducks/order-duck/constants';
+import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
 
 function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
     const dispatch = useDispatch();
@@ -35,14 +35,16 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
                             <td>
 
                                 {data.status === Order.Delivered ?
-                                    <CircularProgress value={data.progressCount} color={data.progressColor} img={'box.svg'} />
+                                    <CircularProgress value={100} color={OrderColor.Delivered} img={'box.svg'} />
                                     : data.status === Order.OrderPlaced ?
-                                        <CircularProgress value={data.progressCount} color={data.progressColor} img={'checklist.svg'} />
+                                        <CircularProgress value={100} color={OrderColor.OrderPlaced} img={'checklist.svg'} />
                                         : data.status === Order.PickUp ?
-                                            <CircularProgress value={data.progressCount} color={data.progressColor} img={'trolley.svg'} />
+                                            <CircularProgress value={100} color={OrderColor.PickUp} img={'trolley.svg'} />
                                             : data.status === Order.DropOff ?
-                                                <CircularProgress value={data.progressCount} color={data.progressColor} img={'tracking-green.svg'} />
-                                                : null
+                                                <CircularProgress value={100} color={OrderColor.DropOff} img={'tracking-green.svg'} />
+                                                : data.status === Order.InProgress ?
+                                                    <CircularProgress value={100} color={OrderColor.InProgress} img={'tracking-green.svg'} />
+                                                    : null
 
                                 }
                             </td>

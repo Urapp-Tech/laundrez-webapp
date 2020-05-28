@@ -11,6 +11,7 @@ import { API_URL } from '../../store/services/config';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
 import { OrderActions } from '../../store/ducks/order-duck';
 import clsx from 'clsx';
+import moment from 'moment';
 
 export default function OrderReview({ history }) {
     const dispatch = useDispatch();
@@ -102,7 +103,7 @@ export default function OrderReview({ history }) {
         calculateAmount();
         calculateHST();
         calculateGrandTotal();
-    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal,coupon]);
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, coupon]);
     return (
         <>
             <h4 className="mb-3" >Order Review</h4>
@@ -129,7 +130,13 @@ export default function OrderReview({ history }) {
                                         <OrderReviewItems /> */}
                                     </div>
                                     <div>
-                                        <PickAndDropInfo />
+                                        <PickAndDropInfo
+                                            pickupDate={moment(currentOrder?.pickupDate).format('ddd, Do MMM YYYY')}
+                                            pickupTime={currentOrder?.pickupTime}
+                                            dropoffDate={moment(currentOrder?.dropoffDate).format('ddd, Do MMM YYYY')}
+                                            dropoffTime={currentOrder?.dropoffTime}
+                                            address={currentOrder?.address}
+                                        />
                                     </div>
                                     <div>
                                         <Row className="mt-3 border-bottom pb-3" >

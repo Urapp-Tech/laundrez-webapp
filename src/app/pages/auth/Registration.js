@@ -18,7 +18,8 @@ export default function Registration({ history }) {
     email: '',
     phoneNo: '',
     postalCode: '',
-    password: ''
+    password: '',
+    referralCode: ''
 
   });
 
@@ -93,7 +94,8 @@ export default function Registration({ history }) {
       email: formValues.email,
       phoneNo: formValues.phoneNo,
       postalCode: formValues.postalCode,
-      password: formValues.password
+      password: formValues.password,
+      referralCode: formValues.referralCode ? formValues.referralCode : undefined
     };
     setProgress(true);
     HttpService.post('/User/signup/', body).subscribe(() => {
@@ -193,6 +195,15 @@ export default function Registration({ history }) {
               placeholder="Postal Code"
             />
             {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              value={formValues.referralCode}
+              onChange={(e) => setFormValues({ ...formValues, referralCode: e.target.value })}
+              placeholder="Referral Code"
+            />
+            {(notValid.error && notValid.type === 'referralCode') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Row className="justify-content-center " >
             <Col className=" mt-4 mb-4" >

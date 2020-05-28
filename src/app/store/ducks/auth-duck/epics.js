@@ -30,8 +30,8 @@ export class AuthEpics {
     static getProfile(action$, state$, { ajaxGet }) {
         return action$.pipe(ofType(AuthActionTypes.GET_PROFILE_PROG), switchMap(() => {
             return ajaxGet('/User').pipe(pluck('response'), map(obj => {
-                let { id, username, firstName, lastName, email, phoneNo, postalCode } = obj.result;
-                let user = { id, username, firstName, lastName, email, phoneNo, postalCode };
+                let { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode } = obj.result;
+                let user = { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode };
                 AuthStorage.setUser(user);
                 return {
                     type: AuthActionTypes.GET_PROFILE_SUCC,

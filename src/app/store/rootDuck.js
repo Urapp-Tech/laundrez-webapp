@@ -57,7 +57,8 @@ export const rootEpic = combineEpics(
   order.OrderEpics.cancelOrder,
   order.OrderEpics.makePayment,
 
-  mybasket.MyBasketEpics.validateCoupon,
+  mybasket.MyBasketEpics.validatePromoCoupon,
+  mybasket.MyBasketEpics.validateReferralCoupon,
 
   card.CardEpics.getCards,
   card.CardEpics.saveCard,

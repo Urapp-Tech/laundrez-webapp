@@ -52,4 +52,24 @@ export class OrderActions {
         };
     }
 
+    static clearOrder() {
+        return {
+            type: OrderActionTypes.CLEAR_ORDER
+        };
+    }
+
+    static setOrder(order) {
+        return {
+            type: OrderActionTypes.SET_ORDER,
+            payload: { order }
+        };
+    }
+
+    static setCurrentOrder(currentOrder) {
+        return {
+            type: OrderActionTypes.SET_CURRENT_ORDER,
+            payload: { currentOrder }
+        };
+    }
+
 }

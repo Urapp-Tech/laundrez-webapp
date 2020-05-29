@@ -87,7 +87,8 @@ export default function PaymentDetails({ history }) {
                 expiryMonth: Number(formValues.expiryMonth),
                 expiryYear: Number(formValues.expiryYear),
                 cvvNumber: formValues.cvv,
-                saveCard: formValues.rememberDetails
+                saveCard: formValues.rememberDetails,
+                cardNumber: formValues.cardNumber
             };
             body['cardDetails'] = cardDetails;
         }

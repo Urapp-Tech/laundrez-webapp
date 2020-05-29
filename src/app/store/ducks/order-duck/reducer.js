@@ -1,4 +1,5 @@
 import { OrderActionTypes } from './actions-types';
+import { OrderStorage } from './order-storage';
 const initState = {
   isProgressPost: false,
   isProgressUpdate: false,
@@ -28,6 +29,7 @@ export function OrderReducer(state = initState, action) {
     case OrderActionTypes.ORDER_START:
       obj = { ...state.currentOrder };
       obj['start'] = true;
+      OrderStorage.setCurrentOrder(obj);
       return { ...state, currentOrder: obj };
 
     case OrderActionTypes.SET_PICKUP_AND_DROPOFF:
@@ -38,11 +40,13 @@ export function OrderReducer(state = initState, action) {
       obj['dropoffTime'] = action.payload.dropoffTime;
       obj['driverInstruction'] = action.payload.driverInstruction;
       obj['address'] = action.payload.address;
+      OrderStorage.setCurrentOrder({ ...obj });
       return { ...state, currentOrder: { ...obj } };
 
     case OrderActionTypes.POST_ORDER_PROG:
       return { ...state, isProgressPost: true, };
     case OrderActionTypes.POST_ORDER_SUCC:
+      OrderStorage.setOrder(action.payload.order);
       return { ...state, isProgressPost: false, order: action.payload.order };
     case OrderActionTypes.POST_ORDER_FAIL:
       return { ...state, isProgressPost: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
@@ -62,6 +66,28 @@ export function OrderReducer(state = initState, action) {
       return { ...state, isProgressPayment: false, };
     case OrderActionTypes.MAKE_PAYMENT_FAIL:
       return { ...state, isProgressPayment: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
+    case OrderActionTypes.CLEAR_ORDER:
+      OrderStorage.clearOrder();
+      return {
+        ...state, currentOrder: {
+          pickupDate: '',
+          pickupTime: '',
+          dropoffDate: '',
+          dropoffTime: '',
+          driverInstruction: '',
+          address: undefined,
+          start: false
+        },
+        order: {}
+      };
+
+    case OrderActionTypes.SET_ORDER:
+      return { ...state, order: action.payload.order };
+
+    case OrderActionTypes.SET_CURRENT_ORDER:
+      return { ...state, currentOrder: action.payload.currentOrder };
+
     default:
       return state;
   }

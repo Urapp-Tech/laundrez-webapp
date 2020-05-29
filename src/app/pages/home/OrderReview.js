@@ -19,11 +19,14 @@ export default function OrderReview({ history }) {
     const driverInstruction = useSelector(store => store?.order?.currentOrder?.driverInstruction);
     const currentOrder = useSelector(store => store?.order?.currentOrder);
     const config = useSelector(store => store?.lov?.config);
-    const coupon = useSelector(store => store?.mybasket?.coupon);
+    const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
+    const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
+    const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
     const isProgress = useSelector(store => store?.order?.isProgressPost);
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalHST, setTotalHST] = useState(0);
     const [grandTotal, setGrandTotal] = useState(0);
+    const [discountAmount, setDiscountAmount] = useState(0);
     useEffect(() => {
         if (!currentOrder.start) {
             history.replace('/mybasket');
@@ -45,7 +48,7 @@ export default function OrderReview({ history }) {
             // couponCode: 'string',
             // couponType: 'string',
             orderAmount: Number(totalAmount),
-            discountAmount: 0,
+            discountAmount: Number(discountAmount),
             totalAmount: Number(grandTotal),
             // stripeToken: 'string',
             listDetail: Object.keys(basketItems).map((key) => ({
@@ -55,9 +58,18 @@ export default function OrderReview({ history }) {
                 amount: basketItems[key].price * basketItems[key].qty,
             })),
         };
+        if (referralCoupon && useReferral) {
+            body['couponId'] = referralCoupon?.id;
+            body['couponCode'] = referralCoupon?.code;
+            body['couponType'] = referralCoupon?.couponType;
+        }
+        else if (promoCoupon) {
+            body['couponId'] = promoCoupon?.id;
+            body['couponCode'] = promoCoupon?.code;
+            body['couponType'] = promoCoupon?.couponType;
+        }
         dispatch(OrderActions.postOrder(body));
-        history.push('/paymentdetails');
-    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, history]);
+    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, referralCoupon, promoCoupon, useReferral, discountAmount]);
 
 
     const calculateTotal = useCallback((accumulator, key) => {
@@ -69,25 +81,30 @@ export default function OrderReview({ history }) {
     }, [basketItems]);
 
     const calculateDiscount = useCallback((totalAmount) => {
+        let coupon = useReferral ? referralCoupon : promoCoupon;
         let type = coupon?.offerType;
         let _totalAmount;
+        let _discountAmount = 0;
         if (type === 'Amount') {
-            _totalAmount = totalAmount - coupon?.offerValue;
+            _discountAmount = coupon?.offerValue;
+            _totalAmount = totalAmount - _discountAmount;
         }
         else if (type === 'Percentage') {
-            _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
+            _discountAmount = Math.abs(totalAmount * (coupon?.offerValue / 100)).toFixed(2);
+            _totalAmount = Math.abs(totalAmount - _discountAmount).toFixed(2);
         }
+        setDiscountAmount(_discountAmount);
         return _totalAmount;
-    }, [coupon]);
+    }, [referralCoupon, promoCoupon, useReferral]);
 
     const calculateAmount = useCallback(() => {
         let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
         amount = Math.abs(amount).toFixed(2);
-        if (coupon) {
+        if ((referralCoupon && useReferral) || promoCoupon) {
             amount = calculateDiscount(amount);
         }
         setTotalAmount(amount);
-    }, [basketItems, calculateTotal, coupon, calculateDiscount]);
+    }, [basketItems, calculateTotal, referralCoupon, useReferral, promoCoupon, calculateDiscount]);
 
     const calculateHST = useCallback(() => {
         let hst = Math.abs(totalAmount * (config?.system?.HSTPercentage / 100)).toFixed(2);
@@ -104,7 +121,15 @@ export default function OrderReview({ history }) {
         calculateAmount();
         calculateHST();
         calculateGrandTotal();
-    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, coupon]);
+        // let coupon = null;
+        // if (((referralCoupon && useReferral) || promoCoupon)) {
+        //     coupon = useReferral ? referralCoupon : promoCoupon;
+        //     setCoupon(coupon);
+        // }
+        // else {
+        //     setCoupon(coupon);
+        // }
+    }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, referralCoupon, useReferral, promoCoupon]);
     return (
         <>
             <h4 className="mb-3" >Order Review</h4>

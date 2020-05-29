@@ -9,32 +9,32 @@ export default function MyBasketFooter() {
 
     const dispatch = useDispatch();
     const isProgressCoupon = useSelector(store => store?.mybasket?.isProgress);
-    const coupon = useSelector(store => store?.mybasket?.coupon);
+    const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
+    const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
+    const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
     const [formValues, setFormValues] = useState({
         promoCode: '',
-        useReferral: false
     });
     const [typedPromo, setTypedPromo] = useState(false);
 
     useEffect(() => {
         if (formValues.promoCode) {
             setTypedPromo(true);
-            dispatch(MyBasketActions.validateCoupon(formValues.promoCode));
+            dispatch(MyBasketActions.validatePromoCoupon(formValues.promoCode));
         }
-        else if (typedPromo && !formValues.promoCode){
+        else if (typedPromo && !formValues.promoCode) {
 
-            dispatch(MyBasketActions.clearCoupon());
+            dispatch(MyBasketActions.clearPromoCoupon());
         }
     }, [formValues.promoCode, dispatch, typedPromo]);
 
     useEffect(() => {
-        if (coupon?.code) {
+        if (promoCoupon?.code) {
             setFormValues({
-                promoCode: coupon?.code,
-                useReferral: false
+                promoCode: promoCoupon?.code,
             });
         }
-    }, [coupon]);
+    }, [promoCoupon]);
 
     return (
         <>
@@ -54,7 +54,7 @@ export default function MyBasketFooter() {
                             </InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
-                            disabled={formValues.useReferral}
+                            disabled={useReferral}
                             aria-label="Small"
                             placeholder="Enter Promo Code"
                             className="border-left-0 border"
@@ -64,15 +64,15 @@ export default function MyBasketFooter() {
                         />
                     </InputGroup>
                 </div>
-                <Form.Check
+                {referralCoupon && <Form.Check
                     className="check-primary-addrs"
                     inline
                     label="Use Referral Code"
                     id={'use-referral'}
-                    value={formValues.useReferral}
-                    checked={formValues.useReferral}
-                    onChange={() => setFormValues({ ...formValues, useReferral: !formValues.useReferral })}
-                />
+                    value={useReferral}
+                    checked={useReferral}
+                    onChange={() => dispatch(MyBasketActions.useReferral())}
+                />}
             </div>
             <div className="d-flex add-more-container " >
                 <>

@@ -22,13 +22,16 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
   const dispatch = useDispatch();
   const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
   const basketItems = useSelector(store => store?.mybasket?.items);
-  const coupon = useSelector(store => store?.mybasket?.coupon);
+
+
+  const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
+  const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
+  const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
 
   const [totalAmount, setTotalAmount] = useState(0);
-  // const [discountTotal, setDiscountTotal] = useState(0);
   const [totalHST, setTotalHST] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-
+  const [coupon, setCoupon] = useState(null);
 
   const incrementQty = useCallback((id) => {
     dispatch(MyBasketActions.incrementQty(id));
@@ -48,6 +51,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
   }, [basketItems]);
 
   const calculateDiscount = useCallback((totalAmount) => {
+    let coupon = useReferral ? referralCoupon : promoCoupon;
     let type = coupon?.offerType;
     let _totalAmount;
     if (type === 'Amount') {
@@ -57,16 +61,16 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
       _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
     }
     return _totalAmount;
-  }, [coupon]);
+  }, [referralCoupon, promoCoupon, useReferral]);
 
   const calculateAmount = useCallback(() => {
     let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
     amount = Math.abs(amount).toFixed(2);
-    if (coupon) {
+    if ((referralCoupon && useReferral) || promoCoupon) {
       amount = calculateDiscount(amount);
     }
     setTotalAmount(amount);
-  }, [basketItems, calculateTotal, coupon, calculateDiscount]);
+  }, [basketItems, calculateTotal, referralCoupon, useReferral, promoCoupon, calculateDiscount]);
 
 
 
@@ -87,7 +91,15 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
     calculateAmount();
     calculateHST();
     calculateGrandTotal();
-  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, coupon]);
+    let coupon = null;
+    if (((referralCoupon && useReferral) || promoCoupon)) {
+      coupon = useReferral ? referralCoupon : promoCoupon;
+      setCoupon(coupon);
+    }
+    else {
+      setCoupon(coupon);
+    }
+  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, referralCoupon, useReferral, promoCoupon]);
 
 
 

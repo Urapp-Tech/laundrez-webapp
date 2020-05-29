@@ -4,12 +4,13 @@ import { switchMap, pluck, catchError, flatMap } from 'rxjs/operators';
 import { OrderActionTypes } from './actions-types';
 import { NotificationActions } from '../notification-duck/actions';
 import { MyBasketActions } from '../mybasket-duck/actions';
+import { OrderActions } from './actions';
 export class OrderEpics {
-    static postOrder(action$, state$, { ajaxPost, }) {
+    static postOrder(action$, state$, { ajaxPost,history }) {
         return action$.pipe(ofType(OrderActionTypes.POST_ORDER_PROG), switchMap(({ payload }) => {
             return ajaxPost('/order', payload.body).pipe(pluck('response'), flatMap(obj => {
-                // window.scrollTo(0, 0);
-                // history.replace('/dashboard');
+                window.scrollTo(0, 0);
+                history.push('/paymentdetails');
                 return of(
                     {
                         type: OrderActionTypes.POST_ORDER_SUCC,
@@ -95,11 +96,16 @@ export class OrderEpics {
                         type: OrderActionTypes.MAKE_PAYMENT_SUCC,
                     },
                     MyBasketActions.clearBasket(),
+                    MyBasketActions.clearCoupon(),
+                    OrderActions.clearOrder(),
                     NotificationActions.showSuccessNotification('Order placed successfully'),
                 );
             })
                 , catchError((err) => {
-                    return of({ type: OrderActionTypes.MAKE_PAYMENT_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    window.scrollTo(0, 0);
+                    return of(
+                        NotificationActions.showErrorNotification('Payment unsuccessful'),
+                        { type: OrderActionTypes.MAKE_PAYMENT_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));

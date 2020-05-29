@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 // import { useSelector } from "react-redux";
 import {
   Portlet,
@@ -7,21 +7,29 @@ import {
 import OrderHistoryTable from '../../partials/layout/OrderHistoryTable';
 import Info from '../../../_metronic/layout/assets/layout-svg-icons/info.svg';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from '../../store/services/config';
 import defaultImage from '../../../_metronic/layout/assets/layout-svg-icons/no-image.png';
+import { OrderActions } from '../../store/ducks/order-duck';
 
 
 export default function Dashboard({ history }) {
 
 
   const categories = useSelector(store => store?.category?.categories);
+  const activeOrders = useSelector(store => store?.order?.activeOrders);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(OrderActions.getActiveOrders());
+  }, [dispatch]);
+
   const onClickCategory = useCallback((id, category) => {
     history.push({
       pathname: `/services/${id}`,
       state: { category }
     });
   }, [history]);
+
 
 
   return (
@@ -58,7 +66,7 @@ export default function Dashboard({ history }) {
             </h4>
             <Link to="/orderhistory" >View All</Link>
           </div>
-          <OrderHistoryTable showPagination={false} repeatOrder={false} />
+          <OrderHistoryTable showPagination={false} repeatOrder={false} orders={activeOrders} />
         </div>
       </div>
 

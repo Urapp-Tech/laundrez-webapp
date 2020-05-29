@@ -17,6 +17,14 @@ export class OrderActions {
         };
     }
 
+    static getActiveOrders(page = 1, pageSize = 10, ) {
+        return {
+            type: OrderActionTypes.GET_ACTIVE_ORDERS_PROG,
+            payload: { page, pageSize }
+
+        };
+    }
+
     // static updateOrder(body, index) {
     //     return {
     //         type: OrderActionTypes.UPDATE_ORDER_PROG,

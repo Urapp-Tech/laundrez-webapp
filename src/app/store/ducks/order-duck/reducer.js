@@ -4,11 +4,13 @@ const initState = {
   isProgressPost: false,
   isProgressUpdate: false,
   isProgressOrders: false,
+  isProgressActiveOrders: false,
   isProgressPayment: false,
   isError: false,
   errorMsg: '',
   errorStatus: 0,
   orders: [],
+  activeOrders: [],
   currentOrder: {
     pickupDate: '',
     pickupTime: '',
@@ -59,6 +61,13 @@ export function OrderReducer(state = initState, action) {
       return { ...state, isProgressOrders: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
 
+
+    case OrderActionTypes.GET_ACTIVE_ORDERS_PROG:
+      return { ...state, isProgressActiveOrders: true, };
+    case OrderActionTypes.GET_ACTIVE_ORDERS_SUCC:
+      return { ...state, isProgressActiveOrders: false, activeOrders: action.payload.result };
+    case OrderActionTypes.GET_ACTIVE_ORDERS_FAIL:
+      return { ...state, isProgressActiveOrders: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
     case OrderActionTypes.MAKE_PAYMENT_PROG:
       return { ...state, isProgressPayment: true, };

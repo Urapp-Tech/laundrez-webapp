@@ -1,19 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { withRouter, } from 'react-router-dom';
 import { Table, Badge } from 'react-bootstrap';
 import CircularProgress from './CircularProgress';
 import Pagination from 'react-js-pagination';
-import { useSelector, useDispatch } from 'react-redux';
 import { OrderActions } from '../../store/ducks/order-duck';
 import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
+import { useDispatch } from 'react-redux';
 
-function OrderHistoryTable({ history, showPagination, repeatOrder = true }) {
+function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders, paging }) {
+
     const dispatch = useDispatch();
-    const orders = useSelector(store => store?.order?.orders);
-    const paging = useSelector(store => store?.order?.paging);
-    useEffect(() => {
-        dispatch(OrderActions.getOrders());
-    }, [dispatch]);
 
     return (
         <>

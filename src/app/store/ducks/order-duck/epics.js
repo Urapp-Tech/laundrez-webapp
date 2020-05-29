@@ -51,6 +51,25 @@ export class OrderEpics {
         }));
     }
 
+    static getActiveOrders(action$, state$, { ajaxGet }) {
+        return action$.pipe(ofType(OrderActionTypes.GET_ACTIVE_ORDERS_PROG), switchMap(({ payload }) => {
+            return ajaxGet(`/order/active?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`).pipe(pluck('response'), flatMap(obj => {
+                return of(
+                    {
+                        type: OrderActionTypes.GET_ACTIVE_ORDERS_SUCC,
+                        payload: obj
+                    },
+                );
+            })
+                , catchError((err) => {
+                    return of({ type: OrderActionTypes.GET_ACTIVE_ORDERS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                    );
+                }));
+
+        }));
+    }
+
     static updateOrder(action$, state$, { ajaxPut }) {
         return action$.pipe(ofType(OrderActionTypes.UPDATE_ORDER_PROG), switchMap(({ payload }) => {
             return ajaxPut('/Order', payload.body).pipe(pluck('response'), flatMap(obj => {

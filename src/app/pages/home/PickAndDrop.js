@@ -13,6 +13,8 @@ export default function PickAndDrop({ history }) {
     const dispatch = useDispatch();
     const addresses = useSelector(store => store?.address?.addresses);
     const timeSlots = useSelector(store => store?.lov?.config?.timeSlots);
+    const [pickupTime, setPickupTime] = useState([]);
+    const [dropoffTime, setDropoffTime] = useState([]);
     const dropOfThreshold = useSelector(store => store?.lov?.config?.system.DropOfThreshold);
     const currentOrder = useSelector(store => store?.order?.currentOrder);
     const [formValues, setFormValues] = useState({
@@ -26,11 +28,20 @@ export default function PickAndDrop({ history }) {
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
 
     const [selectedAddress, setSelectedAddress] = useState(undefined);
+
+    useEffect(() => {
+        if (timeSlots.length) {
+            setPickupTime(timeSlots);
+            setDropoffTime(timeSlots);
+        }
+    }, [timeSlots]);
+
     useEffect(() => {
         if (!currentOrder.start) {
             history.replace('/mybasket');
         }
     }, [currentOrder, history]);
+
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
         let { pickupDate,
@@ -47,6 +58,13 @@ export default function PickAndDrop({ history }) {
             driverInstruction
         });
     }, [dispatch, currentOrder]);
+
+    const availableDropOffTime = useCallback((selectedPickupTimeIndex) => {
+        let _dropoffTime = [...timeSlots];
+        _dropoffTime = _dropoffTime.slice(selectedPickupTimeIndex - 1);
+        setDropoffTime(_dropoffTime);
+
+    }, [timeSlots]);
     const getPrimaryAddressLatLng = useCallback(() => {
         if (addresses.length && currentOrder.address === undefined) {
             let selectedAddress = addresses.find((v) => v.isPrimary);
@@ -96,7 +114,7 @@ export default function PickAndDrop({ history }) {
     const dropoffStartHours = Number(dropOfThreshold) + today;
     const dropoffStartDays = Math.ceil(dropoffStartHours / 24);
     const allowedDaysThreshold = 7;
-    const pickupMinDate = moment(new Date()).add(today,'hours').toDate();
+    const pickupMinDate = moment(new Date()).add(today, 'hours').toDate();
     const pickupMaxDate = moment(new Date(), 'DD-MM-YYYY').add(allowedDaysThreshold, 'days').toDate();
     const dropOffMinDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(dropoffStartHours, 'hours').toDate();
     const dropOffMaxDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(allowedDaysThreshold + dropoffStartDays, 'days').toDate();
@@ -134,13 +152,13 @@ export default function PickAndDrop({ history }) {
                                                 <Form.Control as="select" className="pickup-slots"
                                                     value={formValues.pickupTime}
                                                     onChange={(e) => {
-                                                        setFormValues({ ...formValues, pickupTime: e.target.value });
-
+                                                        setFormValues({ ...formValues, pickupTime: e.target.value, dropoffTime: '' });
+                                                        availableDropOffTime(e.target.selectedIndex);
                                                     }
                                                     }>
                                                     <option value={''} >Please Select Pick Up Time</option>
                                                     {
-                                                        timeSlots.map((v, i) => {
+                                                        pickupTime.map((v, i) => {
                                                             return (<option key={i} value={v.value} >{v.value}</option>);
                                                         })
                                                     }
@@ -178,10 +196,12 @@ export default function PickAndDrop({ history }) {
                                                         setFormValues({ ...formValues, dropoffTime: e.target.value });
 
                                                     }
-                                                    }>
+                                                    }
+                                                    disabled={!formValues.pickupTime}
+                                                >
                                                     <option value={''} >Please Select Drop Off Time</option>
                                                     {
-                                                        timeSlots.map((v, i) => {
+                                                        dropoffTime.map((v, i) => {
                                                             return (<option key={i} value={v.value} >{v.value}</option>);
                                                         })
                                                     }

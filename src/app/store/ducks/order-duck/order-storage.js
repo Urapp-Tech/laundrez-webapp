@@ -11,8 +11,8 @@ export class OrderStorage {
     static getCurrentOrder() {
         let currentOrder = JSON.parse(localStorage.getItem('_currentOrder'));
         if (currentOrder) {
-            currentOrder['pickupDate'] = new Date(currentOrder['pickupDate']);
-            currentOrder['dropoffDate'] = new Date(currentOrder['dropoffDate']);
+            currentOrder['pickupDate'] = currentOrder['pickupDate'] ? new Date(currentOrder['pickupDate']) : '';
+            currentOrder['dropoffDate'] = currentOrder['dropoffDate'] ? new Date(currentOrder['dropoffDate']) : '';
         }
         return currentOrder;
     }

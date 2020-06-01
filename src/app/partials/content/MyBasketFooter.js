@@ -12,13 +12,15 @@ export default function MyBasketFooter() {
     const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
     const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
     const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
+    const promoError = useSelector(store => store?.mybasket?.isError);
+    const promoMessage = useSelector(store => store?.mybasket?.errorMsg);
     const [formValues, setFormValues] = useState({
         promoCode: '',
     });
     const [typedPromo, setTypedPromo] = useState(false);
 
     useEffect(() => {
-        if (formValues.promoCode) {
+        if (formValues.promoCode.length > 3) {
             setTypedPromo(true);
             dispatch(MyBasketActions.validatePromoCoupon(formValues.promoCode));
         }
@@ -39,30 +41,33 @@ export default function MyBasketFooter() {
     return (
         <>
             <div className="promo-container ">
-                <div className="w-100 d-flex align-items-center" >
-                    <span className="mb-3 mr-2 " > Add Promo Code </span>
-                    <InputGroup className="mb-3 promo-input">
-                        <InputGroup.Prepend>
-                            <InputGroup.Text className="bg-transparent" id="inputGroup-sizing-sm">
-                                {
-                                    isProgressCoupon ?
-                                        <div className="kt-spinner  kt-spinner--md kt-spinner--center kt-spinner--primary" >
-                                        </div>
-                                        :
-                                        <Coupon />
-                                }
-                            </InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <FormControl
-                            disabled={useReferral}
-                            aria-label="Small"
-                            placeholder="Enter Promo Code"
-                            className="border-left-0 border"
-                            aria-describedby="inputGroup-sizing-sm"
-                            value={formValues.promoCode}
-                            onChange={(e) => setFormValues({ ...formValues, promoCode: e.target.value })}
-                        />
-                    </InputGroup>
+                <div className="d-flex flex-column" >
+                    <div className="w-100 d-flex align-items-center" >
+                        <span className="mb-3 mr-2 d-block" > Add Promo Code </span>
+                        <InputGroup className="mb-3 promo-input">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text className="bg-transparent" id="inputGroup-sizing-sm">
+                                    {
+                                        isProgressCoupon ?
+                                            <div className="kt-spinner  kt-spinner--md kt-spinner--center kt-spinner--primary" >
+                                            </div>
+                                            :
+                                            <Coupon />
+                                    }
+                                </InputGroup.Text>
+                            </InputGroup.Prepend>
+                            <FormControl
+                                disabled={useReferral}
+                                aria-label="Small"
+                                placeholder="Enter Promo Code"
+                                className="border-left-0 border"
+                                aria-describedby="inputGroup-sizing-sm"
+                                value={formValues.promoCode}
+                                onChange={(e) => setFormValues({ ...formValues, promoCode: e.target.value })}
+                            />
+                        </InputGroup>
+                    </div>
+                    {(promoError) && <label className="text-danger d-block" > {promoMessage} </label>}
                 </div>
                 {referralCoupon && <Form.Check
                     className="check-primary-addrs"

@@ -57,7 +57,7 @@ export function MyBasketReducer(state = initState, action) {
       coupon = { ...state.coupon };
       coupon['promo'] = null;
       MyBasketStorage.setCoupon(coupon);
-      return { ...state, isProgress: true, coupon: coupon };
+      return { ...state, isProgress: true, coupon: coupon, isError: false };
     case MyBasketActionTypes.VALIDATE_PROMO_COUPON_SUCC:
       coupon = { ...state.coupon };
       coupon['promo'] = action.payload.promo;
@@ -71,7 +71,7 @@ export function MyBasketReducer(state = initState, action) {
       coupon = { ...state.coupon };
       coupon['promo'] = null;
       MyBasketStorage.setCoupon(coupon);
-      return { ...state, coupon: coupon };
+      return { ...state, coupon: coupon, isError: false, errorMsg: '' };
 
 
     case MyBasketActionTypes.VALIDATE_REFERRAL_COUPON_PROG:

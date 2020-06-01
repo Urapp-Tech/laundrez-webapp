@@ -5,7 +5,7 @@ import { MyBasketActionTypes } from './actions-types';
 export class MyBasketEpics {
 
     static validatePromoCoupon(action$, state$, { ajaxGet }) {
-        return action$.pipe(ofType(MyBasketActionTypes.VALIDATE_PROMO_COUPON_PROG), debounceTime(700), switchMap(({ payload }) => {
+        return action$.pipe(ofType(MyBasketActionTypes.VALIDATE_PROMO_COUPON_PROG), debounceTime(1000), switchMap(({ payload }) => {
             return ajaxGet(`/coupon/validate/${payload.code}`).pipe(pluck('response'), flatMap((obj) => {
                 return of(
                     {
@@ -15,7 +15,7 @@ export class MyBasketEpics {
                 );
             })
                 , catchError((err) => {
-                    return of({ type: MyBasketActionTypes.VALIDATE_PROMO_COUPON_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    return of({ type: MyBasketActionTypes.VALIDATE_PROMO_COUPON_FAIL, payload: { err, message: err?.response?.message || err?.response?.Message, status: err?.status } });
                 }));
 
         }));

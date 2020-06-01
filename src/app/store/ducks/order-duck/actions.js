@@ -17,6 +17,19 @@ export class OrderActions {
         };
     }
 
+    static getOrderDetail(orderId) {
+        return {
+            type: OrderActionTypes.GET_ORDER_DETAIL_PROG,
+            payload: { orderId }
+
+        };
+    }
+    static clearOrderDetail() {
+        return {
+            type: OrderActionTypes.CLEAR_ORDER_DETAIL
+        };
+    }
+
     static getActiveOrders(page = 1, pageSize = 10, ) {
         return {
             type: OrderActionTypes.GET_ACTIVE_ORDERS_PROG,

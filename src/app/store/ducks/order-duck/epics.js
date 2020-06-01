@@ -6,7 +6,7 @@ import { NotificationActions } from '../notification-duck/actions';
 import { MyBasketActions } from '../mybasket-duck/actions';
 import { OrderActions } from './actions';
 export class OrderEpics {
-    static postOrder(action$, state$, { ajaxPost,history }) {
+    static postOrder(action$, state$, { ajaxPost, history }) {
         return action$.pipe(ofType(OrderActionTypes.POST_ORDER_PROG), switchMap(({ payload }) => {
             return ajaxPost('/order', payload.body).pipe(pluck('response'), flatMap(obj => {
                 window.scrollTo(0, 0);
@@ -25,6 +25,26 @@ export class OrderEpics {
                     window.scrollTo(0, 0);
                     return of(
                         { type: OrderActionTypes.POST_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                    );
+                }));
+
+        }));
+    }
+
+
+    static getOrderDetail(action$, state$, { ajaxGet }) {
+        return action$.pipe(ofType(OrderActionTypes.GET_ORDER_DETAIL_PROG), switchMap(({ payload }) => {
+            return ajaxGet(`/order/${payload.orderId}`).pipe(pluck('response'), flatMap(obj => {
+                return of(
+                    {
+                        type: OrderActionTypes.GET_ORDER_DETAIL_SUCC,
+                        payload: { orderDetail: obj?.result }
+                    },
+                );
+            })
+                , catchError((err) => {
+                    return of({ type: OrderActionTypes.GET_ORDER_DETAIL_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
                         NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
                     );
                 }));

@@ -42,7 +42,7 @@ export default function HomePage() {
         <Route path="/deliveryaddress" component={DeliveryAddress} />
         <Route path="/pickanddrop" component={PickAndDrop} />
         <Route path="/orderreview" component={OrderReview} />
-        <Route path="/orderdetails" component={OrderDetails} />
+        <Route path="/orderdetails/:orderId" component={OrderDetails} />
         <Route path="/contactus" component={ContactUs} />
         <Route path="/paymentsettings" component={PaymentSettings} />
         <Route path="/paymentdetails" component={PaymentDetails} />

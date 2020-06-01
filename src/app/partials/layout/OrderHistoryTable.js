@@ -45,8 +45,7 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                 }
                             </td>
                             <td className="cursor-pointer" onClick={() => history.push({
-                                pathname: '/orderdetails',
-                                state: { order: data }
+                                pathname: `/orderdetails/${data?.id}`,
                             })} >{data.orderNumber}</td>
                             <td>{data.orderDate}</td>
                             <td>{

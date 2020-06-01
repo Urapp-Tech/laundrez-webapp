@@ -6,6 +6,7 @@ const initState = {
   isProgressOrders: false,
   isProgressActiveOrders: false,
   isProgressPayment: false,
+  isProgressDetail: false,
   isError: false,
   errorMsg: '',
   errorStatus: 0,
@@ -21,7 +22,8 @@ const initState = {
     start: false
   },
   paging: {},
-  order: {}
+  order: {},
+  orderDetail: {}
 };
 export function OrderReducer(state = initState, action) {
   // let array = [];
@@ -61,6 +63,15 @@ export function OrderReducer(state = initState, action) {
       return { ...state, isProgressOrders: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
 
+    case OrderActionTypes.GET_ORDER_DETAIL_PROG:
+      return { ...state, isProgressDetail: true, };
+    case OrderActionTypes.GET_ORDER_DETAIL_SUCC:
+      return { ...state, isProgressDetail: false, orderDetail: action.payload.orderDetail, };
+    case OrderActionTypes.GET_ORDER_DETAIL_FAIL:
+      return { ...state, isProgressDetail: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
+    case OrderActionTypes.CLEAR_ORDER_DETAIL:
+      return { ...state, orderDetail: {} };
 
     case OrderActionTypes.GET_ACTIVE_ORDERS_PROG:
       return { ...state, isProgressActiveOrders: true, };

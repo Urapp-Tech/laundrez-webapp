@@ -55,6 +55,7 @@ export const rootEpic = combineEpics(
   order.OrderEpics.getOrders,
   order.OrderEpics.getActiveOrders,
   order.OrderEpics.postOrder,
+  order.OrderEpics.updateOrder,
   order.OrderEpics.cancelOrder,
   order.OrderEpics.makePayment,
   order.OrderEpics.getOrderDetail,

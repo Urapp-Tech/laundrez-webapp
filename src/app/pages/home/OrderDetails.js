@@ -95,7 +95,7 @@ export default function OrderDetails() {
                                                     qty={v?.quantity}
                                                     price={v?.unitPrice}
                                                     title={v?.service?.title}
-                                                    imageUrl={v?.service?.image?`${API_URL}/${v?.service?.image}` : defaultImage}
+                                                    imageUrl={v?.service?.image ? `${API_URL}/${v?.service?.image}` : defaultImage}
                                                 />
                                             );
                                         })
@@ -142,7 +142,12 @@ export default function OrderDetails() {
                 <div className="col-xl-6 col-md-6">
                     <div className="row row-full-height ">
                         <div className="col-md-12 ">
-                            <Map height={'600px'} />
+                            <Map
+                                height={'600px'}
+                                showMarker={true}
+                                lat={Number(order?.address?.lat)}
+                                lng={Number(order?.address?.lng)}
+                                />
                         </div>
                     </div>
                 </div>

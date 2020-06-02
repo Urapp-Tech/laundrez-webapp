@@ -30,7 +30,7 @@ export class OrderActions {
         };
     }
 
-    static getActiveOrders(page = 1, pageSize = 10, ) {
+    static getActiveOrders(page = 1, pageSize = 100, ) {
         return {
             type: OrderActionTypes.GET_ACTIVE_ORDERS_PROG,
             payload: { page, pageSize }
@@ -38,13 +38,13 @@ export class OrderActions {
         };
     }
 
-    // static updateOrder(body, index) {
-    //     return {
-    //         type: OrderActionTypes.UPDATE_ORDER_PROG,
-    //         payload: { body, index }
+    static updateOrder(body) {
+        return {
+            type: OrderActionTypes.UPDATE_ORDER_PROG,
+            payload: { body }
 
-    //     };
-    // }
+        };
+    }
 
     static makePayment(body) {
         return {

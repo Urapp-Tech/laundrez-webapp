@@ -55,6 +55,13 @@ export function OrderReducer(state = initState, action) {
     case OrderActionTypes.POST_ORDER_FAIL:
       return { ...state, isProgressPost: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
 
+    case OrderActionTypes.UPDATE_ORDER_PROG:
+      return { ...state, isProgressUpdate: true, };
+    case OrderActionTypes.UPDATE_ORDER_SUCC:
+      return { ...state, isProgressUpdate: false, order: action.payload.order };
+    case OrderActionTypes.UPDATE_ORDER_FAIL:
+      return { ...state, isProgressUpdate: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
     case OrderActionTypes.GET_ORDERS_PROG:
       return { ...state, isProgressOrders: true, };
     case OrderActionTypes.GET_ORDERS_SUCC:

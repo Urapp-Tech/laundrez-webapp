@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Portlet, PortletBody } from '../../partials/content/Portlet';
-import { Col, Row, Form, Alert } from 'react-bootstrap';
-import PaymentSetting from '../../../_metronic/layout/assets/layout-svg-icons/receipt.svg';
+import { Col, Row, Form, } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { CardActions } from '../../store/ducks/card-duck/actions';
 import { OrderActions } from '../../store/ducks/order-duck/actions';
 import clsx from 'clsx';
-export default function PaymentDetails({ history }) {
+export default function PaymentDetails() {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const getYears = function (endYear) {
         let currentYear = new Date().getFullYear(), years = [];
@@ -28,17 +27,12 @@ export default function PaymentDetails({ history }) {
     const cards = useSelector(store => store?.card?.cards);
     const order = useSelector(store => store?.order?.order);
     const isProgress = useSelector(store => store?.order?.isProgressPayment);
-    const paymentSuccess = useSelector(store => store?.notification?.isSuccess);
 
     useEffect(() => {
         dispatch(CardActions.getCards());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (paymentSuccess) {
-            history.replace('/dashboard');
-        }
-    }, [paymentSuccess, history]);
+    
 
 
     const doPayment = useCallback(() => {
@@ -99,9 +93,9 @@ export default function PaymentDetails({ history }) {
 
     return (
         <>
-            {paymentSuccess && <Alert variant={'success'}>
+            {/* {paymentSuccess && <Alert variant={'success'}>
                 <img src={PaymentSetting} alt={'img'} /> <span className="ml-2" >  Payment has been done.</span>
-            </Alert>}
+            </Alert>} */}
             <h4 className="mb-3" >Payment Details</h4>
             <div className="row">
                 <div className="col-md-6">

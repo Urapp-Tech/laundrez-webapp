@@ -18,6 +18,7 @@ export default function OrderReview({ history }) {
     const basketItems = useSelector(store => store?.mybasket?.items);
     const driverInstruction = useSelector(store => store?.order?.currentOrder?.driverInstruction);
     const currentOrder = useSelector(store => store?.order?.currentOrder);
+    const order = useSelector(store => store?.order?.order);
     const config = useSelector(store => store?.lov?.config);
     const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
     const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
@@ -35,10 +36,10 @@ export default function OrderReview({ history }) {
 
     const postOrder = useCallback(() => {
         let body = {
-            orderDate: new Date().toISOString(),
-            pickupDate: currentOrder.pickupDate.toISOString(),
+            orderDate: moment(new Date()).format('YYYY-MM-DD') + 'T00:00:00.000Z',
+            pickupDate: moment(currentOrder.pickupDate).format('YYYY-MM-DD') + 'T00:00:00.000Z',
             pickupTime: currentOrder.pickupTime,
-            dropoffDate: currentOrder.dropoffDate.toISOString(),
+            dropoffDate: moment(currentOrder.dropoffDate).format('YYYY-MM-DD') + 'T00:00:00.000Z',
             dropoffTime: currentOrder.dropoffTime,
             addressId: currentOrder.address?.id,
             deliveryAddress: currentOrder.address?.mainAddress,
@@ -58,18 +59,23 @@ export default function OrderReview({ history }) {
                 amount: basketItems[key].price * basketItems[key].qty,
             })),
         };
-        if (referralCoupon && useReferral) {
+        if (referralCoupon && useReferral && !order?.id) {
             body['couponId'] = referralCoupon?.id;
             body['couponCode'] = referralCoupon?.code;
             body['couponType'] = referralCoupon?.couponType;
         }
-        else if (promoCoupon) {
+        else if (promoCoupon && !order?.id) {
             body['couponId'] = promoCoupon?.id;
             body['couponCode'] = promoCoupon?.code;
             body['couponType'] = promoCoupon?.couponType;
         }
-        dispatch(OrderActions.postOrder(body));
-    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, referralCoupon, promoCoupon, useReferral, discountAmount]);
+        if (!order?.id) {
+            dispatch(OrderActions.postOrder(body));
+        } else {
+            body['id'] = order?.id;
+            dispatch(OrderActions.updateOrder(body));
+        }
+    }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, referralCoupon, promoCoupon, useReferral, discountAmount, order]);
 
 
     const calculateTotal = useCallback((accumulator, key) => {

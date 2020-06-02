@@ -147,12 +147,11 @@ export default function DeliveryAddress() {
     }, [formValues, notValid, user, dispatch]);
     return (
         <>
-            <h4 className="mb-3" >Delivery Address</h4>
+            <h4 className="mb-3" >Add Delivery Address</h4>
             <div className="row">
                 <div className="col-md-8">
                     <Portlet className="">
                         <PortletBody>
-                            <h5 className="mb-3" >Add New Address</h5>
                             <div className="row" >
                                 <div className="col-md-6">
                                     <Form>

@@ -46,7 +46,7 @@ export default function MyBasketFooter() {
                         <span className="mb-3 mr-2 d-block" > Add Promo Code </span>
                         <InputGroup className="mb-3 promo-input">
                             <InputGroup.Prepend>
-                                <InputGroup.Text className="bg-transparent" id="inputGroup-sizing-sm">
+                                <InputGroup.Text id="inputGroup-sizing-sm">
                                     {
                                         isProgressCoupon ?
                                             <div className="kt-spinner  kt-spinner--md kt-spinner--center kt-spinner--primary" >

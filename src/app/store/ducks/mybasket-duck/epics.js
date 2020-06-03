@@ -4,9 +4,9 @@ import { switchMap, pluck, catchError, flatMap, debounceTime } from 'rxjs/operat
 import { MyBasketActionTypes } from './actions-types';
 export class MyBasketEpics {
 
-    static validatePromoCoupon(action$, state$, { ajaxGet }) {
+    static validatePromoCoupon(action$, state$, { ajaxPost }) {
         return action$.pipe(ofType(MyBasketActionTypes.VALIDATE_PROMO_COUPON_PROG), debounceTime(1000), switchMap(({ payload }) => {
-            return ajaxGet(`/coupon/validate/${payload.code}`).pipe(pluck('response'), flatMap((obj) => {
+            return ajaxPost('/coupon/validatepromo', payload.body).pipe(pluck('response'), flatMap((obj) => {
                 return of(
                     {
                         type: MyBasketActionTypes.VALIDATE_PROMO_COUPON_SUCC,

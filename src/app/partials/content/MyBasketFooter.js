@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { InputGroup, FormControl, Form } from 'react-bootstrap';
 import { ReactComponent as Basket } from '../../../_metronic/layout/assets/layout-svg-icons/shopping-cart.svg';
 import { ReactComponent as Coupon } from '../../../_metronic/layout/assets/layout-svg-icons/coupon.svg';
@@ -14,21 +14,40 @@ export default function MyBasketFooter() {
     const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
     const promoError = useSelector(store => store?.mybasket?.isError);
     const promoMessage = useSelector(store => store?.mybasket?.errorMsg);
+    const myBasketItems = useSelector(store => store?.mybasket?.items);
     const [formValues, setFormValues] = useState({
         promoCode: '',
     });
     const [typedPromo, setTypedPromo] = useState(false);
+    const calculateTotalItems = useCallback((accumulator, key) => {
+        let item = myBasketItems[key];
+        let qty = item.qty;
+        return accumulator + qty;
+    }, [myBasketItems]);
+    const calculateAmount = useCallback((accumulator, key) => {
+        let item = myBasketItems[key];
+        let price = item.price;
+        let qty = item.qty;
+        let amount = price * qty;
+        return accumulator + amount;
+    }, [myBasketItems]);
 
     useEffect(() => {
         if (formValues.promoCode.length > 3) {
             setTypedPromo(true);
-            dispatch(MyBasketActions.validatePromoCoupon(formValues.promoCode));
+            let body = {
+                couponCode: formValues.promoCode,
+                amount: Object.keys(myBasketItems).reduce(calculateAmount, 0),
+                quantity: Object.keys(myBasketItems).reduce(calculateTotalItems, 0)
+            };
+
+            dispatch(MyBasketActions.validatePromoCoupon(body));
         }
         else if (typedPromo && !formValues.promoCode) {
 
             dispatch(MyBasketActions.clearPromoCoupon());
         }
-    }, [formValues.promoCode, dispatch, typedPromo]);
+    }, [formValues.promoCode, dispatch, typedPromo, myBasketItems, calculateAmount, calculateTotalItems]);
 
     useEffect(() => {
         if (promoCoupon?.code) {

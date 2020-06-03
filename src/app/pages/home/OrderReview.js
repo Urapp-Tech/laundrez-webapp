@@ -73,6 +73,7 @@ export default function OrderReview({ history }) {
             dispatch(OrderActions.postOrder(body));
         } else {
             body['id'] = order?.id;
+            body['orderNumber'] = order?.orderNumber;
             dispatch(OrderActions.updateOrder(body));
         }
     }, [basketItems, currentOrder, totalAmount, grandTotal, config, dispatch, referralCoupon, promoCoupon, useReferral, discountAmount, order]);

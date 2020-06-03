@@ -41,10 +41,10 @@ export class MyBasketActions {
         };
     }
 
-    static validatePromoCoupon(code) {
+    static validatePromoCoupon(body) {
         return {
             type: MyBasketActionTypes.VALIDATE_PROMO_COUPON_PROG,
-            payload: { code }
+            payload: { body }
         };
     }
 

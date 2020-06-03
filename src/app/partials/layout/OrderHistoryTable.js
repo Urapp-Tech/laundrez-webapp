@@ -105,6 +105,6 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
             </>
         );
     else
-        return <h4 className="mb-3 text-center text-primary" >No Record Found</h4>;
+        return <h4 className="mb-3 text-center text-primary" >No Records Found</h4>;
 }
 export default withRouter(OrderHistoryTable);

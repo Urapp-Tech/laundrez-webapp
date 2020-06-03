@@ -15,6 +15,7 @@ export default function MyBasketFooter() {
     const promoError = useSelector(store => store?.mybasket?.isError);
     const promoMessage = useSelector(store => store?.mybasket?.errorMsg);
     const myBasketItems = useSelector(store => store?.mybasket?.items);
+    const [qtyErrRefCoupon, setQtyErrRefCoupon] = useState({ error: false, message: '' });
     const [formValues, setFormValues] = useState({
         promoCode: '',
     });
@@ -57,6 +58,18 @@ export default function MyBasketFooter() {
         }
     }, [promoCoupon]);
 
+    useEffect(() => {
+        let quantity = Object.keys(myBasketItems).reduce(calculateTotalItems, 0);
+        if (quantity < referralCoupon?.minProduct) {
+            setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is ${referralCoupon?.minProduct}` });
+
+        }
+        else {
+            setQtyErrRefCoupon({ error: false, message: '' });
+        }
+
+    }, [referralCoupon, calculateTotalItems, myBasketItems]);
+
     return (
         <>
             <div className="promo-container ">
@@ -88,15 +101,19 @@ export default function MyBasketFooter() {
                     </div>
                     {(promoError) && <label className="text-danger d-block" > {promoMessage} </label>}
                 </div>
-                {referralCoupon && <Form.Check
+                {referralCoupon && <> <Form.Check
                     className="check-primary-addrs"
                     inline
                     label="Use Referral Code"
                     id={'use-referral'}
                     value={useReferral}
                     checked={useReferral}
+                    disabled={qtyErrRefCoupon.error}
                     onChange={() => dispatch(MyBasketActions.useReferral())}
-                />}
+                />
+                    {(qtyErrRefCoupon.error) && <label className="text-danger d-block" > {qtyErrRefCoupon.message} </label>}
+                </>
+                }
             </div>
             <div className="d-flex add-more-container " >
                 <>

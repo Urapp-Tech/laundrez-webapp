@@ -60,15 +60,21 @@ export default function MyBasketFooter() {
 
     useEffect(() => {
         let quantity = Object.keys(myBasketItems).reduce(calculateTotalItems, 0);
-        if (quantity < referralCoupon?.minProduct) {
-            setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is ${referralCoupon?.minProduct}` });
-
+        let amount = Object.keys(myBasketItems).reduce(calculateAmount, 0);
+        if (quantity < referralCoupon?.minProduct && amount < referralCoupon?.minAmount) {
+            setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is ${referralCoupon?.minProduct} and min amount is ${referralCoupon?.minAmount}` });
+        }
+        else if (amount < referralCoupon?.minAmount) {
+            setQtyErrRefCoupon({ error: true, message: `Min amount for referral coupon is ${referralCoupon?.minAmount}` });
+        }
+        else if (quantity < referralCoupon?.minProduct) {
+            setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is  ${referralCoupon?.minProduct}` });
         }
         else {
             setQtyErrRefCoupon({ error: false, message: '' });
         }
 
-    }, [referralCoupon, calculateTotalItems, myBasketItems]);
+    }, [referralCoupon, calculateTotalItems, myBasketItems, calculateAmount]);
 
     return (
         <>

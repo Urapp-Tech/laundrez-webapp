@@ -6,7 +6,7 @@ export class FaqEpics {
     static getFaqs(action$, state$, { ajaxGet, getRefreshToken }) {
         return action$.pipe(ofType(FaqActionTypes.FAQS_PROG), switchMap(() => {
             return defer(() => {
-                return ajaxGet('/FAQ/all?page[number]=1&page[size]=1000');
+                return ajaxGet('/FAQ/general?page[number]=1&page[size]=1000');
             }).pipe(pluck('response'), flatMap(obj => {
 
                 return of(

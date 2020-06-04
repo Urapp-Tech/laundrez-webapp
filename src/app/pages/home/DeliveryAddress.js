@@ -43,7 +43,8 @@ export default function DeliveryAddress() {
                 propertyType: 'Residential',
                 lat: '',
                 lng: '',
-                mainAddress: ''
+                mainAddress: '',
+                isPrimary: false
             });
         }
     }, [isSuccess]);
@@ -141,7 +142,7 @@ export default function DeliveryAddress() {
             lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
             mainAddress: formValues.mainAddress,
-            isPrimary:formValues.isPrimary
+            isPrimary: formValues.isPrimary
         };
         dispatch(AddressActions.saveAddress(body));
     }, [formValues, notValid, user, dispatch]);
@@ -251,7 +252,9 @@ export default function DeliveryAddress() {
                                                 value={formValues.propertyType}
                                                 onChange={(e) => setFormValues({ ...formValues, propertyType: e.target.value })}
                                             >
-                                                <option value={'residential'} >Residential</option>
+                                                <option value={'Residential'} >Residential</option>
+                                                <option value={'Commercial'} >Commercial</option>
+                                                <option value={'Industry'} >Industry</option>
                                             </Form.Control>
                                             {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
@@ -270,7 +273,7 @@ export default function DeliveryAddress() {
                                     </Row> */}
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
-                                            <Form.Check value={formValues.isPrimary} onChange={() => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
+                                            <Form.Check value={formValues.isPrimary} checked={formValues.isPrimary} onChange={() => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
                                         </Form.Group>
                                     </Row>
                                     <Row id="save-address">
@@ -291,7 +294,7 @@ export default function DeliveryAddress() {
                                 <Col md={12} className="mb-3">
                                     {
                                         addresses.map((v, i) => {
-                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} index={i}/>);
+                                            return (<SavedAddress address={v} deleteAddress={() => dispatch(AddressActions.deleteAddress(v.id, i))} key={i} index={i} />);
                                         })
                                     }
                                 </Col>

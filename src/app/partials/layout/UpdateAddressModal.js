@@ -38,10 +38,10 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             street,
             state,
             city,
-            phoneNo:phone,
+            phoneNo: phone,
             postalCode,
-            suiteNumber:suite,
-            propertyType:type,
+            suiteNumber: suite,
+            propertyType: type,
             lat,
             lng,
             isPrimary,
@@ -151,7 +151,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             isPrimary: formValues.isPrimary,
             id: formValues.id
         };
-        dispatch(AddressActions.updateAddress(body,index));
+        dispatch(AddressActions.updateAddress(body, index));
     }, [formValues, notValid, user, dispatch, index]);
     return (
         <Modal
@@ -161,7 +161,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             aria-labelledby="example-modal-sizes-title-lg"
             centered
             scrollable
-            
+
         >
 
             <Modal.Body  >
@@ -269,13 +269,15 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                         onChange={(e) => setFormValues({ ...formValues, propertyType: e.target.value })}
                                     >
                                         <option value={'Residential'} >Residential</option>
+                                        <option value={'Commercial'} >Commercial</option>
+                                        <option value={'Industry'} >Industry</option>
                                     </Form.Control>
                                     {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                 </Form.Group>
                             </Row>
                             <Row>
                                 <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" checked={formValues.isPrimary} onChange={(e)=> setFormValues({...formValues, isPrimary: e.target.checked})} />
+                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" checked={formValues.isPrimary} onChange={(e) => setFormValues({ ...formValues, isPrimary: e.target.checked })} />
                                 </Form.Group>
                             </Row>
                             <Row id="save-address">

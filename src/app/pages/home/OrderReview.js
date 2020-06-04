@@ -45,13 +45,9 @@ export default function OrderReview({ history }) {
             deliveryAddress: currentOrder.address?.mainAddress,
             description: currentOrder.driverInstruction,
             taxPercentage: Number(config?.system?.HSTPercentage),
-            // couponId: 0,
-            // couponCode: 'string',
-            // couponType: 'string',
             orderAmount: Number(totalAmount),
             discountAmount: Number(discountAmount),
             totalAmount: Number(grandTotal),
-            // stripeToken: 'string',
             listDetail: Object.keys(basketItems).map((key) => ({
                 serviceId: basketItems[key].id,
                 quantity: basketItems[key].qty,
@@ -59,12 +55,12 @@ export default function OrderReview({ history }) {
                 amount: basketItems[key].price * basketItems[key].qty,
             })),
         };
-        if (referralCoupon && useReferral && !order?.id) {
+        if (referralCoupon && useReferral) {
             body['couponId'] = referralCoupon?.id;
             body['couponCode'] = referralCoupon?.code;
             body['couponType'] = referralCoupon?.couponType;
         }
-        else if (promoCoupon && !order?.id) {
+        else if (promoCoupon) {
             body['couponId'] = promoCoupon?.id;
             body['couponCode'] = promoCoupon?.code;
             body['couponType'] = promoCoupon?.couponType;

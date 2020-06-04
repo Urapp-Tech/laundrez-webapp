@@ -14,9 +14,7 @@ export function AddressReducer(state = initState, action) {
       return { ...state, isProgressSave: true };
 
     case AddressActionTypes.SAVE_ADDRESS_SUCC:
-      array = [...state.addresses];
-      array.push(action.payload.address);
-      return { ...state, isProgressSave: false, addresses: array };
+      return { ...state, isProgressSave: false, };
 
     case AddressActionTypes.SAVE_ADDRESS_FAIL:
       return { ...state, isProgressSave: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
@@ -28,9 +26,7 @@ export function AddressReducer(state = initState, action) {
       return { ...state, isProgressUpdate: true };
 
     case AddressActionTypes.UPDATE_ADDRESS_SUCC:
-      array = [...state.addresses];
-      array[action.payload.index] = action.payload.address;
-      return { ...state, isProgressUpdate: false, addresses: array};
+      return { ...state, isProgressUpdate: false, };
 
     case AddressActionTypes.UPDATE_ADDRESS_FAIL:
       return { ...state, isProgressUpdate: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };

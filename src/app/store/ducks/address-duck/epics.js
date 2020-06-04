@@ -3,6 +3,7 @@ import { ofType, } from 'redux-observable';
 import { switchMap, pluck, catchError, flatMap } from 'rxjs/operators';
 import { AddressActionTypes } from './actions-types';
 import { NotificationActions } from '../notification-duck/actions';
+import { AddressActions } from './actions';
 export class AddressEpics {
     static saveAddress(action$, state$, { ajaxPost, getRefreshToken }) {
         return action$.pipe(ofType(AddressActionTypes.SAVE_ADDRESS_PROG), switchMap(({ payload }) => {
@@ -15,7 +16,8 @@ export class AddressEpics {
                         type: AddressActionTypes.SAVE_ADDRESS_SUCC,
                         payload: { address: obj.result }
                     },
-                    NotificationActions.showSuccessNotification('Address saved successfully')
+                    NotificationActions.showSuccessNotification('Address saved successfully'),
+                    AddressActions.getAddresses()
                 );
             })
                 , catchError((err, source) => {
@@ -71,7 +73,8 @@ export class AddressEpics {
                             type: AddressActionTypes.UPDATE_ADDRESS_SUCC,
                             payload: { address: obj.result, index: payload.index }
                         },
-                        NotificationActions.showSuccessNotification('Address Updated successfully')
+                        NotificationActions.showSuccessNotification('Address Updated successfully'),
+                        AddressActions.getAddresses()
                     );
                 })
                     , catchError((err, source) => {
@@ -93,22 +96,22 @@ export class AddressEpics {
             return defer(() => {
                 return ajaxDel(`/Address/${payload.id}`);
             }).pipe(pluck('response'), flatMap(() => {
-                    return of(
-                        {
-                            type: AddressActionTypes.DELETE_ADDRESS_SUCC,
-                            payload: { index: payload.index }
-                        },
-                    );
-                })
-                    , catchError((err, source) => {
-                        if (err.status === 401) {
-                            return getRefreshToken(action$, state$, source);
-                        }
-                        else {
+                return of(
+                    {
+                        type: AddressActionTypes.DELETE_ADDRESS_SUCC,
+                        payload: { index: payload.index }
+                    },
+                );
+            })
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
 
-                            return of({ type: AddressActionTypes.DELETE_ADDRESS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
-                        }
-                    }));
+                        return of({ type: AddressActionTypes.DELETE_ADDRESS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    }
+                }));
 
         }));
     }

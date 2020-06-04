@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger';
 import { HttpService } from './services/http-service';
 import { rootReducer, rootEpic } from './rootDuck';
 import { history } from '../router/RouterHistory';
+import { RefreshTokenService } from './services/refresh-token-service';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -15,7 +16,8 @@ const epicMiddleware = createEpicMiddleware({
         ajaxPost: HttpService.post,
         ajaxPut: HttpService.put,
         ajaxDel: HttpService.delete,
-        history
+        history,
+        getRefreshToken: RefreshTokenService.getRefreshToken
     }
 });
 let middlewares = process.env.NODE_ENV === 'production' ? applyMiddleware(epicMiddleware) : applyMiddleware(epicMiddleware, loggerMiddleware);

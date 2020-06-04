@@ -36,6 +36,7 @@ export const rootEpic = combineEpics(
   auth.AuthEpics.login,
   auth.AuthEpics.getProfile,
   auth.AuthEpics.updateProfile,
+  auth.AuthEpics.getNewAccessToken,
 
 
   category.CategoryEpics.getCategories,

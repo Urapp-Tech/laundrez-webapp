@@ -1,4 +1,4 @@
-import { of } from 'rxjs';
+import { of, defer } from 'rxjs';
 import { ofType, } from 'redux-observable';
 import { switchMap, pluck, catchError, flatMap } from 'rxjs/operators';
 import { OrderActionTypes } from './actions-types';
@@ -6,9 +6,11 @@ import { NotificationActions } from '../notification-duck/actions';
 import { MyBasketActions } from '../mybasket-duck/actions';
 import { OrderActions } from './actions';
 export class OrderEpics {
-    static postOrder(action$, state$, { ajaxPost, history }) {
+    static postOrder(action$, state$, { ajaxPost, history, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.POST_ORDER_PROG), switchMap(({ payload }) => {
-            return ajaxPost('/order', payload.body).pipe(pluck('response'), flatMap(obj => {
+            return defer(() => {
+                return ajaxPost('/order', payload.body);
+            }).pipe(pluck('response'), flatMap(obj => {
                 window.scrollTo(0, 0);
                 history.push('/paymentdetails');
                 return of(
@@ -20,20 +22,26 @@ export class OrderEpics {
                     // MyBasketActions.clearBasket()
                 );
             })
-                , catchError((err) => {
-
-                    window.scrollTo(0, 0);
-                    return of(
-                        { type: OrderActionTypes.POST_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
-                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
-                    );
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                        return of(
+                            { type: OrderActionTypes.POST_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                            NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                        );
+                    }
                 }));
 
         }));
     }
-    static updateOrder(action$, state$, { ajaxPut, history }) {
+    static updateOrder(action$, state$, { ajaxPut, history, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.UPDATE_ORDER_PROG), switchMap(({ payload }) => {
-            return ajaxPut('/Order', payload.body).pipe(pluck('response'), flatMap(obj => {
+            return defer(() => {
+                return ajaxPut('/Order', payload.body);
+            }).pipe(pluck('response'), flatMap(obj => {
                 window.scrollTo(0, 0);
                 history.push('/paymentdetails');
                 return of(
@@ -44,19 +52,26 @@ export class OrderEpics {
                     NotificationActions.showSuccessNotification('Order Updated successfully')
                 );
             })
-                , catchError((err) => {
-                    return of({ type: OrderActionTypes.UPDATE_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
-                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
-                    );
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        return of({ type: OrderActionTypes.UPDATE_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                            NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                        );
+                    }
                 }));
 
         }));
     }
 
 
-    static getOrderDetail(action$, state$, { ajaxGet }) {
+    static getOrderDetail(action$, state$, { ajaxGet, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.GET_ORDER_DETAIL_PROG), switchMap(({ payload }) => {
-            return ajaxGet(`/order/${payload.orderId}`).pipe(pluck('response'), flatMap(obj => {
+            return defer(() => {
+                return ajaxGet(`/order/${payload.orderId}`);
+            }).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
                         type: OrderActionTypes.GET_ORDER_DETAIL_SUCC,
@@ -64,37 +79,54 @@ export class OrderEpics {
                     },
                 );
             })
-                , catchError((err) => {
-                    return of({ type: OrderActionTypes.GET_ORDER_DETAIL_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
-                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
-                    );
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+
+                        return of({ type: OrderActionTypes.GET_ORDER_DETAIL_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                            NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                        );
+                    }
                 }));
 
         }));
     }
 
-    static getOrders(action$, state$, { ajaxGet }) {
+    static getOrders(action$, state$, { ajaxGet, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.GET_ORDERS_PROG), switchMap(({ payload }) => {
-            return ajaxGet(`/order/history?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`).pipe(pluck('response'), flatMap(obj => {
-                return of(
-                    {
-                        type: OrderActionTypes.GET_ORDERS_SUCC,
-                        payload: obj
-                    },
-                );
+            return defer(() => {
+                return ajaxGet(`/order/history?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`);
             })
-                , catchError((err) => {
-                    return of({ type: OrderActionTypes.GET_ORDERS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
-                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                .pipe(pluck('response'), flatMap(obj => {
+                    return of(
+                        {
+                            type: OrderActionTypes.GET_ORDERS_SUCC,
+                            payload: obj
+                        },
                     );
-                }));
+                })
+                    , catchError((err, source) => {
+                        if (err.status === 401) {
+                            return getRefreshToken(action$, state$, source);
+                        }
+                        else {
+
+                            return of({ type: OrderActionTypes.GET_ORDERS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                                NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                            );
+                        }
+                    }));
 
         }));
     }
 
-    static getActiveOrders(action$, state$, { ajaxGet }) {
+    static getActiveOrders(action$, state$, { ajaxGet, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.GET_ACTIVE_ORDERS_PROG), switchMap(({ payload }) => {
-            return ajaxGet(`/order/active?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`).pipe(pluck('response'), flatMap(obj => {
+            return defer(() => {
+                return ajaxGet(`/order/active?page[number]=${payload?.page}&page[size]=${payload?.pageSize}`);
+            }).pipe(pluck('response'), flatMap(obj => {
                 return of(
                     {
                         type: OrderActionTypes.GET_ACTIVE_ORDERS_SUCC,
@@ -102,19 +134,26 @@ export class OrderEpics {
                     },
                 );
             })
-                , catchError((err) => {
-                    return of({ type: OrderActionTypes.GET_ACTIVE_ORDERS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
-                        NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
-                    );
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        return of({ type: OrderActionTypes.GET_ACTIVE_ORDERS_FAIL, payload: { err, message: err?.response?.message, status: err?.status } },
+                            NotificationActions.showErrorNotification(err?.response?.message || err?.response?.Message)
+                        );
+                    }
                 }));
 
         }));
     }
 
 
-    static cancelOrder(action$, state$, { ajaxPut, history }) {
+    static cancelOrder(action$, state$, { ajaxPut, history, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.CANCEL_ORDER_PROG), switchMap(({ payload }) => {
-            return ajaxPut(`/Order/cancel/${payload.id}`).pipe(pluck('response'), flatMap(() => {
+            return defer(() => {
+                return ajaxPut(`/Order/cancel/${payload.id}`);
+            }).pipe(pluck('response'), flatMap(() => {
                 history.replace('/dashboard');
                 return of(
                     {
@@ -122,16 +161,23 @@ export class OrderEpics {
                     },
                 );
             })
-                , catchError((err) => {
-                    return of({ type: OrderActionTypes.CANCEL_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        return of({ type: OrderActionTypes.CANCEL_ORDER_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                    }
                 }));
 
         }));
     }
 
-    static makePayment(action$, state$, { ajaxPost, history }) {
+    static makePayment(action$, state$, { ajaxPost, history, getRefreshToken }) {
         return action$.pipe(ofType(OrderActionTypes.MAKE_PAYMENT_PROG), switchMap(({ payload }) => {
-            return ajaxPost('/Order/makepayment', payload.body).pipe(pluck('response'), flatMap(() => {
+            return defer(() => {
+                return ajaxPost('/Order/makepayment', payload.body);
+            }).pipe(pluck('response'), flatMap(() => {
                 history.replace('/dashboard');
                 return of(
                     {
@@ -143,11 +189,17 @@ export class OrderEpics {
                     NotificationActions.showSuccessNotification('Order placed successfully'),
                 );
             })
-                , catchError((err) => {
-                    window.scrollTo(0, 0);
-                    return of(
-                        NotificationActions.showErrorNotification('Payment unsuccessful'),
-                        { type: OrderActionTypes.MAKE_PAYMENT_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                        return of(
+                            NotificationActions.showErrorNotification('Payment unsuccessful'),
+                            { type: OrderActionTypes.MAKE_PAYMENT_FAIL, payload: { err, message: err?.response?.message, status: err?.status } }
+                        );
+                    }
                 }));
 
         }));

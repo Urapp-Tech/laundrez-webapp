@@ -1,6 +1,6 @@
 import { of, defer, /* merge */ } from 'rxjs';
 import { ofType, } from 'redux-observable';
-import { switchMap, pluck, catchError, map, flatMap } from 'rxjs/operators';
+import { switchMap, pluck, catchError, map, flatMap, mergeMap } from 'rxjs/operators';
 import { AuthActionTypes } from './actions-types';
 import { AuthStorage } from './auth-storage';
 import { AuthActions } from './actions';
@@ -101,7 +101,7 @@ export class AuthEpics {
         }));
     }
     static getNewAccessToken(action$, state$, { ajaxPost }) {
-        return action$.pipe(ofType(AuthActionTypes.GET_NEW_ACCESS_TOKEN_PROG), switchMap(({ payload }) => {
+        return action$.pipe(ofType(AuthActionTypes.GET_NEW_ACCESS_TOKEN_PROG), mergeMap(({ payload }) => {
             return ajaxPost('/user/refreshtoken', payload.body).pipe(pluck('response'), map((obj) => {
                 AuthStorage.setToken(obj?.token);
                 AuthStorage.setRefreshToken(obj?.refreshToken);

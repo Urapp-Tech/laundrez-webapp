@@ -61,6 +61,28 @@ export class AuthStorage {
         }
 
     }
+    static setIsProfileCompleted(value) {
+        try {
+            localStorage.setItem('_isprofilecompleted', JSON.stringify(value));
+        } catch (e) {
+            console.error(
+                'setIsProfileCompleted: Error setting key [ _isprofilecompleted ] in localStorage: ' +
+                JSON.stringify(e)
+            );
+        }
+
+    }
+    static getIsProfileCompleted() {
+        try {
+            return JSON.parse(localStorage.getItem('_isprofilecompleted'));
+        } catch (e) {
+            console.error(
+                'getIsProfileCompleted: Error setting key [ _isprofilecompleted ] in localStorage: ' +
+                JSON.stringify(e)
+            );
+        }
+
+    }
     static clearStorage() {
         try {
 

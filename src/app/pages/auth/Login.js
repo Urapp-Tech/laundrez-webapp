@@ -7,6 +7,7 @@ import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.sv
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 // import FacebookLogin from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import clsx from 'clsx';
 
 
 function Login() {
@@ -17,9 +18,27 @@ function Login() {
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
-  const responseFacebook = (/* response */) => {
-    // console.log(response);
-  };
+  const responseFacebook = useCallback((response) => {
+    let name = response?.name?.split(' ');
+    let firstName = '';
+    let lastName = '';
+    name.forEach((v, i) => {
+      if (i === 0) {
+        firstName = v;
+      }
+      else if (i === 1) {
+        lastName = v;
+      }
+    });
+    let body = {
+      firstName: firstName,
+      lastName: lastName,
+      email: response?.email,
+      SocialPlatform: 'Facebook',
+      Token: response?.accessToken
+    };
+    dispatch(AuthActions.socialLogin(body));
+  }, [dispatch]);
   useEffect(() => {
     return () => {
       dispatch(AuthActions.clearError());
@@ -102,7 +121,7 @@ function Login() {
               fields="name,email,picture"
               callback={responseFacebook}
               render={renderProps => (
-                <button onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className="btn btn-fb btn-block mt-4" > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
+                <button onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className={clsx('btn btn-fb btn-block mt-4', isProgress && 'pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light')} > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
               )}
             />
           </Form>

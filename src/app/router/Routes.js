@@ -60,6 +60,7 @@ export const Routes = withRouter(({ history }) => {
     if (coupon) {
       dispatch(MyBasketActions.setCoupon(coupon));
     }
+    //TODO: check for profile complete and redirect
   }, [dispatch]);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
@@ -72,7 +73,11 @@ export const Routes = withRouter(({ history }) => {
           <AuthPage />
         ) : (
             /* Otherwise redirect to root page (`/`) */
-            <Redirect from="/auth" to={'/dashboard'} />
+            AuthStorage.getIsProfileCompleted()
+              ?
+              <Redirect from="/auth" to={'/dashboard'} />
+              :
+              <Redirect from="/auth" to={'/profile'} />
           )}
 
         <Route path="/error" component={ErrorsPage} />

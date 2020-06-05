@@ -11,9 +11,7 @@ export class AuthEpics {
             return ajaxPost('/User/signin/', payload.body).pipe(pluck('response'), flatMap(obj => {
                 AuthStorage.setToken(obj?.token);
                 AuthStorage.setRefreshToken(obj?.refreshToken);
-                // let { id, username, firstName, lastName } = obj;
-                // let user = { id, username, firstName, lastName };
-                // AuthStorage.setUser(user);
+                AuthStorage.setIsProfileCompleted(obj?.isProfileCompleted);
                 return of(
                     {
                         type: AuthActionTypes.LOGIN_SUCC,
@@ -23,6 +21,26 @@ export class AuthEpics {
             })
                 , catchError((err) => {
                     return of({ type: AuthActionTypes.LOGIN_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                }));
+
+        }));
+    }
+
+    static sociallLogin(action$, state$, { ajaxPost }) {
+        return action$.pipe(ofType(AuthActionTypes.SOCIAL_LOGIN_PROG), switchMap(({ payload }) => {
+            return ajaxPost('/User/sociallogin/', payload.body).pipe(pluck('response'), flatMap(obj => {
+                AuthStorage.setToken(obj?.token);
+                AuthStorage.setRefreshToken(obj?.refreshToken);
+                AuthStorage.setIsProfileCompleted(obj?.isProfileCompleted);
+                return of(
+                    {
+                        type: AuthActionTypes.SOCIAL_LOGIN_SUCC,
+                    },
+                    AuthActions.getProfile()
+                );
+            })
+                , catchError((err) => {
+                    return of({ type: AuthActionTypes.SOCIAL_LOGIN_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
                 }));
 
         }));
@@ -63,23 +81,7 @@ export class AuthEpics {
                 }, NotificationActions.showSuccessNotification('Profile updated successfully'));
             }), catchError((err, source) => {
                 if (err.status === 401) {
-                    // let body = {
-                    //     token: AuthStorage.getRefreshToken(),
-                    //     email: state$?.value?.auth?.user?.email
-                    // };
-                    // return action$.pipe(
-                    //     ofType(AuthActionTypes.GET_NEW_ACCESS_TOKEN_SUCC),
-                    //     takeUntil(
-                    //         action$.pipe(
-                    //             ofType(AuthActionTypes.GET_NEW_ACCESS_TOKEN_FAIL)
-                    //         )
-                    //     ),
-                    //     take(1),
-                    //     mergeMap(() => source),
-                    //     merge(of(AuthActions.getNewAccessToken(body))),
-                    // );
                     return getRefreshToken(action$, state$, source);
-
                 }
                 else {
                     window.scrollTo(0, 0);

@@ -5,6 +5,7 @@ import MenuItemText from './MenuItemText';
 import MenuSubmenu from './MenuSubmenu';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
+import { AuthStorage } from '../../../app/store/ducks/auth-duck/auth-storage';
 
 class MenuItem extends React.Component {
   asideLeftLIRef = React.createRef();
@@ -102,10 +103,14 @@ class MenuItem extends React.Component {
               <MenuItemText item={item} parentItem={parentItem} />
             </a>
             :
-            <Link to={{
-              pathname: `/${item.page}`,
-              state: { category: item.category }
-            }} className="kt-menu__link kt-menu__toggle">
+            <Link to={
+              AuthStorage.getIsProfileCompleted() ?
+                {
+                  pathname: `/${item.page}`,
+                  state: { category: item.category }
+                }
+                : '/profile'
+            } className="kt-menu__link kt-menu__toggle">
               <MenuItemText item={item} parentItem={parentItem} />
             </Link>
         )}

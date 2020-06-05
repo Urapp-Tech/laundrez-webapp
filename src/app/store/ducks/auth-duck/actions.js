@@ -41,6 +41,12 @@ export class AuthActions {
             payload: { body }
         };
     }
+    static socialLogin(body) {
+        return {
+            type: AuthActionTypes.SOCIAL_LOGIN_PROG,
+            payload: { body }
+        };
+    }
     static clearSuccess() {
         return {
             type: AuthActionTypes.CLEAR_SUCCESS,

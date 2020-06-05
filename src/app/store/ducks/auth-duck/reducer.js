@@ -20,6 +20,15 @@ export function AuthReducer(state = initialAuthState, action) {
 
 
 
+    case AuthActionTypes.SOCIAL_LOGIN_PROG:
+      return { ...state, isProgress: true };
+
+    case AuthActionTypes.SOCIAL_LOGIN_SUCC:
+      return { ...state, isProgress: false, };
+
+    case AuthActionTypes.SOCIAL_LOGIN_FAIL:
+      return { ...state, isProgress: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
     case AuthActionTypes.GET_PROFILE_PROG:
       return { ...state, isProgress: true };
 

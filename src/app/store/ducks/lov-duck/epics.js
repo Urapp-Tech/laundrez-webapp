@@ -41,4 +41,27 @@ export class LovEpics {
     }
 
 
+    static getPrivacyPolicy(action$, state$, { ajaxGet, }) {
+        return action$.pipe(ofType(LovActionTypes.GET_PRIVACY_POLICY_PROG), switchMap(() => {
+            return defer(() => {
+                return ajaxGet('/privacypolicy/latest');
+            }).pipe(pluck('response'), flatMap(obj => {
+                return of({
+                    type: LovActionTypes.GET_PRIVACY_POLICY_SUCC, payload: {
+                        policy: obj?.result?.policy,
+                        policyYear: obj?.result?.policyYear,
+                        termsConditions: obj?.result?.termsConditions
+                    }
+                });
+            }), catchError((err) => {
+
+
+                return of({ type: LovActionTypes.GET_PRIVACY_POLICY_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+
+            }));
+
+        }));
+    }
+
+
 }

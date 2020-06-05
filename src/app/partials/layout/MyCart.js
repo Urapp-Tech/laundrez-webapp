@@ -20,12 +20,18 @@ const perfectScrollbarOptions = {
 export default function MyCart({ bgImage, useSVG, icon, iconType }) {
 
   const dispatch = useDispatch();
+  const hstPercentage = useSelector(store => store?.lov?.config?.system?.HSTPercentage);
   const basketItems = useSelector(store => store?.mybasket?.items);
 
-  const [totalAmont, setTotalAmount] = useState(0);
+
+  const useReferral = useSelector(store => store?.mybasket?.coupon?.useReferral);
+  const referralCoupon = useSelector(store => store?.mybasket?.coupon?.referral);
+  const promoCoupon = useSelector(store => store?.mybasket?.coupon?.promo);
+
+  const [totalAmount, setTotalAmount] = useState(0);
   const [totalHST, setTotalHST] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-
+  const [coupon, setCoupon] = useState(null);
 
   const incrementQty = useCallback((id) => {
     dispatch(MyBasketActions.incrementQty(id));
@@ -44,30 +50,58 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
     return accumulator + amount;
   }, [basketItems]);
 
+  const calculateDiscount = useCallback((totalAmount) => {
+    let coupon = useReferral ? referralCoupon : promoCoupon;
+    let type = coupon?.offerType;
+    let _totalAmount;
+    if (type === 'Amount') {
+      _totalAmount = totalAmount - coupon?.offerValue;
+    }
+    else if (type === 'Percentage') {
+      _totalAmount = Math.abs(totalAmount - (totalAmount * (coupon?.offerValue / 100))).toFixed(2);
+    }
+    return _totalAmount;
+  }, [referralCoupon, promoCoupon, useReferral]);
+
   const calculateAmount = useCallback(() => {
     let amount = Object.keys(basketItems).reduce(calculateTotal, 0);
     amount = Math.abs(amount).toFixed(2);
+    if ((referralCoupon && useReferral) || promoCoupon) {
+      amount = calculateDiscount(amount);
+    }
     setTotalAmount(amount);
-  }, [basketItems, calculateTotal]);
+  }, [basketItems, calculateTotal, referralCoupon, useReferral, promoCoupon, calculateDiscount]);
+
+
 
 
   const calculateHST = useCallback(() => {
-    let hst = Math.abs(totalAmont * (13 / 100)).toFixed(2);
+    let hst = Math.abs(totalAmount * (hstPercentage / 100)).toFixed(2);
     setTotalHST(hst);
-  }, [totalAmont]);
+  }, [totalAmount, hstPercentage]);
 
 
   const calculateGrandTotal = useCallback(() => {
-    let grandTotal = Number(totalAmont) + Number(totalHST);
+    let grandTotal = Number(totalAmount) + Number(totalHST);
     grandTotal = Math.abs(grandTotal).toFixed(2);
     setGrandTotal(grandTotal);
-  }, [totalAmont, totalHST]);
+  }, [totalAmount, totalHST]);
 
   useEffect(() => {
     calculateAmount();
     calculateHST();
     calculateGrandTotal();
-  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal]);
+    let coupon = null;
+    if (((referralCoupon && useReferral) || promoCoupon)) {
+      coupon = useReferral ? referralCoupon : promoCoupon;
+      setCoupon(coupon);
+    }
+    else {
+      setCoupon(coupon);
+    }
+  }, [basketItems, calculateAmount, calculateHST, calculateGrandTotal, referralCoupon, useReferral, promoCoupon]);
+
+
 
 
 
@@ -124,6 +158,7 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
                       title={basketItems[v].title}
                       qty={basketItems[v].qty}
                       price={basketItems[v].price}
+                      categoryTitle={basketItems[v]?.category?.title}
                       incrementQty={() => incrementQty(basketItems[v].id)}
                       decrementQty={() => decrementQty(basketItems[v].id)}
                     />);
@@ -145,12 +180,18 @@ export default function MyCart({ bgImage, useSVG, icon, iconType }) {
               <div className="kt-mycart__section">
                 <div className="kt-mycart__subtitel">
                   <span>Total Amount</span>
-                  <span>HST 13%</span>
+                  <span>Discount</span>
+                  <span>HST {hstPercentage}%</span>
                   <span>Grand Total</span>
                 </div>
 
                 <div className="kt-mycart__prices">
-                  <span>$ {totalAmont}</span>
+                  <span>$ {totalAmount}</span>
+                  {coupon ?
+                    <span>{coupon?.offerType === 'Amount' ? `$${coupon?.offerValue}` : `${coupon?.offerValue}%`}</span>
+                    :
+                    <span>$ 0.00</span>
+                  }
                   <span>$ {totalHST}</span>
                   <span className="kt-font-primary">$ {grandTotal}</span>
                 </div>

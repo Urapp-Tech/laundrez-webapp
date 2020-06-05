@@ -12,29 +12,12 @@ import 'react-circular-progressbar/dist/styles.css';
 import './index.scss'; // Standard version
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'react-google-places-autocomplete/dist/index.min.css';
-/**
- * Base URL of the website.
- *
- * @see https://facebook.github.io/create-react-app/docs/using-the-public-folder
- */
-const { PUBLIC_URL } = process.env;
-/**
- * Creates `axios-mock-adapter` instance for provided `axios` instance, add
- * basic Metronic mocks and returns it.
- *
- * @see https://github.com/ctimmerm/axios-mock-adapter
- */
+import 'react-datepicker/dist/react-datepicker.css';
 
-/**
- * Inject metronic interceptors for axios.
- *
- * @see https://github.com/axios/axios#interceptors
- */
 
 ReactDOM.render(
   <App
     store={store}
-    basename={PUBLIC_URL}
   />,
   document.getElementById('root')
 );

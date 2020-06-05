@@ -4,7 +4,9 @@ import Clock from '../../../_metronic/layout/assets/layout-svg-icons/clock.svg';
 import Calendar from '../../../_metronic/layout/assets/layout-svg-icons/calendar.svg';
 import Pin from '../../../_metronic/layout/assets/layout-svg-icons/pin.svg';
 
-export default function PickAndDropInfo() {
+export default function PickAndDropInfo({ pickupDate, pickupTime, dropoffDate, dropoffTime, address }) {
+
+
     return (
         <Row className="mt-3 border-bottom pb-3" >
             <Col className="border-right" >
@@ -15,14 +17,14 @@ export default function PickAndDropInfo() {
                         <span>
                             <img alt={'img'} src={Calendar} className="w-75 h-75" />
                         </span>
-                        <span>Wed, 19 Feb 2020</span>
+                        <span>{pickupDate}</span>
 
                     </div>
                     <div className="d-flex w-100 justify-content-start align-items-start" >
                         <span>
                             <img alt={'img'} src={Clock} className="w-75 h-75" />
                         </span>
-                        <span>10:00 - 11:00 AM</span>
+                        <span>{pickupTime}</span>
                     </div>
 
                 </div>
@@ -35,14 +37,14 @@ export default function PickAndDropInfo() {
                         <span>
                             <img alt={'img'} className="w-75 h-75" src={Calendar} />
                         </span>
-                        <span>Wed, 19 Feb 2020</span>
+                        <span>{dropoffDate}</span>
 
                     </div>
                     <div className="d-flex w-100 justify-content-start align-items-start" >
                         <span>
                             <img alt={'img'} src={Clock} className="w-75 h-75" />
                         </span>
-                        <span>10:00 - 11:00 AM</span>
+                        <span>{dropoffTime}</span>
                     </div>
 
                 </div>
@@ -53,7 +55,7 @@ export default function PickAndDropInfo() {
                         <img alt={'img'} src={Pin} className="pin-image img-fluid " />
 
                     </span>
-                    <span className="ml-2 street-text" > 2003 | 750 Bay Street</span>
+                    <span className="ml-2 street-text" > {address?.postalCode} | {address?.street}</span>
 
                 </div>
             </Col>

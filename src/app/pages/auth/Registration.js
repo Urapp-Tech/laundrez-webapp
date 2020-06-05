@@ -18,7 +18,8 @@ export default function Registration({ history }) {
     email: '',
     phoneNo: '',
     postalCode: '',
-    password: ''
+    password: '',
+    referralCode: ''
 
   });
 
@@ -46,7 +47,7 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'firstName', message: 'Please provide first name' });
       return;
     }
-    
+
     if (!formValues.lastName) {
       setNotValid({ error: true, type: 'lastName', message: 'Please provide last name' });
       return;
@@ -76,8 +77,12 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'password', message: 'Password must contain 8 characters' });
       return;
     }
-    if (formValues.postalCode.length < 1) {
+    if (!formValues.postalCode) {
       setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+      return;
+    }
+    if (formValues.postalCode.length < 3) {
+      setNotValid({ error: true, type: 'postalCode', message: 'Postal code must contain 3 characters' });
       return;
     }
     // let phoneNo = formValues.phoneNo;
@@ -89,7 +94,8 @@ export default function Registration({ history }) {
       email: formValues.email,
       phoneNo: formValues.phoneNo,
       postalCode: formValues.postalCode,
-      password: formValues.password
+      password: formValues.password,
+      referralCode: formValues.referralCode ? formValues.referralCode : undefined
     };
     setProgress(true);
     HttpService.post('/User/signup/', body).subscribe(() => {
@@ -182,12 +188,22 @@ export default function Registration({ history }) {
           </Form.Group>
           <Form.Group>
             <Form.Control
-              type="number"
+              type="text"
               value={formValues.postalCode}
-              onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
+              maxLength={3}
+              onChange={(e) => setFormValues({ ...formValues, postalCode: String(e.target.value).toUpperCase() })}
               placeholder="Postal Code"
             />
             {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
+          </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              value={formValues.referralCode}
+              onChange={(e) => setFormValues({ ...formValues, referralCode: e.target.value })}
+              placeholder="Referral Code"
+            />
+            {(notValid.error && notValid.type === 'referralCode') && <label className="text-danger" > {notValid.message} </label>}
           </Form.Group>
           <Row className="justify-content-center " >
             <Col className=" mt-4 mb-4" >

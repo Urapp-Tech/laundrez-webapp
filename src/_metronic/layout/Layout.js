@@ -18,11 +18,11 @@ const htmlClassService = new HTMLClassService();
 function Layout({
   children,
   asideDisplay,
-  subheaderDisplay,
+  /* subheaderDisplay, */
   selfLayout,
   layoutConfig,
-  toolbarDisplay,
-  contentContainerClasses,
+  /* toolbarDisplay, */
+  /* contentContainerClasses, */
 }) {
   htmlClassService.setConfig(layoutConfig);
   // scroll to top after location changes

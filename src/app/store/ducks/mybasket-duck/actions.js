@@ -35,5 +35,48 @@ export class MyBasketActions {
             payload: { items }
         };
     }
+    static clearBasket() {
+        return {
+            type: MyBasketActionTypes.CLEAR_BASKET
+        };
+    }
+
+    static validatePromoCoupon(body) {
+        return {
+            type: MyBasketActionTypes.VALIDATE_PROMO_COUPON_PROG,
+            payload: { body }
+        };
+    }
+
+    static validateReferralCoupon() {
+        return {
+            type: MyBasketActionTypes.VALIDATE_REFERRAL_COUPON_PROG,
+        };
+    }
+
+    static useReferral() {
+        return {
+            type: MyBasketActionTypes.USE_REFERRAL
+        };
+    }
+
+    static clearPromoCoupon() {
+        return {
+            type: MyBasketActionTypes.CLEAR_PROMO_COUPON,
+        };
+    }
+
+    static clearCoupon() {
+        return {
+            type: MyBasketActionTypes.CLEAR_COUPON
+        };
+    }
+
+    static setCoupon(coupon) {
+        return {
+            type: MyBasketActionTypes.SET_COUPON,
+            payload: { coupon }
+        };
+    }
 
 }

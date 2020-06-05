@@ -4,19 +4,18 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { Routes } from './app/router/Routes';
-
-export default function App({ store, basename }) {
+import { history } from './app/router/RouterHistory';
+export default function App({ store, }) {
   return (
     /* Provide Redux store */
     <Provider store={store}>
-      {/* Override `basename` (e.g: `homepage` in `package.json`) */}
-      <BrowserRouter basename={basename}>
-        
+      <Router history={history}>
+
         <Routes />
-       
-      </BrowserRouter>
+
+      </Router>
     </Provider>
   );
 }

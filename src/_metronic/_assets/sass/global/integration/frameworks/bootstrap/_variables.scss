@@ -24,7 +24,9 @@ $dark:          									#343a40 !default;
 $order-placed:										#357BF3;
 $order-pickedup:									#C367F1;
 $order-out-delivery:								#2CD285;
-$order-delivered:									#949EAE;			
+$order-delivered:									#949EAE;
+$order-inprogress:									#19E4F3;		
+$order-cancelled:									#E83A1E;		
 $theme-colors: (
 												  	"primary":    $primary,
 												   	"secondary":  $secondary,
@@ -37,7 +39,9 @@ $theme-colors: (
 													"order-placed": $order-placed,
 													"order-pickedup": $order-pickedup,
 													"order-out-delivery": $order-out-delivery,
-													"order-delivered": $order-delivered
+													"order-delivered": $order-delivered,
+													"order-inprogress": $order-inprogress,
+													"order-cancelled": $order-cancelled
 );
 
 

@@ -9,25 +9,25 @@ $kt-input-icon: (
     font-size: (
       flaticon: 1.3em,
       fontawesome: 1.2em,
-      lineawesome: 1.4em
-    )
+      lineawesome: 1.4em,
+    ),
   ),
   lg: (
     width: 4.2rem,
     font-size: (
       flaticon: 1.4em,
       fontawesome: 1.3em,
-      lineawesome: 1.6em
-    )
+      lineawesome: 1.6em,
+    ),
   ),
   sm: (
     width: 2.7rem,
     font-size: (
       flaticon: 1em,
       fontawesome: 1em,
-      lineawesome: 1.1em
-    )
-  )
+      lineawesome: 1.1em,
+    ),
+  ),
 );
 
 // Base
@@ -130,6 +130,9 @@ $kt-input-icon: (
     display: inline-block;
     width: kt-get($kt-input-icon, sm, fixed);
   }
+}
+.react-date-picker-custom {
+  background: #fff url("../../../../../layout/assets/layout-svg-icons/calendar-primary.svg") 97% 50% no-repeat;
 }
 [type="date"] {
   background: #fff url("../../../../../layout/assets/layout-svg-icons/calendar-primary.svg") 97% 50% no-repeat;

@@ -7,6 +7,9 @@ import * as mybasket from './ducks/mybasket-duck';
 import * as address from './ducks/address-duck';
 import * as notification from './ducks/notification-duck';
 import * as faq from './ducks/faq-duck';
+import * as lov from './ducks/lov-duck';
+import * as order from './ducks/order-duck';
+import * as card from './ducks/card-duck';
 import { metronic } from '../../_metronic';
 
 const appReducer = combineReducers({
@@ -17,7 +20,10 @@ const appReducer = combineReducers({
   mybasket: mybasket.MyBasketReducer,
   address: address.AddressReducer,
   notification: notification.NotificationReducer,
-  faq: faq.FaqReducer
+  faq: faq.FaqReducer,
+  lov: lov.LovReducer,
+  order: order.OrderReducer,
+  card: card.CardReducer
 });
 export const rootReducer = (state, action) => {
   if (action.type === auth.AuthActionTypes.LOGOUT) {
@@ -30,19 +36,37 @@ export const rootEpic = combineEpics(
   auth.AuthEpics.login,
   auth.AuthEpics.getProfile,
   auth.AuthEpics.updateProfile,
+  auth.AuthEpics.getNewAccessToken,
 
 
   category.CategoryEpics.getCategories,
 
   service.ServiceEpics.getServices,
-  service.ServiceEpics.getServiceFaq,
+  service.ServiceEpics.getService,
 
   address.AddressEpics.saveAddress,
   address.AddressEpics.getAddresses,
   address.AddressEpics.updateAddress,
   address.AddressEpics.deleteAddress,
 
-  faq.FaqEpics.getFaqs
+  faq.FaqEpics.getFaqs,
+
+  lov.LovEpics.getLov,
+
+  order.OrderEpics.getOrders,
+  order.OrderEpics.getActiveOrders,
+  order.OrderEpics.postOrder,
+  order.OrderEpics.updateOrder,
+  order.OrderEpics.cancelOrder,
+  order.OrderEpics.makePayment,
+  order.OrderEpics.getOrderDetail,
+
+  mybasket.MyBasketEpics.validatePromoCoupon,
+  mybasket.MyBasketEpics.validateReferralCoupon,
+
+  card.CardEpics.getCards,
+  card.CardEpics.saveCard,
+  card.CardEpics.deleteCard,
 
 
 

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import GooglePlacesAutocomplete, { geocodeByAddress } from 'react-google-places-autocomplete';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
 
-export default function UpdateAddressModal({ showModal, toggleModal, address }) {
+export default function UpdateAddressModal({ showModal, toggleModal, address, index }) {
 
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState({
@@ -14,11 +14,12 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         phoneNo: '',
         postalCode: '',
         suiteNumber: '',
-        busserCode: '',
         propertyType: '',
         lat: '',
         lng: '',
-        formattedAddress: ''
+        mainAddress: '',
+        isPrimary: false,
+        id: 0
     });
     useEffect(() => {
         let { street,
@@ -26,28 +27,32 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             city,
             phone,
             postalCode,
-            suiteNumber,
-            busserCode,
-            propertyType,
+            suite,
+            type,
             lat,
             lng,
-            formattedAddress } = address;
+            isPrimary,
+            mainAddress,
+            id } = address;
         setFormValues({
             street,
             state,
             city,
-            phoneNo:phone,
+            phoneNo: phone,
             postalCode,
-            suiteNumber,
-            busserCode,
-            propertyType,
+            suiteNumber: suite,
+            propertyType: type,
             lat,
             lng,
-            formattedAddress
+            isPrimary,
+            mainAddress,
+            id
         });
     }, [address]);
     const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
     const user = useSelector(store => store?.auth?.user);
+    const isProgress = useSelector(store => store?.address?.isProgressUpdate);
+
     const onFocusPhoneNumInput = useCallback(() => {
         if (formValues.phoneNo.length === 0) {
             setFormValues({ ...formValues, phoneNo: '+1' });
@@ -65,7 +70,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                 let _results = results[0];
                 let lat = _results.geometry.location.lat();
                 let lng = _results.geometry.location.lng();
-                let formattedAddress = _results.formatted_address;
+                let mainAddress = _results.formatted_address;
                 let addressComponents = _results.address_components;
                 let state = '';
                 let city = '';
@@ -102,7 +107,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                     postalCode,
                     lat,
                     lng,
-                    formattedAddress
+                    mainAddress
                 });
 
             });
@@ -114,12 +119,15 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         if (notValid.error) {
             setNotValid({ error: false, type: '', message: '' });
         }
-        if (!formValues.formattedAddress) {
-            setNotValid({ error: true, type: 'formattedAddress', message: 'Please provide address' });
+        if (!formValues.mainAddress) {
+            setNotValid({ error: true, type: 'mainAddress', message: 'Please provide address' });
             return;
         }
 
-
+        if (!formValues.postalCode) {
+            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+            return;
+        }
         if (!formValues.phoneNo) {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
             return;
@@ -131,16 +139,20 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
         let body = {
             userId: user.id,
             type: formValues.propertyType,
-            streetAddress: formValues.street,
+            street: formValues.street,
             city: formValues.city,
             state: formValues.state,
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
-            lang: formValues.lng,
-            lat: formValues.lat,
+            suite: formValues.suiteNumber,
+            lng: String(Math.abs(formValues.lng).toFixed(5)),
+            lat: String(Math.abs(formValues.lat).toFixed(5)),
+            mainAddress: formValues.mainAddress,
+            isPrimary: formValues.isPrimary,
+            id: formValues.id
         };
-        dispatch(AddressActions.saveAddress(body));
-    }, [formValues, notValid, user, dispatch]);
+        dispatch(AddressActions.updateAddress(body, index));
+    }, [formValues, notValid, user, dispatch, index]);
     return (
         <Modal
             size="lg"
@@ -149,7 +161,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
             aria-labelledby="example-modal-sizes-title-lg"
             centered
             scrollable
-            
+
         >
 
             <Modal.Body  >
@@ -167,11 +179,11 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                                             onSelect={handleSelect}
                                             inputClassName="form-control"
                                             placeholder=''
-                                            initialValue={formValues.formattedAddress}
+                                            initialValue={formValues.mainAddress}
 
 
                                         />
-                                        {(notValid.error && notValid.type === 'formattedAddress') && <label className="text-danger" > {notValid.message} </label>}
+                                        {(notValid.error && notValid.type === 'mainAddress') && <label className="text-danger" > {notValid.message} </label>}
                                     </Form.Group>
                                 </Row>
                                 <Row>
@@ -256,30 +268,20 @@ export default function UpdateAddressModal({ showModal, toggleModal, address }) 
                                         value={formValues.propertyType}
                                         onChange={(e) => setFormValues({ ...formValues, propertyType: e.target.value })}
                                     >
-                                        <option value={'residential'} >Residential</option>
+                                        <option value={'Residential'} >Residential</option>
+                                        <option value={'Commercial'} >Commercial</option>
+                                        <option value={'Industry'} >Industry</option>
                                     </Form.Control>
                                     {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                 </Form.Group>
                             </Row>
                             <Row>
                                 <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Label>Busser Code</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        placeholder=""
-                                        value={formValues.busserCode}
-                                        onChange={(e) => setFormValues({ ...formValues, busserCode: e.target.value })}
-                                    />
-                                    {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group as={Col} controlId="formGridBusser">
-                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />
+                                    <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" checked={formValues.isPrimary} onChange={(e) => setFormValues({ ...formValues, isPrimary: e.target.checked })} />
                                 </Form.Group>
                             </Row>
                             <Row id="save-address">
-                                <button onClick={onClickSaveAddress} className="btn btn-primary  btn-primary-gradient btn-block" > Update Address</button>
+                                <button onClick={onClickSaveAddress} className={isProgress ? 'btn btn-primary  btn-primary-gradient btn-block pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Update Address</button>
                             </Row>
                         </Col>
 

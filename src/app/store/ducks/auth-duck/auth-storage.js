@@ -19,12 +19,32 @@ export class AuthStorage {
             );
         }
     }
+    static setRefreshToken(token) {
+        try {
+            localStorage.setItem('_refresh-token', token);
+        } catch (e) {
+            console.error(
+                'setRefreshToken: Error setting key [ token ] in localStorage: ' +
+                JSON.stringify(e)
+            );
+        }
+    }
+    static getRefreshToken() {
+        try {
+            return localStorage.getItem('_refresh-token');
+        } catch (e) {
+            console.error(
+                'getRefreshToken: Error setting key [ token ] in localStorage: ' +
+                JSON.stringify(e)
+            );
+        }
+    }
     static setUser(user) {
         try {
             localStorage.setItem('_user', JSON.stringify(user));
         } catch (e) {
             console.error(
-                'setToken: Error setting key [ user ] in localStorage: ' +
+                'setRefreshToken: Error setting key [ user ] in localStorage: ' +
                 JSON.stringify(e)
             );
         }

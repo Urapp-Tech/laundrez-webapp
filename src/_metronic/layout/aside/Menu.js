@@ -83,7 +83,7 @@ class AsideLeft extends React.Component {
    * Use for fixed left aside menu, to show menu on mouseenter event.
    * @param e Event
    */
-  mouseEnter = e => {
+  mouseEnter = () => {
     // check if the left aside menu is fixed
     if (document.body.classList.contains('kt-aside--fixed')) {
       if (this.outsideTm) {
@@ -109,7 +109,7 @@ class AsideLeft extends React.Component {
    * Use for fixed left aside menu, to show menu on mouseenter event.
    * @param e Event
    */
-  mouseLeave = e => {
+  mouseLeave = () => {
     if (document.body.classList.contains('kt-aside--fixed')) {
       if (this.insideTm) {
         clearTimeout(this.insideTm);
@@ -172,7 +172,7 @@ class AsideLeft extends React.Component {
               layoutConfig={layoutConfig}
             />
           </ul>
-          
+
         </div>
       </>
     );

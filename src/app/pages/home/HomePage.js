@@ -16,6 +16,7 @@ import YourProfile from './YourProfile';
 import Faqs from './Faqs';
 import { CategoryActions } from '../../store/ducks/category-duck';
 import { useDispatch } from 'react-redux';
+import { LovActions } from '../../store/ducks/lov-duck/actions';
 
 
 
@@ -23,6 +24,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(CategoryActions.getCategories());
+    dispatch(LovActions.getLov());
   }, [dispatch]);
 
 
@@ -40,13 +42,13 @@ export default function HomePage() {
         <Route path="/deliveryaddress" component={DeliveryAddress} />
         <Route path="/pickanddrop" component={PickAndDrop} />
         <Route path="/orderreview" component={OrderReview} />
-        <Route path="/orderdetails" component={OrderDetails} />
+        <Route path="/orderdetails/:orderId" component={OrderDetails} />
         <Route path="/contactus" component={ContactUs} />
         <Route path="/paymentsettings" component={PaymentSettings} />
         <Route path="/paymentdetails" component={PaymentDetails} />
         <Route path="/profile" component={YourProfile} />
         <Route path="/faqs" component={Faqs} />
-       
+
 
 
 

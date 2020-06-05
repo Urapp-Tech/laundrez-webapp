@@ -14,22 +14,28 @@ export default function Services() {
     const { location } = useHistory();
     const { state } = location;
     const services = useSelector(store => store?.service?.services);
-
-    const [selectedService, setSelectedService] = useState(null);
+    const service = useSelector(store => store?.service?.service);
 
     useEffect(() => {
+        dispatch(ServiceActions.clearServices());
         dispatch(ServiceActions.getServices(categoryId));
     }, [dispatch, categoryId]);
 
+    useEffect(() => {
+        if (service) {
+            setShowModal(true);
+        }
+
+    }, [service]);
+
     const onCardClick = useCallback((index) => {
-        setShowModal(true);
-        setSelectedService(services[index]);
-    }, [services]);
+        dispatch(ServiceActions.getService(services[index].id));
+    }, [services, dispatch]);
 
     const closeModal = useCallback(() => {
+        dispatch(ServiceActions.clearService());
         setShowModal(false);
-        setSelectedService(null);
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
@@ -40,7 +46,7 @@ export default function Services() {
                         <div key={i} className="margin-card " onClick={() => onCardClick(i)} >
                             <Portlet className="justify-content-center service-card kt-portlet--border-bottom-brand">
                                 <PortletBody className="justify-content-center align-items-center">
-                                    <h5 className="mt-3" >{data.title}</h5>
+                                    <h5 className="mt-3 text-center text-break" >{data.title}</h5>
                                     <img className="service-image mb-1" alt="img" src={data.image ? `${API_URL}/${data.image}` : defaultImage} />
                                     <div className="text-truncate card-description" >{data.shortDescription}</div>
                                     <h2 className="font-weight-bold price" >${data.price}</h2>
@@ -51,7 +57,7 @@ export default function Services() {
                 })
                 }
             </div>
-            {selectedService && <ServiceModal data={selectedService} showModal={showModal} closeModal={closeModal} />}
+            {service && <ServiceModal showModal={showModal} closeModal={closeModal} />}
         </div>
     );
 }   

@@ -7,7 +7,9 @@ import FbLogo from '../../../_metronic/layout/assets/layout-svg-icons/fb-logo.sv
 import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 // import FacebookLogin from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-function Login({ history }) {
+
+
+function Login() {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
   const isError = useSelector(store => store?.auth?.isError);
@@ -15,7 +17,7 @@ function Login({ history }) {
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
-  const responseFacebook = (response) => {
+  const responseFacebook = (/* response */) => {
     // console.log(response);
   };
   useEffect(() => {

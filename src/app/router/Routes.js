@@ -22,6 +22,8 @@ import SuccessToast from '../partials/content/SuccessToast';
 import ErrorToast from '../partials/content/ErrorToast';
 import TermsAndCondtion from '../pages/home/TermsAndCondition';
 import PrivacyPolicy from '../pages/home/PrivacyPolicy';
+import { OrderStorage } from '../store/ducks/order-duck/order-storage';
+import { OrderActions } from '../store/ducks/order-duck';
 
 export const Routes = withRouter(({ history }) => {
 
@@ -43,8 +45,20 @@ export const Routes = withRouter(({ history }) => {
   }, [dispatch, user]);
   useEffect(() => {
     const items = MyBasketStorage.getBasket();
+    const order = OrderStorage.getOrder();
+    const currentOrder = OrderStorage.getCurrentOrder();
+    const coupon = MyBasketStorage.getCoupon();
     if (items) {
       dispatch(MyBasketActions.setBasket(items));
+    }
+    if (order) {
+      dispatch(OrderActions.setOrder(order));
+    }
+    if (currentOrder) {
+      dispatch(OrderActions.setCurrentOrder(currentOrder));
+    }
+    if (coupon) {
+      dispatch(MyBasketActions.setCoupon(coupon));
     }
   }, [dispatch]);
   return (

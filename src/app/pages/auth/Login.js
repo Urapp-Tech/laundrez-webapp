@@ -23,14 +23,15 @@ function Login() {
     let name = response?.name?.split(' ');
     let firstName = '';
     let lastName = '';
-    name.forEach((v, i) => {
-      if (i === 0) {
-        firstName = v;
-      }
-      else if (i === 1) {
-        lastName = v;
-      }
-    });
+    if (name)
+      name.forEach((v, i) => {
+        if (i === 0) {
+          firstName = v;
+        }
+        else if (i === 1) {
+          lastName = v;
+        }
+      });
     let body = {
       firstName: firstName,
       lastName: lastName,
@@ -118,7 +119,7 @@ function Login() {
               Login
              </button>
             <FacebookLogin
-              appId="1000433136825993"
+              appId="359670414909451"
               fields="name,email,picture"
               callback={responseFacebook}
               render={renderProps => (

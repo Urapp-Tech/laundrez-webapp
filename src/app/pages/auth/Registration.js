@@ -48,8 +48,18 @@ export default function Registration({ history }) {
       return;
     }
 
+    if (formValues.firstName.length < 3) {
+      setNotValid({ error: true, type: 'firstName', message: 'First name must contain atleast 3 characters' });
+      return;
+    }
+
     if (!formValues.lastName) {
       setNotValid({ error: true, type: 'lastName', message: 'Please provide last name' });
+      return;
+    }
+
+    if (formValues.lastName.length < 3) {
+      setNotValid({ error: true, type: 'lastName', message: 'Last name must contain atleast 3 characters' });
       return;
     }
     if (!formValues.phoneNo) {

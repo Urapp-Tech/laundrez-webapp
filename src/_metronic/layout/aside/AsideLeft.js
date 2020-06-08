@@ -11,6 +11,7 @@ import TwitterImage from '../assets/layout-svg-icons/twitter-sign.svg';
 import EmailImage from '../assets/layout-svg-icons/black-envelope.svg';
 import PowerImage from '../assets/layout-svg-icons/power.svg';
 import { Link } from 'react-router-dom';
+import { FacebookShareButton, EmailShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share';
 
 class AsideLeft extends React.Component {
   asideOffCanvasRef = React.createRef();
@@ -52,10 +53,19 @@ class AsideLeft extends React.Component {
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
               <div className="d-flex justify-content-between   w-75 mt-3">
-                <img alt={'fb'} src={FbImage} />
-                <img alt={'whatsapp'} src={WhatsappImage} />
-                <img alt={'twitter'} src={TwitterImage} />
-                <img alt={'email'} src={EmailImage} />
+                <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={'https://github.com/'} quote={'thsis quote'} ></FacebookShareButton>
+                <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} url={'https://github.com/'} > 
+                
+                {/* <img alt={'whatsapp'} src={WhatsappImage} /> */}
+                </WhatsappShareButton>
+                <TwitterShareButton children={<img alt={'twitter'} src={TwitterImage} />} url={'https://github.com/'} > 
+                {/* <img alt={'twitter'} src={TwitterImage} /> */}
+                </TwitterShareButton>
+                <EmailShareButton children={<img alt={'email'} src={EmailImage} />} url={'https://github.com/'} > 
+                {/* <img alt={'email'} src={EmailImage} /> */}
+                </EmailShareButton>
+
+
 
               </div>
               <div className="break-line mt-3" ></div>

@@ -53,6 +53,7 @@ export const rootEpic = combineEpics(
   faq.FaqEpics.getFaqs,
 
   lov.LovEpics.getLov,
+  lov.LovEpics.getPrivacyPolicy,
 
   order.OrderEpics.getOrders,
   order.OrderEpics.getActiveOrders,

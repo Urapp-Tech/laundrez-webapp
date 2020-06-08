@@ -8,4 +8,10 @@ export class LovActions {
         };
     }
 
+    static getPrivacyPolicy() {
+        return {
+            type: LovActionTypes.GET_PRIVACY_POLICY_PROG
+        };
+    }
+
 }

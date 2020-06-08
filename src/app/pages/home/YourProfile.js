@@ -28,6 +28,19 @@ export default function YourProfile() {
         verifyPassword: '',
 
     });
+
+    const onFocusPhoneNumInput = useCallback(() => {
+        if (!formValues.phoneNo) {
+            setFormValues({ ...formValues, phoneNo: '+1' });
+        }
+    }, [formValues]);
+
+    const onBlurPhoneNumInput = useCallback(() => {
+        if (formValues.phoneNo.length < 3) {
+            setFormValues({ ...formValues, phoneNo: '' });
+        }
+    }, [formValues]);
+
     const addresses = useSelector(store => store?.address?.addresses);
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
@@ -143,10 +156,11 @@ export default function YourProfile() {
             email: formValues.email,
             phoneNo: formValues.phoneNo,
             postalCode: formValues.postalCode,
+            socialPlatform: user?.socialPlatform
         };
         dispatch(AuthActions.updateProfile(body));
 
-    }, [formValues, notValid, isErrorProfile, dispatch]);
+    }, [formValues, notValid, isErrorProfile, dispatch, user]);
 
     return (
         <>
@@ -215,6 +229,8 @@ export default function YourProfile() {
                                                     placeholder=""
                                                     value={formValues.phoneNo}
                                                     onChange={(e) => setFormValues({ ...formValues, phoneNo: e.target.value })}
+                                                    onFocus={onFocusPhoneNumInput}
+                                                    onBlur={onBlurPhoneNumInput}
                                                 />
                                                 {(notValid.error && notValid.type === 'phoneNo') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
@@ -271,6 +287,7 @@ export default function YourProfile() {
                                             <Form.Control
                                                 type="password"
                                                 placeholder=""
+                                                disabled={user?.socialPlatform ? true : false}
                                                 value={formValues.newPassword}
                                                 onChange={(e) => setFormValues({ ...formValues, newPassword: e.target.value })}
                                             />
@@ -283,6 +300,7 @@ export default function YourProfile() {
                                             <Form.Control
                                                 type="password"
                                                 placeholder=""
+                                                disabled={user?.socialPlatform ? true : false}
                                                 value={formValues.verifyPassword}
                                                 onChange={(e) => setFormValues({ ...formValues, verifyPassword: e.target.value })}
                                             />
@@ -291,7 +309,7 @@ export default function YourProfile() {
                                     </Row>
 
                                     <Row className="pr-2 pl-3 mt-4" >
-                                        <button onClick={onClickChangePassword} className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block  pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Change Password</button>
+                                        <button onClick={onClickChangePassword} disabled={user?.socialPlatform ? true : false} className={isProgress ? 'text-white btn btn-primary  btn-primary-gradient btn-block  pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light' : 'btn btn-primary  btn-primary-gradient btn-block'} > Change Password</button>
                                     </Row>
 
                                 </div>

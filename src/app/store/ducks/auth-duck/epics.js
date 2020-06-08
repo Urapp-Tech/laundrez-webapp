@@ -48,14 +48,28 @@ export class AuthEpics {
 
     static getProfile(action$, state$, { ajaxGet }) {
         return action$.pipe(ofType(AuthActionTypes.GET_PROFILE_PROG), switchMap(() => {
-            return ajaxGet('/User').pipe(pluck('response'), map(obj => {
-                let { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode } = obj.result;
-                let user = { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode };
+            return ajaxGet('/User').pipe(pluck('response'), flatMap(obj => {
+                let { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode, socialPlatform } = obj.result;
+                let user = { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode, socialPlatform };
                 AuthStorage.setUser(user);
-                return {
-                    type: AuthActionTypes.GET_PROFILE_SUCC,
-                    payload: { user }
-                };
+                let isProfileCompleted = AuthStorage.getIsProfileCompleted();
+                if (isProfileCompleted)
+                    return of(
+                        {
+                            type: AuthActionTypes.GET_PROFILE_SUCC,
+                            payload: { user }
+                        },
+                        AuthActions.setIsProfileCompleted(isProfileCompleted),
+                    );
+                else
+                    return of(
+                        {
+                            type: AuthActionTypes.GET_PROFILE_SUCC,
+                            payload: { user }
+                        },
+                        AuthActions.setIsProfileCompleted(isProfileCompleted),
+                        NotificationActions.showErrorNotification('Please complete your profile first')
+                    );
             })
                 , catchError((err) => {
                     AuthStorage.clearStorage();
@@ -70,15 +84,23 @@ export class AuthEpics {
             return defer(() => {
                 return ajaxPut('/User', payload.body);
             }).pipe(pluck('response'), flatMap(obj => {
-                let { id, username, firstName, lastName, email, phoneNo, postalCode } = obj.result;
-                let user = { id, username, firstName, lastName, email, phoneNo, postalCode };
+                let { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode, socialPlatform } = obj.result;
+                let user = { id, username, firstName, lastName, email, phoneNo, postalCode, referralCode, socialPlatform };
+                let isProfileCompleted = AuthStorage.getIsProfileCompleted();
+                if (!isProfileCompleted) {
+                    AuthStorage.setIsProfileCompleted(true);
+                    isProfileCompleted = true;
+                }
                 AuthStorage.setUser(user);
                 window.scrollTo(0, 0);
 
                 return of({
                     type: AuthActionTypes.UPDATE_PROFILE_SUCC,
                     payload: { user }
-                }, NotificationActions.showSuccessNotification('Profile updated successfully'));
+                },
+                    NotificationActions.showSuccessNotification('Profile updated successfully'),
+                    AuthActions.setIsProfileCompleted(isProfileCompleted)
+                );
             }), catchError((err, source) => {
                 if (err.status === 401) {
                     return getRefreshToken(action$, state$, source);

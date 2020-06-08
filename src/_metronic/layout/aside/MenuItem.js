@@ -5,7 +5,6 @@ import MenuItemText from './MenuItemText';
 import MenuSubmenu from './MenuSubmenu';
 import clsx from 'clsx';
 import { connect } from 'react-redux';
-import { AuthStorage } from '../../../app/store/ducks/auth-duck/auth-storage';
 
 class MenuItem extends React.Component {
   asideLeftLIRef = React.createRef();
@@ -74,7 +73,7 @@ class MenuItem extends React.Component {
   };
 
   render() {
-    const { item, currentUrl, parentItem, layoutConfig, config } = this.props;
+    const { item, currentUrl, parentItem, layoutConfig, config, isProfileCompleted } = this.props;
     const isActive = this.isMenuItemIsActive(item);
     return (
       <li
@@ -104,7 +103,7 @@ class MenuItem extends React.Component {
             </a>
             :
             <Link to={
-              AuthStorage.getIsProfileCompleted() ?
+              isProfileCompleted ?
                 {
                   pathname: `/${item.page}`,
                   state: { category: item.category }
@@ -152,7 +151,8 @@ class MenuItem extends React.Component {
 }
 const mapStateToProps = (store) => {
   return {
-    config: store.lov.config
+    config: store.lov.config,
+    isProfileCompleted: store?.auth?.isProfileCompleted
   };
 };
 export default connect(mapStateToProps, null)(MenuItem);

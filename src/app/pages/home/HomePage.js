@@ -15,9 +15,9 @@ import PaymentDetails from './PaymentDetails';
 import YourProfile from './YourProfile';
 import Faqs from './Faqs';
 import { CategoryActions } from '../../store/ducks/category-duck';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LovActions } from '../../store/ducks/lov-duck/actions';
-import { AuthStorage } from '../../store/ducks/auth-duck/auth-storage';
+// import { AuthStorage } from '../../store/ducks/auth-duck/auth-storage';
 
 
 
@@ -28,17 +28,19 @@ export default function HomePage() {
     dispatch(LovActions.getLov());
   }, [dispatch]);
 
+  const isProfileCompleted = useSelector(store => store?.auth?.isProfileCompleted);
+
 
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <Switch>
+        {/* /* Redirect from root URL to /dashboard. */}
         {
-          /* Redirect from root URL to /dashboard. */
-          AuthStorage.getIsProfileCompleted()
+          (isProfileCompleted
             ?
             <Redirect exact from="/" to="/dashboard" />
             :
-            <Redirect exact from="/" to="/profile" />
+            <Redirect exact from="/" to="/profile" />)
         }
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/services/:categoryId" component={Services} />

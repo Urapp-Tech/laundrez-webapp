@@ -14,6 +14,12 @@ export class AuthActions {
             payload: { body }
         };
     }
+    static setIsProfileCompleted(value) {
+        return {
+            type: AuthActionTypes.SET_IS_PROFILE_COMPLETED,
+            payload: { isProfileCompleted: value }
+        };
+    }
     static setUser(user) {
         return {
             type: AuthActionTypes.SET_USER,

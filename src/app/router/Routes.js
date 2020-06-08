@@ -24,15 +24,17 @@ import TermsAndCondtion from '../pages/home/TermsAndCondition';
 import PrivacyPolicy from '../pages/home/PrivacyPolicy';
 import { OrderStorage } from '../store/ducks/order-duck/order-storage';
 import { OrderActions } from '../store/ducks/order-duck';
+import { NotificationActions } from '../store/ducks/notification-duck';
 
 export const Routes = withRouter(({ history }) => {
 
   const dispatch = useDispatch();
-  const { isAuthorized, menuConfig, user } = useSelector(
+  const { isAuthorized, menuConfig, user, /* isProfileCompleted */ } = useSelector(
     ({ auth, builder: { menuConfig } }) => ({
       menuConfig,
       isAuthorized: AuthStorage.getUser() !== null,
-      user: auth.user
+      user: auth.user,
+      isProfileCompleted: auth?.isProfileCompleted
     }),
     shallowEqual
   );
@@ -48,6 +50,12 @@ export const Routes = withRouter(({ history }) => {
     const order = OrderStorage.getOrder();
     const currentOrder = OrderStorage.getCurrentOrder();
     const coupon = MyBasketStorage.getCoupon();
+    const isProfileCompleted = AuthStorage.getIsProfileCompleted();
+    if (isProfileCompleted === false) {
+      history.replace('/profile');
+      dispatch(NotificationActions.showErrorNotification('Please complete your profile first'));
+    }
+    dispatch(AuthActions.setIsProfileCompleted(isProfileCompleted));
     if (items) {
       dispatch(MyBasketActions.setBasket(items));
     }
@@ -60,8 +68,9 @@ export const Routes = withRouter(({ history }) => {
     if (coupon) {
       dispatch(MyBasketActions.setCoupon(coupon));
     }
+
     //TODO: check for profile complete and redirect
-  }, [dispatch]);
+  }, [dispatch, history]);
   return (
     /* Create `LayoutContext` from current `history` and `menuConfig`. */
     <LayoutContextProvider history={history} menuConfig={menuConfig}>
@@ -73,6 +82,7 @@ export const Routes = withRouter(({ history }) => {
           <AuthPage />
         ) : (
             /* Otherwise redirect to root page (`/`) */
+            /* isProfileCompleted */
             AuthStorage.getIsProfileCompleted()
               ?
               <Redirect from="/auth" to={'/dashboard'} />

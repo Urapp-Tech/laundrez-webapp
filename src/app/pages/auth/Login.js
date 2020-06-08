@@ -13,6 +13,7 @@ import clsx from 'clsx';
 function Login() {
   const dispatch = useDispatch();
   const isProgress = useSelector(store => store?.auth?.isProgress);
+  const isProgressSocialLogin = useSelector(store => store?.auth?.isProgressSocialLogin);
   const isError = useSelector(store => store?.auth?.isError);
   const errorMessage = useSelector(store => store?.auth?.errorMsg);
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
@@ -121,7 +122,7 @@ function Login() {
               fields="name,email,picture"
               callback={responseFacebook}
               render={renderProps => (
-                <button onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className={clsx('btn btn-fb btn-block mt-4', isProgress && 'pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light')} > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
+                <button disabled={isProgressSocialLogin} onClick={(e) => { e.preventDefault(); renderProps.onClick(); }} className={clsx('btn btn-fb btn-block mt-4', isProgressSocialLogin && 'pr-0 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light')} > <img src={FbLogo} alt={'img'} className="mr-2" /> Login with Facebook </button>
               )}
             />
           </Form>

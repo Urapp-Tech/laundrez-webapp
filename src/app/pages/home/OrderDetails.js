@@ -43,10 +43,12 @@ export default function OrderDetails() {
                                                         : order?.status === Order.PickUp ?
                                                             <CircularProgress width="4rem" value={100} color={OrderColor.PickUp} img={'trolley.svg'} />
                                                             : order?.status === Order.DropOff ?
-                                                                <CircularProgress width="4rem" value={100} color={OrderColor.DropOff} img={'tracking-green.svg'} />
+                                                                <CircularProgress width="4rem" value={100} color={OrderColor.DropOff} img={'Dropoff.svg'} />
                                                                 : order?.status === Order.InProgress ?
-                                                                    <CircularProgress width="4rem" value={100} color={OrderColor.InProgress} img={'tracking-green.svg'} />
-                                                                    : null
+                                                                    <CircularProgress width="4rem" value={100} color={OrderColor.InProgress} img={'In-progress.svg'} />
+                                                                    : order?.status === Order.Cancelled ?
+                                                                        <CircularProgress width="4rem" value={100} color={OrderColor.Cancelled} img={'cancel.svg'} />
+                                                                        : null
 
                                                 }
                                                 {/* <CircularProgress width="4rem" value={88} color={'#2CD285'} img={'tracking-green.svg'} /> */}
@@ -147,7 +149,7 @@ export default function OrderDetails() {
                                 showMarker={true}
                                 lat={Number(order?.address?.lat)}
                                 lng={Number(order?.address?.lng)}
-                                />
+                            />
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { withRouter, } from 'react-router-dom';
 import { Table, Badge } from 'react-bootstrap';
 import CircularProgress from './CircularProgress';
 import Pagination from 'react-js-pagination';
 import { OrderActions } from '../../store/ducks/order-duck';
 import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 
 function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders, paging }) {
 
+    const [isOnRepeatOrderClicked, setIsOnRepeatOrderClicked] = useState(false);
+    const orderDetails = useSelector(store => store?.order?.orderDetail?.listDetail);
     const dispatch = useDispatch();
+    const onRepeatOrderClick = useCallback((orderId) => {
+        setIsOnRepeatOrderClicked(true);
+        dispatch(OrderActions.getOrderDetail(orderId));
+    }, [dispatch]);
+    useEffect(() => {
+        if (orderDetails && isOnRepeatOrderClicked) {
+            orderDetails.forEach((v) => {
+                let service = v?.service;
+                service['qty'] = v?.quantity;
+                dispatch(MyBasketActions.addToBasket(service));
+            });
+            setIsOnRepeatOrderClicked(false);
+            history.replace('/mybasket');
+
+        }
+        return () => {
+            if (orderDetails) {
+                dispatch(OrderActions.clearOrderDetail());
+            }
+        };
+    }, [orderDetails, dispatch, history, isOnRepeatOrderClicked]);
     if (orders.length)
         return (
             <>
@@ -37,10 +61,12 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                             : data.status === Order.PickUp ?
                                                 <CircularProgress value={100} color={OrderColor.PickUp} img={'trolley.svg'} />
                                                 : data.status === Order.DropOff ?
-                                                    <CircularProgress value={100} color={OrderColor.DropOff} img={'tracking-green.svg'} />
+                                                    <CircularProgress value={100} color={OrderColor.DropOff} img={'Dropoff.svg'} />
                                                     : data.status === Order.InProgress ?
-                                                        <CircularProgress value={100} color={OrderColor.InProgress} img={'tracking-green.svg'} />
-                                                        : null
+                                                        <CircularProgress value={100} color={OrderColor.InProgress} img={'In-progress.svg'} />
+                                                        : data.status === Order.Cancelled ?
+                                                            <CircularProgress value={100} color={OrderColor.Cancelled} img={'cancel.svg'} />
+                                                            : null
 
                                     }
                                 </td>
@@ -56,7 +82,7 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                             : data.status === Order.PickUp ?
                                                 <Badge variant="order-pickedup">Order Pickedup</Badge>
                                                 : data.status === Order.DropOff ?
-                                                    <Badge variant="order-out-delivery">Out for Delivery</Badge>
+                                                    <Badge variant="order-out-delivery">Dropoff</Badge>
                                                     : data.status === Order.InProgress ?
                                                         <Badge variant="order-inprogress">In Progress</Badge>
                                                         : data.status === Order.Cancelled ?
@@ -71,7 +97,7 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                     <td>
                                         {
                                             data.status === Order.Delivered ?
-                                                <Badge variant="primary">Repeat Order</Badge>
+                                                <Badge className="cursor-pointer" variant="primary" onClick={() => onRepeatOrderClick(data.id)} >Repeat Order</Badge>
                                                 : null
                                         }
                                     </td>

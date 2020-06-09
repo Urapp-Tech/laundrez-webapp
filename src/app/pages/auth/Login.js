@@ -8,6 +8,7 @@ import Logo from '../../../_metronic/layout/assets/layout-svg-icons/Logo.svg';
 // import FacebookLogin from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import clsx from 'clsx';
+import { FB_APP_ID } from '../../store/services/config';
 
 
 function Login() {
@@ -119,7 +120,7 @@ function Login() {
               Login
              </button>
             <FacebookLogin
-              appId="359670414909451"
+              appId={FB_APP_ID}
               fields="name,email,picture"
               callback={responseFacebook}
               render={renderProps => (

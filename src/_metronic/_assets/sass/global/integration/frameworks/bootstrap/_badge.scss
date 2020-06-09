@@ -17,10 +17,12 @@
 .badge-order-out-delivery {
   background-color: kt-get($theme-colors, order-out-delivery);
   color: #fff;
+  padding: 0.5em 2.8em;
 }
 .badge-order-inprogress {
   background-color: kt-get($theme-colors, order-inprogress);
   color: #fff;
+  padding: 0.5em 2.1em;
 }
 .badge-order-cancelled {
   background-color: kt-get($theme-colors, order-cancelled);

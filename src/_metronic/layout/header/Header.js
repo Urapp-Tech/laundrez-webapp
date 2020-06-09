@@ -27,7 +27,8 @@ class Header extends React.Component {
     const {
       menuHeaderDisplay,
       headerAttributes,
-      headerClasses
+      headerClasses,
+      isProfileCompleted
     } = this.props;
     return (
       <div
@@ -40,7 +41,7 @@ class Header extends React.Component {
         {/* <!-- begin:: Header Topbar --> */}
         {/* <!-- empty div to fix topbar to stay on the right when menu-horizontal is hidden --> */}
         {!menuHeaderDisplay && <div />}
-        <Topbar />
+        <Topbar isProfileCompleted={isProfileCompleted} />
         {/* <!-- end:: Header Topbar --> */}
       </div>
     );
@@ -58,7 +59,8 @@ const mapStateToProps = store => ({
     'header.menu.self.display'
   ),
   fluid:
-    objectPath.get(store.builder.layoutConfig, 'header.self.width') === 'fluid'
+    objectPath.get(store.builder.layoutConfig, 'header.self.width') === 'fluid',
+  isProfileCompleted: store?.auth?.isProfileCompleted
 });
 
 export default connect(mapStateToProps)(Header);

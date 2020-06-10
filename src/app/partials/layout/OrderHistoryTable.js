@@ -4,7 +4,7 @@ import { Table, Badge } from 'react-bootstrap';
 import CircularProgress from './CircularProgress';
 import Pagination from 'react-js-pagination';
 import { OrderActions } from '../../store/ducks/order-duck';
-import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
+import { Order, OrderColor, OrderProgressCount } from '../../store/ducks/order-duck/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
 
@@ -55,17 +55,17 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                 <td>
 
                                     {data.status === Order.Delivered ?
-                                        <CircularProgress value={100} color={OrderColor.Delivered} img={'box.svg'} />
+                                        <CircularProgress value={OrderProgressCount.Delivered} color={OrderColor.Delivered} img={'box.svg'} />
                                         : data.status === Order.OrderPlaced ?
-                                            <CircularProgress value={100} color={OrderColor.OrderPlaced} img={'checklist.svg'} />
+                                            <CircularProgress value={OrderProgressCount.OrderPlaced} color={OrderColor.OrderPlaced} img={'checklist.svg'} />
                                             : data.status === Order.PickUp ?
-                                                <CircularProgress value={100} color={OrderColor.PickUp} img={'trolley.svg'} />
+                                                <CircularProgress value={OrderProgressCount.PickUp} color={OrderColor.PickUp} img={'trolley.svg'} />
                                                 : data.status === Order.DropOff ?
-                                                    <CircularProgress value={100} color={OrderColor.DropOff} img={'Dropoff.svg'} />
+                                                    <CircularProgress value={OrderProgressCount.DropOff} color={OrderColor.DropOff} img={'Dropoff.svg'} />
                                                     : data.status === Order.InProgress ?
-                                                        <CircularProgress value={100} color={OrderColor.InProgress} img={'In-progress.svg'} />
+                                                        <CircularProgress value={OrderProgressCount.InProgress} color={OrderColor.InProgress} img={'In-progress.svg'} />
                                                         : data.status === Order.Cancelled ?
-                                                            <CircularProgress value={100} color={OrderColor.Cancelled} img={'cancel.svg'} />
+                                                            <CircularProgress value={OrderProgressCount.Cancelled} color={OrderColor.Cancelled} img={'cancel.svg'} />
                                                             : null
 
                                     }
@@ -82,9 +82,9 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                             : data.status === Order.PickUp ?
                                                 <Badge variant="order-pickedup">Order Pickedup</Badge>
                                                 : data.status === Order.DropOff ?
-                                                    <Badge variant="order-out-delivery">Dropoff</Badge>
+                                                    <Badge variant="order-out-delivery">Order Droped Off</Badge>
                                                     : data.status === Order.InProgress ?
-                                                        <Badge variant="order-inprogress">In Progress</Badge>
+                                                        <Badge variant="order-inprogress">Out for Delivery</Badge>
                                                         : data.status === Order.Cancelled ?
                                                             <Badge variant="order-cancelled">Cancelled</Badge>
                                                             : null

@@ -53,7 +53,13 @@ class AsideLeft extends React.Component {
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
               <div className="d-flex justify-content-between   w-75 mt-3">
-                <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={'https://github.com/'} quote={'thsis quote'} ></FacebookShareButton>
+                <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={'https://github.com/'} quote={
+                // eslint-disable-next-line quotes
+                  `Lorem Ipsum is simply dummy text of the 
+                  https://play.google.com/store/apps
+                  https://www.apple.com/ios/app-store/
+
+                  `} ></FacebookShareButton>
                 <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} url={'https://github.com/'} > 
                 
                 {/* <img alt={'whatsapp'} src={WhatsappImage} /> */}

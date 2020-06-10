@@ -12,28 +12,29 @@
 }
 .badge-order-pickedup {
   background-color: kt-get($theme-colors, order-pickedup);
+  padding: 0.5em 1.1em;
   color: #fff;
 }
 .badge-order-out-delivery {
   background-color: kt-get($theme-colors, order-out-delivery);
   color: #fff;
-  padding: 0.5em 2.8em;
+  padding: 0.5em 0.5em;
 }
 .badge-order-inprogress {
   background-color: kt-get($theme-colors, order-inprogress);
   color: #fff;
-  padding: 0.5em 2.1em;
+  padding: 0.5em 1.1em;
 }
 .badge-order-cancelled {
   background-color: kt-get($theme-colors, order-cancelled);
-  padding: 0.5em 2.1em;
+  padding: 0.5em 2.2em;
   color: #fff;
 }
 
 .badge-order-delivered {
   background-color: kt-get($theme-colors, order-delivered);
   color: #fff;
-  padding: 0.5em 2.3em;
+  padding: 0.5em 2.4em;
 }
 .badge-primary {
   color: #fff;

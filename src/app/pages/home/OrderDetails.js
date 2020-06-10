@@ -6,7 +6,7 @@ import CircularProgress from '../../partials/layout/CircularProgress';
 import { Row, Col } from 'react-bootstrap';
 import Map from '../../partials/layout/Map';
 import moment from 'moment';
-import { Order, OrderColor } from '../../store/ducks/order-duck/constants';
+import { Order, OrderColor, OrderProgressCount } from '../../store/ducks/order-duck/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { OrderActions } from '../../store/ducks/order-duck';
 import { useParams } from 'react-router-dom';
@@ -37,17 +37,17 @@ export default function OrderDetails() {
                                             <Col className="d-flex " >
 
                                                 {order?.status === Order.Delivered ?
-                                                    <CircularProgress width="4rem" value={100} color={OrderColor.Delivered} img={'box.svg'} />
+                                                    <CircularProgress width="4rem" value={OrderProgressCount.Delivered} color={OrderColor.Delivered} img={'box.svg'} />
                                                     : order?.status === Order.OrderPlaced ?
-                                                        <CircularProgress width="4rem" value={100} color={OrderColor.OrderPlaced} img={'checklist.svg'} />
+                                                        <CircularProgress width="4rem" value={OrderProgressCount.OrderPlaced} color={OrderColor.OrderPlaced} img={'checklist.svg'} />
                                                         : order?.status === Order.PickUp ?
-                                                            <CircularProgress width="4rem" value={100} color={OrderColor.PickUp} img={'trolley.svg'} />
+                                                            <CircularProgress width="4rem" value={OrderProgressCount.PickUp} color={OrderColor.PickUp} img={'trolley.svg'} />
                                                             : order?.status === Order.DropOff ?
-                                                                <CircularProgress width="4rem" value={100} color={OrderColor.DropOff} img={'Dropoff.svg'} />
+                                                                <CircularProgress width="4rem" value={OrderProgressCount.DropOff} color={OrderColor.DropOff} img={'Dropoff.svg'} />
                                                                 : order?.status === Order.InProgress ?
-                                                                    <CircularProgress width="4rem" value={100} color={OrderColor.InProgress} img={'In-progress.svg'} />
+                                                                    <CircularProgress width="4rem" value={OrderProgressCount.InProgress} color={OrderColor.InProgress} img={'In-progress.svg'} />
                                                                     : order?.status === Order.Cancelled ?
-                                                                        <CircularProgress width="4rem" value={100} color={OrderColor.Cancelled} img={'cancel.svg'} />
+                                                                        <CircularProgress width="4rem" value={OrderProgressCount.Cancelled} color={OrderColor.Cancelled} img={'cancel.svg'} />
                                                                         : null
 
                                                 }
@@ -63,9 +63,9 @@ export default function OrderDetails() {
                                                             order?.status === Order.PickUp ?
                                                                 <span className="text-order-pickedup font-weight-bold" >Order Picked Up</span> :
                                                                 order?.status === Order.InProgress ?
-                                                                    <span className="text-order-inprogress font-weight-bold" >Order In Progress</span> :
+                                                                    <span className="text-order-inprogress font-weight-bold" >Out for Delivery</span> :
                                                                     order?.status === Order.DropOff ?
-                                                                        <span className="text-order-out-delivery font-weight-bold" >Order Dropoff</span> :
+                                                                        <span className="text-order-out-delivery font-weight-bold" >Order Droped Off</span> :
                                                                         order?.status === Order.Cancelled ?
                                                                             <span className="text-order-cancelled font-weight-bold" >Order Cancelled </span> :
                                                                             order?.status === Order.Delivered ?

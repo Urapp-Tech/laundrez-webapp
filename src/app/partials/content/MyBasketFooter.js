@@ -48,6 +48,9 @@ export default function MyBasketFooter() {
 
             dispatch(MyBasketActions.clearPromoCoupon());
         }
+        return () => {
+            dispatch(MyBasketActions.clearPromoCouponError());
+        };
     }, [formValues.promoCode, dispatch, typedPromo, myBasketItems, calculateAmount, calculateTotalItems]);
 
     useEffect(() => {
@@ -61,20 +64,28 @@ export default function MyBasketFooter() {
     useEffect(() => {
         let quantity = Object.keys(myBasketItems).reduce(calculateTotalItems, 0);
         let amount = Object.keys(myBasketItems).reduce(calculateAmount, 0);
+        let error = false;
         if (quantity < referralCoupon?.minProduct && amount < referralCoupon?.minAmount) {
             setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is ${referralCoupon?.minProduct} and min amount is ${referralCoupon?.minAmount}` });
+            error = true;
         }
         else if (amount < referralCoupon?.minAmount) {
             setQtyErrRefCoupon({ error: true, message: `Min amount for referral coupon is ${referralCoupon?.minAmount}` });
+            error = true;
         }
         else if (quantity < referralCoupon?.minProduct) {
             setQtyErrRefCoupon({ error: true, message: `Min number of items for referral coupon is  ${referralCoupon?.minProduct}` });
+            error = true;
         }
         else {
             setQtyErrRefCoupon({ error: false, message: '' });
+            error = false;
+        }
+        if (useReferral && error) {
+            dispatch(MyBasketActions.useReferral());
         }
 
-    }, [referralCoupon, calculateTotalItems, myBasketItems, calculateAmount]);
+    }, [referralCoupon, calculateTotalItems, myBasketItems, calculateAmount, useReferral, dispatch]);
 
     return (
         <>

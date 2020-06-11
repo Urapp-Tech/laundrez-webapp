@@ -66,6 +66,12 @@ export class MyBasketActions {
         };
     }
 
+    static clearPromoCouponError() {
+        return {
+            type: MyBasketActionTypes.CLEAR_PROMO_COUPON_ERROR,
+        };
+    }
+
     static clearCoupon() {
         return {
             type: MyBasketActionTypes.CLEAR_COUPON

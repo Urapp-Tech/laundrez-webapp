@@ -109,6 +109,9 @@ export function MyBasketReducer(state = initState, action) {
     case MyBasketActionTypes.SET_COUPON:
       return { ...state, coupon: action.payload.coupon };
 
+    case MyBasketActionTypes.CLEAR_PROMO_COUPON_ERROR:
+      return { ...state, isError: false, errorMsg: '' };
+
 
     default:
       return state;

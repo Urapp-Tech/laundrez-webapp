@@ -134,7 +134,14 @@ export class AuthEpics {
 
                 };
             }), catchError(err => {
-                return of({ type: AuthActionTypes.GET_NEW_ACCESS_TOKEN_FAIL, payload: { err, message: err?.response?.message, status: err?.status } });
+                AuthStorage.clearStorage();
+                return of(
+                    {
+                        type: AuthActionTypes.GET_NEW_ACCESS_TOKEN_FAIL,
+                        payload: { err, message: err?.response?.message, status: err?.status }
+                    },
+                    AuthActions.logout()
+                );
             }));
         }));
     }

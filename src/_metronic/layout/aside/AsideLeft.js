@@ -25,6 +25,7 @@ class AsideLeft extends React.Component {
   }
 
   render() {
+    const { referralCode } = this.props;
     return (
       <>
         <button className="kt-aside-close" id="kt_aside_close_btn">
@@ -53,22 +54,22 @@ class AsideLeft extends React.Component {
             <div className="d-flex flex-column sidemenu-footer "  >
               <span>Share</span>
               <div className="d-flex justify-content-between   w-75 mt-3">
-                <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={'https://github.com/'} quote={
-                // eslint-disable-next-line quotes
-                  `Lorem Ipsum is simply dummy text of the 
+                <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={'https://laundrez.pt-staging.com/'} quote={
+                  // eslint-disable-next-line quotes
+                  `Dummy text for sharing
                   https://play.google.com/store/apps
                   https://www.apple.com/ios/app-store/
-
+                  referral code is ${referralCode}
                   `} ></FacebookShareButton>
-                <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} url={'https://github.com/'} > 
-                
-                {/* <img alt={'whatsapp'} src={WhatsappImage} /> */}
+                <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} title={`referral code is ${referralCode}`} url={'https://laundrez.pt-staging.com/'} >
+
+                  {/* <img alt={'whatsapp'} src={WhatsappImage} /> */}
                 </WhatsappShareButton>
-                <TwitterShareButton children={<img alt={'twitter'} src={TwitterImage} />} url={'https://github.com/'} > 
-                {/* <img alt={'twitter'} src={TwitterImage} /> */}
+                <TwitterShareButton children={<img alt={'twitter'} src={TwitterImage} />} title={`referral code is ${referralCode}`} url={'https://laundrez.pt-staging.com/'} >
+                  {/* <img alt={'twitter'} src={TwitterImage} /> */}
                 </TwitterShareButton>
-                <EmailShareButton children={<img alt={'email'} src={EmailImage} />} url={'https://github.com/'} > 
-                {/* <img alt={'email'} src={EmailImage} /> */}
+                <EmailShareButton children={<img alt={'email'} src={EmailImage} />} subject={'Referral sharing laundrez'} body={`referral code is ${referralCode}`} url={'https://laundrez.pt-staging.com/'} >
+                  {/* <img alt={'email'} src={EmailImage} /> */}
                 </EmailShareButton>
 
 
@@ -109,7 +110,8 @@ const mapStateToProps = store => ({
       target: 'kt_aside_mobile_toggler',
       state: 'kt-header-mobile__toolbar-toggler--active'
     }
-  }
+  },
+  referralCode: store?.auth?.user?.referralCode
 });
 
 export default connect(mapStateToProps)(AsideLeft);

@@ -17,6 +17,7 @@ function Login() {
   const isProgressSocialLogin = useSelector(store => store?.auth?.isProgressSocialLogin);
   const isError = useSelector(store => store?.auth?.isError);
   const errorMessage = useSelector(store => store?.auth?.errorMsg);
+  const errorStatus = useSelector(store => store?.auth?.errorStatus);
   const [notValid, setNotValid] = useState({ error: false, type: '', message: '' });
   const [formValues, setFormValues] = useState({ email: '', password: '' });
 
@@ -96,7 +97,14 @@ function Login() {
           </div>
           {isError &&
             <Alert variant={'danger'}>
-              {errorMessage}
+              <div className="d-flex" >
+                <span> {errorMessage} {' '}
+                  {
+                    errorStatus === 418 && <Link to="/auth/forgot-password" className="text-white "  ><u> Forgot Password </u></Link>
+                  }
+                </span>
+              </div>
+
             </Alert>
           }
           <Form className="kt-form " onSubmit={onLoginClick} >

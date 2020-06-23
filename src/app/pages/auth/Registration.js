@@ -91,8 +91,8 @@ export default function Registration({ history }) {
       setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
       return;
     }
-    if (formValues.postalCode.length < 3) {
-      setNotValid({ error: true, type: 'postalCode', message: 'Postal code must contain 3 characters' });
+    if (formValues.postalCode.length < 6) {
+      setNotValid({ error: true, type: 'postalCode', message: 'Postal code must contain 6 characters' });
       return;
     }
     // let phoneNo = formValues.phoneNo;
@@ -200,7 +200,7 @@ export default function Registration({ history }) {
             <Form.Control
               type="text"
               value={formValues.postalCode}
-              maxLength={3}
+              maxLength={6}
               onChange={(e) => setFormValues({ ...formValues, postalCode: String(e.target.value).toUpperCase() })}
               placeholder="Postal Code"
             />

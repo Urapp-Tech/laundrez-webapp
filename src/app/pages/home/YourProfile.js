@@ -8,8 +8,8 @@ import { HttpService } from '../../store/services/http-service';
 import { AuthActions } from '../../store/ducks/auth-duck';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
 import { NotificationActions } from '../../store/ducks/notification-duck';
-
-
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Clipboard from '../../../_metronic/layout/assets/layout-svg-icons/clipboard.svg';
 export default function YourProfile() {
     const dispatch = useDispatch();
     const user = useSelector(store => store?.auth?.user);
@@ -185,6 +185,18 @@ export default function YourProfile() {
                                 <h6 className="text-secondary m-0" >Postal Code</h6>
                                 <h6 className="m-0" >{user?.postalCode}</h6>
                             </div>
+                            <div className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
+                                <h6 className="text-secondary m-0" >Referral Code
+                                <CopyToClipboard text={user?.referralCode}
+                                        onCopy={() => dispatch(NotificationActions.showSuccessNotification('Copied to clipboard'))}
+                                    >
+                                        <span>
+                                            <img alt={'imag'} className="clipboard-image" src={Clipboard} />
+                                        </span>
+                                    </CopyToClipboard>
+                                </h6>
+                                <h6 className="m-0" >{user?.referralCode}</h6>
+                            </div>
                             {addresses.map((v, i) => {
                                 return (<div key={i} className="d-flex border-bottom pb-3 mb-3 justify-content-between align-items-center" >
                                     <h6 className="text-secondary m-0" >Address {i + 1}</h6>
@@ -242,7 +254,8 @@ export default function YourProfile() {
                                                     type="text"
                                                     placeholder=""
                                                     value={formValues.postalCode}
-                                                    onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
+                                                    maxLength={6}
+                                                    onChange={(e) => setFormValues({ ...formValues, postalCode: String(e.target.value).toUpperCase() })}
                                                 />
                                                 {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>

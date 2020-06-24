@@ -328,7 +328,7 @@
   .promo-container {
     .promo-input {
       width: 15rem;
-      span{
+      span {
         background-color: rgba(255, 163, 4, 0.3);
       }
     }
@@ -417,4 +417,9 @@
   top: 0;
   right: 0;
   z-index: 4;
+}
+.clipboard-image {
+  height: 2.2rem;
+  width: 2.2rem;
+  cursor: pointer;
 }

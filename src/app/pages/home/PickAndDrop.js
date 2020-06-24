@@ -111,7 +111,7 @@ export default function PickAndDrop({ history }) {
         return day !== 0;
     };
     const today = 24;
-    const dropoffStartHours = Number(dropOfThreshold) + today;
+    const dropoffStartHours = Number(dropOfThreshold) ;
     const dropoffStartDays = Math.ceil(dropoffStartHours / 24);
     const allowedDaysThreshold = 7;
     const pickupMinDate = moment(new Date()).add(today, 'hours').toDate();

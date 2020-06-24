@@ -259,7 +259,7 @@ export default function DeliveryAddress() {
                                             {(notValid.error && notValid.type === 'propertyType') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
                                     </Row>
-                                    {/* <Row>
+                                    <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
                                             <Form.Label>Busser Code</Form.Label>
                                             <Form.Control
@@ -270,7 +270,7 @@ export default function DeliveryAddress() {
                                             />
                                             {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
-                                    </Row> */}
+                                    </Row>
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
                                             <Form.Check value={formValues.isPrimary} checked={formValues.isPrimary} onChange={() => setFormValues({ ...formValues, isPrimary: !formValues.isPrimary })} className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" />

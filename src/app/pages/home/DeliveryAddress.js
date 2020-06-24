@@ -142,6 +142,7 @@ export default function DeliveryAddress() {
             lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
             mainAddress: formValues.mainAddress,
+            buzzerCode: formValues.busserCode,
             isPrimary: formValues.isPrimary
         };
         dispatch(AddressActions.saveAddress(body));

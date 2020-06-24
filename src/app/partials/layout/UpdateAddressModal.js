@@ -15,6 +15,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
         postalCode: '',
         suiteNumber: '',
         propertyType: '',
+        busserCode: '',
         lat: '',
         lng: '',
         mainAddress: '',
@@ -33,6 +34,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             lng,
             isPrimary,
             mainAddress,
+            buzzerCode,
             id } = address;
         setFormValues({
             street,
@@ -46,6 +48,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             lng,
             isPrimary,
             mainAddress,
+            busserCode: buzzerCode,
             id
         });
     }, [address]);
@@ -149,6 +152,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
             lat: String(Math.abs(formValues.lat).toFixed(5)),
             mainAddress: formValues.mainAddress,
             isPrimary: formValues.isPrimary,
+            buzzerCode: formValues.busserCode,
             id: formValues.id
         };
         dispatch(AddressActions.updateAddress(body, index));
@@ -277,6 +281,18 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                             </Row>
                             <Row>
                                 <Form.Group as={Col} controlId="formGridBusser">
+                                    <Form.Label>Busser Code</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        placeholder=""
+                                        value={formValues.busserCode}
+                                        onChange={(e) => setFormValues({ ...formValues, busserCode: e.target.value })}
+                                    />
+                                    {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group as={Col} controlId="formGridPrimAdd">
                                     <Form.Check className="check-primary-addrs" inline style={{ color: '#2c436a' }} label="Use as Primary Address" checked={formValues.isPrimary} onChange={(e) => setFormValues({ ...formValues, isPrimary: e.target.checked })} />
                                 </Form.Group>
                             </Row>

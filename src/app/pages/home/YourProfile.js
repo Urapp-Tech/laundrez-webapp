@@ -9,7 +9,7 @@ import { AuthActions } from '../../store/ducks/auth-duck';
 import { AddressActions } from '../../store/ducks/address-duck/actions';
 import { NotificationActions } from '../../store/ducks/notification-duck';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Clipboard from '../../../_metronic/layout/assets/layout-svg-icons/clipboard.svg';
+import Clipboard from '../../../_metronic/layout/assets/layout-svg-icons/copy-to-clipboard.svg';
 export default function YourProfile() {
     const dispatch = useDispatch();
     const user = useSelector(store => store?.auth?.user);

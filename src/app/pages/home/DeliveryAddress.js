@@ -14,7 +14,7 @@ export default function DeliveryAddress() {
         phoneNo: '',
         postalCode: '',
         suiteNumber: '',
-        busserCode: '',
+        buzzerCode: '',
         propertyType: 'Residential',
         lat: '',
         lng: '',
@@ -39,7 +39,7 @@ export default function DeliveryAddress() {
                 phoneNo: '',
                 postalCode: '',
                 suiteNumber: '',
-                busserCode: '',
+                buzzerCode: '',
                 propertyType: 'Residential',
                 lat: '',
                 lng: '',
@@ -142,7 +142,7 @@ export default function DeliveryAddress() {
             lng: Math.abs(formValues.lng).toFixed(5),
             lat: Math.abs(formValues.lat).toFixed(5),
             mainAddress: formValues.mainAddress,
-            buzzerCode: formValues.busserCode,
+            buzzerCode: formValues.buzzerCode,
             isPrimary: formValues.isPrimary
         };
         dispatch(AddressActions.saveAddress(body));
@@ -262,14 +262,14 @@ export default function DeliveryAddress() {
                                     </Row>
                                     <Row>
                                         <Form.Group as={Col} controlId="formGridBusser">
-                                            <Form.Label>Busser Code</Form.Label>
+                                            <Form.Label>Buzzer Code</Form.Label>
                                             <Form.Control
                                                 type="number"
                                                 placeholder=""
-                                                value={formValues.busserCode}
-                                                onChange={(e) => setFormValues({ ...formValues, busserCode: e.target.value })}
+                                                value={formValues.buzzerCode}
+                                                onChange={(e) => setFormValues({ ...formValues, buzzerCode: e.target.value })}
                                             />
-                                            {(notValid.error && notValid.type === 'busserCode') && <label className="text-danger" > {notValid.message} </label>}
+                                            {(notValid.error && notValid.type === 'buzzerCode') && <label className="text-danger" > {notValid.message} </label>}
                                         </Form.Group>
                                     </Row>
                                     <Row>

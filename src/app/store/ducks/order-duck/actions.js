@@ -17,6 +17,27 @@ export class OrderActions {
         };
     }
 
+    static checkSelectedPickupSlot(body) {
+        return {
+            type: OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_PROG,
+            payload: { body }
+
+        };
+    }
+
+    static checkSelectedDropoffSlot(body) {
+        return {
+            type: OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_PROG,
+            payload: { body }
+        };
+    }
+
+    static clearError() {
+        return {
+            type: OrderActionTypes.CLEAR_ERROR
+        };
+    }
+
     static getOrderDetail(orderId) {
         return {
             type: OrderActionTypes.GET_ORDER_DETAIL_PROG,

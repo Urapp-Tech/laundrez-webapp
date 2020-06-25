@@ -7,7 +7,11 @@ const initState = {
   isProgressActiveOrders: false,
   isProgressPayment: false,
   isProgressDetail: false,
+  isProgressPickupSlot: false,
+  isProgressDropoffSlot: false,
   isError: false,
+  isErrorPickupSlot: false,
+  isErrorDropoffSlot: false,
   errorMsg: '',
   errorStatus: 0,
   orders: [],
@@ -21,6 +25,8 @@ const initState = {
     address: undefined,
     start: false
   },
+  isPickupSlotAvailable: false,
+  isDropoffSlotAvailable: false,
   paging: {},
   order: {},
   orderDetail: {}
@@ -61,6 +67,22 @@ export function OrderReducer(state = initState, action) {
       return { ...state, isProgressUpdate: false, order: action.payload.order };
     case OrderActionTypes.UPDATE_ORDER_FAIL:
       return { ...state, isProgressUpdate: false, isError: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
+    case OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_PROG:
+      return { ...state, isProgressPickupSlot: true, isPickupSlotAvailable: false, isErrorPickupSlot: false };
+    case OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_SUCC:
+      return { ...state, isProgressPickupSlot: false, isPickupSlotAvailable: true };
+    case OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_FAIL:
+      return { ...state, isProgressPickupSlot: false, isErrorPickupSlot: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
+
+    case OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_PROG:
+      return { ...state, isProgressDropoffSlot: true, isDropoffSlotAvailable: false, isErrorDropoffSlot: false };
+    case OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_SUCC:
+      return { ...state, isProgressDropoffSlot: false, isDropoffSlotAvailable: true };
+    case OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_FAIL:
+      return { ...state, isProgressDropoffSlot: false, isErrorDropoffSlot: true, errorMsg: action.payload.message, errorStatus: action.payload.status };
+
 
     case OrderActionTypes.GET_ORDERS_PROG:
       return { ...state, isProgressOrders: true, };
@@ -114,6 +136,9 @@ export function OrderReducer(state = initState, action) {
 
     case OrderActionTypes.SET_CURRENT_ORDER:
       return { ...state, currentOrder: action.payload.currentOrder };
+
+    case OrderActionTypes.CLEAR_ERROR:
+      return { ...state, isError: false, isErrorDropoffSlot: false, isErrorPickupSlot: false, errorMsg: '', errorStatus: 0 };
 
     default:
       return state;

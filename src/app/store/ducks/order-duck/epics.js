@@ -204,4 +204,57 @@ export class OrderEpics {
 
         }));
     }
+
+    static checkSelectedPickupSlot(action$, state$, { ajaxPost, getRefreshToken }) {
+        return action$.pipe(ofType(OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_PROG), switchMap(({ payload }) => {
+            return defer(() => {
+                return ajaxPost('/Order/validatetimeslot', payload.body);
+            }).pipe(pluck('response'), flatMap((obj) => {
+                return of(
+                    {
+                        type: OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_SUCC,
+                        payload: obj
+                    }
+                );
+            })
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                        return of(
+                            { type: OrderActionTypes.CHECK_SELECTED_PICKUP_SLOT_FAIL, payload: { err, message: err?.response?.message || err?.response?.Message, status: err?.status } }
+                        );
+                    }
+                }));
+
+        }));
+    }
+    static checkSelectedDropoffSlot(action$, state$, { ajaxPost, getRefreshToken }) {
+        return action$.pipe(ofType(OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_PROG), switchMap(({ payload }) => {
+            return defer(() => {
+                return ajaxPost('/Order/validatetimeslot', payload.body);
+            }).pipe(pluck('response'), flatMap((obj) => {
+                return of(
+                    {
+                        type: OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_SUCC,
+                        payload: obj
+                    }
+                );
+            })
+                , catchError((err, source) => {
+                    if (err.status === 401) {
+                        return getRefreshToken(action$, state$, source);
+                    }
+                    else {
+                        window.scrollTo(0, 0);
+                        return of(
+                            { type: OrderActionTypes.CHECK_SELECTED_DROPOFF_SLOT_FAIL, payload: { err, message: err?.response?.message || err?.response?.Message, status: err?.status } }
+                        );
+                    }
+                }));
+
+        }));
+    }
 }

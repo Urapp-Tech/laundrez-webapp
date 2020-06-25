@@ -13,6 +13,13 @@ export default function PickAndDrop({ history }) {
     const dispatch = useDispatch();
     const addresses = useSelector(store => store?.address?.addresses);
     const timeSlots = useSelector(store => store?.lov?.config?.timeSlots);
+    const isProgressPickupSlot = useSelector(store => store?.order?.isProgressPickupSlot);
+    const isProgressDropoffSlot = useSelector(store => store?.order?.isProgressDropoffSlot);
+    const isDropoffSlotAvailable = useSelector(store => store?.order?.isDropoffSlotAvailable);
+    const isPickupSlotAvailable = useSelector(store => store?.order?.isPickupSlotAvailable);
+    const isErrorPickupSlot = useSelector(store => store?.order?.isErrorPickupSlot);
+    const isErrorDropoffSlot = useSelector(store => store?.order?.isErrorDropoffSlot);
+    const errorMessage = useSelector(store => store?.order?.errorMsg);
     const [pickupTime, setPickupTime] = useState([]);
     const [dropoffTime, setDropoffTime] = useState([]);
     const dropOfThreshold = useSelector(store => store?.lov?.config?.system.DropOfThreshold);
@@ -41,6 +48,38 @@ export default function PickAndDrop({ history }) {
             history.replace('/mybasket');
         }
     }, [currentOrder, history]);
+
+    useEffect(() => {
+        if (formValues.pickupTime && formValues.pickupDate) {
+            let body = {
+                date: moment(formValues.pickupDate).format('YYYY-MM-DD'),
+                time: formValues.pickupTime,
+                status: 'PickUp'// PickUp, DropOff
+            };
+            dispatch(OrderActions.checkSelectedPickupSlot(body));
+        }
+
+        return () => {
+            dispatch(OrderActions.clearError());
+        };
+
+    }, [formValues.pickupTime, formValues.pickupDate, dispatch]);
+
+
+    useEffect(() => {
+        if (formValues.dropoffTime && formValues.dropoffDate) {
+            let body = {
+                date: moment(formValues.dropoffDate).format('YYYY-MM-DD'),
+                time: formValues.dropoffTime,
+                status: 'DropOff'// PickUp, DropOff
+            };
+            dispatch(OrderActions.checkSelectedDropoffSlot(body));
+        }
+
+
+    }, [formValues.dropoffTime, formValues.dropoffDate, dispatch]);
+
+
 
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
@@ -111,7 +150,7 @@ export default function PickAndDrop({ history }) {
         return day !== 0;
     };
     const today = 24;
-    const dropoffStartHours = Number(dropOfThreshold) ;
+    const dropoffStartHours = Number(dropOfThreshold);
     const dropoffStartDays = Math.ceil(dropoffStartHours / 24);
     const allowedDaysThreshold = 7;
     const pickupMinDate = moment(new Date()).add(today, 'hours').toDate();
@@ -127,10 +166,12 @@ export default function PickAndDrop({ history }) {
                         <div className="col-md-12 ">
                             <Portlet className="">
                                 <PortletBody>
-                                    <Form>
-                                        <Row className="border-bottom" >
+                                    <Form className="d-flex flex-column border-bottom" >
+                                        <Row className="" >
                                             <Form.Group as={Col} controlId="formGridStreet1">
-                                                <Form.Label>Pickup Date</Form.Label>
+                                                <Form.Label>Pickup Date
+                                                {isProgressPickupSlot && <div className=" d-inline ml-3 kt-spinner kt-spinner--center kt-spinner--primary " ></div>}
+                                                </Form.Label>
                                                 <Form.Row>
                                                     <ReactDatePicker
                                                         selected={formValues.pickupDate}
@@ -165,15 +206,19 @@ export default function PickAndDrop({ history }) {
                                                 </Form.Control>
                                                 {(notValid.error && notValid.type === 'pickupTime') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
+
                                         </Row>
+                                        {isErrorPickupSlot && <span className="text-danger" >{errorMessage}</span>}
                                     </Form>
-                                    <Form>
-                                        <Row className="border-bottom mt-3" >
+                                    <Form className="d-flex flex-column border-bottom  mt-3" >
+                                        <Row className="" >
                                             <Form.Group as={Col} controlId="formGridStreet3">
-                                                <Form.Label>Dropoff Date</Form.Label>
+                                                <Form.Label>Dropoff Date
+                                                {isProgressDropoffSlot && <div className=" d-inline ml-3 kt-spinner kt-spinner--center kt-spinner--primary " ></div>}
+                                                </Form.Label>
                                                 <Form.Row>
                                                     <ReactDatePicker
-                                                        disabled={!formValues.pickupDate}
+                                                        disabled={!isPickupSlotAvailable}
                                                         selected={formValues.dropoffDate}
                                                         onChange={(e) => {
                                                             setFormValues({ ...formValues, dropoffDate: e });
@@ -197,7 +242,7 @@ export default function PickAndDrop({ history }) {
 
                                                     }
                                                     }
-                                                    disabled={!formValues.pickupTime}
+                                                    disabled={!isPickupSlotAvailable}
                                                 >
                                                     <option value={''} >Please Select Drop Off Time</option>
                                                     {
@@ -209,6 +254,7 @@ export default function PickAndDrop({ history }) {
                                                 {(notValid.error && notValid.type === 'dropoffTime') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
+                                        {isErrorDropoffSlot && <span className="text-danger" >{errorMessage}</span>}
                                     </Form>
                                     <Form>
                                         <div className="border-bottom mt-3 d-block"  >
@@ -241,7 +287,7 @@ export default function PickAndDrop({ history }) {
                                         </Form.Group>
                                     </Row>
                                     <Row className="justify-content-end pb-5 " >
-                                        <button onClick={() => PlaceOrder()} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
+                                        <button onClick={() => PlaceOrder()} disabled={!isDropoffSlotAvailable || !isPickupSlotAvailable} id="pickdrop-placeorder" className="btn btn-lg btn-primary-gradient btn-primary ">Place Order</button>
                                     </Row>
                                 </PortletBody>
                             </Portlet>

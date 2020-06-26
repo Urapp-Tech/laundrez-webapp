@@ -108,7 +108,7 @@ export default function OrderDetails() {
                                             <Row  >
                                                 <Col className=" d-flex  justify-content-between align-items-center" >
                                                     <span>Total Amount</span>
-                                                    <h6 className=" " >${order?.orderAmount}</h6>
+                                                    <h6 className=" " >${Number(order?.orderAmount).toFixed(2)}</h6>
                                                 </Col>
                                             </Row>
                                             <Row className="" >
@@ -120,7 +120,7 @@ export default function OrderDetails() {
                                             <Row className="" >
                                                 <Col className=" d-flex  justify-content-between align-items-center" >
                                                     <span>Discount</span>
-                                                    <h6 className=" " >${order?.discountAmount}</h6>
+                                                    <h6 className=" " >${Number(order?.discountAmount).toFixed(2)}</h6>
                                                 </Col>
                                             </Row>
                                         </Col>
@@ -129,7 +129,7 @@ export default function OrderDetails() {
                                         <Row className="  pb-3 pt-4" >
                                             <Col className=" d-flex justify-content-between align-items-center" >
                                                 <h5>Grand Total</h5>
-                                                <h5 className="kt-font-primary font-weight-bold" >${order?.totalAmount}</h5>
+                                                <h5 className="kt-font-primary font-weight-bold" >${Number(order?.totalAmount).toFixed(2)}</h5>
                                             </Col>
                                         </Row>
                                     </div>

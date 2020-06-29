@@ -43,10 +43,9 @@ export default function AuthPage() {
               {/* </div> */}
               <div className="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
                 <div className="kt-grid__item kt-grid__item--middle">
-                  <h3 className="kt-login__title">Laundrez</h3>
+                  <h2 className="kt-login__title">Laundrez</h2>
                   <h4 className="kt-login__subtitle">
-                    Lorem ipsum dolor sit amet, coectetuer adipiscing
-                    elit sed diam nonummy et nibh euismod
+                    The easiest way to stay clean 
                   </h4>
                 </div>
               </div>

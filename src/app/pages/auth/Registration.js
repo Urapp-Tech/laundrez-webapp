@@ -137,7 +137,7 @@ export default function Registration({ history }) {
         {isSuccess &&
           <>
             <Alert className="flex-column" variant={'success'}>
-              <div className="text-center" > You account has been successfully created.</div>
+              <div className="text-center" > Your account has been successfully created.</div>
 
             </Alert>
             <div className="kt-spinner kt-spinner--center kt-spinner--primary mt-4" ></div>

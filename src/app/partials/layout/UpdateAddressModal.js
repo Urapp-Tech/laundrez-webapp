@@ -178,7 +178,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                             <Form>
                                 <Row>
                                     <Form.Group as={Col} controlId="formGridStreet">
-                                        <Form.Label>Main Address</Form.Label>
+                                        <Form.Label>Address</Form.Label>
                                         <GooglePlacesAutocomplete
                                             onSelect={handleSelect}
                                             inputClassName="form-control"
@@ -196,8 +196,9 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                         <Form.Control
                                             type="text"
                                             placeholder=""
-                                            readOnly
                                             value={formValues.street}
+                                            autoComplete={'no'}
+                                            onChange={(e) => setFormValues({ ...formValues, street: e.target.value })}
                                         />
                                     </Form.Group>
 
@@ -221,19 +222,21 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                             type="text"
                                             placeholder=""
                                             value={formValues.postalCode}
-                                            onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
+                                            autoComplete={'no'}
+                                            onChange={(e) => setFormValues({ ...formValues, postalCode: String(e.target.value).toUpperCase() })}
                                         />
                                         {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
                                     </Form.Group>
                                 </Row>
                                 <Row>
                                     <Form.Group as={Col} controlId="formGridState">
-                                        <Form.Label>State</Form.Label>
+                                        <Form.Label>Province</Form.Label>
                                         <Form.Control
                                             type="text"
                                             placeholder=""
-                                            readOnly
                                             value={formValues.state}
+                                            autoComplete={'no'}
+                                            onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
                                         />
                                     </Form.Group>
                                 </Row>
@@ -243,8 +246,9 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                         <Form.Control
                                             type="text"
                                             placeholder=""
-                                            readOnly
                                             value={formValues.city}
+                                            autoComplete={'no'}
+                                            onChange={(e) => setFormValues({ ...formValues, city: e.target.value })}
                                         />
                                     </Form.Group>
                                 </Row>
@@ -283,7 +287,7 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                 <Form.Group as={Col} controlId="formGridBusser">
                                     <Form.Label>Buzzer Code</Form.Label>
                                     <Form.Control
-                                        type="number"
+                                        type="text"
                                         placeholder=""
                                         value={formValues.buzzerCode}
                                         onChange={(e) => setFormValues({ ...formValues, buzzerCode: e.target.value })}

@@ -57,19 +57,16 @@ class AsideLeft extends React.Component {
               <div className="d-flex justify-content-between   w-75 mt-3">
                 <FacebookShareButton children={<img alt={'fb'} src={FbImage} />} url={API_URL} quote={
                   // eslint-disable-next-line quotes
-                  `Dummy text for sharing
-                  https://play.google.com/store/apps
-                  https://www.apple.com/ios/app-store/
-                  referral code is ${referralCode}
+                  `Hey, I'm using LaundrEZ for all my laundry and drycleaning needs, use my referral code ${referralCode} to get 20% off your first order! 
                   `} ></FacebookShareButton>
-                <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} title={`referral code is ${referralCode}`} url={API_URL} >
+                <WhatsappShareButton children={<img alt={'whatsapp'} src={WhatsappImage} />} title={`Hey, I'm using LaundrEZ for all my laundry and drycleaning needs, use my referral code ${referralCode} to get 20% off your first order!`} url={API_URL} >
 
                   {/* <img alt={'whatsapp'} src={WhatsappImage} /> */}
                 </WhatsappShareButton>
-                <TwitterShareButton children={<img alt={'twitter'} src={TwitterImage} />} title={`referral code is ${referralCode}`} url={API_URL} >
+                <TwitterShareButton children={<img alt={'twitter'} src={TwitterImage} />} title={`Hey, I'm using LaundrEZ for all my laundry and drycleaning needs, use my referral code ${referralCode} to get 20% off your first order!`} url={API_URL} >
                   {/* <img alt={'twitter'} src={TwitterImage} /> */}
                 </TwitterShareButton>
-                <EmailShareButton children={<img alt={'email'} src={EmailImage} />} subject={'Referral sharing laundrez'} body={`referral code is ${referralCode}`} url={API_URL} >
+                <EmailShareButton children={<img alt={'email'} src={EmailImage} />} subject={'Referral sharing laundrez'} body={`Hey, I'm using LaundrEZ for all my laundry and drycleaning needs, use my referral code ${referralCode} to get 20% off your first order!`} url={API_URL} >
                   {/* <img alt={'email'} src={EmailImage} /> */}
                 </EmailShareButton>
 

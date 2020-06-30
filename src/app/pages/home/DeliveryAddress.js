@@ -28,6 +28,9 @@ export default function DeliveryAddress() {
     const isSuccess = useSelector(store => store?.notification?.isSuccess);
     useEffect(() => {
         dispatch(AddressActions.getAddresses());
+        let autoCompleteInput = document.getElementById('react-google-places-autocomplete-input');
+        autoCompleteInput.removeAttribute('autocomplete');
+        autoCompleteInput.setAttribute('autocomplete', 'no');
     }, [dispatch]);
 
     useEffect(() => {
@@ -156,15 +159,16 @@ export default function DeliveryAddress() {
                         <PortletBody>
                             <div className="row" >
                                 <div className="col-md-6">
-                                    <Form>
+                                    <Form  >
                                         <Row>
                                             <Form.Group as={Col} controlId="formGridStreet">
-                                                <Form.Label>Main Address</Form.Label>
+                                                <Form.Label>Address</Form.Label>
                                                 <GooglePlacesAutocomplete
                                                     onSelect={handleSelect}
                                                     inputClassName="form-control"
                                                     placeholder=''
                                                     initialValue={formValues.mainAddress}
+
 
 
                                                 />
@@ -177,7 +181,8 @@ export default function DeliveryAddress() {
                                                 <Form.Control
                                                     type="text"
                                                     placeholder=""
-                                                    readOnly
+                                                    autoComplete={'no'}
+                                                    onChange={(e) => setFormValues({ ...formValues, street: e.target.value })}
                                                     value={formValues.street}
                                                 />
                                             </Form.Group>
@@ -202,19 +207,21 @@ export default function DeliveryAddress() {
                                                     type="text"
                                                     placeholder=""
                                                     value={formValues.postalCode}
-                                                    onChange={(e) => setFormValues({ ...formValues, postalCode: e.target.value })}
+                                                    autoComplete={'no'}
+                                                    onChange={(e) => setFormValues({ ...formValues, postalCode: String(e.target.value).toUpperCase() })}
                                                 />
                                                 {(notValid.error && notValid.type === 'postalCode') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
                                         <Row>
                                             <Form.Group as={Col} controlId="formGridState">
-                                                <Form.Label>State</Form.Label>
+                                                <Form.Label>Province</Form.Label>
                                                 <Form.Control
                                                     type="text"
                                                     placeholder=""
-                                                    readOnly
                                                     value={formValues.state}
+                                                    autoComplete={'no'}
+                                                    onChange={(e) => setFormValues({ ...formValues, state: e.target.value })}
                                                 />
                                             </Form.Group>
                                         </Row>
@@ -224,8 +231,9 @@ export default function DeliveryAddress() {
                                                 <Form.Control
                                                     type="text"
                                                     placeholder=""
-                                                    readOnly
                                                     value={formValues.city}
+                                                    autoComplete={'no'}
+                                                    onChange={(e) => setFormValues({ ...formValues, city: e.target.value })}
                                                 />
                                             </Form.Group>
                                         </Row>
@@ -264,7 +272,7 @@ export default function DeliveryAddress() {
                                         <Form.Group as={Col} controlId="formGridBusser">
                                             <Form.Label>Buzzer Code</Form.Label>
                                             <Form.Control
-                                                type="number"
+                                                type="text"
                                                 placeholder=""
                                                 value={formValues.buzzerCode}
                                                 onChange={(e) => setFormValues({ ...formValues, buzzerCode: e.target.value })}

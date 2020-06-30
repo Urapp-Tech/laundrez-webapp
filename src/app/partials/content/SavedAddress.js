@@ -8,12 +8,18 @@ import { useSelector } from 'react-redux';
 export default function SavedAddress({ address, deleteAddress, index }) {
     const [openModal, setOpenModal] = useState(false);
     const isSuccess = useSelector(store => store?.notification?.isSuccess);
-    
-    useEffect(()=> {
-        if(isSuccess) {
+
+    useEffect(() => {
+        if (isSuccess) {
             setOpenModal(false);
         }
     }, [isSuccess]);
+    useEffect(() => {
+        if (openModal) {
+            let autoCompleteInput = document.querySelectorAll('#react-google-places-autocomplete-input')[1];
+            autoCompleteInput.setAttribute('autocomplete', 'no');
+        }
+    }, [openModal]);
     return (
         <div className="border-bottom pb-3 mb-3 d-flex justify-content-between align-items-center" >
             <div onClick={() => setOpenModal(!openModal)} className="cursor-pointer d-flex street-container   justify-content-start align-items-center">

@@ -145,17 +145,26 @@ export default function PickAndDrop({ history }) {
         history.push('/orderreview');
     }, [formValues, history, selectedAddress, dispatch, notValid, addresses]);
 
-    const isSunday = date => {
+    const isSunday = useCallback(date => {
         const day = new Date(date).getDay();
         return day !== 0;
-    };
+    }, []);
+    const isSaturdaySelected = useCallback((date) => {
+        const day = new Date(date).getDay();
+        return day === 6;
+    }, []);
     const today = 24;
     const dropoffStartHours = Number(dropOfThreshold);
     const dropoffStartDays = Math.ceil(dropoffStartHours / 24);
     const allowedDaysThreshold = 7;
     const pickupMinDate = moment(new Date()).add(today, 'hours').toDate();
     const pickupMaxDate = moment(new Date(), 'DD-MM-YYYY').add(allowedDaysThreshold, 'days').toDate();
-    const dropOffMinDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(dropoffStartHours, 'hours').toDate();
+    let dropOffMinDate = '';
+    if (isSaturdaySelected(formValues.pickupDate)) {
+        dropOffMinDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(dropoffStartHours + today, 'hours').toDate();
+    } else {
+        dropOffMinDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(dropoffStartHours, 'hours').toDate();
+    }
     const dropOffMaxDate = moment(formValues.pickupDate, 'DD-MM-YYYY').add(allowedDaysThreshold + dropoffStartDays, 'days').toDate();
     return (
         <>

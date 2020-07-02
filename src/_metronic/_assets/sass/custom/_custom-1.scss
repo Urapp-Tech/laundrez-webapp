@@ -424,3 +424,31 @@
   margin-left: 8px;
   cursor: pointer;
 }
+.secured-container {
+  #pci-icon {
+    width: 83px;
+    height: 32px;
+    object-fit: contain;
+  }
+  #stripe-icon {
+    width: 97px;
+    height: 56px;
+    object-fit: contain;
+  }
+}
+#card-number-input {
+  background: url(../../../layout/assets/layout-svg-icons/cards-icon.png) no-repeat right 10px;
+  background-size: 17rem;
+}
+@media only screen and (max-width: 600px) {
+  #card-number-input {
+    background: url(../../../layout/assets/layout-svg-icons/cards-icon.png) no-repeat right 10px;
+    background-size: 15em;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 991px) {
+  #card-number-input {
+    background: url(../../../layout/assets/layout-svg-icons/cards-icon.png) no-repeat right 10px;
+    background-size: 16em;
+  }
+}

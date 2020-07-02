@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CardActions } from '../../store/ducks/card-duck/actions';
 import { OrderActions } from '../../store/ducks/order-duck/actions';
 import clsx from 'clsx';
+import StripeIcon from '../../../_metronic/layout/assets/layout-svg-icons/stripe-icon.png';
+import PciIcon from '../../../_metronic/layout/assets/layout-svg-icons/pci-icon.png';
 export default function PaymentDetails() {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
     const getYears = function (endYear) {
         let currentYear = new Date().getFullYear(), years = [];
         while (currentYear <= endYear) {
@@ -32,7 +34,7 @@ export default function PaymentDetails() {
         dispatch(CardActions.getCards());
     }, [dispatch]);
 
-    
+
 
 
     const doPayment = useCallback(() => {
@@ -89,8 +91,6 @@ export default function PaymentDetails() {
         dispatch(OrderActions.makePayment(body));
 
     }, [formValues, notValid, dispatch, cards, order]);
-
-
     return (
         <>
             {/* {paymentSuccess && <Alert variant={'success'}>
@@ -98,14 +98,14 @@ export default function PaymentDetails() {
             </Alert>} */}
             <h4 className="mb-3" >Payment Details</h4>
             <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-8">
                     <Portlet className="">
                         <PortletBody>
                             <div className="row" >
                                 <div className="col-md-12">
                                     <Form>
                                         {cards.length ? <Row>
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} >
                                                 <Form.Label>Saved Card</Form.Label>
                                                 <Form.Control
                                                     as="select"
@@ -126,10 +126,11 @@ export default function PaymentDetails() {
                                             <h6>Add New Card</h6>
                                         </Row>
                                         <Row>
-                                            <Form.Group as={Col} controlId="formGridStreet">
+                                            <Form.Group as={Col} >
                                                 <Form.Label>Card Number</Form.Label>
                                                 <Form.Control
                                                     type="text"
+                                                    id="card-number-input"
                                                     placeholder=""
                                                     value={formValues.cardNumber}
                                                     onChange={(e) => setFormValues({ ...formValues, cardNumber: e.target.value })}
@@ -138,14 +139,14 @@ export default function PaymentDetails() {
                                             </Form.Group>
                                         </Row>
                                         <Row  >
-                                            <Form.Group as={Col} controlId="formGridProperty">
+                                            <Form.Group as={Col} md={3} sm={5} xs={5} >
                                                 <Form.Label>Expiry Month</Form.Label>
                                                 <Form.Control
                                                     as="select"
                                                     value={formValues.expiryMonth}
                                                     onChange={(e) => setFormValues({ ...formValues, expiryMonth: e.target.value })}
                                                 >
-                                                    <option value={0} >Select Expiry Month</option>
+                                                    <option value={0} >MM</option>
                                                     {
                                                         months.map((v, i) => {
                                                             return <option key={i} value={Number(i) + 1} >{v}</option>;
@@ -155,13 +156,16 @@ export default function PaymentDetails() {
                                                 </Form.Control>
                                                 {(notValid.error && notValid.type === 'expiryMonth') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
-                                            <Form.Group as={Col} controlId="formGridProperty">
+                                            <Col md={1} sm={2} xs={2} className="mt-auto text-center mb-auto" >
+                                                /
+                                            </Col>
+                                            <Form.Group as={Col} md={3} sm={5} xs={5} >
                                                 <Form.Label>Expiry Year</Form.Label>
                                                 <Form.Control
                                                     as="select"
                                                     value={formValues.expiryYear}
                                                     onChange={(e) => setFormValues({ ...formValues, expiryYear: e.target.value })}>
-                                                    <option value={0} >Select Expiry Year</option>
+                                                    <option value={0} >YYYY</option>
                                                     {
                                                         getYears(2040).map((v, i) => {
                                                             return <option key={i} value={v} >{v}</option>;
@@ -170,9 +174,7 @@ export default function PaymentDetails() {
                                                 </Form.Control>
                                                 {(notValid.error && notValid.type === 'expiryYear') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
-                                        </Row>
-                                        <Row>
-                                            <Form.Group as={Col} controlId="formGridSuite">
+                                            <Form.Group as={Col} md={4} sm={12} >
                                                 <Form.Label>CVV</Form.Label>
                                                 <Form.Control
                                                     type="text"
@@ -184,8 +186,10 @@ export default function PaymentDetails() {
                                                 {(notValid.error && notValid.type === 'cvv') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
                                         </Row>
+                                        {/* <Row>
+                                        </Row> */}
                                         <Row>
-                                            <Form.Group as={Col} controlId="formGridBusser">
+                                            <Form.Group as={Col} >
                                                 <Form.Check className="check-primary-addrs" checked={formValues.rememberDetails} onChange={() => setFormValues({ ...formValues, rememberDetails: !formValues.rememberDetails })} inline style={{ color: '#2c436a' }} label="Remember Details" />
                                             </Form.Group>
                                         </Row>
@@ -200,28 +204,13 @@ export default function PaymentDetails() {
                         </PortletBody>
                     </Portlet>
                 </div>
-                {/* <div className="col-md-6">
-                    <Portlet className="">
-                        <PortletBody>
-                            <h5 className="mb-3" >Saved Card</h5>
-                            {
-                                cards.map((v, i) => {
-                                    return (
-
-                                        <SavedCard
-                                            key={i}
-                                            cardCount={Number(i) + 1}
-                                            cardNumber={v?.cardNumber}
-                                            expiryMonth={v?.expiryMonth}
-                                            expiryYear={v?.expiryYear}
-                                            deleteCard={() => dispatch(CardActions.deleteCard(v?.cardId))}
-                                        />
-                                    );
-                                })
-                            }
-                        </PortletBody>
-                    </Portlet>
-                </div> */}
+                <div className="col-md-4">
+                    <h6 className="mb-3 text-secondary" >Secured By</h6>
+                    <div className="d-flex secured-container justify-content-start align-items-center" >
+                        <img id="stripe-icon" src={StripeIcon} alt={'icon'} />
+                        <img id="pci-icon" src={PciIcon} alt={'icon'} />
+                    </div>
+                </div>
             </div>
         </>
     );

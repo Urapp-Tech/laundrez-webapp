@@ -139,7 +139,7 @@ export default function PaymentDetails() {
                                             </Form.Group>
                                         </Row>
                                         <Row  >
-                                            <Form.Group as={Col} md={3} sm={5} xs={5} >
+                                            <Form.Group as={Col} md={4} sm={5} xs={5} className="pr-0" >
                                                 <Form.Label>Expiry Month</Form.Label>
                                                 <Form.Control
                                                     as="select"
@@ -159,7 +159,7 @@ export default function PaymentDetails() {
                                             <Col md={1} sm={2} xs={2} className="mt-auto text-center mb-auto" >
                                                 /
                                             </Col>
-                                            <Form.Group as={Col} md={3} sm={5} xs={5} >
+                                            <Form.Group as={Col} md={4} sm={5} xs={5} className="pl-0">
                                                 <Form.Label>Expiry Year</Form.Label>
                                                 <Form.Control
                                                     as="select"
@@ -174,7 +174,7 @@ export default function PaymentDetails() {
                                                 </Form.Control>
                                                 {(notValid.error && notValid.type === 'expiryYear') && <label className="text-danger" > {notValid.message} </label>}
                                             </Form.Group>
-                                            <Form.Group as={Col} md={4} sm={12} >
+                                            <Form.Group as={Col} md={3} sm={12} >
                                                 <Form.Label>CVV</Form.Label>
                                                 <Form.Control
                                                     type="text"

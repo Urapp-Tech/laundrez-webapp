@@ -437,8 +437,10 @@
   }
 }
 #card-number-input {
-  background: url(../../../layout/assets/layout-svg-icons/cards-icon.png) no-repeat right 10px;
+  background: url(../../../layout/assets/layout-svg-icons/cards-icon.png) no-repeat scroll ;
+  background-position: 98% center;
   background-size: 17rem;
+  padding-right: 10px;
 }
 @media only screen and (max-width: 600px) {
   #card-number-input {

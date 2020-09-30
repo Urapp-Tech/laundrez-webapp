@@ -120,10 +120,6 @@ export default function DeliveryAddress() {
             setNotValid({ error: true, type: 'mainAddress', message: 'Please provide address' });
             return;
         }
-        if (!formValues.postalCode) {
-            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
-            return;
-        }
         if (!formValues.phoneNo) {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide phone number' });
             return;
@@ -133,6 +129,11 @@ export default function DeliveryAddress() {
             setNotValid({ error: true, type: 'phoneNo', message: 'Please provide a valid phone number matching the format +1XXXXXXXXXX' });
             return;
         }
+        if (!formValues.postalCode) {
+            setNotValid({ error: true, type: 'postalCode', message: 'Please provide postal code' });
+            return;
+        }
+
         let body = {
             userId: user.id,
             type: formValues.propertyType,

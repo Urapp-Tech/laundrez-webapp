@@ -39,7 +39,7 @@ export default function OrderReview({ history }) {
         var deliveryAddress = currentOrder.address?.mainAddress;
         debugger;
         if(currentOrder.address?.suite) {
-            deliveryAddress = "Suite# " + currentOrder.address?.suite + " ," + currentOrder.address?.mainAddress;
+            deliveryAddress = 'Suite# ' + currentOrder.address?.suite + ' ,' + currentOrder.address?.mainAddress;
         }
 
         let body = {

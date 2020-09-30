@@ -35,6 +35,13 @@ export default function OrderReview({ history }) {
     }, [currentOrder, history]);
 
     const postOrder = useCallback(() => {
+
+        var deliveryAddress = currentOrder.address?.mainAddress;
+        debugger;
+        if(currentOrder.address?.suite) {
+            deliveryAddress = 'Suite# ' + currentOrder.address?.suite + ' ,' + currentOrder.address?.mainAddress;
+        }
+
         let body = {
             orderDate: moment(new Date()).format('YYYY-MM-DD') + 'T00:00:00.000Z',
             pickupDate: moment(currentOrder.pickupDate).format('YYYY-MM-DD') + 'T00:00:00.000Z',
@@ -42,7 +49,7 @@ export default function OrderReview({ history }) {
             dropoffDate: moment(currentOrder.dropoffDate).format('YYYY-MM-DD') + 'T00:00:00.000Z',
             dropoffTime: currentOrder.dropoffTime,
             addressId: currentOrder.address?.id,
-            deliveryAddress: currentOrder.address?.mainAddress,
+            deliveryAddress: deliveryAddress,
             description: currentOrder.driverInstruction,
             taxPercentage: Number(config?.system?.HSTPercentage),
             orderAmount: Number(totalAmount),

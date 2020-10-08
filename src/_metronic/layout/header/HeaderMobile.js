@@ -16,7 +16,7 @@ class HeaderMobile extends React.Component {
     const {
       headerLogo,
       asideDisplay,
-      headerMenuSelfDisplay,
+      // headerMenuSelfDisplay,
       headerMobileCssClasses,
       headerMobileAttributes
     } = this.props;
@@ -70,9 +70,9 @@ const mapStateToProps = store => ({
     store.builder.layoutConfig,
     'aside.self.display'
   ),
-  headerMenuSelfDisplay:
-    objectPath.get(store.builder.layoutConfig, 'header.menu.self.display') ===
-    true,
+  // headerMenuSelfDisplay:
+  //   objectPath.get(store.builder.layoutConfig, 'header.menu.self.display') ===
+  //   true,
   toggleOptions: {
     target: 'body',
     targetState: 'kt-header__topbar--mobile-on',

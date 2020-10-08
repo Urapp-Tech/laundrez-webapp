@@ -16,7 +16,7 @@ class HeaderMobile extends React.Component {
     const {
       headerLogo,
       asideDisplay,
-      headerMenuSelfDisplay,
+      // headerMenuSelfDisplay,
       headerMobileCssClasses,
       headerMobileAttributes
     } = this.props;
@@ -42,14 +42,14 @@ class HeaderMobile extends React.Component {
             </button>
           )}
 
-          {headerMenuSelfDisplay && (
+          {/* {headerMenuSelfDisplay && (
             <button
               className="kt-header-mobile__toggler"
               id="kt_header_mobile_toggler"
             >
               <span />
             </button>
-          )}
+          )} */}
 
           <button
             ref={this.toggleButtonRef}
@@ -70,9 +70,9 @@ const mapStateToProps = store => ({
     store.builder.layoutConfig,
     'aside.self.display'
   ),
-  headerMenuSelfDisplay:
-    objectPath.get(store.builder.layoutConfig, 'header.menu.self.display') ===
-    true,
+  // headerMenuSelfDisplay:
+  //   objectPath.get(store.builder.layoutConfig, 'header.menu.self.display') ===
+  //   true,
   toggleOptions: {
     target: 'body',
     targetState: 'kt-header__topbar--mobile-on',

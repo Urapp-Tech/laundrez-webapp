@@ -37,7 +37,6 @@ export default function OrderReview({ history }) {
     const postOrder = useCallback(() => {
 
         var deliveryAddress = currentOrder.address?.mainAddress;
-        debugger;
         if(currentOrder.address?.suite) {
             deliveryAddress = 'Suite# ' + currentOrder.address?.suite + ' ,' + currentOrder.address?.mainAddress;
         }

@@ -36,10 +36,14 @@ export default function OrderReview({ history }) {
 
     const postOrder = useCallback(() => {
 
-        var deliveryAddress = currentOrder.address?.mainAddress;
+        var deliveryAddress = '';
         if(currentOrder.address?.suite) {
-            deliveryAddress = 'Suite# ' + currentOrder.address?.suite + ' ,' + currentOrder.address?.mainAddress;
+            deliveryAddress = currentOrder.address?.suite + ', ';
         }
+        if(currentOrder.address?.street) {
+            deliveryAddress = deliveryAddress + currentOrder.address?.street + ', ';
+        }
+        deliveryAddress = deliveryAddress + currentOrder.address?.mainAddress;
 
         let body = {
             orderDate: moment(new Date()).format('YYYY-MM-DD') + 'T00:00:00.000Z',

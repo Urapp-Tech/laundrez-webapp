@@ -177,19 +177,6 @@ export default function DeliveryAddress() {
                                             </Form.Group>
                                         </Row>
                                         <Row>
-                                            <Form.Group as={Col} controlId="formGridStreet">
-                                                <Form.Label>Street</Form.Label>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder=""
-                                                    autoComplete={'no'}
-                                                    onChange={(e) => setFormValues({ ...formValues, street: e.target.value })}
-                                                    value={formValues.street}
-                                                />
-                                            </Form.Group>
-
-                                        </Row>
-                                        <Row>
                                             <Form.Group as={Col} controlId="formGridSuite">
                                                 <Form.Label>Suite Number</Form.Label>
                                                 <Form.Control

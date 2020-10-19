@@ -184,24 +184,9 @@ export default function UpdateAddressModal({ showModal, toggleModal, address, in
                                             inputClassName="form-control"
                                             placeholder=''
                                             initialValue={formValues.mainAddress}
-
-
                                         />
                                         {(notValid.error && notValid.type === 'mainAddress') && <label className="text-danger" > {notValid.message} </label>}
                                     </Form.Group>
-                                </Row>
-                                <Row>
-                                    <Form.Group as={Col} controlId="formGridStreet">
-                                        <Form.Label>Street</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder=""
-                                            value={formValues.street}
-                                            autoComplete={'no'}
-                                            onChange={(e) => setFormValues({ ...formValues, street: e.target.value })}
-                                        />
-                                    </Form.Group>
-
                                 </Row>
                                 <Row>
                                     <Form.Group as={Col} controlId="formGridSuite">

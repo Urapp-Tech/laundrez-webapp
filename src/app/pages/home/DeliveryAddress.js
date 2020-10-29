@@ -143,8 +143,8 @@ export default function DeliveryAddress() {
             postalCode: formValues.postalCode,
             phone: formValues.phoneNo,
             suite: formValues.suiteNumber,
-            lng: Math.abs(formValues.lng).toFixed(5),
-            lat: Math.abs(formValues.lat).toFixed(5),
+            lng: (formValues.lng).toFixed(5),
+            lat: (formValues.lat).toFixed(5),
             mainAddress: formValues.mainAddress,
             buzzerCode: formValues.buzzerCode,
             isPrimary: formValues.isPrimary

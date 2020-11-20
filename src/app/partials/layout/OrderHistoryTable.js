@@ -7,6 +7,7 @@ import { OrderActions } from '../../store/ducks/order-duck';
 import { Order, OrderColor, OrderProgressCount } from '../../store/ducks/order-duck/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { MyBasketActions } from '../../store/ducks/mybasket-duck/actions';
+import { format } from 'date-fns';
 
 function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders, paging }) {
 
@@ -73,7 +74,7 @@ function OrderHistoryTable({ history, showPagination, repeatOrder = true, orders
                                 <td className="cursor-pointer" onClick={() => history.push({
                                     pathname: `/orderdetails/${data?.id}`,
                                 })} >{data.orderNumber}</td>
-                                <td>{data.orderDate}</td>
+                                <td>{format(new Date(data.orderDate), 'yyyy-MM-dd kk:mm:ss')}</td>
                                 <td>{
                                     data.status === Order.Delivered ?
                                         <Badge variant="order-delivered">Delivered</Badge>

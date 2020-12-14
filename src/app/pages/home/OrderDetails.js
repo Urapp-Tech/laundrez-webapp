@@ -55,7 +55,7 @@ export default function OrderDetails() {
                                                 <div className="d-flex ml-2 h-100 justify-content-between flex-column order-info" >
                                                     <span>Order Id: <b>{order?.orderNumber}</b></span>
                                                     {/* <span>08:35 , 05-01-2020</span> */}
-                                                    <span>{moment(order?.orderDate).format('hh:mm')} , {moment(order?.orderDate).format('DD-MM-YYYY')}</span>
+                                                    <span>{new Date(Date.parse((new Date(order?.orderDate)).toLocaleString() + ' UTC')).toLocaleString()}</span>
                                                     {
 
                                                         order?.status === Order.OrderPlaced ?
